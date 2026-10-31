@@ -10,5 +10,7 @@ python3 src/78_six_decades.py base_ge7=results/tri_base_m3e7_eval.json+results/t
 python3 src/79_extra_content_table.py trix_base_m3e7 trix_lora_m3e7 trix_lora_m3e10 trix_lora_m3e15v1 trix_lora_m3e20v1 trix_lora_m3e10v1s1 trix_lora_m3e10v1s2 trix_lora_m3e15v1s1 trix_lora_m3e15v1s2 trix_lora_m3e20v1s1 trix_lora_m3e20v1s2 > /dev/null   # results/extra_content.txt
 python3 src/79b_extra_quality_table.py trix_base_m3e7 trix_lora_m3e7 trix_lora_m3e10 trix_lora_m3e15v1 trix_lora_m3e20v1 > /dev/null   # results/extra_quality.txt
 python3 src/78b_prompt_variants_decade.py 3 ge10=results/trp90_lora_m3e10_eval.json:results/trp90_lora_m3e10_content.json ge15=results/trp90_lora_m3e15_eval.json:results/trp90_lora_m3e15_content.json > /dev/null   # results/prompt_variants_decade.txt
+OUT=results/prompt_variants_2000s.txt python3 src/78b_prompt_variants_decade.py 4 ge10=results/trp00_lora_m3e10_eval.json:results/trp00_lora_m3e10_content.json ge15=results/trp00_lora_m3e15_eval.json:results/trp00_lora_m3e15_content.json > /dev/null   # results/prompt_variants_2000s.txt
+python3 src/78c_bandwidth_prompts.py bw_ge10=results/trpbw_lora_m3e10_eval.json bw_ge20=results/trpbw_lora_m3e20_eval.json > /dev/null   # results/bandwidth_prompts.txt
 python3 src/73_probe_augment.py --help > /dev/null 2>&1 || true
 echo "tables regenerated"

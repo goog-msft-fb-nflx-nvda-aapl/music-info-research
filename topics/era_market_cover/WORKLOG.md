@@ -825,3 +825,31 @@ Measured: script exit 0, "tables regenerated"; `git status --short` empty afterw
 
 ## 2026-11-01 — Consolidated six-decade figures
 `src/91_fig_six_decades.py` reads `results/six_decades.json` (11 configs, MERT and MuQ codec probes) and draws `results/figs/six_decades_E.png` (expected probe decade per prompted decade, diagonal = ideal, seed adapters as thin dashed lines) and `results/figs/six_decades_delta.png` (change in P(prompted decade) vs neutral, 95% song-bootstrap CI, 24 songs x 3 seeds). Needs matplotlib (not part of `99_make_all_tables.sh`, which stays numpy/scipy only). Figures show the numbers in `results/six_decades.txt`; no new measurement.
+
+## 2026-11-01 — FD-VGG and paired metrics for the seed adapters (all ge), 2000s wording variants, era-free bandwidth wording
+Config: LoRA seed adapters v1s1/v1s2 (three-branch guidance, gm 3), 24 validation songs x 3 seeds. FD-VGG (`run_seedmetrics.sh` -> `run_avb.sh`, `83_fd_bootstrap.py`; reference = 171 real PA1 train clips of the prompted decade; delta = FD(era) - FD(neutral), song-bootstrap 95% CI, * = CI excludes 0) and paired metrics (`run_avb_pair.sh`, `85_pair_metrics.py`) for tri_ (1960s/1980s/2010s) and trix_ (1970s/1990s/2000s) sets at ge10/15/20 (ge7 existed). Files `results/fd_boot_*`, `results/pair_*`, tables `results/fd_vgg_table*.txt`.
+FD-VGG delta, main decades (1960s / 1980s / 2010s), seed1, seed2:
+| ge | seed1 | seed2 |
+|---|---|---|
+| 7 | -0.43 / -1.48* / -1.98* | +0.06 / -1.64* / -1.91* |
+| 10 | +0.02 / -0.83 / -1.88* | +0.25 / -0.90* / -2.05* |
+| 15 | +0.02 / -0.47 / -1.26* | +0.64 / -0.62 / -1.57* |
+| 20 | +0.02 / -0.35 / -1.28* | +0.46 / -0.44 / -1.32* |
+Extra decades (1970s / 1990s / 2000s): seed1 ge10 -0.91* / -0.82* / -1.47*; seed2 ge10 -0.99* / -0.79 / -1.73*; ge15 and ge20: only 2000s excludes 0 in the four seed runs (-1.24 to -1.66); the primary adapter (trix_lora_m3e15v1, m3e20v1) has no CI excluding 0 at ge15/20.
+Observation: in both seed adapters the FD gain for 1980s and 1970s/1990s shrinks as ge rises (1960s FD never improves, point estimates >= 0 at ge10-20); 2010s and 2000s keep a CI below 0 at every ge. Interpretation: FD is computed against 171 real clips per decade and has wide CIs; it does not mirror the probe, whose delta rises with ge (see six-decade entry).
+Paired metrics (delta KL-PaSST to own original / delta CLAP text score, mean; all song-bootstrap CIs in `results/pair_*.json`): every seed set, all six decades and ge7-20, has negative delta KL (-0.08 to -0.42; less than neutral = generated clips are classified more like their original than neutral generations are) and positive delta CLAP (+0.012 to +0.26); CLAP gain for 1980s is the largest (+0.21 to +0.26), for 1970s/1990s smallest (+0.015 to +0.07; seed adapters +0.04 to +0.07).
+
+## 2026-11-01 — 2000s prompt-wording variants (primary adapter, ge10 / ge15; `src/prompts_2000s_variants.json`, `run_tri_p00.sh`, `results/trp00_*`, `results/prompt_variants_2000s.txt`)
+Config: LoRA v1, three-branch gm 3, 24 songs x 3 seeds; variants a hip-hop/r&b, b pop-punk/emo rock, c dance-pop/electro, d "a recording from the two-thousands"; delta = P(2000s | variant) - P(2000s | neutral).
+MERT delta [CI] / E / top1 at ge10 and ge15: a +0.133 / 4.00 / .64 and +0.100 / 4.11 / .61; b +0.240 / 4.03 / .83 and +0.240 / 4.09 / .83; c -0.178 / 3.74 / .14 and -0.155 / 3.83 / .18; d -0.072 / 3.50 / .35 and -0.155 / 3.79 / .19. MuQ delta: a +0.155, +0.104; b +0.361, +0.313; c -0.046, -0.023; d +0.031, +0.006. For comparison the default wording (hand-written 2000s prompt) has MERT +0.257 and +0.202 (E 4.05, 4.16; top1 .82, .76) and MuQ +0.318 and +0.263.
+Observation: the pop-punk/emo wording does not lose its effect from ge10 to ge15 (MERT +0.240 both; top1 .83 both) while the default wording does (+0.257 -> +0.202); its MuQ delta is higher than the default at both ge. Dance-pop and the bare-decade wording lower P(2000s) in MERT. Song-ID top1 (neutral .944): a .847/.806, b .833/.819, c .708/.708, d .875/.875.
+Interpretation: the primary adapter's 2000s decline at high ge is wording-dependent; "2000s" in this probe's training data is separable by guitar-based wording but not by electronic wording. One decade, one adapter, one seed set.
+
+## 2026-11-01 — Era-free bandwidth wording (`src/prompts_bandwidth.json`, `run_tri_pbw.sh`, `78c_bandwidth_prompts.py`, `results/trpbw_*`, `results/bandwidth_prompts.txt`)
+Config: LoRA v1, three-branch gm 3 at ge10 and ge20, 24 songs x 3 seeds; prompts contain no decade: bw_hi "modern studio recording with extended high-frequency content, bright airy full-bandwidth sound", bw_lo "dull band-limited recording with rolled-off highs and tape hiss, narrow bandwidth sound". Change vs neutral of the probe's expected decade index E (0 = 1960s), song-bootstrap 95% CI:
+| | MERT ge10 | MERT ge20 | MuQ ge10 | MuQ ge20 |
+|---|---|---|---|---|
+| bw_hi dE | +0.42 [+0.20,+0.64] | +0.95 [+0.66,+1.24] | +0.97 [+0.76,+1.19] | +1.24 [+0.99,+1.48] |
+| bw_lo dE | -1.34 [-1.65,-1.02] | -1.75 [-2.03,-1.44] | -0.98 [-1.26,-0.68] | -1.51 [-1.80,-1.20] |
+Reference at ge10, same adapter: 1960s prompt dE = -2.79 (MERT, 0.26 vs neutral 3.05) and -2.29 (MuQ, 0.65 vs 2.94); 2010s prompt +1.44 / +1.36.
+Observation: wording about bandwidth alone, with no era named, moves the probes by about half of the 1960s prompt effect (bw_lo, MERT ge10: P(1960s) +0.34, P(2000s) -0.27; bw_hi: P(2010s) +0.10 MERT, +0.28 MuQ at ge10, +0.35/+0.45 at ge20). Interpretation: the era probes respond to bandwidth/brightness cues; this is consistent with the post-hoc band-limit result (2026-10-31) and means part of the era-prompt effect can be carried by bandwidth. It does not show that all of it is: the spectrum-matched control (2026-10-31) kept the MERT 1980s/2010s deltas positive with CI excluding 0 after matching long-term spectra. A generation-time hard bandwidth constraint (decoder-level) was not run; this entry is the prompt-level version.
