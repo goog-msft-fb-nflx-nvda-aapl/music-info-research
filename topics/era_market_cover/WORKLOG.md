@@ -822,3 +822,6 @@ Observations: the 2000s decline and the drift toward 2010s do not appear in eith
 ## 2026-11-01 — Fresh-clone reproduction of all stored-result tables (R04)
 Config: `git clone` of the public repo at commit `299ab8d` (after the topic-folder reorganization) on the server, new venv from `~/miniconda3/bin/python -m venv` with only `pip install numpy scipy` (Python 3.14.6, numpy 2.5.4, scipy 1.18.1), `bash src/99_make_all_tables.sh` from `topics/era_market_cover`.
 Measured: script exit 0, "tables regenerated"; `git status --short` empty afterwards, i.e. every regenerated table is byte-identical to the committed one. Clone and venv deleted afterwards.
+
+## 2026-11-01 — Consolidated six-decade figures
+`src/91_fig_six_decades.py` reads `results/six_decades.json` (11 configs, MERT and MuQ codec probes) and draws `results/figs/six_decades_E.png` (expected probe decade per prompted decade, diagonal = ideal, seed adapters as thin dashed lines) and `results/figs/six_decades_delta.png` (change in P(prompted decade) vs neutral, 95% song-bootstrap CI, 24 songs x 3 seeds). Needs matplotlib (not part of `99_make_all_tables.sh`, which stays numpy/scipy only). Figures show the numbers in `results/six_decades.txt`; no new measurement.
