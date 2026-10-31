@@ -856,3 +856,6 @@ Observation: wording about bandwidth alone, with no era named, moves the probes 
 
 ## 2026-11-01 — Drive backup of the new generation folders (drive17)
 `drive17.sh` (rclone copy of every `gen_*` folder, then count check): 23 folders for the seed adapters, extra decades and 1990s variants (gen_lora_v1s1/s2, gen_tri_lora_m3e{7,10,15,20}v1s{1,2}, gen_trix_*, gen_trp90_*): local file count == Drive object count in every folder (577 or 433). Drive folder `CommE5070_FP_topic2` permission list: owner only (Restricted), re-checked after the upload. The 2000s-variant and bandwidth folders (gen_trp00_*, gen_trpbw_*) are covered by a second pass (`drive18`).
+
+## 2026-11-01 — Drive backup complete (drive18)
+Second pass added gen_trp00_lora_m3e{10,15} (577 files each) and gen_trpbw_lora_m3e{10,20} (289 each). Full check over all 102 backed-up folders (every `gen_*`, `mclg_*`, `results`): local file count == Drive object count in all 102. Drive folder permission list after the upload: owner only (Restricted).
