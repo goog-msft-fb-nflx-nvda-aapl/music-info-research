@@ -8,7 +8,7 @@ from peft import LoraConfig, get_peft_model
 from common import ROOT, SR, manifest, LABELS
 sys.argv_backup = sys.argv
 ap = argparse.ArgumentParser(); ap.add_argument("--name", default="v1"); ap.add_argument("--steps", type=int, default=1500); ap.add_argument("--bs", type=int, default=4); ap.add_argument("--lr", type=float, default=1e-4)
-ap.add_argument("--r", type=int, default=16); ap.add_argument("--crop", type=int, default=500); ap.add_argument("--seed", type=int, default=0); ap.add_argument("--targets", default="attn", choices=["attn", "attnff"]); ap.add_argument("--pdrop", type=float, default=0.1); ap.add_argument("--no_melody", action="store_true", help="train text-only (no chroma condition)"); a = ap.parse_args()
+ap.add_argument("--r", type=int, default=16); ap.add_argument("--crop", type=int, default=500); ap.add_argument("--seed", type=int, default=0); ap.add_argument("--targets", default="attn", choices=["attn", "attnff"]); ap.add_argument("--pdrop", type=float, default=0.1); ap.add_argument("--aug", action="store_true", help="N-1: with probability 2/3 the target codes come from lora/codes_A_train_aug.npy (bandwidth-randomized versions of the same stem, 101_make_aug_codes.py)"); ap.add_argument("--no_melody", action="store_true", help="train text-only (no chroma condition)"); a = ap.parse_args()
 import importlib.util; spec = importlib.util.spec_from_file_location("gen", os.path.join(os.path.dirname(os.path.abspath(__file__)), "prompts_era.py")); P = importlib.util.module_from_spec(spec); spec.loader.exec_module(P)
 torch.manual_seed(a.seed); rng = np.random.default_rng(a.seed)
 mid = "facebook/musicgen-melody"; proc = AutoProcessor.from_pretrained(mid)
@@ -24,6 +24,7 @@ if not os.path.exists(cf):
         if i % 200 == 0: print("codes", i, len(rows), C[-1].shape, flush=True)
     T = min(c.shape[1] for c in C); np.save(cf, np.stack([c[:, :T] for c in C]))
 codes = np.load(cf).astype(np.int64); print("codes", codes.shape, flush=True)
+augc = np.load(os.path.join(cdir, "codes_A_train_aug.npy")).astype(np.int64) if a.aug else None
 cfg = model.config.decoder; K = cfg.num_codebooks; PAD = cfg.pad_token_id; BOS = cfg.bos_token_id
 lc = LoraConfig(r=a.r, lora_alpha=2 * a.r, lora_dropout=0.0, target_modules=r".*decoder.*(q_proj|k_proj|v_proj|out_proj)" if a.targets == "attn" else r".*decoder.*(q_proj|k_proj|v_proj|out_proj|fc1|fc2)", bias="none")
 pm = get_peft_model(model, lc); pm.print_trainable_parameters()
@@ -41,7 +42,7 @@ pm.eval(); t0 = time.time(); ema = None
 for step in range(a.steps):
     idx = rng.choice(len(rows), a.bs, replace=False); texts, mixes, tg = [], [], []
     for i in idx:
-        r = rows[i]; T = codes.shape[2]; s = int(rng.integers(0, T - a.crop)); tg.append(codes[i, :, s:s + a.crop])
+        r = rows[i]; T = codes.shape[2]; s = int(rng.integers(0, T - a.crop)); v = int(rng.integers(0, 3)) if a.aug else 0; tg.append(codes[i, :, s:s + a.crop] if v == 0 else augc[v - 1, i, :, s:s + a.crop])
         m = mix32(r); mixes.append(m[int(s / 50 * 32000):int((s + a.crop) / 50 * 32000)]); texts.append("a song recording" if rng.random() < a.pdrop else P.PROMPTS[r["label"]])
     L = min(len(m) for m in mixes); inp = (proc(text=texts, padding=True, return_tensors="pt") if a.no_melody else proc(text=texts, audio=[m[:L] for m in mixes], sampling_rate=32000, padding=True, return_tensors="pt")).to("cuda")
     inp = {k: (v.to(torch.bfloat16) if v.dtype == torch.float32 else v) for k, v in inp.items()}
