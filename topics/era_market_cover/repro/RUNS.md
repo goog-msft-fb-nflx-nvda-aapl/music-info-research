@@ -16,6 +16,8 @@ Environment: see `environment.txt`. Server layout: `~/era_market` with `src/` (t
 | `07_generate.py` | Era-targeted accompaniment regeneration with MusicGen-Melody (facebook/musicgen-melody, 1.5B, fp16). | python 07_generate.py --n 12 --seeds 0 1 |
 | `08_bleed.py` | Vocal-bleed diagnostics: per-clip vocal share of energy (rms_voc / (rms_voc + rms_acc)) and the Whisper-small language posterior of the ACCOMPANIMENT stem. | python 08_bleed.py --ds B |
 | `09_bleed_analysis.py` | Mac-side analysis of vocal-bleed diagnostics. usage: python 09_bleed_analysis.py <manifest_dir>  (manifest_A.csv, manifest_B.csv with split/label columns; not committed) | python 09_bleed_analysis.py <manifest_dir>  (manifest_A.csv, manifest_B.csv with split/label columns; not committed) |
+| `100_songecho_sao.py` | B-1: SongEcho_base / SongEcho_large / MuseControlLite adapters of the Text-to-Music control family (Tsai et al., HF fundwotsai2001/Text-to-Music_control_family, Stable Audio Open 1.0 base) as external melody-controlled baselines,  |  |
+| `101_make_aug_codes.py` | N-1: bandwidth-randomized training targets. For every dataset-A TRAIN clip, the Demucs accompaniment stem (24 kHz mono) is degraded in two random ways (seeded) and encoded with the EnCodec 32 kHz tokenizer of MusicGen: low-pass (B | python 101_make_aug_codes.py   (GPU) |
 | `10_eval_gen.py` | Evaluate the MusicGen-Melody era regenerations (gen/ from 07_generate.py). | python 10_eval_gen.py --out results/gen_eval.json |
 | `11_gen_analysis.py` | Summaries and paired tests for results/gen_eval.json. clips (12 songs) are the unit: seeds are averaged within song, then Wilcoxon signed-rank across songs. |  |
 | `12_codec_resynth.py` | Pass real accompaniment stems through the EnCodec 32 kHz codec used inside MusicGen (4 codebooks = 2.2 kbps at 50 Hz) so real and generated audio share codec artifacts. | python 12_codec_resynth.py --ds A |
@@ -92,8 +94,9 @@ Environment: see `environment.txt`. Server layout: `~/era_market` with `src/` (t
 | `75_bandwidth_check.py` | Bandwidth/noise-floor check of generated accompaniment (follow-up to 74_dsp_components.py: band-limit and hiss move the probes). | python 75_bandwidth_check.py label=gendir:evaljson ... -> results/bandwidth_check.{json,txt} |
 | `76_spectrum_match.py` | Long-term-spectrum-matched control for the generated-audio Deltas (follow-up to 75_bandwidth_check.py). | python 76_spectrum_match.py label=gendir:evaljson ... -> results/spectrum_match.{json,txt} |
 | `77_probe_doublecodec.py` | Probe augmentation with a second EnCodec pass (follow-up to 73_probe_augment.py). | python 77_probe_doublecodec.py set1 set2 ... -> results/probe_doublecodec.{json,txt}, emb/A_{,muq_}acc2codec_norm_L.npy |
-| `78_six_decades.py` | Six-decade controllability table: for each decade prompt (1960s ... 2010s) the per-song change of P(target decade / era prompt) - P(. / neutral) and the mean expected-decade index of the generated accompaniment, from the codec-mat | python 78_six_decades.py label=main_eval.json+extra_eval.json ... -> results/six_decades.{json,txt} |
-| `78b_prompt_variants_decade.py` | Prompt-wording variants of one decade (default 1990s, decade index 3): per-song Delta P(target decade / variant) - P(. / neutral), 95% song-bootstrap CI, mean expected decade E, top-1 = target share, and song-ID top-1 / chord agre | python 78b_prompt_variants_decade.py <decade_index> label=eval.json:content.json ... -> results/prompt_variants_decade.txt  (variant conditions are every cond e |
+| `78_six_decades.py` | Six-decade controllability table: for each decade prompt (1960s ... 2010s) the per-song change of P(target decade / era prompt) - P(. / neutral) and the mean expected-decade index of the generated accompaniment, from the codec-mat | python 78_six_decades.py label=main_eval.json+extra_eval.json ... -> results/six_decades.{json,txt} (or ${OUT_PREFIX}.{json,txt}) |
+| `78b_prompt_variants_decade.py` | Prompt-wording variants of one decade (default 1990s, decade index 3): per-song Delta P(target decade / variant) - P(. / neutral), 95% song-bootstrap CI, mean expected decade E, top-1 = target share, and song-ID top-1 / chord agre | [OUT=results/<file>.txt] python 78b_prompt_variants_decade.py <decade_index> label=eval.json:content.json ... -> results/prompt_variants_decade.txt  (variant co |
+| `78c_bandwidth_prompts.py` | Era-free bandwidth wording (bw_hi, bw_lo) vs neutral: per-song change of the probe's expected decade E (mean over songs of sum_k k P_k) and of P(each decade), 95% song-bootstrap CI, for MERT and MuQ codec probes; plus the same for | python 78c_bandwidth_prompts.py label=eval.json ... -> results/bandwidth_prompts.txt (conditions: every cond except neutral and identity/dsp rows) |
 | `79_extra_content_table.py` | Song-identification top-1 and chord agreement of the extra-decade (1970s/1990s/2000s) remixes vs the original mix, from results/trix_*_content.json (13_content_metrics.py). usage: python 79_extra_content_table.py tag ... -> result | python 79_extra_content_table.py tag ... -> results/extra_content.txt |
 | `79b_extra_quality_table.py` | Audiobox Aesthetics (PQ, PC, CE, CU) of the extra-decade generations: per-song change versus the neutral prompt of the same set (seed means), Wilcoxon over songs; neutral PQ for reference. usage: python 79b_extra_quality_table.py  | python 79b_extra_quality_table.py tag ... -> results/extra_quality.txt (inputs results/quality_<tag>.json from 18_quality.py with ERAS=neutral,1970s,1990s,2000s |
 | `80_make_tables.py` | R04: regenerate the main generation tables from results/*.json only (no GPU, no audio). Calls 56_summarize_gens.py for each (label, eval json, content json) triple that exists and writes results/tables_main.txt. |  |
@@ -104,7 +107,17 @@ Environment: see `environment.txt`. Server layout: `~/era_market` with `src/` (t
 | `84_fd_table.py` | Table of results/fd_boot_<set>.json (src/83_fd_bootstrap.py): FD-VGG of generated sets to real PA1 train clips of the same decade; Delta = FD(era prompt) - FD(neutral prompt), 95% song-bootstrap CI; negative = closer to the real d |  |
 | `85_pair_metrics.py` | E07 paired metrics per clip with song-bootstrap CIs, from the av-benchmark caches written by run_avb_pair.sh (avbp/cache/{gt,pred}_<set>_<era>/). | python 85_pair_metrics.py set1 set2 ...   (run in ~/era_market, CPU) |
 | `90_make_runs_index.py` | Builds repro/RUNS.md: an index of every script in src/ with its first docstring/comment line and its usage line, and, for each WORKLOG.md entry, the scripts and result files cited in its heading. Everything is read from the files; | python src/90_make_runs_index.py |
+| `91_fig_six_decades.py` | Figures from results/six_decades.json (written by 78_six_decades.py): (1) expected probe decade E per prompted decade, (2) probe-probability change vs neutral with 95% song-bootstrap CI. | python 91_fig_six_decades.py -> results/figs/six_decades_E.png, results/figs/six_decades_delta.png. Configs: base_ge7, lora_ge{7,10,15,20}; seed adapters are dr |
+| `92_make_page.py` | Builds docs/era_market/index.html (project page of topic 2) from results/six_decades.json and the numbers of the report. usage (from the topic folder): python src/92_make_page.py ; the audio section uses the 32 base-model demo cli |  |
+| `93_build_demo_clips.py` | Builds the demo clips of the adapter system for the project page: generated accompaniment only (no vocals, no dataset audio), seed 0, seconds 9-21 of each 30 s clip, loudness-normalised to -23 LUFS, mp3 128 kbit/s, opaque hashed f | python 93_build_demo_clips.py <dir with <clip>_<era>_s0_acc.wav> <out dir docs/era_market/audio_lora> -> prints the JSON list for the page. |
+| `94_nuisance_steering.py` | Does the era-steering effect survive removal of nuisance information from the probe's feature space? (CPU, stored embeddings) | python 94_nuisance_steering.py set1 set2 ... -> results/nuisance_steering.{json,txt} |
+| `95_controlled_tasks.py` | Two controlled versions of the probe tasks (CPU, stored MERT-v2 embeddings, per-stem layer/C as in probe_<ds>.json; pooled train+val clips, NOT artist-grouped: the manifest has no artist ids, so absolute values may be optimistic a | python 95_controlled_tasks.py -> results/controlled_tasks.{json,txt} |
+| `96_clique_proxy.py` | Proxy composition groups without Discogs ids (the public manifest hides artist, title, Discogs id and YouTube id): Discogs-VINet (Araz et al. 2024; third-party AGPL code kept outside the repo) embeddings of every clip's mix (A and | python 96_clique_proxy.py (GPU for the embeddings, cached in emb/<ds>_vinet.npy) |
+| `97_era_encoder.py` | M-1: nuisance-controlled ordinal era encoder on frozen features of the codec-resynthesized accompaniment (dataset A). | python 97_era_encoder.py [mert/muq] [adv/leace] |
+| `98_era_axis_lora.py` | M-2: era-axis conditioned LoRA. As 48_lora_musicgen.py, but the text prompt is ALWAYS the neutral prompt and the era enters only through a continuous era coordinate z (D=8, from 97_era_encoder.py, standardized on TRAIN) of the cli | python 98_era_axis_lora.py --z A_eraz_mert_leace0.0_s0 --name ax_leace --steps 3000 --bs 8 --lr 1e-4 --pdrop 0.1 |
 | `99_make_all_tables.sh` | R04: regenerate every table in results/ that is computed from stored results/*.json (no GPU, no audio). usage (from the topic folder): bash src/99_make_all_tables.sh |  |
+| `99b_era_axis_gen.py` | M-2 generation with the era-axis conditioned adapter (98_era_axis_lora.py). Era enters only through the era coordinate z (decade prototype = mean z of the TRAIN clips of that decade; neutral = 0), text is always the neutral prompt | python 99b_era_axis_gen.py --name ax_ctrl --z A_eraz_mert_leace0.0_s0 --gm 3 --ge 7 --outdir gen_ax_ctrl_ge7 --eras neutral 1960s 1970s 1980s 1990s 2000s 2010s |
+| `ace_install.sh` |  |  |
 | `common.py` |  |  |
 | `diag_mert.py` | diagnostic: is MERT-v2-30s loading deterministic under transformers 5? loads the model N times, embeds one real clip, reports finiteness and max abs difference of the layer-18 mean embedding vs the first load, and parameters that  |  |
 | `diag_mert2.py` | diagnostic 2: nondeterminism within one load, non-persistent buffers, and scale of the effect relative to between-clip differences. |  |
@@ -112,14 +125,18 @@ Environment: see `environment.txt`. Server layout: `~/era_market` with `src/` (t
 | `diag_mert_orig_loader.py` | diagnostic: is MERT-v2-30s loading deterministic under transformers 5? loads the model N times, embeds one real clip, reports finiteness and max abs difference of the layer-18 mean embedding vs the first load, and parameters that  |  |
 | `diag_muq.py` | diagnostic: MuQ determinism across loads (same check as diag_mert_fixed.py), to rule out the same uninitialized-buffer problem. |  |
 | `eraprobe.py` | Shared helpers: loudness normalization, MERT-v2 and MuQ embedding of a dict of waveforms (MERT first, MuQ imported afterwards), decade probes trained on dataset-A TRAIN stems. |  |
+| `lorav1_vinet2.sh` |  |  |
+| `lorav1_vinet3.sh` |  |  |
 | `mert_util.py` | MERT-v2-30s loader that fixes a transformers-5 loading bug: the non-persistent buffer embed_positions.inv_freq (rotary frequencies) is left UNINITIALIZED (random memory, sometimes denormal/NaN), |  |
 | `muq_util.py` | MuQ (OpenMuQ/MuQ-large-msd-iter) loader patched for transformers 5: config attn flag and forward hooks that rebuild hidden_states. |  |
 | `prompts_era.py` | Era prompt texts shared by 07_generate.py (copied verbatim) and 48_lora_musicgen.py. |  |
+| `q_main3.sh` | main-decade (1960s/1980s/2010s) three-branch runs for the seed adapters at ge15/ge20, started after the matching extra-decade runs. usage: q_main3.sh <gpu> <ge> <adapter> |  |
 | `run_ace.sh` | server: ACE-Step 1.5 cover mode on the original accompaniment stem, three cover strengths, then the standard scoring |  |
 | `run_ace10.sh` |  |  |
 | `run_analysis.sh` | server: waits for stems_emb.done, then stats, language ID, probes (probes are CPU) |  |
 | `run_avb.sh` | E07: FD-VGG / FD-PANN / FD-PaSST (av-benchmark, unpaired) of generated sets against real PA1 train clips of the target decade. | [EL="1970s 1990s 2000s"] run_avb.sh <gpu> <set,set,...>   sets are gen_<name> dirs (or `gen` for the standard base set); eras 1960s 1980s 2010s and neutral. Ref |
 | `run_avb_pair.sh` | E07 paired metrics (av-benchmark): KL-PaSST / KL-PANN of each generated remix against ITS OWN ORIGINAL clip (real mix, same song id) and the LAION-CLAP (music_audioset_epoch_15_esc_90.14) text-audio score of the generated remix ag | [EL="1970s 1990s 2000s"] run_avb_pair.sh <gpu> <set,set,...>   (sets as in run_avb.sh; eras 1960s 1980s 2010s neutral). Output: ~/era_market/avbp/out/<set>_<era |
+| `run_ax.sh` | M-2/M-3: generation with the era-axis adapter, then probe evaluation and content metrics. usage: [SUF=_dose] run_ax.sh <gpu> <adapter name> <z file> <ge> [eras...]  (eras: neutral, decades, or aX = interpolation between the 1960s  |  |
 | `run_battery2.sh` | evaluator battery for the newer generators: VINet identity, then the LALM judge. usage: run_battery2.sh <gpu> |  |
 | `run_bon.sh` | server: best-of-N (G09): 8 candidates (seeds 10..17) for 1960s/1980s/2010s prompts on the 24 songs, then scoring. usage: run_bon.sh <gpu> |  |
 | `run_bsr.sh` | server: BS-RoFormer separation of dataset $1 on GPU $2, then MERT + MuQ embeddings of its stems and probes vs the Demucs stems |  |
@@ -163,8 +180,11 @@ Environment: see `environment.txt`. Server layout: `~/era_market` with `src/` (t
 | `run_qk.sh` | Audiobox Aesthetics (18_quality.py) + KAD-style margin (20_kad.py) for generation sets that had neither. usage: run_qk.sh <gpu> <tag> <name:seeds,...>  (dir = gen_<name>; embeddings from results/<name>_eval_emb.npz) |  |
 | `run_quality_more.sh` | server: Audiobox Aesthetics + KAD-style margin for the guidance sweep, MuseControlLite and text-only generations. usage: bash run_quality_more.sh <gpu> |  |
 | `run_quality_x.sh` | Audiobox Aesthetics for the extra-decade sets. usage: bash run_quality_x.sh <gpu> |  |
+| `run_reembed.sh` | server: re-embed every MERT condition after the inv_freq fix (mert_util.py), dataset $1 on GPU $2, then probes (04) for all stem conditions |  |
 | `run_remix_level.sh` |  |  |
 | `run_rerun_all.sh` | server: recompute everything that used MERT after the inv_freq fix (mert_util.py). usage: bash run_rerun_all.sh probes / evalA <gpu> / evalB <gpu> |  |
+| `run_sao.sh` | B-1: control-family adapter (SongEcho_base / SongEcho_large / MuseControlLite) generation, probe evaluation and content metrics. usage: run_sao.sh <gpu> <method> <tag> |  |
+| `run_seedmetrics.sh` | usage: run_seedmetrics.sh <gpu> <suffix list e.g. "m3e15v1s1 m3e10v1s1"> <extra trix-only sets> | run_seedmetrics.sh <gpu> <suffix list e.g. "m3e15v1s1 m3e10v1s1"> <extra trix-only sets> |
 | `run_sp.sh` | server: sampling-parameter ablation (G07), seeds 0 1, then scoring. usage: run_sp.sh <gpu> |  |
 | `run_sp2.sh` | server: sampling-parameter ablation (G07), seeds 0 1, then scoring. usage: run_sp.sh <gpu> |  |
 | `run_stems.sh` | server launcher: bash run_stems.sh <gpu>  (separation then MERT-v2 embeddings for A and B) |  |
@@ -174,13 +194,19 @@ Environment: see `environment.txt`. Server layout: `~/era_market` with `src/` (t
 | `run_tri.sh` | three-branch guidance (standard melody CFG + era contrast). usage: run_tri.sh <gpu> <base/lora> <gm> <ge> [top_k] |  |
 | `run_tri_ad.sh` | three-branch guidance (standard melody CFG + era contrast). usage: run_tri_ad.sh <gpu> <base/lora> <gm> <ge> [top_k] [adapter dir name under lora/, default v1] |  |
 | `run_tri_k.sh` | three-branch guidance (standard melody CFG + era contrast). usage: run_tri.sh <gpu> <base/lora> <gm> <ge> [top_k] |  |
+| `run_tri_p00.sh` | 2000s prompt-wording variants with the LoRA, three-branch guidance. usage: run_tri_p00.sh <gpu> <ge> |  |
 | `run_tri_p90.sh` | 1990s prompt-wording variants with the LoRA, three-branch guidance. usage: run_tri_p90.sh <gpu> <ge> |  |
+| `run_tri_pbw.sh` | bandwidth-wording control (era-free prompts bw_hi, bw_lo) with the LoRA, three-branch guidance. usage: run_tri_pbw.sh <gpu> <ge> |  |
 | `run_tri_x.sh` | three-branch guidance for the extra decades (1970s, 1990s, 2000s). usage: run_tri_x.sh <gpu> <base/lora> <gm> <ge> |  |
 | `run_tri_x2.sh` | three-branch guidance for the extra decades with adapter choice and content metrics. usage: run_tri_x2.sh <gpu> <gm> <ge> [adapter under lora/, default v1] |  |
 | `run_vaeid.sh` |  |  |
 | `run_validity.sh` | server: independent evaluators (Audiobox, KAD-style margin, CLAP zero-shot era, COCOLA) for LoRA v1/v2/v3 and ACE-Step c05/c10 generations; Discogs tagger for v1 and ACE c05 |  |
 | `run_vinet3.sh` | VINet identity for generation dirs not yet scored; single process writes vinet_identity.json |  |
 | `run_vinet4.sh` |  |  |
+| `tri2_vinet.sh` |  |  |
+| `tri3_vinet.sh` |  |  |
+| `tri5_vinet.sh` |  |  |
+| `tri_vinet.sh` |  |  |
 
 ## WORKLOG entries and the scripts / result files named in their headings
 
@@ -317,3 +343,30 @@ Environment: see `environment.txt`. Server layout: `~/era_market` with `src/` (t
   scripts: 61_triple_guidance.py, 78b_prompt_variants_decade.py, run_tri_p90.sh
 - 2026-10-31 paired metrics for the extra decades (`src/run_avb_pair.sh` with `EL`, `src/85_pair_metrics.py` with `EL` -> `results/pair_trix_*.json`; GPUs 0-3)  
   scripts: 85_pair_metrics.py, run_avb_pair.sh
+- 2026-10-31 — Seed adapters at ge15/ge20 on all six decades (MERT/MuQ probe, `results/six_decades.txt`, 11 configs)
+- 2026-11-01 — Fresh-clone reproduction of all stored-result tables (R04)
+- 2026-11-01 — Consolidated six-decade figures
+- 2026-11-01 — FD-VGG and paired metrics for the seed adapters (all ge), 2000s wording variants, era-free bandwidth wording
+- 2026-11-01 — 2000s prompt-wording variants (primary adapter, ge10 / ge15; `src/prompts_2000s_variants.json`, `run_tri_p00.sh`, `results/trp00_*`, `results/prompt_variants_2000s.txt`)  
+  scripts: run_tri_p00.sh
+- 2026-11-01 — Era-free bandwidth wording (`src/prompts_bandwidth.json`, `run_tri_pbw.sh`, `78c_bandwidth_prompts.py`, `results/trpbw_*`, `results/bandwidth_prompts.txt`)  
+  scripts: 78c_bandwidth_prompts.py, run_tri_pbw.sh
+- 2026-11-01 — Drive backup of the new generation folders (drive17)
+- 2026-11-01 — Drive backup complete (drive18)
+- 2026-11-01 — License check of the generator weights
+- 2026-11-01 — Report and project page rewritten
+- 2026-11-01 — Demo clips of the adapter system published (user approved publishing)
+- 2026-11-01 — Review follow-ups: steering after nuisance removal; language-held-fixed market; genre-held-out decade (`src/94_nuisance_steering.py`, `src/95_controlled_tasks.py` -> `results/nuisance_steering.{json,txt}`, `results/controlled_tasks.{json,txt}`; CPU, stored embeddings)  
+  scripts: 94_nuisance_steering.py, 95_controlled_tasks.py
+- 2026-11-01 — Split audit without ids (`src/96_clique_proxy.py` -> `results/clique_proxy.{json,txt}`; GPU 1 for the embeddings)  
+  scripts: 96_clique_proxy.py
+- 2026-11-01 — M-1 nuisance-controlled ordinal era encoder (`src/97_era_encoder.py` -> `results/era_encoder_{mert,muq}_{adv,leace}.{json,txt}`, `emb/A_eraz_<enc>_<mode><lam>_s<seed>.npy` on the server; CPU)  
+  scripts: 97_era_encoder.py
+- 2026-11-01 — B-1 external baselines: survey 4 and SongEcho adapters (`SURVEY4.md`, `src/100_songecho_sao.py`)  
+  scripts: 100_songecho_sao.py
+- 2026-11-01 — Server cleanup (own files only)
+- 2026-11-01 — B-1 result: SongEcho_base / SongEcho_large (Stable Audio Open adapters) on the six-decade protocol (`src/100_songecho_sao.py`, `src/run_sao.sh`, `results/sao_songecho_{base,large}_{eval,content}.json`, `results/six_decades_baselines.{json,txt}`; seeds 0-2, 24 songs x 7 prompts, guidance  
+  scripts: 100_songecho_sao.py, run_sao.sh
+- 2026-11-01 — M-2 first results: era-axis conditioned adapters (`src/98_era_axis_lora.py`, `src/99b_era_axis_gen.py`, `src/run_ax.sh`; `results/ax_{ctrl,free}_ge{7,10}_{eval,content}.json`, `results/six_decades_axis.{json,txt}`, `results/nuisance_steering_axis.{json,txt}`)  
+  scripts: 98_era_axis_lora.py, 99b_era_axis_gen.py, run_ax.sh
+- 2026-11-01 — N-1 / N-2 launched (16:09 JST; same recipe as M-2: LoRA r16, 3000 steps, bs 8, lr 1e-4, three-branch gm 3, ge 10, 24 songs x 7 prompts x 3 seeds, probes and content as before)

@@ -113,3 +113,4 @@ Gate before the submission (target: all experiments complete by 20 Dec 2026, pap
 - [ ] 21-31 Dec: page and video update; start paper (ICML format)
 - [ ] 25 Dec-10 Jan: paper in ICML format; 11-19 Jan: internal review; submit abstract and paper to ICML (estimated 16 and 22 Jan 2027, confirm)
 - Non-language fallback if ACL does not work out: ISMIR 2027 (submission about late Apr 2027, TBA). Other non-language options seen: ICME 2027 (30 Dec 2026, IEEE listing), ICML 2027 (about 22 Jan 2027, estimate), DAFx 2027 (about late Mar 2027, estimate).
+- [ ] STANDING RULE (user, 2026-11-01): the code will be public for reviewers, so every configuration and script of every run (also failed or dropped ones, and every new method) is committed and pushed with its exact command; after each experiment family: copy new server scripts into `src/`, regenerate `repro/RUNS.md` (`python src/90_make_runs_index.py`), update `REPRODUCE.md`, push

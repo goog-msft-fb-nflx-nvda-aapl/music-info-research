@@ -8,6 +8,7 @@ Topic 2 of the repository (topic 1 is in `../musicgen_steering/`). Topic offered
 3. Can stable era cues control a generated cover that keeps the original vocal and melody and regenerates the accompaniment in a target decade? (MusicGen-Melody with era prompts, optional LoRA, three-branch guidance; evaluated with independent encoders, distribution and quality metrics, and content-preservation metrics)
 
 ## Where things are
+- `REPRODUCE.md` ordered reproduction guide (environments, data, commands per stage); `repro/RUNS.md` index of every script with its usage line.
 - `report/` the report (`report.tex`, `refs.bib`, `report.pdf`); the project page is built by `src/92_make_page.py` into the repository-level `docs/era_market/`.
 - `WORKLOG.md` every run with its config and measured result (authoritative); `MASTER_PLAN.md` why each component was chosen, ablation registry; `TODO.md` open items; `TA_COVERAGE.md` the TA's questions against the evidence.
 - `SURVEY.md`, `SURVEY3.md`, `SURVEY_metrics.md` literature notes with a verified/unverified marker per citation; raw replies in `survey1/`, `survey2/`, `survey3/`.
