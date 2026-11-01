@@ -1,0 +1,13 @@
+# Survey 4 synthesis (open melody-conditioned accompaniment / cover systems), 2026-11-01
+Raw replies: `survey4/response_{claude,chatgpt,gemini}.md`. Rule: only items re-checked against the source in this session count as verified.
+## Reliability
+- `response_claude.md`: specific, marks unverified items; consistent with our own checks (Stable Audio Open ControlNet of Hou et al. links no weights: project page and our fetch of it; MuLaCover is arXiv-independent HeartMuLa release).
+- `response_chatgpt.md`: careful, separates verified/partial/unverified; adds MIDI-SAG, MusiConGen, ACE-Step 1.5 cover checkpoints, YuE2 (not re-checked here).
+- `response_gemini.md`: states checkpoints for Music ControlNet and Stable Audio Open ControlNet exist; contradicted by the other two replies and by our own fetch of the project page (no weights linked). Not used.
+## Verified by us this session (source opened)
+- Hou et al., Stable Audio Open ControlNet (arXiv 2410.05151): project page `stable-audio-control.github.io/web/` links only the paper and datasets, no code or weights. The third-party repo `EmilianPostolache/stable-audio-controlnet` ships audio-conditioned (accompaniment) ControlNets for MusDB / MoisesDB, no melody-control checkpoint.
+- Text-to-Music control family (`github.com/fundwotsai2001/Text-to-Music_control_family`, commit de6978b): README lists SongEcho_base (31M trainable), SongEcho_large (198M), MuseControlLite (85M), run with `control_melody_inference.py`, adapters downloaded from the Hugging Face repo `fundwotsai2001/Text-to-Music_control_family`.
+## Reported by replies, not re-checked
+JASCO melody 400M/1B (10 s, gated, chords + melody salience + drums), MuLaCover (full song, regenerates vocals; style schema without an era field), MPEcho and SongEcho-ACE-Step (regenerate vocals), MIDI-SAG (vocal to backing track, many dependencies), MusiConGen (chords and rhythm, about 30 s), ACE-Step 1.5 cover checkpoints (base, sft, turbo, xl).
+## What it changes for us
+Same-task baselines (keep the original vocal, regenerate the accompaniment, era text prompt, melody from the mix) with public weights: the three control-family adapters (we ran MuseControlLite only), ACE-Step cover (turbo only, done). Systems that regenerate the vocal (MuLaCover, MPEcho, SongEcho-ACE) answer a different task and are not baselines for accompaniment-only covers. No system reports era-labelled training or era-adherence evaluation (replies), so our decade-control evaluation has no direct external comparison.
