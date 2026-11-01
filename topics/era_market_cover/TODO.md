@@ -100,7 +100,7 @@ Open (GPU access ends 2026-10-31):
 Order by cost/benefit: N-1, N-2, N-3 (training only, ~15 min each), N-4, N-5, then N-7, N-6.
 
 ## Submission order (earliest deadline first; resubmit to the next only after a rejection, no dual submission; TBA = estimate from the previous cycle, confirm at the official site)
-1. ACL 2027, ARR 4 Jan 2027 (aggregator; official page TBA); framing for this venue: language/genre/bandwidth confounds of era and market recognition plus controlled generation
+1. ACL 2027 (Kyoto, 17-22 Aug 2027; main conference 20-22 Aug), ARR submission 4 Jan 2027 11:59 pm UTC-12 (official site 2027.aclweb.org, checked 2026-11-01; commitment, notification, camera-ready TBA); framing for this venue: language/genre/bandwidth confounds of era and market recognition plus controlled generation
 2. Interspeech 2027, TBA, estimate early Mar 2027
 3. ISMIR 2027, TBA, estimate late Apr 2027 (best topical fit)
 4. EMNLP 2027, TBA, aggregator ARR 28 May 2027
