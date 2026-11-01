@@ -22,15 +22,20 @@ mid = "facebook/musicgen-melody"; proc = AutoProcessor.from_pretrained(mid); mod
 from peft import PeftModel
 model = PeftModel.from_pretrained(model, os.path.join(ROOT, "lora", a.name)).merge_and_unload().eval()
 from common import LABELS
-Amap = torch.nn.Linear(torch.load(os.path.join(ROOT, "lora", a.name, "A.pt"))["weight"].shape[1], model.config.decoder.hidden_size, bias=False).cuda(); Amap.load_state_dict(torch.load(os.path.join(ROOT, "lora", a.name, "A.pt"))); Amap.eval()
+pf = os.path.join(ROOT, "lora", a.name, "prefix.txt"); P_ = int(open(pf).read()) if os.path.exists(pf) else 0; H = model.config.decoder.hidden_size; Amap = torch.nn.Linear(torch.load(os.path.join(ROOT, "lora", a.name, "A.pt"))["weight"].shape[1], H * max(P_, 1), bias=False).cuda(); Amap.load_state_dict(torch.load(os.path.join(ROOT, "lora", a.name, "A.pt"))); Amap.eval()
 Zall = np.load(os.path.join(ROOT, "emb", a.z + ".npy")).astype(np.float32); allrows = manifest("A"); zst = np.load(os.path.join(ROOT, "lora", a.name + "_zstats.npz")); Zn = (Zall - zst["mean"]) / zst["std"]
 PROTO = {"neutral": np.zeros(Zall.shape[1], np.float32)}
 for k, d in enumerate(LABELS["A"]): PROTO[d] = Zn[[i for i, r in enumerate(allrows) if r["split"] == "train" and r["label"] == d]].mean(0)
 def zof(e):
     if e.startswith("a"): al = float(e[1:]); return (1 - al) * PROTO["1960s"] + al * PROTO["2010s"]
     return PROTO[e]
-CUR = {"z": None}; model.enc_to_dec_proj.register_forward_hook(lambda mod, inp, out: out if CUR["z"] is None else out + Amap(CUR["z"].float())[:, None, :].to(out.dtype))
-NEUTRAL = "a song recording"
+NEUTRAL = "a song recording" + "".join(f"<extra_id_{i}>" for i in range(P_)); PIDS = {proc.tokenizer.convert_tokens_to_ids(f"<extra_id_{i}>") for i in range(P_)}
+CUR = {"z": None, "idx": torch.tensor([j for j, t in enumerate(proc.tokenizer(NEUTRAL)["input_ids"]) if t in PIDS], device="cuda")}
+def film(mod, inp, out):
+    if CUR["z"] is None: return out
+    if P_ == 0: return out + Amap(CUR["z"].float())[:, None, :].to(out.dtype)
+    out = out.clone(); out[:, CUR["idx"]] += Amap(CUR["z"].float()).view(len(out), P_, H).to(out.dtype); return out
+model.enc_to_dec_proj.register_forward_hook(film)
 STATE = {}; orig = MusicgenMelodyForConditionalGeneration._prepare_encoder_hidden_states_kwargs_for_generation
 def patched(self, inputs_tensor, model_kwargs, model_input_name, generation_config):
     nb = STATE.get("neutral"); gs = generation_config.guidance_scale

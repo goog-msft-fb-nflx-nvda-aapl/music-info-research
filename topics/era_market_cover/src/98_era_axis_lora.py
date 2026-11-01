@@ -9,7 +9,7 @@ from peft import LoraConfig, get_peft_model
 from common import ROOT, SR, manifest, LABELS
 sys.argv_backup = sys.argv
 ap = argparse.ArgumentParser(); ap.add_argument("--name", default="v1"); ap.add_argument("--steps", type=int, default=1500); ap.add_argument("--bs", type=int, default=4); ap.add_argument("--lr", type=float, default=1e-4)
-ap.add_argument("--r", type=int, default=16); ap.add_argument("--crop", type=int, default=500); ap.add_argument("--seed", type=int, default=0); ap.add_argument("--targets", default="attn", choices=["attn", "attnff"]); ap.add_argument("--pdrop", type=float, default=0.1); ap.add_argument("--z", required=True); ap.add_argument("--aug", action="store_true", help="N-1: with probability 2/3 the target codes come from lora/codes_A_train_aug.npy (bandwidth-randomized versions of the same stem)"); ap.add_argument("--zdrop", type=float, default=0.1); ap.add_argument("--no_melody", action="store_true", help="train text-only (no chroma condition)"); a = ap.parse_args()
+ap.add_argument("--r", type=int, default=16); ap.add_argument("--crop", type=int, default=500); ap.add_argument("--seed", type=int, default=0); ap.add_argument("--targets", default="attn", choices=["attn", "attnff"]); ap.add_argument("--pdrop", type=float, default=0.1); ap.add_argument("--z", required=True); ap.add_argument("--prefix", type=int, default=0, help="N-3: number of dedicated prefix tokens (T5 sentinel tokens appended to the neutral prompt); z then changes only the states at those P positions (Linear(D -> P*hidden)) instead of every text position"); ap.add_argument("--aug", action="store_true", help="N-1: with probability 2/3 the target codes come from lora/codes_A_train_aug.npy (bandwidth-randomized versions of the same stem)"); ap.add_argument("--zdrop", type=float, default=0.1); ap.add_argument("--no_melody", action="store_true", help="train text-only (no chroma condition)"); a = ap.parse_args()
 import importlib.util; spec = importlib.util.spec_from_file_location("gen", os.path.join(os.path.dirname(os.path.abspath(__file__)), "prompts_era.py")); P = importlib.util.module_from_spec(spec); spec.loader.exec_module(P)
 torch.manual_seed(a.seed); rng = np.random.default_rng(a.seed)
 mid = "facebook/musicgen-melody"; proc = AutoProcessor.from_pretrained(mid)
@@ -31,8 +31,12 @@ lc = LoraConfig(r=a.r, lora_alpha=2 * a.r, lora_dropout=0.0, target_modules=r".*
 pm = get_peft_model(model, lc); pm.print_trainable_parameters()
 Zall = np.load(os.path.join(ROOT, "emb", a.z + ".npy")).astype(np.float32); allrows = manifest("A"); sid2i = {r["sample_id"]: i for i, r in enumerate(allrows)}; trI = [i for i, r in enumerate(allrows) if r["split"] == "train" and r["label"] in LABELS["A"]]
 zm, zs = Zall[trI].mean(0), Zall[trI].std(0) + 1e-6; Zn = (Zall - zm) / zs; np.savez(os.path.join(cdir, a.name + "_zstats.npz"), mean=zm, std=zs)
-Dz = Zall.shape[1]; Amap = torch.nn.Linear(Dz, model.config.decoder.hidden_size, bias=False).cuda(); torch.nn.init.zeros_(Amap.weight); CUR = {"z": None}
-def film(mod, inp, out): return out if CUR["z"] is None else out + Amap(CUR["z"])[:, None, :].to(out.dtype)
+Dz = Zall.shape[1]; P_ = a.prefix; NEUT = "a song recording" + "".join(f"<extra_id_{i}>" for i in range(P_)); H = model.config.decoder.hidden_size
+Amap = torch.nn.Linear(Dz, H * max(P_, 1), bias=False).cuda(); torch.nn.init.zeros_(Amap.weight); CUR = {"z": None, "idx": None}
+def film(mod, inp, out):
+    if CUR["z"] is None: return out
+    if P_ == 0: return out + Amap(CUR["z"])[:, None, :].to(out.dtype)
+    out = out.clone(); out[:, CUR["idx"]] += Amap(CUR["z"]).view(len(out), P_, H).to(out.dtype); return out
 model.enc_to_dec_proj.register_forward_hook(film)
 for n, p in pm.named_parameters():
     if p.requires_grad: p.data = p.data.float()
@@ -44,14 +48,16 @@ def mix32(r):
         mixcache[r["sample_id"]] = AF.resample(torch.from_numpy(sf.read(r["path"], dtype="float32")[0]), SR, 32000).numpy()
         if len(mixcache) > 300: mixcache.pop(next(iter(mixcache)))
     return mixcache[r["sample_id"]]
+PIDS = {proc.tokenizer.convert_tokens_to_ids(f"<extra_id_{i}>") for i in range(P_)}
 pm.eval(); t0 = time.time(); ema = None
 for step in range(a.steps):
     idx = rng.choice(len(rows), a.bs, replace=False); texts, mixes, tg, zb = [], [], [], []
     for i in idx:
         r = rows[i]; T = codes.shape[2]; s = int(rng.integers(0, T - a.crop)); v = int(rng.integers(0, 3)) if a.aug else 0; tg.append(codes[i, :, s:s + a.crop] if v == 0 else augc[v - 1, i, :, s:s + a.crop])
-        m = mix32(r); mixes.append(m[int(s / 50 * 32000):int((s + a.crop) / 50 * 32000)]); texts.append("a song recording"); zb.append(np.zeros(Dz, np.float32) if rng.random() < a.zdrop else Zn[sid2i[r["sample_id"]]])
+        m = mix32(r); mixes.append(m[int(s / 50 * 32000):int((s + a.crop) / 50 * 32000)]); texts.append(NEUT); zb.append(np.zeros(Dz, np.float32) if rng.random() < a.zdrop else Zn[sid2i[r["sample_id"]]])
     L = min(len(m) for m in mixes); inp = (proc(text=texts, padding=True, return_tensors="pt") if a.no_melody else proc(text=texts, audio=[m[:L] for m in mixes], sampling_rate=32000, padding=True, return_tensors="pt")).to("cuda")
     inp = {k: (v.to(torch.bfloat16) if v.dtype == torch.float32 else v) for k, v in inp.items()}
+    if P_: CUR["idx"] = torch.tensor([j for j, t in enumerate(inp["input_ids"][0].tolist()) if t in PIDS], device="cuda")
     tgt = torch.from_numpy(np.stack(tg)).cuda()                                   # (B, K, T)
     B, _, T = tgt.shape; d = torch.full((B, K, T + K - 1), PAD, device="cuda", dtype=torch.long)
     for k in range(K): d[:, k, k:k + T] = tgt[:, k]
@@ -61,5 +67,5 @@ for step in range(a.steps):
     loss.backward(); torch.nn.utils.clip_grad_norm_([p for p in pm.parameters() if p.requires_grad] + list(Amap.parameters()), 1.0); opt.step(); sched.step(); opt.zero_grad(set_to_none=True)
     ema = loss.item() if ema is None else 0.98 * ema + 0.02 * loss.item()
     if step % 25 == 0: print(f"step {step}/{a.steps} loss {loss.item():.3f} ema {ema:.3f} {time.time() - t0:.0f}s", flush=True)
-    if (step + 1) % 500 == 0 or step + 1 == a.steps: pm.save_pretrained(os.path.join(cdir, a.name)); torch.save(Amap.state_dict(), os.path.join(cdir, a.name, "A.pt"))
+    if (step + 1) % 500 == 0 or step + 1 == a.steps: pm.save_pretrained(os.path.join(cdir, a.name)); torch.save(Amap.state_dict(), os.path.join(cdir, a.name, "A.pt")); open(os.path.join(cdir, a.name, "prefix.txt"), "w").write(str(P_))
 print("done", time.time() - t0)
