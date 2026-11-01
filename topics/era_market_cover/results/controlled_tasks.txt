@@ -1,0 +1,7 @@
+(1) dataset B, English-sung labeled clips n=489: US 132, UK 134, Brazil 12, Spain 49, Germany 95, Italy 67
+  US_vs_UK (n=266, majority 0.504, chance 0.500): mix_norm acc 0.713 [0.665,0.762] bal 0.713 F1 0.713 | voc_norm acc 0.642 [0.594,0.690] bal 0.641 F1 0.641 | acc_norm acc 0.673 [0.620,0.724] bal 0.673 F1 0.673
+  five_way_no_Brazil (n=477, majority 0.281, chance 0.200): mix_norm acc 0.398 [0.360,0.437] bal 0.349 F1 0.351 | voc_norm acc 0.330 [0.291,0.365] bal 0.280 F1 0.277 | acc_norm acc 0.377 [0.340,0.420] bal 0.322 F1 0.320
+  reference, all languages, six-way (n=900, majority 0.167): mix_norm acc 0.587 bal 0.587 F1 0.593
+(2) dataset A pooled n=1158, 6 EffNet-style clusters (n per cluster [153, 220, 125, 165, 460, 35])
+  mix_norm: leave-one-cluster-out acc 0.430 [0.402,0.459] MAE 0.90 decades vs stratified OOF acc 0.472 MAE 0.80; per cluster (n, majority, acc): 153, 0.60, 0.45; 220, 0.20, 0.38; 125, 0.35, 0.28; 165, 0.25, 0.45; 460, 0.20, 0.47; 35, 0.29, 0.54
+  acc_norm: leave-one-cluster-out acc 0.436 [0.408,0.465] MAE 0.94 decades vs stratified OOF acc 0.467 MAE 0.86; per cluster (n, majority, acc): 153, 0.60, 0.59; 220, 0.20, 0.39; 125, 0.35, 0.28; 165, 0.25, 0.44; 460, 0.20, 0.46; 35, 0.29, 0.37
