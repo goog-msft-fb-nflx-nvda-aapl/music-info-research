@@ -145,3 +145,16 @@ Validation-only reporting on small splits (A 132, B 102); no artist or album gro
 | N-5 | Inference-time era control without training? | probe-guided SMC with nuisance-controlled score and melody similarity | planned |
 | N-6 | Direct optimisation of the era score? | straight-through tokens through EnCodec decoder and MERT | later |
 | N-7 | Does the idea transfer to ACE-Step cover? | LoRA on ACE-Step 1.5 | later |
+
+## 5. Main storyline and pre-set success criteria (decided 2026-11-01; target: ACL 2027, ARR submission 4 Jan 2027, Kyoto 17-22 Aug 2027)
+Problem: release decade and market labels are edition labels whose audio cues are confounded with sung language, genre and recording bandwidth; generators steered with decade words inherit the confound. Question: can an era axis learned from accompaniment with nuisance information removed (i) predict the decade and (ii) steer a melody-preserving cover, with effects that survive nuisance removal?
+Contributions to establish: (C1) stem and intervention analysis of what recognition uses (done: stem swap, LEACE language, bandwidth, genre held out, language fixed); (C2) the nuisance-controlled ordinal era coordinate z and z-conditioned generation (M-1, M-2; first results: monotone E, extremes as strong as the text prompt and as robust to nuisance erasure, middle decades near neutral); (C3) melody-preserving three-branch era guidance (done); (C4) the improvements N-1..N-5 that close the open gaps below.
+Open gaps to resolve before writing (criteria fixed before the runs, MERT and MuQ both must agree):
+ G1 middle decades: z-conditioning reaches Delta P(target) > 0 with the interval excluding 0 for 1980s and 1990s (currently about 0) -> N-3 (six-way head, prefix tokens), `ax_ctrlc` / `ax_freec`.
+ G2 bandwidth shortcut: with N-1 (bandwidth-randomized training) the effect of the era-free bandwidth prompts on E falls by at least half while the decade effect after nuisance erasure does not fall by more than 0.1.
+ G3 reproducibility: adapter and z training seeds 0-2 (`ax_ctrl_s1`, `ax_ctrl_s2`): between-seed SD of Delta below 0.06 for the extremes.
+ G4 melody preservation: song-ID top-1 >= .85 at the chosen guidance (currently .857-.883) and, with N-4, close to the SongEcho adapters' .98 at era effect >= the text system.
+ G5 dose-response: E rises monotonically with the interpolation alpha between the 1960s and 2010s prototypes (`ax_ctrl_ge10_dose`), Spearman >= .9 over the five alphas.
+ G6 baselines: text-decade LoRA + three-branch (done), SongEcho_base/large (done), ACE-Step cover (done), base MusicGen (done), plus N-2 soft era tokens.
+Timeline: by 15 Nov: M-2 replicates, dose-response, `c` variants analysed, N-1 and N-2 trained and generated; by 30 Nov: N-3, N-4 results, N-5 decision; by 10 Dec: all numbers frozen, tables regenerated from stored results; 11-24 Dec: paper in ACL format, reproduction guide, page update; 25 Dec-3 Jan: internal review, submit to ARR on or before 4 Jan 2027 (11:59 pm UTC-12).
+Fit risk for ACL (to decide at writing time): the work is on music audio; the NLP-facing angles are the sung-language confound of market recognition and text-conditioned (prompt-based) generation; an audio-oriented fallback is Interspeech or ISMIR (see Submission order in TODO.md).

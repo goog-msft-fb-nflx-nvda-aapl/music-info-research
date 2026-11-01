@@ -106,3 +106,10 @@ Order by cost/benefit: N-1, N-2, N-3 (training only, ~15 min each), N-4, N-5, th
 4. EMNLP 2027, TBA, aggregator ARR 28 May 2027
 5. ICASSP 2028, TBA, estimate mid Sep 2027
 Gate before the first submission (target: complete by mid Dec 2026): M-1..M-3 finished and written up; N-1..N-7 each run or explicitly dropped with the reason; B-1 baselines done; every number in the paper re-checked against `results/`; reproduction guide in the repo; report and page updated.
+
+## Schedule to the ACL submission (details and criteria: MASTER_PLAN section 5)
+- [ ] by 15 Nov: M-2 replicates (`ax_ctrl_s1/s2`), dose-response, `c` variants analysed; N-1, N-2 run
+- [ ] by 30 Nov: N-3, N-4 results; decide N-5
+- [ ] by 10 Dec: freeze numbers; regenerate all tables; reproduction guide
+- [ ] 11-24 Dec: paper (ACL format), page and video update
+- [ ] 25 Dec-3 Jan: internal review; submit to ARR by 4 Jan 2027
