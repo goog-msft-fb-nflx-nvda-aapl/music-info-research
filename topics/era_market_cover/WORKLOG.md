@@ -859,3 +859,6 @@ Observation: wording about bandwidth alone, with no era named, moves the probes 
 
 ## 2026-11-01 — Drive backup complete (drive18)
 Second pass added gen_trp00_lora_m3e{10,15} (577 files each) and gen_trpbw_lora_m3e{10,20} (289 each). Full check over all 102 backed-up folders (every `gen_*`, `mclg_*`, `results`): local file count == Drive object count in all 102. Drive folder permission list after the upload: owner only (Restricted).
+
+## 2026-11-01 — License check of the generator weights
+Source opened: https://huggingface.co/facebook/musicgen-melody (model card). Quoted line: "Code is released under MIT, model weights are released under CC-BY-NC 4.0." The README statement about MusicGen-Melody weights (CC-BY-NC 4.0) is therefore verified for this checkpoint. Other generators used (ACE-Step, Stable Audio Open via MuseControlLite) have not been checked in this session; the README only names MusicGen-Melody and says other generator licenses still apply.
