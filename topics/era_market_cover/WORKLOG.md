@@ -950,3 +950,12 @@ Note: the first `run_tri_pbw.sh` linked the v1 neutral clips (`gen_lora`) into e
 
 ## 2026-11-02 — N-3 prefix-token injection launched (`src/98_era_axis_lora.py --prefix P`, `src/99b_era_axis_gen.py` reads `lora/<name>/prefix.txt`, driver `src/run_ax_prefix.sh <gpu> <name> <z file> <P>`)
 Design: the neutral prompt gets P T5 sentinel tokens appended ("a song recording<extra_id_0>..."); z enters through Linear(8 -> P x hidden), zero-initialized, added only to the encoder states at those P positions (the other text positions and the chroma stream are untouched), instead of a bias on every text position (M-2). Everything else as M-2 (3000 steps, bs 8, lr 1e-4, z dropout .1, three-branch gm 3, ge 10, 24 songs x 3 seeds). Runs: `ax_ctrlc_pfx4` (leacec z, P=4, GPU 0), `ax_freec_pfx4` (advc z, P=4, GPU 1), `ax_ctrlc_pfx16` (P=16, GPU 2). Question: does localizing z in dedicated tokens improve middle-decade control, the erased-probe robustness or song identity (top-1) relative to the bias injection (ctrlc: 1980s .484, rho_E .957, erased 1980s .414). Results pending.
+
+## 2026-11-02 — N-3 prefix-token injection results (`results/ax_{ctrlc,freec}_pfx4_ge10_*`, `ax_ctrlc_pfx16_ge10_*`, `results/six_decades_pfx.*`, `results/ordinal_control_pfx.*`, `results/nuisance_steering_pfx.*`)
+Configuration as the 2026-11-02 launch entry (seed 0 only). MERT Delta 1960s / 1970s / 1980s / 1990s / 2000s / 2010s, 24 songs x 3 seeds:
+- ctrlc, bias injection (reference): +.741 / +.591 / +.484 / +.389 / +.225 / +.517; rho_E .957; erased ("both") 1960s/1980s/2010s +.521/+.414/+.335.
+- ctrlc, P=4 prefix: +.805 / +.652 / +.377 / +.186 / +.174 / +.434; rho_E .921; erased +.629/+.261/+.312.
+- freec, P=4 prefix: +.780 / +.650 / +.452 / +.261 / +.150 / +.344; rho_E .937; erased +.574/+.323/+.134 (bias injection freec: .687/.612/.576/.345/.140/.530; rho_E .962; erased .480/.439/.306).
+- ctrlc, P=16 prefix: +.689 / +.686 / +.324 / +.372 / +.397 / +.489; rho_E .913; erased +.536/+.180/+.195.
+Song-identity top-1 on era-prompted clips: bias ctrlc .854, freec .861; prefix P=4 .856 / .822; P=16 .859. Chord agreement .347-.358 for all.
+Outcome: prefix tokens strengthen the 1960s/1970s effects (+.805 vs +.741) but lower the 1980s/1990s effects, rho_E and the erased 1980s effect compared with the bias injection; no improvement in content preservation. N-3 as implemented is not an improvement (one seed; the differences in the 1980s/1990s Delta, .1-.2, exceed the seed SD .02-.05 of the bias variants). Closed negative; bias injection stays the default.

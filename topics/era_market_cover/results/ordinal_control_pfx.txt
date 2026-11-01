@@ -1,0 +1,9 @@
+pfx4
+  mert: rho 0.921 [0.892,0.948] slope 0.855 range 4.22 E 0.13 1.27 2.92 3.34 4.08 4.34 neutral 3.18
+  muq: rho 0.913 [0.881,0.942] slope 0.772 range 3.85 E 0.32 1.38 2.71 2.99 3.88 4.17 neutral 3.04
+freec_pfx4
+  mert: rho 0.937 [0.922,0.950] slope 0.883 range 4.22 E 0.07 1.17 2.75 3.47 4.20 4.28 neutral 3.06
+  muq: rho 0.930 [0.916,0.943] slope 0.757 range 3.72 E 0.27 1.31 2.51 2.97 3.78 3.99 neutral 3.07
+pfx16
+  mert: rho 0.913 [0.895,0.931] slope 0.827 range 4.19 E 0.29 1.32 3.16 3.40 3.91 4.48 neutral 3.00
+  muq: rho 0.869 [0.843,0.896] slope 0.717 range 3.63 E 0.57 1.41 3.16 3.23 3.69 4.20 neutral 2.75
