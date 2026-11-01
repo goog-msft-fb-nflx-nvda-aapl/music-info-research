@@ -69,6 +69,9 @@ svg{width:100%;height:auto;display:block}svg text{fill:var(--mut);font:11px syst
 <h2>Controls and limits</h2>
 <ul>
 <li>Prompts that name no decade but only bandwidth ("dull, band-limited, tape hiss") shift the probes by about half the effect of the 1960s prompt, so part of the era effect rides on bandwidth cues. Matching each clip's long-term spectrum to its neutral clip keeps the MERT 1980s and 2010s effects positive and halves the MuQ 2010s effect.</li>
+<li><b>Nuisance removal:</b> after erasing style and bandwidth directions from the probe, every adapter-plus-guidance effect stays positive but shrinks by .07 to .27; the unmodified model's 2010s effect disappears (MERT +.328 to -.020) while its 1980s effect stays (+.593 to +.608).</li>
+<li><b>Language held fixed:</b> for English-sung clips only, US-vs-UK market accuracy is .713 (chance .500) and the five-way task .398 (majority .281); numbers are pooled and not artist-grouped, so likely optimistic.</li>
+<li>Release decade is a label of an edition, not of the recording; we could not recover Discogs ids, so splits are artist-disjoint but not guaranteed clique-disjoint.</li>
 <li>24 validation songs, 3 seeds; probes are proxies trained on the same real clips; no artist ids, test labels hidden; language and genre are proxies. <b>No listening test has been run</b>, so nothing here says how the covers sound to people.</li>
 </ul>
 
