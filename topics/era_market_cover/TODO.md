@@ -99,9 +99,12 @@ Open (GPU access ends 2026-10-31):
 - [ ] N-7 ACE-Step 1.5 cover with a z-conditioned or era-labelled LoRA (ACE-Step LoRA training; weights license MIT per survey)
 Order by cost/benefit: N-1, N-2, N-3 (training only, ~15 min each), N-4, N-5, then N-7, N-6.
 
-## Upcoming venues (deadlines; TBA where the call is not published; confirm at the official site)
-- ISMIR 2027 (London, 12-16 Sep 2027): deadline TBA (2026 edition: abstract 20 Apr, paper 27 Apr)
-- ACL 2027 (Kyoto, Aug 2027): ARR deadline TBA (aggregator: 4 Jan 2027)
-- Interspeech 2027 (Sao Paulo, 29 Aug-2 Sep 2027): deadline TBA
-- EMNLP 2027: deadline TBA (aggregator: ARR 28 May 2027)
-- ICASSP 2028: TBA (2027 edition's deadline was 16 Sep 2026)
+## Submission targets (deadline = submission date; TBA = call not published, estimate from the previous cycle; confirm at the official site)
+| Venue | Submission deadline | Fit |
+|---|---|---|
+| ACL 2027 | ARR 4 Jan 2027 (aggregator, official page TBA) | computational linguistics; weak fit, only if framed around language confound |
+| Interspeech 2027 | TBA, estimate early Mar 2027 (past years 25 Feb-21 Mar) | speech/audio; plausible |
+| ISMIR 2027 | TBA, estimate late Apr 2027 (2026: abstract 20 Apr, paper 27 Apr) | best fit (music generation and analysis) |
+| EMNLP 2027 | TBA, aggregator ARR 28 May 2027 | weak fit |
+| ICASSP 2028 | TBA, estimate mid Sep 2027 (2027 edition: 16 Sep 2026) | audio; plausible |
+Most probable target: ISMIR 2027 (late Apr 2027); backup: Interspeech 2027 (early Mar 2027). Plan the experiments and the rewritten paper (new method M-1..M-3 and N-1..N-7) to be complete by early Feb 2027 for the Interspeech option.
