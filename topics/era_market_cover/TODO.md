@@ -88,3 +88,13 @@ Open (GPU access ends 2026-10-31):
 - [ ] B-1 external baseline: ControlNet for Stable Audio Open (Hou et al., arXiv 2410.05151) on the same songs/prompts, if code and weights are public (check); else survey prompt to the user
 - [ ] update report, page, video notes after M-1..M-3 (only measured numbers)
 - [ ] FINAL: reproduction guide in the repo README (data prep, separation, embeddings, probes, adapters training, generation, evaluation, tables; exact commands in order, environments); write after all experiments finish
+
+## Next-round method candidates (after the M-2 round; GPU; each is one run family, logged with its own ID)
+- [ ] N-1 **bandwidth-randomized training**: adapter trained on accompaniment with random low-pass / EQ / hiss augmentation (and a spectrum-matched variant) so the decade cannot be carried by bandwidth; test with the era-free bandwidth prompts and the nuisance-erased probes (expect: bandwidth-prompt effect falls, decade effect survives or not)
+- [ ] N-2 **era tokens (soft prompts)**: learn K continuous text tokens per decade (prompt tuning) on the same data, compare with the decade word, with z-conditioning and with LoRA alone
+- [ ] N-3 **richer era code**: z with a six-way decade head plus a nuisance-orthogonal subspace (supervised contrastive loss, prototype per decade, mixture of prototypes) so middle decades (1980s, 1990s) are encoded; z via prefix tokens in cross-attention (IP-Adapter style, zero-gated) instead of a bias
+- [ ] N-4 **era-axis conditioning on the strongest melody controller**: apply the z-conditioning (and LoRA) to the Stable Audio Open adapters (SongEcho_base/large: top-1 .986 at weak era control) so that melody preservation and decade control come together
+- [ ] N-5 **probe-guided sequential Monte Carlo**: N particles per 2 s segment, weight by the nuisance-controlled era score of the partially decoded audio and the melody similarity to the source, resample (inference-time, no training); compares with best-of-N (G09) and with guidance
+- [ ] N-6 **differentiable era loss**: straight-through (Gumbel) tokens -> EnCodec decoder -> frozen MERT -> nuisance-controlled era head, auxiliary loss during adapter training (heavy; only after N-1 to N-5)
+- [ ] N-7 ACE-Step 1.5 cover with a z-conditioned or era-labelled LoRA (ACE-Step LoRA training; weights license MIT per survey)
+Order by cost/benefit: N-1, N-2, N-3 (training only, ~15 min each), N-4, N-5, then N-7, N-6.

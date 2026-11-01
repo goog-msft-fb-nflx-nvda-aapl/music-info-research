@@ -138,3 +138,10 @@ Validation-only reporting on small splits (A 132, B 102); no artist or album gro
 | M-2 | Can the discovered coordinate itself steer generation? | LoRA on MusicGen-Melody conditioned on z (FiLM-style bias on encoder states) with a neutral text prompt; inference with decade prototypes z_d, interpolations, and three-branch guidance on z | planned |
 | M-3 | Does z-conditioning beat decade-word conditioning under nuisance controls? | Probes, nuisance-erased probes, dose-response, content metrics; reference = text-decade LoRA (v1) | planned |
 | B-1 | Is the system better than a stronger melody controller? | ControlNet for Stable Audio Open on the same 24 songs | check availability |
+| N-1 | Is the decade effect separable from bandwidth if the adapter cannot use bandwidth? | Random band-limit/EQ/hiss augmentation of training stems (and spectrum-matched variant) | planned |
+| N-2 | Do learned era tokens beat the decade word? | Prompt tuning, K tokens per decade | planned |
+| N-3 | Can z encode the middle decades with nuisance removed? | six-way head + nuisance-orthogonal subspace, prototype / contrastive loss, prefix tokens in cross-attention | planned (variants `c` running) |
+| N-4 | Melody-preserving AND era-controlled? | z-conditioning on SongEcho/MuseControlLite adapters (Stable Audio Open) | planned |
+| N-5 | Inference-time era control without training? | probe-guided SMC with nuisance-controlled score and melody similarity | planned |
+| N-6 | Direct optimisation of the era score? | straight-through tokens through EnCodec decoder and MERT | later |
+| N-7 | Does the idea transfer to ACE-Step cover? | LoRA on ACE-Step 1.5 | later |
