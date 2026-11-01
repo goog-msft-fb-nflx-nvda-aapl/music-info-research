@@ -1,7 +1,7 @@
 """Six-decade controllability table: for each decade prompt (1960s ... 2010s) the per-song change of P(target decade | era prompt) - P(. | neutral) and the mean expected-decade index of the generated accompaniment, from the codec-matched MERT / MuQ probes.
 Main-decade eval json (1960s/1980s/2010s) and extra-decade eval json (1970s/1990s/2000s) of the same configuration are joined; 24 songs, seeds averaged, 95% song-bootstrap CI.
-usage: python 78_six_decades.py label=main_eval.json+extra_eval.json ... -> results/six_decades.{json,txt}"""
-import sys, json, numpy as np
+usage: python 78_six_decades.py label=main_eval.json+extra_eval.json ... -> results/six_decades.{json,txt} (or ${OUT_PREFIX}.{json,txt})"""
+import sys, os, json, numpy as np
 D = ["1960s", "1970s", "1980s", "1990s", "2000s", "2010s"]; rng = np.random.default_rng(0); out = {}; txt = []
 for arg in sys.argv[1:]:
     label, rest = arg.split("=", 1); R = []
@@ -17,4 +17,4 @@ for arg in sys.argv[1:]:
             cells.append(f"{e} {d.mean():+.3f} [{np.percentile(bs, 2.5):+.3f},{np.percentile(bs, 97.5):+.3f}] E={ed:.2f} top1={top1:.2f}")
         line.append(f"  {enc}: " + " | ".join(cells))
     txt += line; print("\n".join(line))
-json.dump(out, open("results/six_decades.json", "w"), indent=1); open("results/six_decades.txt", "w").write("\n".join(txt) + "\n")
+PRE = os.environ.get("OUT_PREFIX", "results/six_decades"); json.dump(out, open(PRE + ".json", "w"), indent=1); open(PRE + ".txt", "w").write("\n".join(txt) + "\n")
