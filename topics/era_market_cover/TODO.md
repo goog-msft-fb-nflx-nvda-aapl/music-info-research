@@ -113,3 +113,4 @@ Gate before the first submission (target: complete by mid Dec 2026): M-1..M-3 fi
 - [ ] by 10 Dec: freeze numbers; regenerate all tables; reproduction guide
 - [ ] 11-24 Dec: paper (ACL format), page and video update
 - [ ] 25 Dec-3 Jan: internal review; submit to ARR by 4 Jan 2027
+- Non-language fallback if ACL does not work out: ISMIR 2027 (submission about late Apr 2027, TBA). Other non-language options seen: ICME 2027 (30 Dec 2026, IEEE listing), ICML 2027 (about 22 Jan 2027, estimate), DAFx 2027 (about late Mar 2027, estimate).
