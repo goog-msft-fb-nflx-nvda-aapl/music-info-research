@@ -34,7 +34,7 @@ for k in PJ:
     M[(k, "random")] = R
 txt.append("real-audio validation (A n=132): " + " | ".join(f"{key}: rank {v['rank']} acc {v['val_acc']:.3f} rho {v['spearman_E_vs_true']:.2f}" for key, v in out["real"].items()))
 for s in sys.argv[1:]:
-    Rr = json.load(open(f"{ROOT}/results/{s}_eval.json"))["rows"]; Zd = np.load(f"{ROOT}/results/{s}_eval_emb.npz"); songs = sorted({r["clip"] for r in Rr}); res = {}
+    parts = s.split("+"); Rr = [r for q in parts for r in json.load(open(f"{ROOT}/results/{q}_eval.json"))["rows"]]; Zl = [np.load(f"{ROOT}/results/{q}_eval_emb.npz") for q in parts]; Zd = {k: np.concatenate([z[k] for z in Zl]) for k in ("mert", "muq")}; songs = sorted({r["clip"] for r in Rr}); res = {}   # "a+b" joins the main-decade and extra-decade sets of one configuration
     for k in PJ:
         X = Zd[k]; ok = np.isfinite(X).all(1)
         for name in list(Z) + ["random"]:
@@ -45,6 +45,8 @@ for s in sys.argv[1:]:
             for e, t in TD.items():
                 P = lambda c: np.array([np.mean([pr[i, t] for i, r in enumerate(Rr) if r["clip"] == x and r["cond"] == c]) for x in songs]); d = P(e) - P("neutral"); bs = [d[rng.integers(0, len(d), len(d))].mean() for _ in range(2000)]
                 cells[e] = {"delta": float(d.mean()), "ci": [float(np.percentile(bs, 2.5)), float(np.percentile(bs, 97.5))]}
+            DEC = ["1960s", "1970s", "1980s", "1990s", "2000s", "2010s"]; ii = [i for i, r in enumerate(Rr) if r["cond"] in DEC and ok[i]]
+            if len({Rr[i]["cond"] for i in ii}) >= 5: cells["rho_E"] = float(spearmanr([DEC.index(Rr[i]["cond"]) for i in ii], pr[ii] @ np.arange(6))[0])   # ordinal control score under this probe (needs >= 5 decade prompts)
             res[f"{k}_{name}"] = cells
-    out["sets"][s] = res; txt.append(s + f" (n_songs={len(songs)})\n" + "\n".join(f"  {key:12s} " + " | ".join(f"{e} {c['delta']:+.3f} [{c['ci'][0]:+.3f},{c['ci'][1]:+.3f}]" for e, c in cells.items()) for key, cells in res.items()))
+    out["sets"][s] = res; txt.append(s + f" (n_songs={len(songs)})\n" + "\n".join(f"  {key:12s} " + " | ".join((f"{e} {c['delta']:+.3f} [{c['ci'][0]:+.3f},{c['ci'][1]:+.3f}]" if e != "rho_E" else f"rho_E {c:.3f}") for e, c in cells.items()) for key, cells in res.items()))
 PRE = os.environ.get("OUT_PREFIX", "nuisance_steering"); json.dump(out, open(f"{ROOT}/results/{PRE}.json", "w"), indent=1); open(f"{ROOT}/results/{PRE}.txt", "w").write("\n".join(txt) + "\n"); print("\n".join(txt))

@@ -1,0 +1,27 @@
+textLoRA_ge10
+  mert: rho 0.965 [0.955,0.973] slope 0.883 range 4.23 E 0.26 1.15 2.25 3.31 4.05 4.49 neutral 3.05
+  muq: rho 0.948 [0.935,0.958] slope 0.754 range 3.65 E 0.65 1.43 2.38 3.08 3.91 4.30 neutral 2.94
+textLoRA_ge7
+  mert: rho 0.941 [0.925,0.954] slope 0.800 range 3.85 E 0.51 1.39 2.42 3.26 4.04 4.36 neutral 3.05
+  muq: rho 0.898 [0.865,0.926] slope 0.635 range 3.06 E 1.04 1.64 2.57 3.10 3.77 4.11 neutral 2.94
+base_ge7
+  mert: rho 0.462 [0.417,0.504] slope 0.261 range 1.82 E 2.80 4.46 2.47 3.50 4.12 4.62 neutral 3.35
+  muq: rho 0.220 [0.138,0.300] slope 0.092 range 0.50 E 3.47 3.69 2.53 3.22 3.70 3.97 neutral 3.46
+axis_ctrl_ge7
+  mert: rho 0.884 [0.859,0.911] slope 0.768 range 3.70 E 0.50 1.39 2.60 3.39 3.92 4.19 neutral 3.04
+  muq: rho 0.875 [0.848,0.904] slope 0.670 range 3.29 E 0.83 1.64 2.65 3.22 3.79 4.11 neutral 2.93
+axis_ctrl_ge10
+  mert: rho 0.910 [0.896,0.924] slope 0.874 range 4.07 E 0.29 0.93 2.28 3.53 3.93 4.36 neutral 3.04
+  muq: rho 0.899 [0.881,0.917] slope 0.770 range 3.69 E 0.58 1.31 2.33 3.33 3.82 4.27 neutral 2.93
+axis_free_ge7
+  mert: rho 0.883 [0.860,0.905] slope 0.771 range 3.84 E 0.48 1.49 2.82 3.43 3.86 4.33 neutral 2.95
+  muq: rho 0.873 [0.842,0.903] slope 0.625 range 3.29 E 0.89 2.00 2.81 3.21 3.67 4.19 neutral 2.87
+axis_free_ge10
+  mert: rho 0.918 [0.898,0.938] slope 0.874 range 4.30 E 0.20 1.21 2.81 3.55 4.00 4.50 neutral 2.95
+  muq: rho 0.903 [0.880,0.925] slope 0.761 range 3.88 E 0.43 1.59 2.84 3.33 3.83 4.32 neutral 2.87
+songecho_base
+  mert: rho 0.316 [0.222,0.417] slope 0.155 range 0.90 E 2.85 2.85 3.21 3.01 3.23 3.74 neutral 2.54
+  muq: rho 0.145 [0.055,0.244] slope 0.072 range 0.52 E 2.83 3.25 3.24 2.93 3.32 3.35 neutral 2.90
+songecho_large
+  mert: rho 0.265 [0.186,0.357] slope 0.131 range 0.75 E 2.72 2.76 2.83 2.96 2.99 3.47 neutral 2.43
+  muq: rho 0.181 [0.102,0.272] slope 0.084 range 0.49 E 2.77 3.06 3.13 2.91 3.29 3.27 neutral 2.89
