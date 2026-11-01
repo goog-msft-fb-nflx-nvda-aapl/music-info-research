@@ -99,12 +99,10 @@ Open (GPU access ends 2026-10-31):
 - [ ] N-7 ACE-Step 1.5 cover with a z-conditioned or era-labelled LoRA (ACE-Step LoRA training; weights license MIT per survey)
 Order by cost/benefit: N-1, N-2, N-3 (training only, ~15 min each), N-4, N-5, then N-7, N-6.
 
-## Submission targets (deadline = submission date; TBA = call not published, estimate from the previous cycle; confirm at the official site)
-| Venue | Submission deadline | Fit |
-|---|---|---|
-| ACL 2027 | ARR 4 Jan 2027 (aggregator, official page TBA) | computational linguistics; weak fit, only if framed around language confound |
-| Interspeech 2027 | TBA, estimate early Mar 2027 (past years 25 Feb-21 Mar) | speech/audio; plausible |
-| ISMIR 2027 | TBA, estimate late Apr 2027 (2026: abstract 20 Apr, paper 27 Apr) | best fit (music generation and analysis) |
-| EMNLP 2027 | TBA, aggregator ARR 28 May 2027 | weak fit |
-| ICASSP 2028 | TBA, estimate mid Sep 2027 (2027 edition: 16 Sep 2026) | audio; plausible |
-Most probable target: ISMIR 2027 (late Apr 2027); backup: Interspeech 2027 (early Mar 2027). Plan the experiments and the rewritten paper (new method M-1..M-3 and N-1..N-7) to be complete by early Feb 2027 for the Interspeech option.
+## Submission order (earliest deadline first; resubmit to the next only after a rejection, no dual submission; TBA = estimate from the previous cycle, confirm at the official site)
+1. ACL 2027, ARR 4 Jan 2027 (aggregator; official page TBA); framing for this venue: language/genre/bandwidth confounds of era and market recognition plus controlled generation
+2. Interspeech 2027, TBA, estimate early Mar 2027
+3. ISMIR 2027, TBA, estimate late Apr 2027 (best topical fit)
+4. EMNLP 2027, TBA, aggregator ARR 28 May 2027
+5. ICASSP 2028, TBA, estimate mid Sep 2027
+Gate before the first submission (target: complete by mid Dec 2026): M-1..M-3 finished and written up; N-1..N-7 each run or explicitly dropped with the reason; B-1 baselines done; every number in the paper re-checked against `results/`; reproduction guide in the repo; report and page updated.
