@@ -99,18 +99,17 @@ Open (GPU access ends 2026-10-31):
 - [ ] N-7 ACE-Step 1.5 cover with a z-conditioned or era-labelled LoRA (ACE-Step LoRA training; weights license MIT per survey)
 Order by cost/benefit: N-1, N-2, N-3 (training only, ~15 min each), N-4, N-5, then N-7, N-6.
 
-## Submission order (earliest deadline first; resubmit to the next only after a rejection, no dual submission; TBA = estimate from the previous cycle, confirm at the official site)
-1. ACL 2027 (Kyoto, 17-22 Aug 2027; main conference 20-22 Aug), ARR submission 4 Jan 2027 11:59 pm UTC-12 (official site 2027.aclweb.org, checked 2026-11-01; commitment, notification, camera-ready TBA); framing for this venue: language/genre/bandwidth confounds of era and market recognition plus controlled generation
-2. Interspeech 2027, TBA, estimate early Mar 2027
-3. ISMIR 2027, TBA, estimate late Apr 2027 (best topical fit)
-4. EMNLP 2027, TBA, aggregator ARR 28 May 2027
-5. ICASSP 2028, TBA, estimate mid Sep 2027
-Gate before the first submission (target: complete by mid Dec 2026): M-1..M-3 finished and written up; N-1..N-7 each run or explicitly dropped with the reason; B-1 baselines done; every number in the paper re-checked against `results/`; reproduction guide in the repo; report and page updated.
+## Submission target (decided 2026-11-01): ICML 2027
+- Primary: ICML 2027 (South America, host city TBA): abstract about 16 Jan 2027, full paper about 22 Jan 2027, AoE (UTC-12); ESTIMATES from an aggregator based on the 2026 cycle (abstract 23 Jan, paper 28 Jan 2026); the official call is not published: check icml.cc/Conferences/current/Dates and update this line.
+- Not submitted in parallel (no dual submission): ACL 2027 (ARR 4 Jan 2027, official), kept only as an alternative if the ICML plan is dropped.
+- Fallbacks after a rejection, in time order: Interspeech 2027 (about early Mar, TBA), ISMIR 2027 (about late Apr, TBA, best topical fit), EMNLP 2027 (ARR about 28 May, TBA), ICASSP 2028 (about mid Sep 2027, TBA).
+- Paper framing for ICML: a learning problem, not a music-domain study: nuisance-controlled ordinal representation (LEACE / adversarial / contrastive variants) used as the conditioning variable of a pretrained autoregressive generator, with guidance in the representation space, evaluated by intervention (erasure) rather than by raw probe scores; baselines: text-conditioning, soft prompts, external controllers.
+Gate before the submission (target: all experiments complete by 20 Dec 2026, paper draft by 10 Jan 2027, submit by 20 Jan 2027): M-1..M-3 finished and written up; N-1..N-7 each run or explicitly dropped with the reason; B-1 baselines done; every number in the paper re-checked against `results/`; reproduction guide in the repo; report and page updated.
 
 ## Schedule to the ACL submission (details and criteria: MASTER_PLAN section 5)
 - [ ] by 15 Nov: M-2 replicates (`ax_ctrl_s1/s2`), dose-response, `c` variants analysed; N-1, N-2 run
 - [ ] by 30 Nov: N-3, N-4 results; decide N-5
 - [ ] by 10 Dec: freeze numbers; regenerate all tables; reproduction guide
-- [ ] 11-24 Dec: paper (ACL format), page and video update
-- [ ] 25 Dec-3 Jan: internal review; submit to ARR by 4 Jan 2027
+- [ ] 21-31 Dec: page and video update; start paper (ICML format)
+- [ ] 25 Dec-10 Jan: paper in ICML format; 11-19 Jan: internal review; submit abstract and paper to ICML (estimated 16 and 22 Jan 2027, confirm)
 - Non-language fallback if ACL does not work out: ISMIR 2027 (submission about late Apr 2027, TBA). Other non-language options seen: ICME 2027 (30 Dec 2026, IEEE listing), ICML 2027 (about 22 Jan 2027, estimate), DAFx 2027 (about late Mar 2027, estimate).
