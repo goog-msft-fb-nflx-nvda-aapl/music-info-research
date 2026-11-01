@@ -1,0 +1,18 @@
+ctrl
+  mert: rho 0.910 [0.896,0.925] slope 0.874 range 4.07 E 0.29 0.93 2.28 3.53 3.93 4.36 neutral 3.04
+  muq: rho 0.899 [0.881,0.917] slope 0.770 range 3.69 E 0.58 1.31 2.33 3.33 3.82 4.27 neutral 2.93
+ctrlc
+  mert: rho 0.957 [0.946,0.967] slope 0.863 range 4.29 E 0.22 1.24 2.42 3.06 3.95 4.50 neutral 2.88
+  muq: rho 0.925 [0.908,0.941] slope 0.749 range 3.81 E 0.43 1.53 2.57 2.89 3.81 4.24 neutral 2.81
+freec
+  mert: rho 0.962 [0.952,0.971] slope 0.890 range 4.32 E 0.24 1.07 2.56 3.33 4.00 4.56 neutral 2.82
+  muq: rho 0.954 [0.943,0.962] slope 0.799 range 3.91 E 0.41 1.29 2.48 2.95 3.93 4.32 neutral 2.75
+ctrl_aug
+  mert: rho 0.909 [0.890,0.926] slope 0.868 range 4.11 E 0.22 0.99 2.15 3.40 3.84 4.34 neutral 2.86
+  muq: rho 0.902 [0.883,0.923] slope 0.767 range 3.77 E 0.55 1.47 2.28 3.31 3.80 4.32 neutral 2.86
+onehot
+  mert: rho 0.948 [0.934,0.960] slope 0.872 range 4.25 E 0.22 1.05 2.56 3.14 3.95 4.47 neutral 2.81
+  muq: rho 0.942 [0.929,0.955] slope 0.787 range 3.86 E 0.45 1.33 2.47 2.95 3.91 4.31 neutral 2.90
+ordlabel
+  mert: rho 0.890 [0.870,0.913] slope 0.883 range 3.88 E 0.39 0.78 2.16 3.68 4.11 4.27 neutral 3.28
+  muq: rho 0.889 [0.866,0.911] slope 0.758 range 3.47 E 0.69 1.16 2.34 3.40 3.86 4.16 neutral 3.09
