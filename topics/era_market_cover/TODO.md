@@ -87,3 +87,4 @@ Open (GPU access ends 2026-10-31):
 - [ ] M-3 evaluation: codec-matched probes, nuisance-erased probes, dose-response along the axis, identity (song-ID, VINet), FD/KL; ablations (lambda, z dimension, text-decade LoRA reference)
 - [ ] B-1 external baseline: ControlNet for Stable Audio Open (Hou et al., arXiv 2410.05151) on the same songs/prompts, if code and weights are public (check); else survey prompt to the user
 - [ ] update report, page, video notes after M-1..M-3 (only measured numbers)
+- [ ] FINAL: reproduction guide in the repo README (data prep, separation, embeddings, probes, adapters training, generation, evaluation, tables; exact commands in order, environments); write after all experiments finish
