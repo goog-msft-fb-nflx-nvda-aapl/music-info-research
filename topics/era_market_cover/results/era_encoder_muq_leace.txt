@@ -1,0 +1,1 @@
+muq leace lam=0.0: val acc 0.273±0.011, MAE 1.39 decades, spearman 0.479; nuisance R2 from z (val, higher = more leakage): ridge 0.025, mlp 0.015

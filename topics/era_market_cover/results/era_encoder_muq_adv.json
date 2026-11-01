@@ -1,0 +1,69 @@
+{
+ "enc": "muq",
+ "layer": 9,
+ "runs": {
+  "adv0.0_s0": {
+   "val_acc": 0.29545454545454547,
+   "val_mae_decades": 1.1289318398465436,
+   "val_spearman": 0.6690414445673563,
+   "nuisance_R2_ridge": 0.07856069505214691,
+   "nuisance_R2_mlp": 0.09938733279705048
+  },
+  "adv0.0_s1": {
+   "val_acc": 0.29545454545454547,
+   "val_mae_decades": 1.2251568217105704,
+   "val_spearman": 0.6236392932916874,
+   "nuisance_R2_ridge": 0.07297998666763306,
+   "nuisance_R2_mlp": 0.09751468896865845
+  },
+  "adv0.0_s2": {
+   "val_acc": 0.2878787878787879,
+   "val_mae_decades": 1.133266618147707,
+   "val_spearman": 0.6534417310521264,
+   "nuisance_R2_ridge": 0.07500829547643661,
+   "nuisance_R2_mlp": 0.08673372864723206
+  },
+  "adv0.1_s0": {
+   "val_acc": 0.29545454545454547,
+   "val_mae_decades": 1.1541877904359867,
+   "val_spearman": 0.6607759247197343,
+   "nuisance_R2_ridge": 0.20203058421611786,
+   "nuisance_R2_mlp": 0.22999246418476105
+  },
+  "adv0.1_s1": {
+   "val_acc": 0.2803030303030303,
+   "val_mae_decades": 1.1593410002344662,
+   "val_spearman": 0.6667131291173218,
+   "nuisance_R2_ridge": 0.06814844906330109,
+   "nuisance_R2_mlp": 0.07372213900089264
+  },
+  "adv0.1_s2": {
+   "val_acc": 0.29545454545454547,
+   "val_mae_decades": 1.1411419929267894,
+   "val_spearman": 0.660543093174731,
+   "nuisance_R2_ridge": 0.0836106464266777,
+   "nuisance_R2_mlp": 0.0803665965795517
+  },
+  "adv0.3_s0": {
+   "val_acc": 0.2803030303030303,
+   "val_mae_decades": 1.1417678388212156,
+   "val_spearman": 0.6392390068069171,
+   "nuisance_R2_ridge": 0.05109873414039612,
+   "nuisance_R2_mlp": 0.052670568227767944
+  },
+  "adv0.3_s1": {
+   "val_acc": 0.2727272727272727,
+   "val_mae_decades": 1.2030295276491694,
+   "val_spearman": 0.6274810137842439,
+   "nuisance_R2_ridge": 0.07169657945632935,
+   "nuisance_R2_mlp": 0.09310808777809143
+  },
+  "adv0.3_s2": {
+   "val_acc": 0.2878787878787879,
+   "val_mae_decades": 1.13510715150012,
+   "val_spearman": 0.6204960674341411,
+   "nuisance_R2_ridge": 0.05850912258028984,
+   "nuisance_R2_mlp": 0.06314259022474289
+  }
+ }
+}

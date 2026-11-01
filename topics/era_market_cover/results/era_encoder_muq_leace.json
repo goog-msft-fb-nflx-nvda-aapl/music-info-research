@@ -1,0 +1,27 @@
+{
+ "enc": "muq",
+ "layer": 9,
+ "runs": {
+  "leace0.0_s0": {
+   "val_acc": 0.26515151515151514,
+   "val_mae_decades": 1.4223461193575229,
+   "val_spearman": 0.4336487525688885,
+   "nuisance_R2_ridge": 0.01778656803071499,
+   "nuisance_R2_mlp": 0.009327314794063568
+  },
+  "leace0.0_s1": {
+   "val_acc": 0.2878787878787879,
+   "val_mae_decades": 1.358774000305697,
+   "val_spearman": 0.5266649547977588,
+   "nuisance_R2_ridge": 0.037468988448381424,
+   "nuisance_R2_mlp": 0.0066402931697666645
+  },
+  "leace0.0_s2": {
+   "val_acc": 0.26515151515151514,
+   "val_mae_decades": 1.3951955154966647,
+   "val_spearman": 0.4773046672570315,
+   "nuisance_R2_ridge": 0.019468897953629494,
+   "nuisance_R2_mlp": 0.030038131400942802
+  }
+ }
+}

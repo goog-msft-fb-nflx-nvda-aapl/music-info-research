@@ -1,0 +1,27 @@
+{
+ "enc": "mert",
+ "layer": 22,
+ "runs": {
+  "leace0.0_s0": {
+   "val_acc": 0.25757575757575757,
+   "val_mae_decades": 1.3063813975449672,
+   "val_spearman": 0.4828926243371139,
+   "nuisance_R2_ridge": 0.020171120762825012,
+   "nuisance_R2_mlp": -0.023566681891679764
+  },
+  "leace0.0_s1": {
+   "val_acc": 0.2727272727272727,
+   "val_mae_decades": 1.3231671050371419,
+   "val_spearman": 0.4805643088870796,
+   "nuisance_R2_ridge": 0.012332847341895103,
+   "nuisance_R2_mlp": 0.007460236549377441
+  },
+  "leace0.0_s2": {
+   "val_acc": 0.26515151515151514,
+   "val_mae_decades": 1.2894688712867874,
+   "val_spearman": 0.494301370042282,
+   "nuisance_R2_ridge": 0.021929796785116196,
+   "nuisance_R2_mlp": 0.00938420556485653
+  }
+ }
+}
