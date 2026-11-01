@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Era and Market Covers</title>
+<style>
+:root{--bg:#f6f4ee;--fg:#1b2430;--mut:#4a5563;--card:#fff;--line:#d9d5ca;--acc:#b4410b;--c1:#7a7a7a;--c2:#9ecae1;--c3:#4292c6;--c4:#2171b5;--c5:#08306b}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b2430;--fg:#f6f4ee;--mut:#c9d1db;--card:#243244;--line:#3a4a60;--acc:#f2a65a;--c1:#a9b0ba;--c2:#9ecae1;--c3:#6baed6;--c4:#4292c6;--c5:#c6dbef;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1b2430;--fg:#f6f4ee;--mut:#c9d1db;--card:#243244;--line:#3a4a60;--acc:#f2a65a;--c1:#a9b0ba;--c2:#9ecae1;--c3:#6baed6;--c4:#4292c6;--c5:#c6dbef;color-scheme:dark}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:860px;margin:0 auto;padding:32px max(16px,env(safe-area-inset-right,0px)) 64px max(16px,env(safe-area-inset-left,0px))}
+h1{font-family:Georgia,serif;font-size:2rem;line-height:1.2;margin:0 0 8px;text-wrap:balance}
+h2{font-family:Georgia,serif;margin:40px 0 8px;text-wrap:balance}
+p,li{color:var(--mut)} a{color:var(--acc)} b{color:var(--fg)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin:16px 0}
+.video{position:relative;padding-bottom:56.25%;height:0;border-radius:12px;overflow:hidden}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.t{overflow-x:auto}table{border-collapse:collapse;width:100%} th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);color:var(--fg);white-space:nowrap}
+.s{font-size:.9rem}.row{display:flex;flex-wrap:wrap;gap:12px;margin:8px 0}
+button.k{font:inherit;font-size:.85rem;padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--fg);cursor:pointer}
+button.k[aria-pressed="true"]{background:var(--acc);color:var(--bg);border-color:var(--acc)}
+label{display:flex;flex-direction:column;font-size:.85rem;color:var(--mut);gap:4px}select{font:inherit;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--fg)}
+svg{width:100%;height:auto;display:block}svg text{fill:var(--mut);font:11px system-ui,sans-serif}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+</style>
+</head>
+<body>
+<main>
+<h1>Which stem carries the era of a song, and can we regenerate it?</h1>
+<p>Course project, CommE5070 (Deep Learning for Music Analysis and Generation, NTU), music generation track. We study which stem, vocal or accompaniment, carries release-decade and release-market cues in Discogs-VI clips, then keep the original vocal and melody and regenerate the accompaniment in a requested decade. <a href="report.pdf">Read the report (PDF)</a> or <a href="https://github.com/goog-msft-fb-nflx-nvda-aapl/musicgen-steering-eval/tree/main/topics/era_market_cover">browse code, results and worklog</a>.</p>
+<div class="card video"><iframe src="https://www.youtube.com/embed/JPDp9j9sH0M" title="Mid-progress video (earlier stage of the project)" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+<p class="s"><a href="https://youtu.be/JPDp9j9sH0M">Mid-progress video on YouTube</a> (earlier stage; the sections below are the current results).</p>
+
+<h2>Which stem carries the cue</h2>
+<p>Linear probes on frozen MERT and MuQ layers, validation accuracy, six classes (chance .167); decade n=132, market n=102.</p>
+<div class="card t"><table>
+<tr><th>Task</th><th>Encoder</th><th>Mix</th><th>Vocals</th><th>Accompaniment</th></tr>
+<tr><td>Decade</td><td>MERT</td><td>.477</td><td>.394</td><td>.485</td></tr>
+<tr><td>Decade</td><td>MuQ</td><td>.477</td><td>.318</td><td>.424</td></tr>
+<tr><td>Market (1980s)</td><td>MERT</td><td>.588</td><td>.608</td><td>.422</td></tr>
+<tr><td>Market (1980s)</td><td>MuQ</td><td>.471</td><td>.471</td><td>.392</td></tr>
+</table></div>
+<p>Decade information is about as strong in the accompaniment as in the full mix; for market the vocal stem is as strong as the mix (MERT vocals vs accompaniment, Holm-adjusted p = .022). A second separator reproduces the ordering.</p>
+
+<h2>What the probes use</h2>
+<ul>
+<li><b>Stem swap.</b> Vocal of one clip with the accompaniment of another clip of a different label: the decade prediction follows the accompaniment (34.8% vs 16.4% for the vocal), the market prediction follows the vocal (50.0% vs 18.3%).</li>
+<li><b>Language.</b> Erasing the sung-language subspace (rank 5) drops market accuracy from .588 to .353 for the mix; erasing five random directions leaves it at .591. For English-sung clips only, market accuracy is .397 (majority share .274).</li>
+<li><b>Bandwidth.</b> Band-limiting or adding hiss to real accompaniment moves the decade probes toward earlier decades; compression, clipping and a high shelf do not.</li>
+<li><b>Labels are editions.</b> In the full Discogs-VI metadata a composition has on average 2.42 release countries and 1.99 release decades.</li>
+</ul>
+
+<h2>Era-targeted covers</h2>
+<p>Original vocal kept; the accompaniment is regenerated by MusicGen-Melody from the chroma of the original mix and an era prompt. A low-rank adapter trained on decade-labelled accompaniment plus a three-branch guidance rule (melody term kept, era-contrast term added) moves the probes along the whole decade axis. Pick configurations below: the line is the expected decade the probe reports for clips made with each prompt (0 = 1960s). The dotted diagonal would be a perfect match.</p>
+<div class="card">
+<div class="row"><label>Evaluator<select id="enc"><option value="mert">MERT probe</option><option value="muq">MuQ probe</option></select></label></div>
+<div class="btns" id="cfg" role="group" aria-label="Configurations"></div>
+<svg id="ch" viewBox="0 0 640 340" role="img" aria-label="Expected probe decade per prompted decade"></svg>
+<div class="t"><table id="tb"></table></div>
+<p class="s" id="note"></p></div>
+<ul>
+<li>With the adapter, the expected decade increases monotonically across the six prompts, and every change in target-decade probability (vs a neutral prompt) has a confidence interval that excludes 0. The unmodified model moves only the 1980s and 2010s; its 1970s prompt gives a lower target-decade probability than neutral.</li>
+<li>The 1990s prompt is the weakest and depends on wording (a grunge wording gives the lowest effect, a eurodance wording the highest in MERT).</li>
+<li>The song stays the song: song identification from the cover alone gives top-1 .875 at guidance 7 and 10 (neutral generations of the same adapter .944; chance .042).</li>
+<li>An independent third encoder (Discogs-EffNet) orders the six prompts the same way. Against real clips of the prompted decade, FD-VGG is lower than for neutral generations for the 1980s and 2010s prompts (not for the 1960s), and Audiobox production quality does not drop at moderate guidance.</li>
+</ul>
+
+<h2>Controls and limits</h2>
+<ul>
+<li>Prompts that name no decade but only bandwidth ("dull, band-limited, tape hiss") shift the probes by about half the effect of the 1960s prompt, so part of the era effect rides on bandwidth cues. Matching each clip's long-term spectrum to its neutral clip keeps the MERT 1980s and 2010s effects positive and halves the MuQ 2010s effect.</li>
+<li>24 validation songs, 3 seeds; probes are proxies trained on the same real clips; no artist ids, test labels hidden; language and genre are proxies. <b>No listening test has been run</b>, so nothing here says how the covers sound to people.</li>
+</ul>
+
+<h2>Listen: same song, different era prompt</h2>
+<p>Earlier demo clips made by the unmodified MusicGen-Melody (accompaniment only, no vocals; 12-second excerpts from the melody of a course clip and a text prompt; loudness-matched). They show the base model, which follows the 1980s and 2010s prompts but not the 1960s one; clips from the adapter system above are not published here.</p>
+<div class="card"><div class="row"><label>Song<select id="song"></select></label></div><div id="aud"></div></div>
+
+<h2>Team</h2>
+<p>James Christian (MS in AI, UT Austin); Angel Hsia (MS, <a href="https://gice.ntu.edu.tw/en/">GICE, NTU</a>); a Ph.D. student at GICE, NTU (name to be announced).</p>
+<p class="s">The audio on this page is generated by models and released under Apache-2.0 with the code; the licenses of the generators still apply. The course audio is not redistributed. Topic 1 of the repository: <a href="../">steering evaluation page</a>.</p>
+</main>
+<script>
+/*DATA*/
+const $=i=>document.getElementById(i),Dc=["1960s","1970s","1980s","1990s","2000s","2010s"];
+const names={base_ge7:"base model, era weight 7",lora_ge7:"adapter, era weight 7",lora_ge10:"adapter, era weight 10",lora_ge15:"adapter, era weight 15",lora_ge20:"adapter, era weight 20"};
+const cols={base_ge7:"var(--c1)",lora_ge7:"var(--c2)",lora_ge10:"var(--c3)",lora_ge15:"var(--c4)",lora_ge20:"var(--c5)"};
+let on=new Set(["base_ge7","lora_ge10"]);
+$('cfg').innerHTML=Object.keys(names).map(k=>`<button class="k" data-k="${k}" aria-pressed="${on.has(k)}">${names[k]}</button>`).join('');
+$('cfg').onclick=e=>{const k=e.target.dataset.k;if(!k)return;on.has(k)?on.delete(k):on.add(k);e.target.setAttribute('aria-pressed',on.has(k));draw()};
+$('enc').onchange=draw;
+function draw(){const enc=$('enc').value,S=D.six[enc],x0=48,x1=620,y0=300,y1=16,X=i=>x0+(x1-x0)*i/5,Y=v=>y0-(y0-y1)*v/5;let s='';
+for(let v=0;v<=5;v++)s+=`<line x1="${x0}" x2="${x1}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/><text x="${x0-8}" y="${Y(v)+4}" text-anchor="end">${v}</text>`;
+Dc.forEach((d,i)=>s+=`<text x="${X(i)}" y="${y0+18}" text-anchor="middle">${d}</text>`);
+s+=`<line x1="${X(0)}" y1="${Y(0)}" x2="${X(5)}" y2="${Y(5)}" stroke="var(--fg)" stroke-dasharray="2 4"/><text x="${x0}" y="${y0+36}">prompted decade</text><text transform="translate(12 ${(y0+y1)/2}) rotate(-90)" text-anchor="middle">expected decade of the probe</text>`;
+[...on].forEach(k=>{const E=S[k].E;s+=`<polyline fill="none" stroke="${cols[k]}" stroke-width="2.5" points="${E.map((v,i)=>X(i)+','+Y(v)).join(' ')}"/>`+E.map((v,i)=>`<circle cx="${X(i)}" cy="${Y(v)}" r="4" fill="${cols[k]}" stroke="var(--card)" stroke-width="1.5"><title>${names[k]}, ${Dc[i]} prompt: expected decade ${v.toFixed(2)}, change in P(target) ${S[k].dP[i].toFixed(3)}</title></circle>`).join('')});
+$('ch').innerHTML=s;
+$('tb').innerHTML='<tr><th>Configuration</th><th>Quantity</th>'+Dc.map(d=>`<th>${d}</th>`).join('')+'</tr>'+[...on].map(k=>`<tr><td>${names[k]}</td><td>expected decade</td>${S[k].E.map(v=>`<td>${v.toFixed(2)}</td>`).join('')}</tr><tr><td></td><td>change in P(target)</td>${S[k].dP.map(v=>`<td>${(v>=0?'+':'')+v.toFixed(3)}</td>`).join('')}</tr>`).join('');
+$('note').textContent='Codec-matched decade probes on 24 validation songs x 3 seeds; change in P(target) = prompt minus neutral prompt of the same model. The probes are proxies for era, not listener judgments.'}
+function songs(){const s=+$('song').value||0;$('aud').innerHTML=['neutral','1960s','1980s','2010s'].map(e=>`<p class="s" style="margin:12px 0 4px;color:var(--fg)">${e==='neutral'?'Neutral prompt':e+' prompt'}</p><audio controls preload="none" style="width:100%" src="${D.songs[s][e]}"></audio>`).join('');
+document.querySelectorAll('audio').forEach(a=>a.addEventListener('play',()=>document.querySelectorAll('audio').forEach(o=>{if(o!==a)o.pause()})))}
+$('song').innerHTML=D.songs.map((_,i)=>`<option value="${i}">Song ${i+1}</option>`).join('');$('song').onchange=songs;songs();draw();
+</script>
+</body>
+</html>
