@@ -128,3 +128,13 @@ Legend: **done** = measured, logged in WORKLOG (section date), result file in `r
 ## 5. Known limitations to state in the paper
 Validation-only reporting on small splits (A 132, B 102); no artist or album grouping available; language and genre are proxies; probes are trained on codec-resynthesized real audio and may still shift on other decoders (ACE VAE round trip measured, other generators not); generation evaluated on 24 songs; no human perceptual test; LoRA rank/steps differences are single-run unless G11b shows small seed variance; third-party survey claims marked "recalled" in `SURVEY3.md` are not verified.
 
+
+## 4. Review follow-up registry (2026-11-01)
+| ID | Question | Design | Status |
+|---|---|---|---|
+| R-A | Does composition leakage across splits explain the probe results? | Discogs-VINet cosine graph over all clips; group-aware 5-fold vs stratified | done, weak proxy (WORKLOG) |
+| R-B | Does steering survive removal of style and bandwidth information? | LEACE on codec accompaniment embeddings, retrained probe, same eraser on generated embeddings; random same-rank control | done |
+| M-1 | Can an era coordinate be learned that predicts decade but not genre or bandwidth? | MERT layer-22 accompaniment features -> small MLP z (8-d); CORAL ordinal loss + gradient-reversal heads on style PCs and bandwidth statistics; lambda 0/0.3/1 | planned |
+| M-2 | Can the discovered coordinate itself steer generation? | LoRA on MusicGen-Melody conditioned on z (FiLM-style bias on encoder states) with a neutral text prompt; inference with decade prototypes z_d, interpolations, and three-branch guidance on z | planned |
+| M-3 | Does z-conditioning beat decade-word conditioning under nuisance controls? | Probes, nuisance-erased probes, dose-response, content metrics; reference = text-decade LoRA (v1) | planned |
+| B-1 | Is the system better than a stronger melody controller? | ControlNet for Stable Audio Open on the same 24 songs | check availability |

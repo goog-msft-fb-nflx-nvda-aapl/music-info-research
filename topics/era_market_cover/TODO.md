@@ -78,3 +78,12 @@ Open (GPU access ends 2026-10-31):
 - [x] LoRA rank/step check v1, v2, v3 (WORKLOG); training-seed replicates done (G11b)
 - [ ] impossible with PA1 (no artist/Discogs ids): artist-grouped bootstrap, remaster/reissue check; Diff-MST not installed; Discogs-VI-YT audio needs YouTube download (ask course staff)
 - [ ] final presentation (8 min) and ISMIR-template report with contributions appendix; no bug history in either; every number re-checked against result files
+
+## Review follow-up 2026-11-01 (source: deep-research-paper-review.md; listening test is not part of the plan, evaluation stays quantitative)
+- [x] R-A split audit without ids: the PA1 manifest hides artist, title, Discogs id and YouTube id (dataset README), so ids cannot be recovered; proxy audit with Discogs-VINet (`src/96_clique_proxy.py`, WORKLOG 2026-11-01)
+- [x] R-B steering after nuisance removal (`src/94_nuisance_steering.py`), language-fixed market and genre-held-out decade (`src/95_controlled_tasks.py`)
+- [ ] M-1 nuisance-controlled ordinal era encoder on MERT features of accompaniment (adversarial heads for style and bandwidth; ablation lambda 0 / 0.3 / 1; LEACE variant) -> `src/97_era_encoder.py`
+- [ ] M-2 era-axis conditioned LoRA: the era coordinate z (not a decade word) conditions MusicGen-Melody; inference with decade prototypes and interpolations; three-branch guidance with z -> `src/98_era_axis_lora.py`, `src/99b_era_axis_gen.py`
+- [ ] M-3 evaluation: codec-matched probes, nuisance-erased probes, dose-response along the axis, identity (song-ID, VINet), FD/KL; ablations (lambda, z dimension, text-decade LoRA reference)
+- [ ] B-1 external baseline: ControlNet for Stable Audio Open (Hou et al., arXiv 2410.05151) on the same songs/prompts, if code and weights are public (check); else survey prompt to the user
+- [ ] update report, page, video notes after M-1..M-3 (only measured numbers)
