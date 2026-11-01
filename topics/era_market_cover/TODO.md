@@ -98,3 +98,11 @@ Open (GPU access ends 2026-10-31):
 - [ ] N-6 **differentiable era loss**: straight-through (Gumbel) tokens -> EnCodec decoder -> frozen MERT -> nuisance-controlled era head, auxiliary loss during adapter training (heavy; only after N-1 to N-5)
 - [ ] N-7 ACE-Step 1.5 cover with a z-conditioned or era-labelled LoRA (ACE-Step LoRA training; weights license MIT per survey)
 Order by cost/benefit: N-1, N-2, N-3 (training only, ~15 min each), N-4, N-5, then N-7, N-6.
+
+## Venues with 2027 deadlines (search 2026-11-01; dates marked unconfirmed come from secondary sources, confirm at the official site before use)
+- ISMIR 2027 (London, 12-16 Sep 2027): call not published; 2026 pattern was abstract 20 Apr and full paper 27 Apr -> expect about late April 2027 (inference).
+- ACL 2027 (Kyoto, Aug 2027): ARR deadline 4 Jan 2027 reported by an aggregator, official page says TBA.
+- Interspeech 2027 (Sao Paulo, 29 Aug-2 Sep): not announced; an aggregator estimates 4 Mar 2027 (past years: 25 Feb-21 Mar).
+- EMNLP 2027: aggregator lists a tentative ARR deadline 28 May 2027 (unconfirmed).
+- EvoMusArt 2027 (Mainz, 31 Mar-2 Apr 2027): deadline 1 Nov 2026 (passed or today); AIMG 2026 workshop (IEEE Big Data) deadlines 19-26 Oct 2026 passed.
+- Passed: ICASSP 2027 full paper 16 Sep 2026; NAACL/COLING 2027 ARR 12 Oct 2026; EACL 2027 ARR 3 Aug 2026.
