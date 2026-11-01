@@ -3,7 +3,7 @@ Nuisance concept Z, fitted on dataset-A TRAIN only: (style) top-10 principal com
 LEACE (Belrose et al. 2023) eraser fitted on the codec-resynthesized TRAIN accompaniment embeddings (MERT / MuQ codec-probe layer) with Z; the era probe (logistic regression C=0.01) is retrained on the erased train embeddings; the same eraser is applied to the stored embeddings of generated sets (results/<set>_eval_emb.npz) and the Delta statistic is recomputed (per song P(target decade | era prompt) - P(. | neutral), 95% song-bootstrap CI). Control: random orthogonal projection of the same rank (20 draws, mean).
 Also reports real-audio validation accuracy and Spearman(expected decade, true decade) of each erased probe (A: n=132).
 usage: python 94_nuisance_steering.py set1 set2 ... -> results/nuisance_steering.{json,txt}"""
-import sys, json, numpy as np, torch
+import sys, os, json, numpy as np, torch
 from scipy.stats import spearmanr
 from sklearn.decomposition import PCA
 from sklearn.linear_model import LogisticRegression
@@ -47,4 +47,4 @@ for s in sys.argv[1:]:
                 cells[e] = {"delta": float(d.mean()), "ci": [float(np.percentile(bs, 2.5)), float(np.percentile(bs, 97.5))]}
             res[f"{k}_{name}"] = cells
     out["sets"][s] = res; txt.append(s + f" (n_songs={len(songs)})\n" + "\n".join(f"  {key:12s} " + " | ".join(f"{e} {c['delta']:+.3f} [{c['ci'][0]:+.3f},{c['ci'][1]:+.3f}]" for e, c in cells.items()) for key, cells in res.items()))
-json.dump(out, open(f"{ROOT}/results/nuisance_steering.json", "w"), indent=1); open(f"{ROOT}/results/nuisance_steering.txt", "w").write("\n".join(txt) + "\n"); print("\n".join(txt))
+PRE = os.environ.get("OUT_PREFIX", "nuisance_steering"); json.dump(out, open(f"{ROOT}/results/{PRE}.json", "w"), indent=1); open(f"{ROOT}/results/{PRE}.txt", "w").write("\n".join(txt) + "\n"); print("\n".join(txt))
