@@ -1,5 +1,5 @@
 """N-5a: best-of-N selection with a nuisance-controlled scorer (inference-time, no training; CPU, stored embeddings).
-Pool: N_MAX generation seeds per (song, decade prompt) of one era-axis system (stored eval json + eval_emb.npz + content json of the same set). Scorer (selector): MERT codec-probe retrained after LEACE erasure of style (10 PCs of Discogs-EffNet tags) and bandwidth statistics (9 accompaniment statistics) from the feature space (as 94_nuisance_steering.py, 'both'), score = P(target decade | clip). Per song and decade the clip with the highest score among the first N seeds is kept (N = 1, 2, 4, 8; N = 1 is the average over the single seeds = random choice). Reported on the kept clips (24 songs, 95% song-bootstrap CI): Delta of P(target) - P(. | neutral) with the neutral reference = mean over all pool seeds, under (a) the selector probe (MERT erased; optimistic, selection-biased), (b) held-out MuQ unerased probe, (c) held-out MuQ erased probe, (d) MERT unerased probe, plus mean song-identity top-1 and chord agreement of the kept clips (content json).
+Pool: N_MAX generation seeds per (song, decade prompt) of one era-axis system (stored eval json + eval_emb.npz + content json of the same set). Scorer (selector): MERT codec-probe retrained after LEACE erasure of style (10 PCs of Discogs-EffNet tags) and bandwidth statistics (9 accompaniment statistics) from the feature space (as 94_nuisance_steering.py, 'both'), score = P(target decade | clip). Per song and decade the clip with the highest score among the first N seeds is kept (N = 1, 2, 4, 8, 16 up to N_MAX; N = 1 is the average over the single seeds = random choice). Reported on the kept clips (24 songs, 95% song-bootstrap CI): Delta of P(target) - P(. | neutral) with the neutral reference = mean over all pool seeds, under (a) the selector probe (MERT erased; optimistic, selection-biased), (b) held-out MuQ unerased probe, (c) held-out MuQ erased probe, (d) MERT unerased probe, plus mean song-identity top-1 and chord agreement of the kept clips (content json).
 usage: python 103_best_of_n.py <set> [N_MAX=8]   -> results/best_of_n_<set>.{json,txt}   (run in the era_market working directory with the venv of 94_nuisance_steering.py)"""
 import sys, os, json, numpy as np, torch
 sys.argv_ = sys.argv; S = sys.argv[1]; NMAX = int(sys.argv[2]) if len(sys.argv) > 2 else 8; sys.argv = [sys.argv[0]]
@@ -12,7 +12,7 @@ def probs(k, name):
     X = Zl[k]; ok = np.isfinite(X).all(1); f, m = M[(k, name)]; pr = np.full((len(X), 6), np.nan); pr[ok] = m.predict_proba(f(X[ok])); return pr
 PR = {"sel_mert_erased": probs("mert", "both"), "muq_unerased": probs("muq", "none"), "muq_erased": probs("muq", "both"), "mert_unerased": probs("mert", "none")}
 idx = {(r["clip"], r["cond"], r["seed"]): i for i, r in enumerate(Rr)}; seeds = sorted({r["seed"] for r in Rr if r["seed"] < NMAX}); out = {}; txt = [f"{S}: pool seeds {seeds}, {len(songs)} songs"]
-for N in (1, 2, 4, 8):
+for N in [n for n in (1, 2, 4, 8, 16, 32) if n <= NMAX]:
     if N > len(seeds): continue
     res = {}
     for pname, pr in PR.items():
