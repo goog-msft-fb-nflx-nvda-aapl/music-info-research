@@ -8,9 +8,9 @@ Course project for CommE5070 (Deep Learning for Music Analysis and Generation, N
 | 2. Era and market cues, era-targeted covers | [`topics/era_market_cover/`](topics/era_market_cover/) | Stem-wise analysis of release-decade and release-market cues on Discogs-VI clips, and cover generation that keeps the original vocal and regenerates the accompaniment in a target decade. |
 
 ## Team
-- James Christian: MS in AI, UT Austin (jameschristian@utexas.edu)
-- Liang-Yu Hsia: MS, [Graduate Institute of Communication Engineering (GICE), NTU](https://gice.ntu.edu.tw/en/) (r13942129@ntu.edu.tw)
-- Jefferson Sy Dionisio: Ph.D., GICE, NTU (jsydionisio@gmail.com)
+- James Christian: MS in Artificial Intelligence, University of Texas at Austin (jameschristian@utexas.edu)
+- Liang-Yu Hsia: MS in Communication Engineering, NTU](https://gice.ntu.edu.tw/en/) (r13942129@ntu.edu.tw)
+- Jefferson Sy Dionisio: Ph.D. in Communication Engineering, NTU (jsydionisio@gmail.com)
 
 ## Shared
 - `docs/` GitHub Pages source (kept at the repository root because Pages serves from `/docs`): `index.html` for topic 1, `era_market/` for topic 2. Pages URL: https://goog-msft-fb-nflx-nvda-aapl.github.io/musicgen-steering-eval/
