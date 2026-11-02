@@ -3,7 +3,7 @@ usage: python 104_smc_gen.py --name ax_ctrlc --z A_eraz_mert_leacec0.0_s0 --gm 3
 import argparse, json, os, shutil, glob, numpy as np, torch, soundfile as sf, torchaudio.functional as AF, pyloudnorm as pyln
 from transformers import AutoProcessor, MusicgenMelodyForConditionalGeneration, LogitsProcessor, LogitsProcessorList
 from common import ROOT, SR, manifest, LABELS
-ap = argparse.ArgumentParser(); ap.add_argument("--name", required=True); ap.add_argument("--z", required=True); ap.add_argument("--gm", type=float, default=3.0); ap.add_argument("--ge", type=float, default=10.0); ap.add_argument("--N", type=int, default=8); ap.add_argument("--seg", type=int, default=100); ap.add_argument("--beta", type=float, default=5.0)
+ap = argparse.ArgumentParser(); ap.add_argument("--name", required=True); ap.add_argument("--z", required=True); ap.add_argument("--gm", type=float, default=3.0); ap.add_argument("--ge", type=float, default=10.0); ap.add_argument("--N", type=int, default=8); ap.add_argument("--seg", type=int, default=100); ap.add_argument("--first", type=int, default=0); ap.add_argument("--beta", type=float, default=5.0)
 ap.add_argument("--outdir", required=True); ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1, 2]); ap.add_argument("--eras", nargs="+", default=["1960s", "1970s", "1980s", "1990s", "2000s", "2010s"]); ap.add_argument("--limit", type=int, default=0); ap.add_argument("--top_k", type=int, default=50); ap.add_argument("--max_new", type=int, default=1500); a = ap.parse_args()
 DEC = LABELS["A"]; rows = manifest("A"); G = os.path.join(ROOT, "gen"); ids = [l.split(",")[0] for l in open(os.path.join(G, "picked.txt")).read().split("\n")]; rowd = {r["sample_id"]: r for r in rows}
 out = os.path.join(ROOT, a.outdir); os.makedirs(out, exist_ok=True); shutil.copy(os.path.join(G, "picked.txt"), os.path.join(out, "picked.txt"))
@@ -57,7 +57,7 @@ class SMC(LogitsProcessor):
     def __call__(self, input_ids, scores):
         assert scores.shape[0] == 4 * N * K, scores.shape
         cols = input_ids.shape[1]; frames = cols - K
-        if frames > 0 and frames % a.seg == 0 and frames <= a.max_new - K - a.seg:
+        if frames > 0 and frames >= a.first and frames % a.seg == 0 and frames <= a.max_new - K - a.seg:
             idsE = input_ids[:N * K].view(N, K, cols); codes = torch.stack([idsE[:, k, 1 + k:1 + k + frames] for k in range(K)], 1)   # (N, K, frames): token of codebook k, frame f sits in column f + 1 + k
             if self.dbg: print("cache shape", self.cache.self_attention_cache.layers[0].keys.shape, "ids", tuple(input_ids.shape), "codes", tuple(codes.shape), flush=True); self.dbg = False
             W = []
