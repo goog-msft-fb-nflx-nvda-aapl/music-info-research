@@ -1,9 +1,9 @@
 #!/bin/bash
 # E07: FD-VGG / FD-PANN / FD-PaSST (av-benchmark, unpaired) of generated sets against real PA1 train clips of the target decade.
 # usage: [EL="1970s 1990s 2000s"] run_avb.sh <gpu> <set,set,...>   sets are gen_<name> dirs (or `gen` for the standard base set); eras 1960s 1980s 2010s and neutral. References: dataset A train clips per decade (171 each).
-# av-benchmark checkout and env are the ones installed in ~/comme5070_pa3 (read-only use); caches/outputs live in ~/era_market/avb.
+# av-benchmark checkout and env : checkout ~/era_market/ext/av-benchmark (git clone https://github.com/hkchengrex/av-benchmark, git checkout f351b9a6fc6abde746d5f8e1d4c47c883319cb41), conda env hw3_avbench; caches/outputs live in ~/era_market/avb.
 cd ~/era_market; export TORCH_HOME=$HOME/era_market/torch_home CUDA_VISIBLE_DEVICES=$1 OMP_NUM_THREADS=4; source ~/miniconda3/etc/profile.d/conda.sh; conda activate hw3_avbench
-AV=/home/jtan/comme5070_pa3/code/av-benchmark; W=~/era_market/avb; mkdir -p $W/ref $W/pred $W/cache $W/out
+AV=${AV:-$HOME/era_market/ext/av-benchmark}; W=~/era_market/avb; mkdir -p $W/ref $W/pred $W/cache $W/out
 ./venv/bin/python - <<P
 import sys, os; sys.path.insert(0, "src")
 from common import manifest

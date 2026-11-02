@@ -2,7 +2,7 @@
 # E07 paired metrics (av-benchmark): KL-PaSST / KL-PANN of each generated remix against ITS OWN ORIGINAL clip (real mix, same song id) and the LAION-CLAP (music_audioset_epoch_15_esc_90.14) text-audio score of the generated remix against the era prompt it was generated from.
 # usage: [EL="1970s 1990s 2000s"] run_avb_pair.sh <gpu> <set,set,...>   (sets as in run_avb.sh; eras 1960s 1980s 2010s neutral). Output: ~/era_market/avbp/out/<set>_<era>.json, flag avbp_<sets>.done. Same environment as run_avb.sh.
 cd ~/era_market; export TORCH_HOME=$HOME/era_market/torch_home CUDA_VISIBLE_DEVICES=$1 OMP_NUM_THREADS=4; source ~/miniconda3/etc/profile.d/conda.sh; conda activate hw3_avbench
-AV=/home/jtan/comme5070_pa3/code/av-benchmark; W=~/era_market/avbp; mkdir -p $W/gt $W/pred $W/cache $W/out
+AV=${AV:-$HOME/era_market/ext/av-benchmark}; W=~/era_market/avbp; mkdir -p $W/gt $W/pred $W/cache $W/out
 for s in ${2//,/ }; do for e in ${EL:-1960s 1980s 2010s} neutral; do
   D=gen_$s; [ $s = gen ] && D=gen; P=$W/pred/${s}_$e; G=$W/gt/${s}_$e; rm -rf $P $G; mkdir -p $P $G
   for f in ~/era_market/$D/*_${e}_s*_remix.wav; do [ -f $f ] || continue; b=$(basename $f .wav); ln -sf $f $P/$b.wav; done
