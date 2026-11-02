@@ -9,7 +9,7 @@ Course project for CommE5070 (Deep Learning for Music Analysis and Generation, N
 
 ## Team
 - James Christian: MS in Artificial Intelligence, University of Texas at Austin (jameschristian@utexas.edu)
-- Liang-Yu Hsia: MS in Communication Engineering, NTU](https://gice.ntu.edu.tw/en/) (r13942129@ntu.edu.tw)
+- Liang-Yu Hsia: MS in Communication Engineering, [NTU](https://gice.ntu.edu.tw/en/) (r13942129@ntu.edu.tw)
 - Jefferson Sy Dionisio: Ph.D. in Communication Engineering, NTU (jsydionisio@gmail.com)
 
 ## Shared
