@@ -1,0 +1,3 @@
+mert advc lam=0.0: val acc 0.293±0.014, MAE 0.98 decades, spearman 0.691; nuisance R2 from z (val, higher = more leakage): ridge 0.121, mlp 0.114
+mert advc lam=0.1: val acc 0.288±0.016, MAE 1.00 decades, spearman 0.697; nuisance R2 from z (val, higher = more leakage): ridge 0.057, mlp 0.042
+mert advc lam=0.3: val acc 0.293±0.014, MAE 0.97 decades, spearman 0.703; nuisance R2 from z (val, higher = more leakage): ridge 0.069, mlp 0.077
