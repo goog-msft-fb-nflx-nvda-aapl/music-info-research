@@ -114,3 +114,11 @@ Gate before the submission (target: all experiments complete by 20 Dec 2026, pap
 - [ ] 25 Dec-10 Jan: paper in ICML format; 11-19 Jan: internal review; submit abstract and paper to ICML (estimated 16 and 22 Jan 2027, confirm)
 - Non-language fallback if ACL does not work out: ISMIR 2027 (submission about late Apr 2027, TBA). Other non-language options seen: ICME 2027 (30 Dec 2026, IEEE listing), ICML 2027 (about 22 Jan 2027, estimate), DAFx 2027 (about late Mar 2027, estimate).
 - [ ] STANDING RULE (user, 2026-11-01): the code will be public for reviewers, so every configuration and script of every run (also failed or dropped ones, and every new method) is committed and pushed with its exact command; after each experiment family: copy new server scripts into `src/`, regenerate `repro/RUNS.md` (`python src/90_make_runs_index.py`), update `REPRODUCE.md`, push
+
+## Next (2026-11-02, after N-5a/N-5b beta 4)
+- [ ] N-5b beta 1 and beta 2: copy results, run six-decade / ordinal / nuisance scripts, log in WORKLOG, push (generation finishing ~17:45 JST)
+- [ ] N-5b variant: score only the later stages (>= 500 frames) to test whether noisy early prefix scores limit SMC (`--first 500`)
+- [ ] N-5 paired comparison: best-of-8 on seeds 0-2 pools vs SMC on the same seeds; same-song selection set vs evaluation set (split the 24 songs 12/12)
+- [ ] N-7 ACE-Step LoRA with the era axis (feasibility check first)
+- [ ] N-4 z-conditioning on SongEcho adapters (only if the training code is public)
+- [ ] housekeeping: add axis, prefix, bon and smc sets to `src/99_make_all_tables.sh`; FD, paired, VINet, tagger and Audiobox metrics for the new sets; Drive backup of new gen dirs and re-verify Restricted; REPRODUCE.md and repro/RUNS.md regeneration; revoke rclone token at the end
