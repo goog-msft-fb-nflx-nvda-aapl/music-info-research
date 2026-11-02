@@ -18,7 +18,7 @@ def slide(n, body, k='', text=''):
 slide(1, f"""<div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:34px"><div class=k>Final report · music generation</div>
 <h1 style="font-size:92px">Which stem carries the era of a song, and can we regenerate it?</h1>
 <p>Stem-wise analysis of release decade and release market, and era-targeted covers: keep the vocal and melody, regenerate the accompaniment.</p></div>
-<div class=s>James Christian · Angel Hsia · open to collaborators</div>""",
+<div class=s>James Christian · Liang-Yu Hsia · open to collaborators</div>""",
 text="Hello. This is our final report on a question about recordings and their release era. Which part of a song, the vocal or the accompaniment, tells a model its release decade or release market? And if we keep the original vocal and melody, can a generator rewrite the accompaniment in a chosen decade? We answer with probes on frozen audio encoders, interventions on the stems, and a cover generation system with several independent checks.")
 slide(2, f"""<h2>Data and what the labels mean</h2><div class=row><div class=col><ul>
 <li><b>Dataset A:</b> six release decades, 1960s to 2010s.</li><li><b>Dataset B:</b> six release markets, all from the 1980s: US, UK, Brazil, Spain, Germany, Italy.</li>
