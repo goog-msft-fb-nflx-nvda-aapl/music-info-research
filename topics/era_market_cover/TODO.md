@@ -122,3 +122,9 @@ Gate before the submission (target: all experiments complete by 20 Dec 2026, pap
 - [ ] N-7 ACE-Step LoRA with the era axis (feasibility check first)
 - [ ] N-4 z-conditioning on SongEcho adapters (only if the training code is public)
 - [ ] housekeeping: add axis, prefix, bon and smc sets to `src/99_make_all_tables.sh`; FD, paired, VINet, tagger and Audiobox metrics for the new sets; Drive backup of new gen dirs and re-verify Restricted; REPRODUCE.md and repro/RUNS.md regeneration; revoke rclone token at the end
+
+## Author block conventions (checked 2026-11-02)
+- ACL style files (github.com/acl-org/acl-style-files, `acl_latex.tex`): each author = name, then affiliation/address lines, then `\texttt{email}`; authors from different institutions are separated with `\And` (`\AND` starts a new row); one shared affiliation may be written once after all names.
+- CVPR author kit (github.com/cvpr-org/author-kit, `main.tex`): name, institution, institution address, `{\tt\small email}`, authors separated with `\and`; one email or home page per author; omit the block lines for authors at the same institution.
+- ICML 2026: macros `\icmlauthor{Name}{affiliation keys}`, `\icmlaffiliation{key}{Institution, City, Country}`, `\icmlcorrespondingauthor`; syntax seen only in ICML 2025 sources, to be checked in the 2026 `example_paper.tex` from icml.cc when the template is used; review is double-blind (author block hidden in the submission version).
+- [ ] when the target template is fixed, convert `report.tex` to it (anonymized submission version without names, emails and the public repository link; camera-ready with names and institutions)
