@@ -1,0 +1,27 @@
+{
+ "enc": "mert",
+ "layer": 14,
+ "tag": "leacel",
+ "n_nuisance": 119,
+ "erased_input_logistic_val_acc": 0.20588235294117646,
+ "runs": {
+  "s0": {
+   "val_head_acc": 0.24509803921568626,
+   "val_logistic_on_z_acc": 0.22549019607843138,
+   "nuisance_R2_ridge": -0.23033957183361053,
+   "nuisance_R2_mlp": -5.960312843322754
+  },
+  "s1": {
+   "val_head_acc": 0.23529411764705882,
+   "val_logistic_on_z_acc": 0.2549019607843137,
+   "nuisance_R2_ridge": -0.06934255361557007,
+   "nuisance_R2_mlp": -28.55379867553711
+  },
+  "s2": {
+   "val_head_acc": 0.18627450980392157,
+   "val_logistic_on_z_acc": 0.19607843137254902,
+   "nuisance_R2_ridge": -0.10792254656553268,
+   "nuisance_R2_mlp": -0.9927867650985718
+  }
+ }
+}

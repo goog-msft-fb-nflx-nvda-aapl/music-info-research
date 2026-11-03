@@ -1,0 +1,27 @@
+{
+ "enc": "mert",
+ "layer": 14,
+ "tag": "leace",
+ "n_nuisance": 19,
+ "erased_input_logistic_val_acc": 0.23529411764705882,
+ "runs": {
+  "s0": {
+   "val_head_acc": 0.2647058823529412,
+   "val_logistic_on_z_acc": 0.2549019607843137,
+   "nuisance_R2_ridge": 0.0005092808860354125,
+   "nuisance_R2_mlp": 0.006400462705641985
+  },
+  "s1": {
+   "val_head_acc": 0.24509803921568626,
+   "val_logistic_on_z_acc": 0.23529411764705882,
+   "nuisance_R2_ridge": 0.016337357461452484,
+   "nuisance_R2_mlp": 0.03708508610725403
+  },
+  "s2": {
+   "val_head_acc": 0.22549019607843138,
+   "val_logistic_on_z_acc": 0.24509803921568626,
+   "nuisance_R2_ridge": 0.011140067130327225,
+   "nuisance_R2_mlp": 0.04791588708758354
+  }
+ }
+}

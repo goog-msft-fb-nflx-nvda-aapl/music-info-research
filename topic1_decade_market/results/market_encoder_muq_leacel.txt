@@ -1,0 +1,1 @@
+muq leacel: head acc 0.248±0.036, logistic on z 0.245, logistic on erased input 0.235 (chance 0.167); nuisance R2 from z (val): ridge -0.129, mlp -4.797

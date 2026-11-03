@@ -1,0 +1,1 @@
+mert leacel: head acc 0.222±0.026, logistic on z 0.225, logistic on erased input 0.206 (chance 0.167); nuisance R2 from z (val): ridge -0.136, mlp -11.836
