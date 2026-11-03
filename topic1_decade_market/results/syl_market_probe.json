@@ -1,0 +1,77 @@
+{
+ "val_acc_vocal_probe": 0.6078431372549019,
+ "layer": 16,
+ "C": 0.01,
+ "cells": {
+  "es": {
+   "target": "Spain",
+   "n": 63,
+   "P_target": 0.24244236946105957,
+   "P_target_source_language_control": 0.04309524595737457,
+   "P_target_original_vocal": 0.07094389200210571,
+   "delta_vs_control": 0.1993471086025238,
+   "ci": [
+    0.14253342151641846,
+    0.25570547580718994
+   ],
+   "top1_hit": 0.2698412698412698,
+   "top1_hit_control": 0.031746031746031744
+  },
+  "pt": {
+   "target": "Brazil",
+   "n": 64,
+   "P_target": 0.5468316674232483,
+   "P_target_source_language_control": 0.08282530307769775,
+   "P_target_original_vocal": 0.019684743136167526,
+   "delta_vs_control": 0.46400636434555054,
+   "ci": [
+    0.37787216901779175,
+    0.5522621870040894
+   ],
+   "top1_hit": 0.671875,
+   "top1_hit_control": 0.03125
+  },
+  "de": {
+   "target": "Germany",
+   "n": 76,
+   "P_target": 0.492399126291275,
+   "P_target_source_language_control": 0.1627080887556076,
+   "P_target_original_vocal": 0.15630647540092468,
+   "delta_vs_control": 0.3296910524368286,
+   "ci": [
+    0.25318604707717896,
+    0.4040141999721527
+   ],
+   "top1_hit": 0.6842105263157895,
+   "top1_hit_control": 0.15789473684210525
+  },
+  "it": {
+   "target": "Italy",
+   "n": 72,
+   "P_target": 0.5608773827552795,
+   "P_target_source_language_control": 0.2004210352897644,
+   "P_target_original_vocal": 0.11417407542467117,
+   "delta_vs_control": 0.36045634746551514,
+   "ci": [
+    0.2827552855014801,
+    0.4304388165473938
+   ],
+   "top1_hit": 0.8055555555555556,
+   "top1_hit_control": 0.20833333333333334
+  },
+  "en": {
+   "target": "US+UK",
+   "n": 34,
+   "P_target": 0.4904235899448395,
+   "P_target_source_language_control": 0.13361263275146484,
+   "P_target_original_vocal": 0.07779943943023682,
+   "delta_vs_control": 0.35681095719337463,
+   "ci": [
+    0.2685759663581848,
+    0.4447273015975952
+   ],
+   "top1_hit": 0.6176470588235294,
+   "top1_hit_control": 0.029411764705882353
+  }
+ }
+}

@@ -207,7 +207,7 @@ Project name: Time Traveler. Goal (professor): era-and-market-controlled cover s
 ## Blocker-driven experiments (2026-11-03; details and literature in `BLOCKERS.md`)
 - [ ] T-4b-sweep cover strength 0.8 and 0.95 for the lyric route (running 2026-11-04 00:00 JST; results `results/lyric_route_eval_s08.*`, `_s095.*`): does identity (VINet) recover while the language stays
 - [ ] T-4e metadata style descriptors per (market, decade) (`src/113_market_styles.py`, running); then generate with style-descriptor prompts on the era-axis system and read out with the Discogs-EffNet tagger (`src/36_discogs_tagger.py`)
-- [ ] T-4f singable translation (syllable-grid retiming) of the lyrics before synthesis; compare lyric similarity and language hit with the plain translation
+- [x] (done 2026-11-04, WORKLOG: text-only syllable matching changes nothing measurable) T-4f singable translation (syllable-grid retiming) of the lyrics before synthesis; compare lyric similarity and language hit with the plain translation
 - [ ] T-4g vocal-only regeneration: original accompaniment kept, only the vocal regenerated with new lyrics (ACE-Step repaint/lego/extract or melody-driven synthesis); identity read-out as in T-4b
 - [x] (first result 2026-11-04, WORKLOG) T-9 era-specific vocal DSP chain (bandwidth, saturation, compression, reverb by decade) on the original vocal, remix with the era-axis accompaniment; era probes on the remix, melody and identity retention
 - [ ] T-10 composition test on generated clips: era-axis accompaniment x lyric language (3 decades x 4 languages on the pilot clips), 2x2 main effects and interaction on the era probe and the language read-out
