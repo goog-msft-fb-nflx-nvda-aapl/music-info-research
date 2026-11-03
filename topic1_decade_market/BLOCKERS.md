@@ -1,0 +1,41 @@
+# Blockers, evidence and research ideas (Time Traveler: era x market covers)
+
+Maintained 2026-11-03. Each blocker lists the evidence (result files), the reading of the evidence (interpretation, marked), literature found by search (titles found by web search, to be opened and verified before citing), new ideas, and the experiment IDs in `TODO.md`. Only measured numbers appear as evidence.
+
+## B1. The market axis does not move through the accompaniment or the singer's timbre
+Evidence
+- Accompaniment-only market encoder after erasing style, statistics and language: validation accuracy .22-.25 (unerased accompaniment .33 MERT, .28 MuQ; chance .167): WORKLOG 2026-11-03 (M-3), `results/market_encoder_*`.
+- Vocal market accuracy .608 falls to .392 after erasing language (Whisper large-v3 groups): WORKLOG 2026-10-27.
+- FreeSVC timbre conversion to a market voice: target-market accuracy .163 / .175 (chance .167); the accuracy loss on the original label equals the loss of the self-voice control (.451 vs .446 MERT; .196 vs .203 MuQ): WORKLOG 2026-11-03 (T-4a), `results/svc_market_eval*.json`.
+- Earlier text-prompt market covers: weak (Spain, UK not significant): WORKLOG 2026-10-26 entry 9.
+Reading (interpretation): the market cue lives in the language and delivery of the vocal, not in accompaniment texture or voice timbre.
+Literature to open: Music for All, representational bias and cross-cultural adaptability of music generation models (arXiv 2502.07328, NAACL Findings 2025: adapters on MusicGen and Mustango for non-Western traditions); Bias beyond Borders, GlobalDISCO (arXiv 2510.01963: quality and alignment gaps across 79 countries); a cross-cultural study that locates part of the MusicGen skew in the English T5 text encoder (arXiv 2608.03433).
+Ideas and experiments
+- I1 language route (T-4b): translated lyrics sung in the target language. Pilot done: language moves (top-1 hit .33-.58) but song identity is lost (B2). Running: cover-strength sweep.
+- I2 singable translation: translate with melody constraints (syllable count, tones). Literature to open: LTAG, translating lyrics jointly with melody alignment (arXiv 2303.15705, EMNLP Findings 2023); GagaST, song translation for tonal languages (arXiv 2203.13420); PolySinger, singing voice to singing voice translation English to Japanese (arXiv 2407.14399, ISMIR 2024). Experiment T-4f: re-time the translated lyrics to the source syllable grid before synthesis.
+- I3 metadata-derived market descriptors instead of country names: Discogs release styles per (country, decade) from 1.9M versions give a data-grounded text condition (T-4e: `src/113_market_styles.py`, `results/market_styles.*`), evaluated with the Discogs-EffNet style tagger on generated audio.
+- I4 compose language and style: lyric route for the language cue plus style-descriptor conditioning for the arrangement cue; test additivity in the 2x2 design (T-6).
+
+## B2. The lyric route loses the song
+Evidence: control (English lyrics, same pipeline) already has VINet cosine .496 to the original mix and top-1 0 of 12; translated .435-.483; the accompaniment-only ACE cover of 2026-10-28 also kept less of the source than chroma-conditioned MusicGen-Melody (WORKLOG 2026-10-28).
+Reading (interpretation): ACE-Step cover mode at strength 0.5 regenerates melody and arrangement.
+Ideas and experiments
+- Higher cover strength (0.8, 0.95): running, read-outs as above.
+- Vocal-only regeneration: keep the original accompaniment stem and the era-axis accompaniment, regenerate only the vocal with new lyrics (ACE-Step task types repaint/lego/extract, or a singing voice synthesis system driven by the extracted melody); T-4g.
+- Melody-conditioned synthesis: extract the vocal F0/MIDI (RMVPE, already inside FreeSVC) and drive a lyric-conditioned synthesizer; check the licences of candidates first.
+
+## B3. Same-song pairs with year and country need audio we do not have
+Evidence: PA1 manifest hides artist, title and Discogs ids; Discogs-VI metadata gives 33,578 cliques with a different-artist pair with era and market move (WORKLOG 2026-11-03, T-1) but the audio is not distributed (SURVEY4.md).
+Ideas: TA's answer (request pending); MTG features on request; licensed-audio control corpora (FMA, MTG-Jamendo) for method development; metadata-only analyses (T-1, T-4e) in the meantime.
+
+## B4. No training data labeled on both axes
+Evidence: PA1 A has decades (US), B has markets (1980s only): no (decade, market) combinations.
+Ideas: factorized conditioners (era adapter, market via lyrics/style) and an additivity test on generated combinations (T-5, T-6): the interaction term of the 2x2 design is the evidence of independence.
+
+## B5. Evaluation depends on probes trained on the same data family
+Evidence: era and market probes are MERT/MuQ logistic heads trained on PA1; held-out encoder differences are reported (paired best-of-N vs SMC, WORKLOG 2026-11-03).
+Ideas: independent families (production-feature baseline after Tardieu et al., DAFx 2011, to open; Discogs-EffNet style tags; CLAP text score); metadata-grounded style tagger read-out (T-4e); no human test (decision), so report agreement across families.
+
+## B6. The era axis changes the accompaniment only
+Evidence: the vocal is kept from the original in all era-axis runs; vocal stems carry decade information (dataset A vocals .39 accuracy, WORKLOG 2026-10-25).
+Ideas: era-specific vocal processing chain (bandwidth, saturation, compression, reverb as parametrized DSP) applied to the original vocal, scored with the era probes on the remix (T-9).

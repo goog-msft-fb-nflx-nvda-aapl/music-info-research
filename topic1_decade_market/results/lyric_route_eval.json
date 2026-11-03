@@ -1,0 +1,1084 @@
+{
+ "rows": [
+  {
+   "id": "B_01a4fa3fe992",
+   "cond": "original_mix",
+   "P_en": 0.4873392879962921
+  },
+  {
+   "id": "B_01a4fa3fe992",
+   "cond": "orig",
+   "P_intended_lang": 0.929557740688324,
+   "lang_top1": "en",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.028011204481792718,
+   "sim_to_other_versions": {
+    "orig": 0.028011204481792718,
+    "es": 0.020202020202020204,
+    "pt": 0.0,
+    "de": 0.004842615012106538,
+    "it": 0.020942408376963352
+   },
+   "vinet_cos_own": 0.4499816596508026,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_01a4fa3fe992",
+   "cond": "es",
+   "P_intended_lang": 0.9601747393608093,
+   "lang_top1": "es",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.13302752293577982,
+   "sim_to_other_versions": {
+    "orig": 0.005037783375314861,
+    "es": 0.13302752293577982,
+    "pt": 0.014218009478672985,
+    "de": 0.017660044150110375,
+    "it": 0.052132701421800945
+   },
+   "vinet_cos_own": 0.3440011739730835,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_01a4fa3fe992",
+   "cond": "pt",
+   "P_intended_lang": 0.9878973960876465,
+   "lang_top1": "pt",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.24113475177304963,
+   "sim_to_other_versions": {
+    "orig": 0.01507537688442211,
+    "es": 0.032036613272311214,
+    "pt": 0.24113475177304963,
+    "de": 0.04405286343612335,
+    "it": 0.037825059101654845
+   },
+   "vinet_cos_own": 0.549049973487854,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_01a4fa3fe992",
+   "cond": "de",
+   "P_intended_lang": 0.9852342009544373,
+   "lang_top1": "de",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.188,
+   "sim_to_other_versions": {
+    "orig": 0.06306306306306306,
+    "es": 0.016563146997929608,
+    "pt": 0.008528784648187633,
+    "de": 0.188,
+    "it": 0.06396588486140725
+   },
+   "vinet_cos_own": 0.38864123821258545,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_01a4fa3fe992",
+   "cond": "it",
+   "P_intended_lang": 0.9843995571136475,
+   "lang_top1": "it",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.16774193548387098,
+   "sim_to_other_versions": {
+    "orig": 0.01818181818181818,
+    "es": 0.016701461377870562,
+    "pt": 0.012903225806451613,
+    "de": 0.05241935483870968,
+    "it": 0.16774193548387098
+   },
+   "vinet_cos_own": 0.4037708640098572,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_0606553d288f",
+   "cond": "original_mix",
+   "P_en": 0.8434262871742249
+  },
+  {
+   "id": "B_0606553d288f",
+   "cond": "orig",
+   "P_intended_lang": 0.37560683488845825,
+   "lang_top1": "en",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.1111111111111111,
+   "sim_to_other_versions": {
+    "orig": 0.1111111111111111,
+    "es": 0.058823529411764705,
+    "pt": 0.058823529411764705,
+    "de": 0.03773584905660377,
+    "it": 0.05263157894736842
+   },
+   "vinet_cos_own": 0.4714162349700928,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_0606553d288f",
+   "cond": "es",
+   "P_intended_lang": 0.782629668712616,
+   "lang_top1": "es",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.8115942028985508,
+   "sim_to_other_versions": {
+    "orig": 0.28169014084507044,
+    "es": 0.8115942028985508,
+    "pt": 0.5797101449275363,
+    "de": 0.11363636363636363,
+    "it": 0.2191780821917808
+   },
+   "vinet_cos_own": 0.47356629371643066,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_0606553d288f",
+   "cond": "pt",
+   "P_intended_lang": 0.028041131794452667,
+   "lang_top1": "zh",
+   "hit": 0,
+   "sim_to_intended_lyrics": 0.72,
+   "sim_to_other_versions": {
+    "orig": 0.23076923076923078,
+    "es": 0.6,
+    "pt": 0.72,
+    "de": 0.17391304347826086,
+    "it": 0.2222222222222222
+   },
+   "vinet_cos_own": 0.42306384444236755,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_0606553d288f",
+   "cond": "de",
+   "P_intended_lang": 0.017960678786039352,
+   "lang_top1": "en",
+   "hit": 0,
+   "sim_to_intended_lyrics": 0.10714285714285714,
+   "sim_to_other_versions": {
+    "orig": 0.10256410256410256,
+    "es": 0.05405405405405406,
+    "pt": 0.16216216216216217,
+    "de": 0.10714285714285714,
+    "it": 0.14634146341463414
+   },
+   "vinet_cos_own": 0.44646722078323364,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_0606553d288f",
+   "cond": "it",
+   "P_intended_lang": 0.014107472263276577,
+   "lang_top1": "zh",
+   "hit": 0,
+   "sim_to_intended_lyrics": 0.1951219512195122,
+   "sim_to_other_versions": {
+    "orig": 0.10256410256410256,
+    "es": 0.10810810810810811,
+    "pt": 0.10810810810810811,
+    "de": 0.14285714285714285,
+    "it": 0.1951219512195122
+   },
+   "vinet_cos_own": 0.4000272750854492,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_0cf44d0e5aa7",
+   "cond": "original_mix",
+   "P_en": 0.8852990865707397
+  },
+  {
+   "id": "B_0cf44d0e5aa7",
+   "cond": "orig",
+   "P_intended_lang": 0.16730056703090668,
+   "lang_top1": "ja",
+   "hit": 0,
+   "sim_to_intended_lyrics": 0.03225806451612903,
+   "sim_to_other_versions": {
+    "orig": 0.03225806451612903,
+    "es": 0.007017543859649123,
+    "pt": 0.0,
+    "de": 0.0,
+    "it": 0.0
+   },
+   "vinet_cos_own": 0.5664032697677612,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_0cf44d0e5aa7",
+   "cond": "es",
+   "P_intended_lang": 0.03916202858090401,
+   "lang_top1": "zh",
+   "hit": 0,
+   "sim_to_intended_lyrics": 0.006944444444444444,
+   "sim_to_other_versions": {
+    "orig": 0.021164021164021163,
+    "es": 0.006944444444444444,
+    "pt": 0.004464285714285714,
+    "de": 0.006711409395973154,
+    "it": 0.0
+   },
+   "vinet_cos_own": 0.46698319911956787,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_0cf44d0e5aa7",
+   "cond": "pt",
+   "P_intended_lang": 0.9950352907180786,
+   "lang_top1": "pt",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.256120527306968,
+   "sim_to_other_versions": {
+    "orig": 0.09558823529411764,
+    "es": 0.07008086253369272,
+    "pt": 0.256120527306968,
+    "de": 0.026246719160104987,
+    "it": 0.055401662049861494
+   },
+   "vinet_cos_own": 0.5131782293319702,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_0cf44d0e5aa7",
+   "cond": "de",
+   "P_intended_lang": 0.9770575761795044,
+   "lang_top1": "de",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.07407407407407407,
+   "sim_to_other_versions": {
+    "orig": 0.26765799256505574,
+    "es": 0.021739130434782608,
+    "pt": 0.026515151515151516,
+    "de": 0.07407407407407407,
+    "it": 0.01675977653631285
+   },
+   "vinet_cos_own": 0.4247294068336487,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_0cf44d0e5aa7",
+   "cond": "it",
+   "P_intended_lang": 0.985489547252655,
+   "lang_top1": "it",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.10106382978723404,
+   "sim_to_other_versions": {
+    "orig": 0.22996515679442509,
+    "es": 0.031088082901554404,
+    "pt": 0.018315018315018316,
+    "de": 0.025252525252525252,
+    "it": 0.10106382978723404
+   },
+   "vinet_cos_own": 0.43869543075561523,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_0e8bf622b5b9",
+   "cond": "original_mix",
+   "P_en": 0.8385176062583923
+  },
+  {
+   "id": "B_0e8bf622b5b9",
+   "cond": "orig",
+   "P_intended_lang": 0.7847885489463806,
+   "lang_top1": "en",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.7829457364341085,
+   "sim_to_other_versions": {
+    "orig": 0.7829457364341085,
+    "es": 0.16030534351145037,
+    "pt": 0.20216606498194944,
+    "de": 0.036101083032490974,
+    "it": 0.26373626373626374
+   },
+   "vinet_cos_own": 0.4851560890674591,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_0e8bf622b5b9",
+   "cond": "es",
+   "P_intended_lang": 0.6133147478103638,
+   "lang_top1": "es",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.11347517730496454,
+   "sim_to_other_versions": {
+    "orig": 0.10218978102189781,
+    "es": 0.11347517730496454,
+    "pt": 0.07692307692307693,
+    "de": 0.0641025641025641,
+    "it": 0.09210526315789473
+   },
+   "vinet_cos_own": 0.4640553295612335,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_0e8bf622b5b9",
+   "cond": "pt",
+   "P_intended_lang": 0.05798042193055153,
+   "lang_top1": "fr",
+   "hit": 0,
+   "sim_to_intended_lyrics": 0.2857142857142857,
+   "sim_to_other_versions": {
+    "orig": 0.2,
+    "es": 0.22988505747126436,
+    "pt": 0.2857142857142857,
+    "de": 0.1164021164021164,
+    "it": 0.15135135135135136
+   },
+   "vinet_cos_own": 0.4457840323448181,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_0e8bf622b5b9",
+   "cond": "de",
+   "P_intended_lang": 0.9837575554847717,
+   "lang_top1": "de",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.7538461538461538,
+   "sim_to_other_versions": {
+    "orig": 0.2572614107883817,
+    "es": 0.0653061224489796,
+    "pt": 0.25384615384615383,
+    "de": 0.7538461538461538,
+    "it": 0.2265625
+   },
+   "vinet_cos_own": 0.5105100870132446,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_0e8bf622b5b9",
+   "cond": "it",
+   "P_intended_lang": 0.9277220964431763,
+   "lang_top1": "it",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.48704663212435234,
+   "sim_to_other_versions": {
+    "orig": 0.20224719101123595,
+    "es": 0.26373626373626374,
+    "pt": 0.25380710659898476,
+    "de": 0.19289340101522842,
+    "it": 0.48704663212435234
+   },
+   "vinet_cos_own": 0.5140734314918518,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_1d029a46b04f",
+   "cond": "original_mix",
+   "P_en": 0.7682228088378906
+  },
+  {
+   "id": "B_1d029a46b04f",
+   "cond": "orig",
+   "P_intended_lang": 0.858835756778717,
+   "lang_top1": "en",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.9714285714285714,
+   "sim_to_other_versions": {
+    "orig": 0.9714285714285714,
+    "es": 0.30303030303030304,
+    "pt": 0.4,
+    "de": 0.2702702702702703,
+    "it": 0.2702702702702703
+   },
+   "vinet_cos_own": 0.5616155862808228,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_1d029a46b04f",
+   "cond": "es",
+   "P_intended_lang": 0.022035058587789536,
+   "lang_top1": "en",
+   "hit": 0,
+   "sim_to_intended_lyrics": 0.09523809523809523,
+   "sim_to_other_versions": {
+    "orig": 0.08695652173913043,
+    "es": 0.09523809523809523,
+    "pt": 0.17391304347826086,
+    "de": 0.24,
+    "it": 0.24
+   },
+   "vinet_cos_own": 0.39989036321640015,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_1d029a46b04f",
+   "cond": "pt",
+   "P_intended_lang": 0.03572613000869751,
+   "lang_top1": "zh",
+   "hit": 0,
+   "sim_to_intended_lyrics": 0.2608695652173913,
+   "sim_to_other_versions": {
+    "orig": 0.34782608695652173,
+    "es": 0.19047619047619047,
+    "pt": 0.2608695652173913,
+    "de": 0.08,
+    "it": 0.24
+   },
+   "vinet_cos_own": 0.4237947165966034,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_1d029a46b04f",
+   "cond": "de",
+   "P_intended_lang": 0.05165146663784981,
+   "lang_top1": "en",
+   "hit": 0,
+   "sim_to_intended_lyrics": 0.5909090909090909,
+   "sim_to_other_versions": {
+    "orig": 0.3333333333333333,
+    "es": 0.25,
+    "pt": 0.19047619047619047,
+    "de": 0.5909090909090909,
+    "it": 0.2727272727272727
+   },
+   "vinet_cos_own": 0.3450736999511719,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_1d029a46b04f",
+   "cond": "it",
+   "P_intended_lang": 0.012266035191714764,
+   "lang_top1": "en",
+   "hit": 0,
+   "sim_to_intended_lyrics": 0.25806451612903225,
+   "sim_to_other_versions": {
+    "orig": 0.27586206896551724,
+    "es": 0.2222222222222222,
+    "pt": 0.13793103448275862,
+    "de": 0.25806451612903225,
+    "it": 0.25806451612903225
+   },
+   "vinet_cos_own": 0.3875238299369812,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_1d3fc0cfce49",
+   "cond": "original_mix",
+   "P_en": 0.9231820106506348
+  },
+  {
+   "id": "B_1d3fc0cfce49",
+   "cond": "orig",
+   "P_intended_lang": 0.9092534780502319,
+   "lang_top1": "en",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.9473684210526315,
+   "sim_to_other_versions": {
+    "orig": 0.9473684210526315,
+    "es": 0.25101214574898784,
+    "pt": 0.11244979919678715,
+    "de": 0.15813953488372093,
+    "it": 0.23346303501945526
+   },
+   "vinet_cos_own": 0.5145063400268555,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_1d3fc0cfce49",
+   "cond": "es",
+   "P_intended_lang": 0.8501245975494385,
+   "lang_top1": "es",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.8607594936708861,
+   "sim_to_other_versions": {
+    "orig": 0.270042194092827,
+    "es": 0.8607594936708861,
+    "pt": 0.5439330543933054,
+    "de": 0.13658536585365855,
+    "it": 0.3562753036437247
+   },
+   "vinet_cos_own": 0.31236952543258667,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_1d3fc0cfce49",
+   "cond": "pt",
+   "P_intended_lang": 0.9869939684867859,
+   "lang_top1": "pt",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.267515923566879,
+   "sim_to_other_versions": {
+    "orig": 0.11612903225806452,
+    "es": 0.24516129032258063,
+    "pt": 0.267515923566879,
+    "de": 0.17886178861788618,
+    "it": 0.21818181818181817
+   },
+   "vinet_cos_own": 0.3596035838127136,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_1d3fc0cfce49",
+   "cond": "de",
+   "P_intended_lang": 0.024173928424715996,
+   "lang_top1": "nl",
+   "hit": 0,
+   "sim_to_intended_lyrics": 0.7526881720430108,
+   "sim_to_other_versions": {
+    "orig": 0.25688073394495414,
+    "es": 0.08256880733944955,
+    "pt": 0.2818181818181818,
+    "de": 0.7526881720430108,
+    "it": 0.30701754385964913
+   },
+   "vinet_cos_own": 0.37686827778816223,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_1d3fc0cfce49",
+   "cond": "it",
+   "P_intended_lang": 0.007531242910772562,
+   "lang_top1": "zh",
+   "hit": 0,
+   "sim_to_intended_lyrics": 0.028169014084507043,
+   "sim_to_other_versions": {
+    "orig": 0.030303030303030304,
+    "es": 0.030303030303030304,
+    "pt": 0.014925373134328358,
+    "de": 0.04,
+    "it": 0.028169014084507043
+   },
+   "vinet_cos_own": 0.44252902269363403,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_20c23d10897b",
+   "cond": "original_mix",
+   "P_en": 0.6073898077011108
+  },
+  {
+   "id": "B_20c23d10897b",
+   "cond": "orig",
+   "P_intended_lang": 0.9082902073860168,
+   "lang_top1": "en",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.6842105263157895,
+   "sim_to_other_versions": {
+    "orig": 0.6842105263157895,
+    "es": 0.36666666666666664,
+    "pt": 0.4247787610619469,
+    "de": 0.4461538461538462,
+    "it": 0.4036697247706422
+   },
+   "vinet_cos_own": 0.5520268678665161,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_20c23d10897b",
+   "cond": "es",
+   "P_intended_lang": 0.8811972141265869,
+   "lang_top1": "es",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.7301587301587301,
+   "sim_to_other_versions": {
+    "orig": 0.4166666666666667,
+    "es": 0.7301587301587301,
+    "pt": 0.5714285714285714,
+    "de": 0.36764705882352944,
+    "it": 0.45217391304347826
+   },
+   "vinet_cos_own": 0.5685785412788391,
+   "vinet_top1": 1
+  },
+  {
+   "id": "B_20c23d10897b",
+   "cond": "pt",
+   "P_intended_lang": 0.9906606078147888,
+   "lang_top1": "pt",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.7368421052631579,
+   "sim_to_other_versions": {
+    "orig": 0.2956521739130435,
+    "es": 0.5289256198347108,
+    "pt": 0.7368421052631579,
+    "de": 0.3511450381679389,
+    "it": 0.4727272727272727
+   },
+   "vinet_cos_own": 0.513666033744812,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_20c23d10897b",
+   "cond": "de",
+   "P_intended_lang": 0.020507577806711197,
+   "lang_top1": "en",
+   "hit": 0,
+   "sim_to_intended_lyrics": 0.07407407407407407,
+   "sim_to_other_versions": {
+    "orig": 0.12307692307692308,
+    "es": 0.08450704225352113,
+    "pt": 0.09375,
+    "de": 0.07407407407407407,
+    "it": 0.1
+   },
+   "vinet_cos_own": 0.5695187449455261,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_20c23d10897b",
+   "cond": "it",
+   "P_intended_lang": 0.5254179239273071,
+   "lang_top1": "it",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.4507042253521127,
+   "sim_to_other_versions": {
+    "orig": 0.13157894736842105,
+    "es": 0.0975609756097561,
+    "pt": 0.3466666666666667,
+    "de": 0.21739130434782608,
+    "it": 0.4507042253521127
+   },
+   "vinet_cos_own": 0.48546814918518066,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_29ba1bae7f9a",
+   "cond": "original_mix",
+   "P_en": 0.927985429763794
+  },
+  {
+   "id": "B_29ba1bae7f9a",
+   "cond": "orig",
+   "P_intended_lang": 0.9210100173950195,
+   "lang_top1": "en",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.8878504672897196,
+   "sim_to_other_versions": {
+    "orig": 0.8878504672897196,
+    "es": 0.3238095238095238,
+    "pt": 0.30097087378640774,
+    "de": 0.1568627450980392,
+    "it": 0.29357798165137616
+   },
+   "vinet_cos_own": 0.5025488138198853,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_29ba1bae7f9a",
+   "cond": "es",
+   "P_intended_lang": 0.9114205241203308,
+   "lang_top1": "es",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.9383886255924171,
+   "sim_to_other_versions": {
+    "orig": 0.30697674418604654,
+    "es": 0.9383886255924171,
+    "pt": 0.6086956521739131,
+    "de": 0.33170731707317075,
+    "it": 0.4018264840182648
+   },
+   "vinet_cos_own": 0.5983971953392029,
+   "vinet_top1": 1
+  },
+  {
+   "id": "B_29ba1bae7f9a",
+   "cond": "pt",
+   "P_intended_lang": 0.025212973356246948,
+   "lang_top1": "en",
+   "hit": 0,
+   "sim_to_intended_lyrics": 0.09259259259259259,
+   "sim_to_other_versions": {
+    "orig": 0.08620689655172414,
+    "es": 0.07142857142857142,
+    "pt": 0.09259259259259259,
+    "de": 0.05660377358490566,
+    "it": 0.08333333333333333
+   },
+   "vinet_cos_own": 0.5149773359298706,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_29ba1bae7f9a",
+   "cond": "de",
+   "P_intended_lang": 0.015103703364729881,
+   "lang_top1": "pt",
+   "hit": 0,
+   "sim_to_intended_lyrics": 0.09259259259259259,
+   "sim_to_other_versions": {
+    "orig": 0.0847457627118644,
+    "es": 0.12280701754385964,
+    "pt": 0.05454545454545454,
+    "de": 0.09259259259259259,
+    "it": 0.11475409836065574
+   },
+   "vinet_cos_own": 0.5099664926528931,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_29ba1bae7f9a",
+   "cond": "it",
+   "P_intended_lang": 0.2788338363170624,
+   "lang_top1": "it",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.6666666666666666,
+   "sim_to_other_versions": {
+    "orig": 0.25274725274725274,
+    "es": 0.3707865168539326,
+    "pt": 0.3103448275862069,
+    "de": 0.22093023255813954,
+    "it": 0.6666666666666666
+   },
+   "vinet_cos_own": 0.33972910046577454,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_2d1144798a47",
+   "cond": "original_mix",
+   "P_en": 0.7486547827720642
+  },
+  {
+   "id": "B_2d1144798a47",
+   "cond": "orig",
+   "P_intended_lang": 0.9613726735115051,
+   "lang_top1": "en",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.4411764705882353,
+   "sim_to_other_versions": {
+    "orig": 0.4411764705882353,
+    "es": 0.1559633027522936,
+    "pt": 0.15384615384615385,
+    "de": 0.25116279069767444,
+    "it": 0.18930041152263374
+   },
+   "vinet_cos_own": 0.45221075415611267,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_2d1144798a47",
+   "cond": "es",
+   "P_intended_lang": 0.0673806443810463,
+   "lang_top1": "en",
+   "hit": 0,
+   "sim_to_intended_lyrics": 0.047058823529411764,
+   "sim_to_other_versions": {
+    "orig": 0.07692307692307693,
+    "es": 0.047058823529411764,
+    "pt": 0.03225806451612903,
+    "de": 0.0718562874251497,
+    "it": 0.06153846153846154
+   },
+   "vinet_cos_own": 0.5717582106590271,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_2d1144798a47",
+   "cond": "pt",
+   "P_intended_lang": 0.9875255823135376,
+   "lang_top1": "pt",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.5954198473282443,
+   "sim_to_other_versions": {
+    "orig": 0.23275862068965517,
+    "es": 0.4146341463414634,
+    "pt": 0.5954198473282443,
+    "de": 0.13168724279835392,
+    "it": 0.35424354243542433
+   },
+   "vinet_cos_own": 0.6071608662605286,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_2d1144798a47",
+   "cond": "de",
+   "P_intended_lang": 0.9952707886695862,
+   "lang_top1": "de",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.42727272727272725,
+   "sim_to_other_versions": {
+    "orig": 0.24880382775119617,
+    "es": 0.17040358744394618,
+    "pt": 0.100418410041841,
+    "de": 0.42727272727272725,
+    "it": 0.08064516129032258
+   },
+   "vinet_cos_own": 0.42427247762680054,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_2d1144798a47",
+   "cond": "it",
+   "P_intended_lang": 0.035597048699855804,
+   "lang_top1": "pt",
+   "hit": 0,
+   "sim_to_intended_lyrics": 0.19138755980861244,
+   "sim_to_other_versions": {
+    "orig": 0.1411764705882353,
+    "es": 0.15217391304347827,
+    "pt": 0.12,
+    "de": 0.143646408839779,
+    "it": 0.19138755980861244
+   },
+   "vinet_cos_own": 0.4563029408454895,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_450fb66e02c7",
+   "cond": "original_mix",
+   "P_en": 0.8176003098487854
+  },
+  {
+   "id": "B_450fb66e02c7",
+   "cond": "orig",
+   "P_intended_lang": 0.7500558495521545,
+   "lang_top1": "en",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.6262626262626263,
+   "sim_to_other_versions": {
+    "orig": 0.6262626262626263,
+    "es": 0.29906542056074764,
+    "pt": 0.2727272727272727,
+    "de": 0.32142857142857145,
+    "it": 0.24347826086956523
+   },
+   "vinet_cos_own": 0.5046950578689575,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_450fb66e02c7",
+   "cond": "es",
+   "P_intended_lang": 0.8876895904541016,
+   "lang_top1": "es",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.6041666666666666,
+   "sim_to_other_versions": {
+    "orig": 0.2727272727272727,
+    "es": 0.6041666666666666,
+    "pt": 0.30303030303030304,
+    "de": 0.25742574257425743,
+    "it": 0.38461538461538464
+   },
+   "vinet_cos_own": 0.5187598466873169,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_450fb66e02c7",
+   "cond": "pt",
+   "P_intended_lang": 0.9635396599769592,
+   "lang_top1": "pt",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.9142857142857143,
+   "sim_to_other_versions": {
+    "orig": 0.15503875968992248,
+    "es": 0.46715328467153283,
+    "pt": 0.9142857142857143,
+    "de": 0.16901408450704225,
+    "it": 0.45517241379310347
+   },
+   "vinet_cos_own": 0.43128371238708496,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_450fb66e02c7",
+   "cond": "de",
+   "P_intended_lang": 0.07609700411558151,
+   "lang_top1": "zh",
+   "hit": 0,
+   "sim_to_intended_lyrics": 0.49523809523809526,
+   "sim_to_other_versions": {
+    "orig": 0.21739130434782608,
+    "es": 0.22,
+    "pt": 0.23300970873786409,
+    "de": 0.49523809523809526,
+    "it": 0.14814814814814814
+   },
+   "vinet_cos_own": 0.46076521277427673,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_450fb66e02c7",
+   "cond": "it",
+   "P_intended_lang": 0.5319901704788208,
+   "lang_top1": "it",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.6942148760330579,
+   "sim_to_other_versions": {
+    "orig": 0.17142857142857143,
+    "es": 0.35398230088495575,
+    "pt": 0.41379310344827586,
+    "de": 0.2033898305084746,
+    "it": 0.6942148760330579
+   },
+   "vinet_cos_own": 0.45861807465553284,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_50102c3b7d22",
+   "cond": "original_mix",
+   "P_en": 0.6683501601219177
+  },
+  {
+   "id": "B_50102c3b7d22",
+   "cond": "orig",
+   "P_intended_lang": 0.22025878727436066,
+   "lang_top1": "en",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.2,
+   "sim_to_other_versions": {
+    "orig": 0.2,
+    "es": 0.2,
+    "pt": 0.2,
+    "de": 0.2,
+    "it": 0.18181818181818182
+   },
+   "vinet_cos_own": 0.5328918695449829,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_50102c3b7d22",
+   "cond": "es",
+   "P_intended_lang": 0.02453436702489853,
+   "lang_top1": "zh",
+   "hit": 0,
+   "sim_to_intended_lyrics": 0.0,
+   "sim_to_other_versions": {
+    "orig": 0.0,
+    "es": 0.0,
+    "pt": 0.0,
+    "de": 0.0,
+    "it": 0.0
+   },
+   "vinet_cos_own": 0.5648359060287476,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_50102c3b7d22",
+   "cond": "pt",
+   "P_intended_lang": 0.02613009698688984,
+   "lang_top1": "en",
+   "hit": 0,
+   "sim_to_intended_lyrics": 0.11764705882352941,
+   "sim_to_other_versions": {
+    "orig": 0.11764705882352941,
+    "es": 0.11764705882352941,
+    "pt": 0.11764705882352941,
+    "de": 0.11764705882352941,
+    "it": 0.1111111111111111
+   },
+   "vinet_cos_own": 0.5661967992782593,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_50102c3b7d22",
+   "cond": "de",
+   "P_intended_lang": 0.03144221007823944,
+   "lang_top1": "en",
+   "hit": 0,
+   "sim_to_intended_lyrics": 0.0,
+   "sim_to_other_versions": {
+    "orig": 0.0,
+    "es": 0.0,
+    "pt": 0.0,
+    "de": 0.0,
+    "it": 0.0
+   },
+   "vinet_cos_own": 0.5236236453056335,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_50102c3b7d22",
+   "cond": "it",
+   "P_intended_lang": 0.007284228689968586,
+   "lang_top1": "en",
+   "hit": 0,
+   "sim_to_intended_lyrics": 0.13333333333333333,
+   "sim_to_other_versions": {
+    "orig": 0.14285714285714285,
+    "es": 0.14285714285714285,
+    "pt": 0.14285714285714285,
+    "de": 0.14285714285714285,
+    "it": 0.13333333333333333
+   },
+   "vinet_cos_own": 0.48576682806015015,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_51c61db82099",
+   "cond": "original_mix",
+   "P_en": 0.6151081919670105
+  },
+  {
+   "id": "B_51c61db82099",
+   "cond": "orig",
+   "P_intended_lang": 0.43783724308013916,
+   "lang_top1": "en",
+   "hit": 1,
+   "sim_to_intended_lyrics": 0.2,
+   "sim_to_other_versions": {
+    "orig": 0.2,
+    "es": 0.2,
+    "pt": 0.4,
+    "de": 0.2857142857142857,
+    "it": 0.18181818181818182
+   },
+   "vinet_cos_own": 0.36104661226272583,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_51c61db82099",
+   "cond": "es",
+   "P_intended_lang": 0.02056915871798992,
+   "lang_top1": "en",
+   "hit": 0,
+   "sim_to_intended_lyrics": 0.0,
+   "sim_to_other_versions": {
+    "orig": 0.0,
+    "es": 0.0,
+    "pt": 0.0,
+    "de": 0.16666666666666666,
+    "it": 0.0
+   },
+   "vinet_cos_own": 0.45864754915237427,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_51c61db82099",
+   "cond": "pt",
+   "P_intended_lang": 0.025278741493821144,
+   "lang_top1": "en",
+   "hit": 0,
+   "sim_to_intended_lyrics": 0.0,
+   "sim_to_other_versions": {
+    "orig": 0.0,
+    "es": 0.0,
+    "pt": 0.0,
+    "de": 0.16666666666666666,
+    "it": 0.0
+   },
+   "vinet_cos_own": 0.4468183219432831,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_51c61db82099",
+   "cond": "de",
+   "P_intended_lang": 0.030677471309900284,
+   "lang_top1": "en",
+   "hit": 0,
+   "sim_to_intended_lyrics": 0.0,
+   "sim_to_other_versions": {
+    "orig": 0.0,
+    "es": 0.0,
+    "pt": 0.2857142857142857,
+    "de": 0.0,
+    "it": 0.0
+   },
+   "vinet_cos_own": 0.3999456465244293,
+   "vinet_top1": 0
+  },
+  {
+   "id": "B_51c61db82099",
+   "cond": "it",
+   "P_intended_lang": 0.009910091757774353,
+   "lang_top1": "en",
+   "hit": 0,
+   "sim_to_intended_lyrics": 0.0,
+   "sim_to_other_versions": {
+    "orig": 0.0,
+    "es": 0.0,
+    "pt": 0.14285714285714285,
+    "de": 0.1111111111111111,
+    "it": 0.0
+   },
+   "vinet_cos_own": 0.4102610945701599,
+   "vinet_top1": 0
+  }
+ ]
+}

@@ -1,4 +1,4 @@
-"""Song-identity metric from a cover-song-identification embedding: Discogs-VINet (Araz et al. 2024, ISMIR2024 branch checkpoint; code and weights are AGPLv3/third party and are NOT vendored in this repo).
+"""Song-identity metric from a cover-song-identification embedding: Discogs-VINet (Araz et al. 2024, ISMIR2024 branch checkpoint; code is third-party under the MIT license; code and weights are NOT vendored in this repo).
 Embedding = whole 30 s clip, CQT as in the authors' inference code (22.05 kHz, hop 512, 84 bins, magnitude, pad to context 8000 frames, mean-downsample x20, scale by max), L2-normalized 'CQTNet' output.
 For every generated remix (original vocal + generated accompaniment) in a generation directory: cosine similarity to the embedding of its own original mix, and retrieval among all original mixes of the 24 evaluation songs (top-1, MRR; chance 1/24).
 Reference rows: real mix re-embedded, and 'recomb' = original vocal + original accompaniment. usage: python 54_vinet_identity.py gen gen_lora gen_lora_v2 ... -> results/vinet_identity.json
