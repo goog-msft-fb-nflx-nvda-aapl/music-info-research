@@ -1,10 +1,10 @@
-# musicgen-steering-eval
+# music-info-research
 
 Does concept steering in MusicGen survive a fair evaluation? We add a learned direction inside a frozen MusicGen so the output is pulled toward a target musical note, then test it with paired, significance-tested evaluation, four direction methods, and layer selection experiments. Course project for CommE5070 (Deep Learning for Music Analysis and Generation, NTU), music generation track. Status: mid-progress. People interested in the topic are welcome to join.
 
 This is topic 1 of the repository; topic 2 is in `../era_market_cover/`. Run all commands below from this folder (paths are relative to it).
 
-- Interactive page (served from the repository's `docs/` folder; video, listen to steered vs unsteered clips, headline numbers): https://goog-msft-fb-nflx-nvda-aapl.github.io/musicgen-steering-eval/
+- Interactive page (served from the repository's `docs/` folder; video, listen to steered vs unsteered clips, headline numbers): https://goog-msft-fb-nflx-nvda-aapl.github.io/music-info-research/
 - Mid-progress video: https://youtu.be/aaZ89FoZe_U
 - Every run with its full config and result: `WORKLOG.md`. Design: `PLAN.md`. Open items: `TODO.md`. Literature notes: `SURVEY.md`.
 

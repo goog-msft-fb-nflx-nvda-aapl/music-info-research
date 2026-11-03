@@ -13,7 +13,7 @@ Course project for CommE5070 (Deep Learning for Music Analysis and Generation, N
 - Jefferson Sy Dionisio: Ph.D. in Communication Engineering, NTU (jsydionisio@gmail.com)
 
 ## Shared
-- `docs/` GitHub Pages source (kept at the repository root because Pages serves from `/docs`): `index.html` for topic 1, `era_market/` for topic 2. Pages URL: https://goog-msft-fb-nflx-nvda-aapl.github.io/musicgen-steering-eval/
+- `docs/` GitHub Pages source (kept at the repository root because Pages serves from `/docs`): `index.html` for topic 1, `era_market/` for topic 2. Pages URL: https://goog-msft-fb-nflx-nvda-aapl.github.io/music-info-research/
 - Topic 1 mid-progress video: https://youtu.be/aaZ89FoZe_U
 - `LICENSE` Apache License 2.0.
 
