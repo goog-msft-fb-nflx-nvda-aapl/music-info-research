@@ -149,3 +149,7 @@ Professor: the TA can provide more data, for example Discogs-VI itself. Goal "Ti
 - [ ] Market-targeted generation baselines on dataset B beyond text prompts: z-conditioned adapter with the M-3 z (language-erased variant), same protocol as the era axis (`src/98_era_axis_lora.py`-style training, `run_ax.sh`-style evaluation, market probes `37_eval_market.py`)
 - [ ] Vocal route for the market axis: market cue sits in vocals and language, so test regenerating or converting the vocal (singing-language or accent conditioning) instead of only the accompaniment; needs a licensed singing-voice generator
 - [ ] Evaluation of a two-axis move: decade probe and market probe on the generated clip, cross-axis leakage (does a market move change the decade score and the reverse), melody retention (as era-axis metrics)
+
+## Survey round 4 (instruction 2026-11-03; plan)
+- [ ] Re-survey after the TA's Discogs-VI answer: available datasets with release year, country and audio or embeddings (Discogs-VI and Discogs-VI-YT, Discogs-VINet features, MusicBrainz/AcousticBrainz, Million Song / Last.fm style sets, SecondHandSongs cover lists, DALI, WhoSampled, Da-TACOS, SHS100K), license and access of each, what covers pair construction and two-axis (year x country) labels
+- [ ] Related work for era and market control and time-conditioned music generation; verified citations only; results to `SURVEY4.md`
