@@ -125,3 +125,6 @@ ds002721 (BCMI-MIdAS), ours:
 - No per-participant rating file found in the BIDS tree (README says it includes reported emotional responses; location unknown). Not usable as a valence/arousal target source until located.
 
 Open: license/redistribution terms of the Jyvaskyla stimulus audio; source of MET stimuli; ds002722, ds002724, ds003774, DAAMEE not inspected.
+
+## 2026-11-03. Draft to MET author
+`drafts/email_met_author.txt`: asks for song ids -> titles/excerpt times and audio availability. Not sent; author's contact email not verified (placeholder).
