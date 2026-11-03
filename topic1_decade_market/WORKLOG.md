@@ -1037,3 +1037,10 @@ Question: is there a nuisance-controlled market coordinate z in the accompanimen
 - Unerased codec-accompaniment probe (reference, `probe_codec_*_B.json`): validation accuracy MERT .333, MuQ .284.
 - After erasure of style and statistics: head accuracy MERT .245 ± .016, MuQ .275 ± .014; logistic on the erased input .235 / .255. With language also erased: MERT .222 ± .026, MuQ .248 ± .036 (logistic on erased input .206 / .235). Nuisance R2 from z about 0 (ridge .009 / -.001).
 Observation: market information in the regenerated-part signal (accompaniment) is weak (.33 / .28 unerased) and falls to .22-.28 after erasure, 5 to 11 points above chance with n = 102 (a 95% binomial interval is about +-.09). A market axis built on dataset B alone carries little accompaniment-borne signal; the market cue found earlier lives in the vocals and the language.
+
+## 2026-11-03 — N-5a best-of-N pool extended to 32 seeds (`results/best_of_n_ax_ctrlc_bon32.{json,txt}`, `results/ax_ctrlc_bon32_{eval,content}.json`)
+Same system and selector as the 16-seed entry; seeds 16-31 via `bash run_bon32_gen.sh <gpu> <eras>` (GPU 0: 1960s 1970s; 1: 1980s 1990s; 2: 2000s 2010s; 3: neutral), then `bash run_bon32_eval.sh 0` (`python src/103_best_of_n.py ax_ctrlc_bon32 32`). Held-out MuQ unerased Delta, N = 1 / 2 / 4 / 8 / 16 / 32:
+- 1980s: .348 / .375 / .463 / .471 / .565 / .542 [.45,.62]; 1990s: .306 / .299 / .335 / .390 / .392 / .416 [.32,.51]; 2010s: .471 / .435 / .500 / .573 / .622 / .597 [.50,.68]; 1960s: .723 / .753 / .779 / .771 / .783 / .812.
+- MuQ erased (1980s / 1990s / 2010s): N=16 .542 / .386 / .437; N=32 .526 / .438 / .425. MERT unerased N=32: 1960s .790, 1980s .798, 1990s .688, 2010s .721 (N=16: .783 / .788 / .675 / .707).
+- Content of the kept clips (top-1 / chord) N=1 .863 / .349, N=16 .875 / .344, N=32 .903 / .348.
+Observation: between N=16 and N=32 the held-out MuQ values change by -.02 to +.03 (intervals overlap) and the MERT selector-side values by +.01; the gain per doubling is below the song-bootstrap interval width beyond N=16 on the held-out encoder.
