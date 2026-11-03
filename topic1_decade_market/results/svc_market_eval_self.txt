@@ -1,0 +1,2 @@
+mert self-voice control: original-vocal acc 0.608; self-converted -> original label acc 0.451; delta P(own label) -0.112
+muq self-voice control: original-vocal acc 0.471; self-converted -> original label acc 0.196; delta P(own label) -0.122

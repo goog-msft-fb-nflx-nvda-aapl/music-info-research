@@ -1,0 +1,16 @@
+{
+ "mert": {
+  "layer": 16,
+  "C": 0.01,
+  "val_acc_original": 0.6078431372549019,
+  "acc_original_label_from_self_converted": 0.45098039215686275,
+  "delta_P_original_label": -0.11203865933816369
+ },
+ "muq": {
+  "layer": 2,
+  "C": 0.01,
+  "val_acc_original": 0.47058823529411764,
+  "acc_original_label_from_self_converted": 0.19607843137254902,
+  "delta_P_original_label": -0.12224045815417091
+ }
+}
