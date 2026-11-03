@@ -107,3 +107,21 @@ Open datasets (no agreement), music listening + affect ratings:
 - DEAP cannot be requested by students alone; an email from us as drafted would not meet its terms. A permanent staff member (supervisor) has to submit/sign. With the service reported down, DEAP is no longer the fastest start.
 - MET (ds008701) has EEG, music listening and per-song valence/arousal ratings in one open dataset; it could replace DEAP for emotion modelling and also serve as the paired EEG-music set. Whether audio is obtainable (needed for the generator), the license, and whether 20 songs per participant are the same songs across participants are unchecked.
 - ds002721 stimuli are a published research stimulus set (audio not in dataset).
+
+## 2026-11-03. Dataset inspection: MET (ds008701) and ds002721 (files read from GitHub mirrors, no EEG downloaded)
+Script: `scripts/met_ratings_summary.py`; output: `results/met_ratings_summary.txt`.
+
+MET (ds008701), ours:
+- License field in dataset_description.json: CC0. Author: Weng Lam Cheang. 20 participants (21-29 y), 400 rating rows (2 flagged missing).
+- 20 distinct songs (ids within t01-t30), each rated by 19-20 participants; every participant heard the same 20 songs in random order. Song categories 4 each of HVHA, HVLA, LVHA, LVLA, N.
+- Released EEG: 66 EEG channels + 1 EOG, 1000 Hz, `.set` files, 130 s per song (120 s music), `bad` segments marked in events.tsv. Electrode positions provided per recording.
+- Music audio not in the dataset; song names not given in the README, only ids t01-t30. Audio source must be identified separately (unresolved).
+- Ratings: valence 1-9, arousal 1-9 (histograms in results file). Share of rating variance explained by song: valence 0.50, arousal 0.67; by participant mean: 0.06 and 0.05.
+- Interpretation: labels are mostly song-level, so a subject-independent EEG-to-valence/arousal model on MET is confounded with song identity unless evaluated leave-song-out, and only 20 songs exist.
+
+ds002721 (BCMI-MIdAS), ours:
+- License conflict inside the source: dataset_description.json says CC0, README Terms of Use says CC BY 4.0 (University of Reading rights-holder). Use CC BY 4.0 attribution to be safe (interpretation).
+- 31 participants, 19 EEG channels, 1 kHz, EDF, 6 runs (runs 1 and 6 resting). Events: music onset code 788, clip code 301-360 = mp3 `<code-300>.mp3` from the Eerola & Vuoskoski (2010) soundtrack set 1, downloadable from the University of Jyvaskyla page (reachable stimulus audio; terms not checked). Clip length: README says 12 s and 20 s in different places.
+- No per-participant rating file found in the BIDS tree (README says it includes reported emotional responses; location unknown). Not usable as a valence/arousal target source until located.
+
+Open: license/redistribution terms of the Jyvaskyla stimulus audio; source of MET stimuli; ds002722, ds002724, ds003774, DAAMEE not inspected.

@@ -1,0 +1,6 @@
+400 rows; participants 20
+rows with Remark: Counter({'0 = data missing': 1, 'missing EEG data': 1})
+distinct songs 20 listeners/song min,median,max 19 20.0 20
+song categories Counter({'HVHA': 4, 'LVLA': 4, 'HVLA': 4, 'N': 4, 'LVHA': 4})
+Valence histogram [(1, 10), (2, 23), (3, 25), (4, 37), (5, 67), (6, 65), (7, 62), (8, 54), (9, 55)] | share of variance explained by song 0.500, by participant mean 0.060
+Arousal histogram [(1, 41), (2, 77), (3, 41), (4, 28), (5, 43), (6, 45), (7, 44), (8, 54), (9, 25)] | share of variance explained by song 0.670, by participant mean 0.051

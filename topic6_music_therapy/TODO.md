@@ -27,7 +27,7 @@
 - [ ] Generator smoke test: Stable Audio Open 1.0 loads, audio-to-audio from a DEAM clip, LoRA/adapter dry run with a VA token.
 
 ## From access check (2026-11-03)
-- [ ] Inspect MET (OpenNeuro ds008701): license, stimulus list (same songs across participants?), audio availability, preprocessed channel list/rate, rating distributions. Download to `~/music_therapy/data` (13 GB; check disk first).
-- [ ] Inspect ds002721 (3.35 GB, CC BY 4.0): ratings file, epoch length, stimulus set source (Eerola & Vuoskoski 2010).
+- [x] MET inspected (WORKLOG): same 20 songs for all, 66 ch, labels mostly song-level, no audio. [ ] Identify MET song source (contact author Weng Lam Cheang via OpenNeuro / paper) and audio rights. [ ] Download EEG (13 GB) to `~/music_therapy/data` after disk check.
+- [x] ds002721 inspected: 19 ch, audio from Eerola & Vuoskoski set 1 (Jyvaskyla site), no rating file found. [ ] Check where the participant responses are; check stimulus audio terms.
 - [ ] Open ds002722, ds002724, ds003774, DAAMEE (Zenodo 16738766) pages ourselves.
 - [ ] Decide dataset for Phase 1/2 (MET vs DEAP vs DREAMER) after the inspections.
