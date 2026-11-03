@@ -4,14 +4,14 @@ Course project for CommE5070 (Deep Learning for Music Analysis and Generation, N
 
 | Guide topic | Folder | Status |
 |---|---|---|
-| 1. Released decade and market classification, era-targeted covers | [`topics/topic1_decade_market/`](topics/topic1_decade_market/) | Stem-wise analysis of release-decade and release-market cues on Discogs-VI clips, and cover generation that keeps the melody and vocals while steering the era. Main work of this repository. |
-| 2. Streaming music accompaniment generation | [`topics/topic2_streaming_accompaniment/`](topics/topic2_streaming_accompaniment/) | not started |
-| 3. Inference-time optimization and evaluation for text-to-music | [`topics/topic3_inference_time_ttm/`](topics/topic3_inference_time_ttm/) | Independent, significance-tested evaluation of concept-direction steering in MusicGen. |
-| 4. MIDI-REPA and ATTM | [`topics/topic4_midi_repa_attm/`](topics/topic4_midi_repa_attm/) | not started |
-| 5. Hit song analysis and generation | [`topics/topic5_hit_song/`](topics/topic5_hit_song/) | not started |
-| 6. Music therapy | [`topics/topic6_music_therapy/`](topics/topic6_music_therapy/) | not started |
-| 7. AI DJ | [`topics/topic7_ai_dj/`](topics/topic7_ai_dj/) | not started |
-| 8. Copyright concerns in music generation | [`topics/topic8_copyright/`](topics/topic8_copyright/) | not started |
+| 1. Released decade and market classification, era-targeted covers | [`topic1_decade_market/`](topic1_decade_market/) | Stem-wise analysis of release-decade and release-market cues on Discogs-VI clips, and cover generation that keeps the melody and vocals while steering the era. Main work of this repository. |
+| 2. Streaming music accompaniment generation | [`topic2_streaming_accompaniment/`](topic2_streaming_accompaniment/) | not started |
+| 3. Inference-time optimization and evaluation for text-to-music | [`topic3_inference_time_ttm/`](topic3_inference_time_ttm/) | Independent, significance-tested evaluation of concept-direction steering in MusicGen. |
+| 4. MIDI-REPA and ATTM | [`topic4_midi_repa_attm/`](topic4_midi_repa_attm/) | not started |
+| 5. Hit song analysis and generation | [`topic5_hit_song/`](topic5_hit_song/) | not started |
+| 6. Music therapy | [`topic6_music_therapy/`](topic6_music_therapy/) | not started |
+| 7. AI DJ | [`topic7_ai_dj/`](topic7_ai_dj/) | not started |
+| 8. Copyright concerns in music generation | [`topic8_copyright/`](topic8_copyright/) | not started |
 
 ## Team
 - James Christian: MS in Artificial Intelligence, University of Texas at Austin (jameschristian@utexas.edu)
