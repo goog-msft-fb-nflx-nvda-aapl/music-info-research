@@ -188,7 +188,7 @@ Project name: Time Traveler. Goal (professor): era-and-market-controlled cover s
 - [ ] Add SecondHandSongs and LargeSHS to the dataset survey (survey round 4 covers SHS-100K and Da-TACOS; LargeSHS not yet)
 
 ### Two-axis plan, ordered (dependencies in brackets)
-1. [ ] T-1 pair statistics from Discogs-VI metadata (running; `src/106_discogs_vi_pairs.py`)
+1. [x] T-1 pair statistics from Discogs-VI metadata (`src/106_discogs_vi_pairs.py`, WORKLOG 2026-11-03: 33,578 cliques with a different-artist pair with era and market move)
 2. [ ] T-2 data access: TA's answer; then features or audio; licence recorded
 3. [ ] T-3 pair set with reissue exclusion and a gold subset checked against MusicBrainz / SHS [T-1, T-2]
 4. [ ] T-4 market axis: vocal-side route (singing-voice conversion or language/accent conditioning) plus an accompaniment-side z from M-3 (language-erased); decide the route after reading the lecture 7/9 singing-generation slides

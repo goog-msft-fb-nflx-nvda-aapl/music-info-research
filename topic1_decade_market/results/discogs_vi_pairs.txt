@@ -1,0 +1,29 @@
+versions 1911611; cliques 348796; eligible versions (valid year, known country) 1643410; cliques with >= 2 eligible 299233
+any | all pairs: cliques 297846, pairs 11002752
+any | era move: cliques 128691, pairs 4289877
+any | era+US-Spain: cliques 8804, pairs 71234
+any | era+market: cliques 96965, pairs 3295568
+any | era+market six: cliques 47070, pairs 950196
+any | market move: cliques 189725, pairs 8287166
+any | market move six: cliques 81321, pairs 2293783
+any+video | all pairs: cliques 145140, pairs 2700217
+any+video | era move: cliques 59587, pairs 978527
+any+video | era+US-Spain: cliques 4651, pairs 20431
+any+video | era+market: cliques 47984, pairs 756873
+any+video | era+market six: cliques 24510, pairs 232803
+any+video | market move: cliques 100627, pairs 2001445
+any+video | market move six: cliques 45798, pairs 624222
+strict | all pairs: cliques 76131, pairs 1568838
+strict | era move: cliques 41603, pairs 654124
+strict | era+US-Spain: cliques 3172, pairs 9160
+strict | era+market: cliques 33578, pairs 509325
+strict | era+market six: cliques 17081, pairs 148215
+strict | market move: cliques 56530, pairs 1209438
+strict | market move six: cliques 26558, pairs 323490
+strict+video | all pairs: cliques 31300, pairs 325064
+strict+video | era move: cliques 16433, pairs 127767
+strict+video | era+US-Spain: cliques 1343, pairs 1883
+strict+video | era+market: cliques 14042, pairs 100296
+strict+video | era+market six: cliques 7482, pairs 32038
+strict+video | market move: cliques 24878, pairs 251669
+strict+video | market move six: cliques 12191, pairs 75914
