@@ -52,6 +52,6 @@ Open, in order of expected value:
 - [ ] Resolve the BCMI (ds002722) music-code to clip mapping from Daly et al., Scientific Data 2020 (doi 10.1038/s41597-020-0507-6); only then use its audio or the clip-level analyses.
 - [ ] Generator: improve valence control (more training audio with valence labels: DEAM host unreachable on 2026-11-04, try again or find authorised mirror; EMOPIA / other open sets; longer training; text prompts), a second independent evaluator (e.g. CLAP-based or a model trained on a different corpus), FAD with fadtk on enough clips, statistics over more seeds.
 - [ ] Connect EEG: replace labels by EEG-predicted valence/arousal (currently uninformative; report as negative end-to-end result) or use per-participant calibrated predictors with a fresh session.
-- [ ] Pending runs: LaBraM fine-tuning on BCMI (results/b5ft), summarise.
+- [x] LaBraM and CBraMod fine-tuning on BCMI done (chance).
 - [ ] Contact MET authors only if the team decides to; the mail draft stays in drafts/ (not sent).
 - [ ] Repository hygiene before going public: confirm licenses (PMEmo data use, demo audio, BCMI CC BY vs CC0).

@@ -253,3 +253,9 @@ Interpretation: the within-participant association is about twice as large when 
 ## 2026-11-04. Memorisation check and demos
 `scripts/memorization_check.py` (MERT layer-6 time-mean features, cosine similarity after train-set standardisation, nearest PMEmo training song): generated clips (108 each) A8k_s2 CFG 3: mean max-cosine 0.44 (max 0.56); A8k_s2 CFG 5: 0.43 (max 0.60); A8k_s1 CFG 5: 0.41 (max 0.56). Held-out real songs to training songs: mean 0.50, 95th percentile 0.64, max 1.00 (one held-out song has an identical copy among the training songs, i.e. PMEmo contains a duplicate). Measured: no generated clip is closer to a training song than typical held-out real songs are; this is one embedding and says nothing about perceptual copying.
 Demos: `demos/` (9 clips, 10 s, A8k_s2 CFG 5, one per target cell), README with the exact command. Rights of the demo audio (trained on PMEmo clips of unclear dataset license) have to be settled before the repository is made public.
+
+## 2026-11-04. Fine-tuned foundation models on BCMI ds002722 (`results/b5ft/`)
+`finetune_fm.py data/bcmi_win4s_200.npz results/b5ft <cbramod|labram> loso,strict 4 6` (8,150 windows of 4 s at 200 Hz, 1,630 trials; trials cut by the recording end dropped). Trial-level CCC [CI] valence | arousal:
+- CBraMod: loso valence CCC -0.004 (r -0.020), arousal CCC 0.014 [-0.010, 0.041] (r 0.033); strict -0.017 | -0.007.
+- LaBraM: loso -0.031 [-0.060, -0.004] | 0.008 [-0.014, 0.036]; strict -0.024 | -0.001.
+Measured: no above-chance prediction for unseen participants (and unseen clip codes) with either fine-tuned model; consistent with ridge and CNN on the same data.
