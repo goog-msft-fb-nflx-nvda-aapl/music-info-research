@@ -1,6 +1,7 @@
 """Market-targeted cover evaluation (dataset B): accompaniment regenerated with market prompts (07_generate.py --ds B, GENDIR=gen_market), scored with market probes (MERT, MuQ) trained on EnCodec-resynthesized dataset-B TRAIN accompaniment
 (layers from probe_codec_{mert,muq}_B.json, C=0.01 as in eraprobe). Delta_X = P(market X | prompt X) - P(market X | neutral prompt) per song, seeds averaged, Wilcoxon over songs.
-usage (server venv): GENDIR=gen_market python 37_eval_market.py --out results/market_eval.json"""
+COND_PREFIX=ds_ reads the files <id>_ds_<market>_s<seed>_acc.wav (neutral file without prefix), e.g. the metadata-derived descriptor sets of 114_market_style_gen.py.
+usage (server venv): [COND_PREFIX=...] GENDIR=gen_market python 37_eval_market.py --out results/market_eval.json"""
 import argparse, json, os, numpy as np, soundfile as sf
 from scipy.stats import wilcoxon
 from sklearn.linear_model import LogisticRegression
@@ -19,7 +20,7 @@ clips = {}
 for s in ids:
     clips[f"{s}|identity_codec|0"] = np.load(os.path.join(ROOT, "stems_codec", "B", s + ".npz"))["accomp"].astype(np.float32)
     for e in PR:
-        for sd in a.seeds: clips[f"{s}|{e}|{sd}"] = sf.read(os.path.join(G, f"{s}_{e}_s{sd}_acc.wav"), dtype="float32")[0]
+        for sd in a.seeds: clips[f"{s}|{e}|{sd}"] = sf.read(os.path.join(G, f"{s}_{e if e == 'neutral' else os.environ.get('COND_PREFIX', '') + e}_s{sd}_acc.wav"), dtype="float32")[0]
 emb = embed_waves(clips, layer); P = predict(probes, emb); R = []
 for n in clips:
     s, c, sd = n.split("|"); R.append({"clip": s, "true": true[s], "cond": c, "seed": int(sd), "mert_probs": P["mert"][n].tolist(), "muq_probs": P["muq"][n].tolist()})

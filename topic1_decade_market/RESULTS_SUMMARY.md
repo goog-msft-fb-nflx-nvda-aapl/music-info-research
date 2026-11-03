@@ -22,7 +22,7 @@ Last updated 2026-11-04. Every row has its configuration and numbers in `WORKLOG
 | T-4k | scale-up of the stem swap, 77 clips, 5 targets | vocal market probe Delta P(target) Spain +.188, Brazil +.421, Germany +.314, Italy +.408, US+UK +.325 (all CIs above 0) | `results/scale_market_probe.*` |
 | T-4k seed 1 | replication | Spain +.212, Brazil +.488, Germany +.308, Italy +.381, US+UK +.239; erased probe within +-.03 | `results/scale_market_probe_seed1*` |
 | T-4l | same, language erased from the probe | all five targets within +-.03 of 0 (Spain +.023): the move is language | `results/scale_market_probe_leace.*` |
-| T-4e / T-4o | style descriptors from Discogs-VI metadata | target-style activation: Brazil +.055 / +.049, other markets at most a few thousandths | `results/market_styles.*`, `market_style_eval.*` |
+| T-4e / T-4o / T-4p | style descriptors from Discogs-VI metadata | tag score: Brazil +.055 / +.049 / +.063, others small; tagger-selected words raise Germany/Italy tags but the independent probes read them as less German/Italian; independent probes move for Brazil (MERT/MuQ +.145/+.490 lift, +.117/+.313 selected) | `results/market_styles.*`, `market_style_eval.*`, `mstyle_probe_*` |
 | T-4n | FreeSVC with a voice-matched reference | no move (target accuracy .178 / .193, effects within +-.01) | `results/svc_market_eval_nn.*` |
 | T-4m | reference-audio style transfer | no consistent move across encoders (Brazil +.105 / +.075 only at strength 0.5) | `results/ace_mref*_eval.*` |
 
