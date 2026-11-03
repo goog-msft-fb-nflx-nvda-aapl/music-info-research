@@ -1,0 +1,7 @@
+orig: n=77 P(intended language) 0.665, language top-1 hit 0.857, lyric similarity to intended text 0.559, intended text is the closest of the five versions in 0.91, VINet cos to the original 0.809, VINet top-1 among 77 0.88
+en: n=34 P(intended language) 0.644, language top-1 hit 0.853, lyric similarity to intended text 0.432, intended text is the closest of the five versions in 0.82, VINet cos to the original 0.827, VINet top-1 among 77 0.94
+es: n=63 P(intended language) 0.557, language top-1 hit 0.714, lyric similarity to intended text 0.448, intended text is the closest of the five versions in 0.78, VINet cos to the original 0.809, VINet top-1 among 77 0.92
+pt: n=64 P(intended language) 0.535, language top-1 hit 0.625, lyric similarity to intended text 0.444, intended text is the closest of the five versions in 0.73, VINet cos to the original 0.807, VINet top-1 among 77 0.88
+de: n=76 P(intended language) 0.637, language top-1 hit 0.776, lyric similarity to intended text 0.518, intended text is the closest of the five versions in 0.88, VINet cos to the original 0.812, VINet top-1 among 77 0.95
+it: n=72 P(intended language) 0.401, language top-1 hit 0.542, lyric similarity to intended text 0.483, intended text is the closest of the five versions in 0.76, VINet cos to the original 0.805, VINet top-1 among 77 0.93
+original mix: P(en) 0.461
