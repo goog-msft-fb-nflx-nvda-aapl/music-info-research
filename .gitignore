@@ -23,3 +23,4 @@ docs/response.md
 topic3_inference_time_ttm/video/frames/*.html
 topic1_decade_market/data_local/
 topic1_decade_market/results/lyrics_route_text.json
+topic1_decade_market/results/lyrics_scale_text.json

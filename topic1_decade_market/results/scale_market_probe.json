@@ -1,0 +1,77 @@
+{
+ "val_acc_vocal_probe": 0.6078431372549019,
+ "layer": 16,
+ "C": 0.01,
+ "cells": {
+  "es": {
+   "target": "Spain",
+   "n": 63,
+   "P_target": 0.23507153987884521,
+   "P_target_source_language_control": 0.04724220559000969,
+   "P_target_original_vocal": 0.07094389200210571,
+   "delta_vs_control": 0.18782934546470642,
+   "ci": [
+    0.1385704129934311,
+    0.23652642965316772
+   ],
+   "top1_hit": 0.2698412698412698,
+   "top1_hit_control": 0.015873015873015872
+  },
+  "pt": {
+   "target": "Brazil",
+   "n": 64,
+   "P_target": 0.5045562982559204,
+   "P_target_source_language_control": 0.08308933675289154,
+   "P_target_original_vocal": 0.019684743136167526,
+   "delta_vs_control": 0.42146697640419006,
+   "ci": [
+    0.33235612511634827,
+    0.5104921460151672
+   ],
+   "top1_hit": 0.59375,
+   "top1_hit_control": 0.03125
+  },
+  "de": {
+   "target": "Germany",
+   "n": 76,
+   "P_target": 0.4751368463039398,
+   "P_target_source_language_control": 0.16140706837177277,
+   "P_target_original_vocal": 0.15630647540092468,
+   "delta_vs_control": 0.31372982263565063,
+   "ci": [
+    0.24410773813724518,
+    0.38294097781181335
+   ],
+   "top1_hit": 0.6842105263157895,
+   "top1_hit_control": 0.14473684210526316
+  },
+  "it": {
+   "target": "Italy",
+   "n": 72,
+   "P_target": 0.5882688164710999,
+   "P_target_source_language_control": 0.1806878298521042,
+   "P_target_original_vocal": 0.11417407542467117,
+   "delta_vs_control": 0.4075809717178345,
+   "ci": [
+    0.32762622833251953,
+    0.48695895075798035
+   ],
+   "top1_hit": 0.7777777777777778,
+   "top1_hit_control": 0.20833333333333334
+  },
+  "en": {
+   "target": "US+UK",
+   "n": 34,
+   "P_target": 0.4813885986804962,
+   "P_target_source_language_control": 0.15676496922969818,
+   "P_target_original_vocal": 0.07779943943023682,
+   "delta_vs_control": 0.32462355494499207,
+   "ci": [
+    0.24233219027519226,
+    0.40637972950935364
+   ],
+   "top1_hit": 0.5882352941176471,
+   "top1_hit_control": 0.058823529411764705
+  }
+ }
+}
