@@ -1,0 +1,19 @@
+Hi all,
+
+Topic 6 (music therapy): we want to use the DEAP dataset and need to know if any of you already has it (for example from earlier work or a lab) before I email the owners.
+
+What DEAP is: "Database for Emotion Analysis using Physiological Signals" (Queen Mary University of London, 2012). 32 people watched 40 one-minute music videos while 32-channel EEG (electroencephalography, brain activity recorded from the scalp) was recorded; each person rated every video for valence (unpleasant to pleasant) and arousal (calm to excited) on a 1-9 scale.
+Page: https://www.eecs.qmul.ac.uk/mmv/datasets/deap/
+Access: a signed license form (EULA = End User License Agreement) is emailed to the owners, who then send a download login. The data cannot be shared between people outside that agreement, so I will not accept a copy unless you are covered by the same license.
+
+What I need from you (reply with one line each):
+1. Do you already have DEAP access or the files (data_preprocessed_python.zip, about 3 GB, 128 Hz version)? If yes, is it under a signed EULA in your name, and where is it stored?
+2. Do you have another EEG-plus-music dataset or access to one (for example the Stanford NMED family: https://purl.stanford.edu/jn859kj8079 )?
+3. If nobody has DEAP: I will send the request email (draft attached, drafts/email_deap_access.txt). Please give me your full names and NTU emails for the "team members" line and tell me if you want to be listed.
+
+Why DEAP matters: it is the only dataset we found that has EEG during music plus per-trial valence/arousal ratings. NMED-T (Naturalistic Music EEG Dataset - Tempo, Stanford, 20 people, 10 full songs, 128-channel EEG) has no emotion ratings and no audio files, so DEAP is needed to train the emotion model.
+
+Survey results and open decisions are in topic6_music_therapy/WORKLOG.md and TODO.md in our repository.
+
+Thanks,
+[YOUR NAME]

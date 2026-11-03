@@ -1,0 +1,27 @@
+To: [email address given on the DEAP download page: https://www.eecs.qmul.ac.uk/mmv/datasets/deap/download.html]
+Subject: Request for DEAP dataset access (academic research, National Taiwan University)
+
+Dear DEAP dataset team,
+
+My name is [YOUR FULL NAME], a [graduate student] at [YOUR DEPARTMENT], National Taiwan University (NTU), Taipei, Taiwan. I am writing to request access to the DEAP dataset (A Database for Emotion Analysis using Physiological Signals, Koelstra et al., IEEE Transactions on Affective Computing, 2012).
+
+Purpose of use
+Non-commercial academic research only. Our team of three students at NTU is carrying out a research project supervised by Professor Yi-Hsuan Yang ([his department at NTU]). The project studies whether a model that predicts valence and arousal from EEG, trained on DEAP, can transfer to EEG recorded during music listening in another public dataset, and whether the resulting emotion estimates can condition music generation, as a basis for future adaptive music biofeedback in music therapy.
+
+How DEAP will be used
+- Training and evaluating EEG-based valence/arousal models (subject-independent, leave-one-subject-out evaluation), using the EEG and the participants' self-assessment ratings.
+- We will use the preprocessed version (32 EEG channels, 128 Hz) if it is available to us.
+- We will not redistribute the dataset. Only derived results (metrics, figures, code without data) will be shared, in a project report and a possible academic paper. We will cite Koelstra et al. (2012) and follow all terms of the End User License Agreement.
+- Data will be stored on a university-hosted research server with access limited to the three team members.
+
+Team members
+[NAME 1], [NAME 2], [NAME 3] (all at NTU). Supervisor: Professor Yi-Hsuan Yang, NTU, [professor's NTU email].
+
+I have attached the signed End User License Agreement [attach after signing; the EULA is on the download page]. Please tell us if you need anything else, such as confirmation from our supervisor.
+
+Thank you for your time and for making the dataset available.
+
+Sincerely,
+[YOUR FULL NAME]
+[Department, National Taiwan University]
+[your email]

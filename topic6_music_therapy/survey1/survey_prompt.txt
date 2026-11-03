@@ -1,0 +1,89 @@
+ROLE
+You are a research assistant doing a literature, dataset and code survey for a small academic team (conference-paper target, ISMIR-style). Be exhaustive, verify every claim against a primary source (paper, dataset page, repository, model card), and give links. Do not invent papers, numbers, licenses or repositories. If something cannot be verified, write "UNVERIFIED" and say what you tried. Separate facts from your interpretation. Do not claim anything is the "best" or a "ceiling".
+
+PROJECT (what we want to build)
+Title (working): Transferring EEG-based emotion modelling across datasets for emotion-conditioned music accompaniment (a foundation for adaptive music biofeedback in music therapy).
+
+Motivation: Music therapy uses music to influence emotional state. Adaptive biofeedback systems are limited by the scarcity of high-quality paired EEG + audio data that also carries emotion labels. We ask whether emotion modelling learned on one paired EEG-emotion dataset can be transferred to another paired EEG-music dataset, in order to generate emotion-conditioned music accompaniment.
+
+Datasets named by the team:
+- NMED-T (Stanford): continuous 128-channel EEG and audio, 20 participants, 10 full-length songs.
+- DEAP (QMUL): 32-channel EEG (+ peripheral signals), 32 participants, 40 one-minute music-video excerpts, per-trial valence/arousal/dominance/liking self-ratings (1-9).
+
+Proposed pipeline:
+Phase 1. Train an EEG encoder (e.g. CNN-Transformer) on DEAP to regress continuous valence-arousal (VA) with an MSE objective. Evaluate with leave-one-subject-out (LOSO) cross-validation.
+Phase 2. Harmonize NMED-T's 128 channels to DEAP's 32-channel montage by spatial interpolation. Run the frozen DEAP encoder on harmonized NMED-T to produce VA pseudo-labels, keep predictive uncertainty, and filter low-confidence samples.
+Phase 3. Emotion-conditioned accompaniment transformation: fine-tune a pretrained latent diffusion audio backbone (not from scratch). The original audio gives musical context; separately encoded EEG embeddings and VA embeddings give emotional conditioning via cross-attention. Modality dropout enables EEG-only, VA-only and joint conditioning at inference. Investigate emotion-aware generation objectives (alignment between target emotion and generated audio).
+Evaluation: Frechet Audio Distance (FAD), spectral characteristics, musical coherence, and MSE between the emotion predicted on generated audio (or from EEG) and the target VA coordinates.
+
+Compute: 4x H200 (shared), Hugging Face and GitHub access. No human listening test (quantitative evaluation only). Code and audio demos must be public and reproducible.
+
+WHAT TO SURVEY (answer every numbered section; use the output format at the end)
+
+1. EEG emotion recognition on DEAP (and similar)
+ - Strongest and most-cited methods since 2018 (CNN, EEGNet, DGCNN, LGGNet, TSception, EEG-Conformer, transformers, foundation models such as LaBraM, CBraMod, BIOT, EEGPT, NeuroLM, etc.).
+ - Critical: which results use proper subject-independent / LOSO protocols versus leaky trial- or segment-level splits. Report reported LOSO numbers for valence and arousal (classification accuracy and, if any, regression error / correlation) with the exact protocol. Flag papers known to have leakage or inflated numbers.
+ - Is continuous VA regression on DEAP meaningful given that labels are per-trial (one rating per 60 s trial, 1-9 scale)? Note the label granularity honestly. Find works that regress VA, and what metrics (RMSE, CCC, Pearson) they report. Consider also datasets with continuous annotation.
+ - Preprocessing standards for DEAP (the preprocessed .dat/.mat version, 128 Hz, baseline removal, windowing) and common pitfalls.
+
+2. Cross-dataset / cross-montage EEG transfer
+ - Channel harmonization: spatial interpolation (spherical spline, MNE interpolate_bads / montage mapping), channel-agnostic or montage-agnostic encoders, 3D electrode-position embeddings, channel-selection/projection approaches.
+ - Cross-dataset emotion recognition (train DEAP, test SEED/SEED-IV/DREAMER/AMIGOS/other): results, domain adaptation methods (DANN, MMD, CORAL, test-time adaptation), pseudo-labelling with uncertainty (MC dropout, ensembles, conformal), and known failure modes (different elicitation, label scales, reference electrode, sampling rate).
+ - Evidence for or against the validity of applying a DEAP-trained emotion regressor to EEG recorded during different music in another lab (NMED-T). Is there any prior work that does exactly this? Be explicit if none exists.
+
+3. NMED-T specifics
+ - Exact content: songs, durations, stimulus audio availability and license (is the original audio included, or only derived/tempo/stimulus info?), EEG preprocessing level provided (raw vs cleaned), sampling rate, behavioural ratings (does it contain any emotion/enjoyment ratings?), download location and size.
+ - Prior work using NMED-T: EEG-music decoding, music retrieval/identification from EEG, tempo/beat tracking from EEG, stimulus reconstruction. List with links and what each did.
+ - Whether 10 songs x 20 participants is enough to support conditioning a generative model; what overfitting risks papers report in similar small-data EEG-to-audio work.
+
+4. Alternative and complementary EEG + music datasets
+ Survey all public datasets pairing EEG (or other physiological signals) with music listening, and for each give: size (participants, stimuli, hours), channels, sampling rate, music (is the audio redistributable, full-length, genre), emotion labels (categorical, VA, continuous, per-trial or time-continuous), license and access procedure, download link, and any known issues. At least check: DEAP, NMED-T, NMED-H, NMED-E, MAHNOB-HCI, DREAMER, AMIGOS, SEED / SEED-IV / SEED-V (music-video vs film), MUSIN-G, OpenMIIR, EEG-music emotion datasets from China/Korea/Europe, the Music-EEG datasets on OpenNeuro / PhysioNet / Zenodo / Figshare, DEAM / PMEmo style audio-only VA corpora (as audio-side emotion labels), "EEG-based music emotion" datasets from 2022-2026, music-therapy-specific EEG datasets (depression, anxiety, dementia, sleep), and fNIRS / EDA / HRV music datasets. Also list datasets with continuous (time-resolved) VA annotation of music (e.g. DEAM, PMEmo, others) because they could supply audio-side emotion supervision.
+
+5. Emotion-conditioned and EEG-conditioned music generation (prior work)
+ - EEG-to-music / brain-to-music generation (e.g. Brain2Music (fMRI), EEG-conditioned MusicLM / diffusion work, NeuroMusic, "EEG2Music", sonification systems, closed-loop BCMI / brain-computer music interfaces, affective brain-computer music interfaces). Report inputs, model, evaluation, whether the code is public.
+ - Valence-arousal / emotion-conditioned music generation, symbolic and audio: LARA-Gen (continuous emotion control, arXiv 2025), Dai et al. 2026 (valence/arousal via in-context learning, https://github.com/DCN2001/MusicEmotionModeling), EMOPIA, Emotion-conditioned Music Transformer, MusicEmo, VA-controlled MusicGen / Stable Audio adapters, ControlNet-style music control, emotion-aware text-to-music (MusicGen, MusicLDM, Stable Audio Open, AudioLDM2, Mustango, JASCO, MuseControlLite, Music ControlNet, DITTO), music editing / accompaniment / style-transfer diffusion (e.g. audio-to-audio, "transformation" of an input clip, SDEdit-style, inpainting, stem-conditioned accompaniment generation such as StemGen, SingSong, MusicGen-Stem, Diff-A-Riff).
+ - Which pretrained latent-diffusion audio backbones can accept (a) an audio context and (b) extra cross-attention conditioning tokens, and can be fine-tuned with LoRA / adapters on a few GPU-hours? Give licenses, parameter counts, sampling rates, and checkpoints on Hugging Face. Compare at least Stable Audio Open 1.0 (and any newer Stable Audio variants), AudioLDM2, MusicLDM, Make-An-Audio, Tango, JASCO, MusicGen-melody, and anything released 2025-2026.
+ - Modality dropout / classifier-free guidance with multiple optional conditions: reference implementations.
+ - Emotion-aware generation objectives: auxiliary emotion-regression loss on generated audio via a frozen music-emotion predictor, contrastive alignment (CLAP-style EEG-audio or emotion-audio), reward / RL / DPO-style fine-tuning for emotion alignment, guidance with a differentiable emotion predictor.
+
+6. Music emotion recognition (audio side) for evaluation
+ - Pretrained audio models that predict valence/arousal from audio and have public checkpoints (e.g. MERT-based, CLAP-based, MuQ, MusicFM, Essentia models, DEAM/PMEmo-trained regressors, the Dai et al. code). Report reported performance (R2 / RMSE / CCC) on DEAM and PMEmo, and known cross-dataset reliability problems of audio VA predictors.
+ - How other papers measure "emotion alignment" of generated music quantitatively without listening tests (emotion classifier accuracy, VA distance, CLAP score with emotion prompts, etc.). Recommend a defensible protocol and list its limitations.
+ - Standard generation metrics: FAD (which embedding: VGGish, PANN, CLAP-music, MERT), KL, CLAP score, MQAScore (music quality), tooling (fadtk, audioldm_eval, av-benchmark), and caveats for small test sets and for 10-song material.
+
+7. EEG-audio alignment and EEG encoders usable as conditioners
+ - EEG-audio contrastive learning, EEG foundation models with public weights, and EEG tokenizers; which are practical for conditioning a diffusion model via cross-attention. Licenses and Hugging Face / GitHub links.
+ - Evidence on how much music-related information (tempo, beat, timbre, identity of song) is decodable from EEG, and what emotion information (if any) EEG carries beyond the audio itself. This matters for deciding whether EEG conditioning adds anything over VA-only conditioning, and for the ablation design (audio-only, VA-only, EEG-only, joint; shuffled-EEG control).
+
+8. Music therapy framing and clinical/ethical context
+ - Key references: Understanding human-AI collaboration in music therapy through co-design with therapists (CHI 2024); A first look at generative AI based music therapy for mental disorders (IEEE TCE 2024); other recent works on AI music generation for therapy, biofeedback, neurofeedback and BCMI for stress / anxiety / depression / sleep / dementia.
+ - Evidence on whether valence-arousal targets are a clinically sensible control signal in music therapy (iso-principle, arousal regulation, entrainment). Limits of claims we may make from a non-clinical, offline study. Ethics and data-protection points for using public EEG datasets.
+
+9. Methodological risks of our plan (be critical)
+ For each, say whether it is a real problem, cite evidence, and propose a mitigation:
+ - Per-trial 1-9 self-ratings in DEAP versus continuous time-resolved VA; temporal mismatch between 60 s labels and short EEG windows.
+ - Label shift and scale mismatch between a DEAP-trained regressor and NMED-T (different stimuli, different language/culture, different task). Pseudo-labels may reflect DEAP's label distribution rather than true emotion.
+ - Interpolating 128 -> 32 channels (vs. selecting the nearest 32 electrodes; vs. using the reduced 10-20 subset) and the effect on spectral/spatial statistics.
+ - EEG that is time-locked to the very audio it should condition: leakage / shortcut learning (the model may learn stimulus identity from EEG instead of emotion), 10 songs only, train/test split by song vs by subject.
+ - Evaluating emotion alignment with a predictor that was trained on the same data used for pseudo-labels (circularity). Propose independent evaluation.
+ - Statistical power with 20 participants and 10 songs; recommended confidence intervals, subject-level bootstrap, permutation tests.
+ Also propose 2-3 reformulations or fallback designs that stay feasible if NMED-T proves unsuitable (for example conditioning only on audio-side VA from DEAM/PMEmo, using DEAP's own music videos' soundtrack audio, or using another paired dataset), and rank them by feasibility and novelty.
+
+10. Novelty check and positioning
+ - Find the closest existing papers (2022-2026) to our whole pipeline and to each phase. State what is already done and what is new in our proposal. If a very close paper exists, say so plainly.
+ - Suggest 3-5 concrete research questions / hypotheses and ablations that would make a convincing paper (for example: does EEG-derived VA improve alignment over random VA; EEG-only vs VA-only conditioning; LOSO transfer gap; effect of uncertainty filtering; number of EEG channels).
+ - Suggest venues (ISMIR 2027, ICASSP, NeurIPS/ICML workshops, TISMIR, IEEE TAC, J. Neural Eng.) and typical page/format expectations.
+
+11. Resources to locate (give direct links for each)
+ - Hugging Face: datasets, models and Spaces for EEG emotion, EEG foundation models, music emotion, Stable Audio Open and other fine-tunable music diffusion models, and any EEG-music generation checkpoints.
+ - GitHub: reference implementations for DEAP LOSO benchmarks, EEG foundation models, channel interpolation / montage harmonization tools (MNE-Python, braindecode, TorchEEG, LibEER, EEG-DL), EEG + diffusion, music generation fine-tuning scripts (stable-audio-tools, audiocraft, AudioLDM2), FAD toolkits.
+ - Google Scholar / arXiv / Semantic Scholar / OpenReview / ISMIR proceedings / PubMed: search queries you used and the key papers found (title, authors, year, venue, link). Include papers that cite DEAP and NMED-T together, and papers on "EEG to music" in 2024-2026.
+ - Benchmarks and toolkits for emotion EEG (LibEER, TorchEEG, SEED-style benchmarks) with their reported baseline tables.
+
+OUTPUT FORMAT
+- Start with a one-page executive summary: the 10 most important findings, a go / no-go style assessment of each phase (Phase 1, Phase 2, Phase 3) with reasons, and the 5 most dangerous risks.
+- Then follow sections 1-11 in order. In each, use tables where possible. Paper tables: title | authors | year | venue | task / data | key numbers (with protocol) | code link | verified (yes/no). Dataset tables: name | participants | stimuli | EEG channels / Hz | emotion labels | audio available? | license / access | link | verified (yes/no).
+- A final section "Recommended plan": which datasets to use (primary and fallback), which encoder and which diffusion backbone to start from (with Hugging Face / GitHub links), the minimum experiment list in order (smoke test first, each experiment with its metric and expected failure mode), and what to download first on a shared server with limited disk (approx. sizes).
+- A bibliography with verified links (DOI / arXiv / ACL / ISMIR / Hugging Face). Mark every item you could not open as UNVERIFIED.
+- Keep dates precise (today is 2026-11-03); prefer sources from 2022-2026, but include foundational earlier work (DEAP 2012, NMED-T 2017, etc.).
+- Do not pad. Quote numbers exactly as reported and name the protocol. State clearly when something does not exist in the literature.
