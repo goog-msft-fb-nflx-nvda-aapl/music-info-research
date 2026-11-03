@@ -30,3 +30,9 @@ Source of the questions: the TA's topic description (original Chinese text in `C
 | The TA can provide more data such as Discogs-VI | requested through `draft.txt` (waiting for the TA's reply); metadata already analysed | `SURVEY4.md` |
 | Guide: pairs of different recordings, reissues excluded, era shift vs release-year gap | open | `TODO.md` "Guide Topic 1 gaps" |
 | Cover generation from the course materials (lecture 11b) | formulation adopted (content-preserving style transfer); SongEcho baseline done; others symbolic or piano-only | `TODO.md` "Course slides on cover generation" |
+
+
+## Limitations in the guide's wording (added 2026-11-04)
+- Pairs of different recordings of one song with different release decades or markets cannot be built from the PA1 clips (no artist, title or Discogs ids; the nearest-neighbour similarity analysis finds 40 pairs with Discogs-VINet cosine >= .8 among 1,290 dataset-A clips and these behave like random cross-decade pairs: `results/proxy_pairs.txt`). The Discogs-VI metadata alone gives candidate pairs (`results/discogs_vi_pairs.txt`); verified pairs need the Discogs-VI audio or LargeSHS (SURVEY4.md, TODO.md).
+- The question "does a cover follow its own release era or the original's" is therefore open on real data; the generation side answers its controlled version (era-prompted regenerations are scored against the target decade; `RESULTS_SUMMARY.md`).
+- Release year gap analysis on real pairs: open for the same reason.

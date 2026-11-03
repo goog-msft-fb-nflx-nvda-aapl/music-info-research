@@ -4,6 +4,8 @@ Topic 1 of the course project guide (2026): released decade/market classificatio
 
 Goal (professor's framing): move one song along two axes, time (for example 20 years earlier or 30 years later) and market (for example a US release rendered as a Spain release). Status: era axis done and evaluated; market axis and the two-axis move are the open work (`TODO.md`, `MASTER_PLAN.md` section 6).
 
+Limitation: the PA1 clips carry no artist, title or Discogs ids, so same-song pairs of different recordings (the guide's pair, release-year-gap and original-versus-cover questions) cannot be built from them; the pair analysis uses Discogs-VI metadata counts and embedding-matched proxy pairs, and verified pairs wait for the original Discogs-VI audio or LargeSHS (`SURVEY4.md`, `TODO.md`).
+
 ## Questions
 1. Which parts of a song (full mix, vocals, accompaniment) let a frozen audio encoder recognize the release decade (dataset A) and the release market (dataset B) on the PA1 Discogs-VI clips?
 2. What do the probes rely on: sung language, arrangement, recording and production traits, or dataset bias? (shuffle-and-remix of stems, LEACE/INLP erasure with random controls, signal-statistics and codec/DSP controls)
