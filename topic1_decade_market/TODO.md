@@ -196,3 +196,8 @@ Project name: Time Traveler. Goal (professor): era-and-market-controlled cover s
 6. [ ] T-6 2x2 counterfactual evaluation per source: (orig era, orig market), (target era, orig market), (orig era, target market), (target era, target market); leakage of the non-target probe; main effects and interaction; three encoder families (control with A, evaluate with B and C); song identity with an unrelated version-identification model
 7. [ ] T-7 original-vs-cover-era test on real pairs [T-3]
 8. [ ] T-8 report, page and demos with the two-axis results; accompaniment-only demos; legal check before publishing generated clips of commercial compositions
+
+### T-4 market axis, vocal route: concrete steps (2026-11-03)
+- [ ] T-4a timbre-only test (needs approval to install third-party code and download weights on the server): FreeSVC in `~/era_market/venv_svc` (`pip install -r ext/free-svc/requirements.txt`, weights `alefiury/free-svc`); convert the vocal stems of dataset-B validation clips to the voice of a target-market reference (reference = a vocal stem from a train clip of that market); score the converted vocals with the vocal market probe (MERT, MuQ, Whisper) and the language-ID: expected from the pre-analysis (interpretation): language group unchanged, market score changes only by the timbre part
+- [ ] T-4b language route: lyrics translation (ASR transcript of the vocal, machine translation) plus singing voice synthesis conditioned on the original melody; decide after T-4a, check licences of every model first
+- [ ] T-4c reconcile the FreeSVC licence (repository LICENSE MIT, model card CC BY-NC-SA 4.0) before any use
