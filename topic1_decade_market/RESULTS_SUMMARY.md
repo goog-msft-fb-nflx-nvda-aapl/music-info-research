@@ -1,6 +1,6 @@
 # Time Traveler: results summary (living document; numbers copied from `WORKLOG.md`, files named in each row)
 
-Last updated 2026-11-04. Every row has its configuration and numbers in `WORKLOG.md` under the date and title given; interpretation is marked there. Plans: `TODO.md`; blockers and ideas: `BLOCKERS.md`; requirements checklist: `TODO.md` (section "Requirements checklist").
+Last updated 2026-11-04 (after T-4f, T-4n, T-4q, T-9d, T-9e, T-9f, proxy pairs). Every row has its configuration and numbers in `WORKLOG.md` under the date and title given; interpretation is marked there. Plans: `TODO.md`; blockers and ideas: `BLOCKERS.md`; requirements checklist: `TODO.md` (section "Requirements checklist").
 
 ## Axis 1, time (era)
 | ID | What | Main measured result | Files |
@@ -25,11 +25,13 @@ Last updated 2026-11-04. Every row has its configuration and numbers in `WORKLOG
 | T-4l | same, language erased from the probe | all five targets within +-.03 of 0 (Spain +.023): the move is language | `results/scale_market_probe_leace.*` |
 | T-4e / T-4o / T-4p | style descriptors from Discogs-VI metadata | tag score: Brazil +.055 / +.049 / +.063, others small; tagger-selected words raise Germany/Italy tags but the independent probes read them as less German/Italian; independent probes move for Brazil (MERT/MuQ +.145/+.490 lift, +.117/+.313 selected); T-4q swap: probe-selected words inflate the probes (Germany +.19/+.12) but not the tagger (-.006): selection inflates its own instrument | `results/market_styles.*`, `market_style_eval.*`, `mstyle_probe_*` |
 | T-4n | FreeSVC with a voice-matched reference | no move (target accuracy .178 / .193, effects within +-.01) | `results/svc_market_eval_nn.*` |
+| T-4f | syllable-matched translation | no measurable change (probe Delta within +-.05 of T-4k) | `results/syl_market_probe.*` |
 | T-4m | reference-audio style transfer | no consistent move across encoders (Brazil +.105 / +.075 only at strength 0.5) | `results/ace_mref*_eval.*` |
 
 ## Both axes
 | ID | What | Main measured result | Files |
 |---|---|---|---|
+| PA1 proxy pairs | VINet-similar clips of dataset A (28-1,307 cross-decade pairs) | predicted shift .45-1.30 decades vs label gap 2.4, same as random cross-decade pairs; PA1 has almost no same-composition pairs | `results/proxy_pairs.*` |
 | T-1 | Discogs-VI metadata pair counts | 33,578 cliques with a different-artist pair with era and market move (3,172 US-Spain) | `results/discogs_vi_pairs.*` |
 | T-10 | era-axis accompaniment x lyric language, 16 songs | era gain the same with source and translated vocal (interactions within +-.05, 1 of 12 CIs excludes 0); language reading independent of the accompaniment | `results/two_axis.*` |
 
