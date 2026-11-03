@@ -31,3 +31,11 @@
 - [x] ds002721 inspected: 19 ch, audio from Eerola & Vuoskoski set 1 (Jyvaskyla site), no rating file found. [ ] Check where the participant responses are; check stimulus audio terms.
 - [ ] Open ds002722, ds002724, ds003774, DAAMEE (Zenodo 16738766) pages ourselves.
 - [ ] Decide dataset for Phase 1/2 (MET vs DEAP vs DREAMER) after the inspections.
+
+## Plan B without MET audio (2026-11-03, MET author mail not sent)
+Audio is not needed for the EEG-to-valence/arousal step, so the bridge design does not depend on MET stimuli.
+- [ ] B1 EEG -> valence/arousal on MET (66 ch, ratings.tsv), leave-song-out and leave-subject-out folds, per-song-label caveat (song explains 50%/67% of rating variance). Metrics: CCC, Pearson, RMSE; report chance level (shuffled labels).
+- [ ] B2 Generator: Stable Audio Open 1.0 adapter conditioned on valence/arousal, trained on DEAM/PMEmo audio with their labels (open audio).
+- [ ] B3 Join: MET-EEG-predicted valence/arousal -> generator; independent evaluator (MERT features + regressor trained on a different corpus).
+- [ ] B4 If B1 is near chance, report that as a finding and test ds002721 / SEED (needs supervisor signature) as the EEG source.
+- [ ] Optional: ask Prof. Yang to sign the DEAP/SEED agreements (permanent-staff signer required).
