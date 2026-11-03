@@ -49,6 +49,7 @@ def proc(f):
         if m1.sum() < 100 or m2.sum() < 100: continue
         tv, ta = float(v1[m1].mean()), float(v2[m2].mean())
         xt = x[:, int(o * fs):int((o + TRIAL_S) * fs)]
+        if xt.shape[1] < int(TRIAL_S * fs): continue          # trial cut by the end of the recording
         xt = (xt - xt.mean(1, keepdims=True)) / (xt.std(1, keepdims=True) + 1e-6) if norm == "z" else xt
         n = int(win_s * fs)
         for k in range(int(TRIAL_S // win_s)):

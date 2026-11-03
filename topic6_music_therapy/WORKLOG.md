@@ -241,3 +241,11 @@ Command: `env/bin/python -I scripts/finetune_fm.py data/met_win4s_200.npz result
 - LaBraM: loso -0.029 [-0.090, 0.019] / -0.061 [-0.113, -0.008]; loso_song 0.014 [-0.084, 0.113] / -0.042 [-0.104, 0.007]; strict -0.140 [-0.197, -0.084] / -0.025 [-0.088, 0.030].
 Measured: fine-tuned CBraMod and LaBraM did not predict MET valence/arousal for unseen subjects or songs (all CCC <= 0.014; several slightly negative). Negative CCC in strict folds is the sign of a shift of the predictions relative to the held-out cell, not information.
 Summary over MET so far (all with unseen subjects/songs): band-power ridge, handcrafted features, subject-centred features, frozen CBraMod and LaBraM features, EEGNet-style CNN, fine-tuned CBraMod and LaBraM: no method above chance.
+
+## 2026-11-04. B6: BCMI training sessions (OpenNeuro ds002724), within-participant across sessions
+Scripts `prep_bcmi_train.py`, `bcmi_train_eval.py`; results `results/b6/ridge_train_sessions.json`. Downloaded 96 EDF recordings = 10 participants (6 with 3 sessions x 4 runs, 2 with 2 sessions, 2 with 1 session; the README speaks of 16 participants), 3,456 trials, 17,280 windows (4 s, 128 Hz, 32 ch), same VA1/VA2 reporting channels as ds002722; no clip identity (music generated in real time; license of the sub-sets as in ds002722: README CC BY 4.0, dataset metadata CC0).
+Ridge on log band power (alpha 1), trial-level r / CCC, valence | arousal:
+- leave-one-participant-out: r -0.003, CCC -0.001 | r 0.036, CCC 0.006.
+- within participant, leave-one-session-out (8 participants with >= 2 sessions): r 0.058 (SD across participants 0.092), CCC 0.017 | r 0.074 (0.056), CCC 0.036; shuffled-label control: r -0.055 (0.027) | -0.065 (0.064).
+- within participant, trial-blocked 5-fold inside the same sessions (10 participants): r 0.120 (0.121), CCC 0.037 | r 0.152 (0.128), CCC 0.052.
+Interpretation: the within-participant association is about twice as large when train and test trials come from the same session as when they come from a different session, and it is near the shuffled-label level across sessions; this fits slow within-session drift shared between EEG and ratings rather than stable emotion information (not tested directly). Nothing transfers to unseen participants.
