@@ -130,3 +130,11 @@ Open: license/redistribution terms of the Jyvaskyla stimulus audio; source of ME
 `drafts/email_met_author.txt`: asks for song ids -> titles/excerpt times and audio availability. Not sent; author's contact email not verified (placeholder).
 
 Prompt to locate the MET author contact and song list: `survey3/find_met_contact_prompt.txt` (for ChatGPT / Perplexity / Gemini).
+
+## 2026-11-03. MET author contact (survey3: r3_chatgpt.rtf, r3_perplexity.rtf, r3_gemini)
+- No email for Weng-Lam Cheang found anywhere. ORCID 0009-0007-9415-4308 (ChatGPT, Gemini; not opened by us).
+- datacite.yml (ChatGPT): six creators: Cheang (Researcher), Weng-Lam Chan, Yiting Zhu, Xinwen Jiang (DataCollectors), Cheng-Teng Ip (Supervisor), Minglei Zhang (Sponsor). IEEE DataPort lists the six authors at University of Macau (Perplexity).
+- Ours: PubMed 40419149 (2025, Chan et al.) prints "Electronic address: chengtengip@um.edu.mo" with Centre for Cognitive and Brain Sciences, University of Macau. ChatGPT and Gemini give the same address; ChatGPT also lists ICI.CogBrainSci@um.edu.mo (not verified by us).
+- Ours: IEEE DataPort author page lists only "MET: Music-Induced EEG Dataset" (a separate version with 8 channels, ~400 CSV files, per ChatGPT-independent page text); private messaging requires login. Different file format from OpenNeuro (66 ch .set).
+- No MET data paper found; song titles/audio source not found by any response. GitHub issue tracker (OpenNeuroDatasets/ds008701/issues) named as alternative channel (not checked by us).
+- Draft `drafts/email_met_author.txt` redirected to Prof. Ip with a forward request. Not sent.

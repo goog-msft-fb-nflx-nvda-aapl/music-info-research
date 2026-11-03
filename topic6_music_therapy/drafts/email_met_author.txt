@@ -1,9 +1,9 @@
-To: [contact email of the MET dataset author; find it on https://openneuro.org/datasets/ds008701 or in the dataset paper]
+To: chengtengip@um.edu.mo   (Prof. Cheng-Teng Ip, University of Macau; supervisor named in the dataset metadata. Cc: nobody else.)
 Subject: Question about stimulus songs in the MET music-induced EEG dataset (OpenNeuro ds008701)
 
-Dear Dr. Cheang,
+Dear Professor Ip,
 
-My name is [YOUR FULL NAME], a [graduate student] at [YOUR DEPARTMENT], National Taiwan University (NTU), Taipei, Taiwan. Our team of three students works on a non-commercial research project supervised by Professor Yi-Hsuan Yang ([his department], NTU). We study EEG-based valence/arousal modelling for music, as a basis for music-therapy applications. Thank you for releasing the MET dataset (OpenNeuro ds008701, version 1.0.5, CC0).
+My name is [YOUR FULL NAME], a [graduate student] at [YOUR DEPARTMENT], National Taiwan University (NTU), Taipei, Taiwan. Our team of three students works on a non-commercial research project supervised by Professor Yi-Hsuan Yang ([his department], NTU). We study EEG-based valence/arousal modelling for music, as a basis for music-therapy applications. Thank you for releasing the MET dataset (OpenNeuro ds008701, version 1.0.5, CC0), created by Dr. Weng-Lam Cheang and colleagues. You are listed as the supervisor in the dataset metadata; if you are not the right person, could you please forward this message to Dr. Cheang or the team member who can answer?
 
 We have two questions:
 1. The dataset refers to the songs only by id (t01 to t30; 20 distinct songs were rated). Could you tell us which songs (title and artist, or the source collection) correspond to these ids, and the excerpt start time within each song?

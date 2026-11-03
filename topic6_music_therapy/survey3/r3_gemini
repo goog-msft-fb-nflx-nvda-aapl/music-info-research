@@ -1,0 +1,29 @@
+**1\. Dataset Metadata**
+
+* **Authors:** "Weng-Lam Cheang", "Weng-Lam Chan", "Yiting Zhu", "Xinwen Jiang", "Cheng-Teng Ip", "Minglei Zhang".  
+* **Affiliation:** Not explicitly stated on the OpenNeuro dataset page. The uploader’s profile lists "Macau". A related publication by co-authors (Weng-Lam Chan, Xinwen Jiang, Cheng-Teng Ip) lists the "Centre for Cognitive and Brain Sciences, University of Macau, Taipa, Macau".  
+* **Contact field:** The OpenNeuro profile for Weng-Lam Cheang leaves the email field blank (Email: ).  
+* **Funding:** Blank/Not provided in the OpenNeuro metadata.  
+* **Associated paper(s):** None listed in the dataset files. The OpenNeuro page only cites standard software references (MNE-BIDS and EEG-BIDS).
+
+**2\. Contact Candidates**
+
+* **Weng-Lam Cheang (Author/Uploader):** Email is UNVERIFIED. The OpenNeuro profile email field is empty, and no publications listing an email for this specific name were found.  
+* **Cheng-Teng Ip (Co-author):** chengtengip@um.edu.mo. This email appears on a May 2025 PubMed abstract where Cheng-Teng Ip is listed as the corresponding author ("Electronic address: chengtengip@um.edu.mo").  
+* **Most likely current:** Since the primary author's email is completely unavailable, reaching out to **Cheng-Teng Ip** (chengtengip@um.edu.mo) is the most viable option, as they act as a corresponding author for this research group at the University of Macau.
+
+**3\. Associated Paper(s)**
+
+* A dedicated data descriptor or paper for the "MET" dataset is UNVERIFIED (none found on OpenNeuro, Google Scholar, or preprint servers).  
+* *Related paper from the same research group (overlapping authors, but different topic):* Weng-Lam Chan, Sebastian Olbrich, Xinwen Jiang, Haoyun Zhang, Cheng-Teng Ip, Martin Brunovsky (2025). *Subanesthetic ketamine alters EEG signal complexity*. PubMed: [https\://pubmed.ncbi.nlm.nih.gov/40419149/](https://pubmed.ncbi.nlm.nih.gov/40419149/)
+
+**4\. Song Information**
+
+* **Song list/Mapping:** UNVERIFIED. The OpenNeuro README notes that sessions are named ses-txx (e.g., "ses-t01 corresponds to song\_id \= t01"), but no source, README, or supplementary file lists the actual 20 song titles, artists, or audio sources.  
+* **Timing:** Available. The README states each song has a "total recording duration... of 130 seconds, including: 5 seconds before music onset, 120 seconds of music playback, 5 seconds after music offset". The audio files themselves are UNVERIFIED/not included in the standard BIDS EEG directories.
+
+**5\. Best Alternative Channels** Since the primary author's email cannot be found, use these alternatives:
+
+* **Co-author Email:** Contact Cheng-Teng Ip at chengtengip@um.edu.mo.  
+* **GitHub Issue Tracker:** Open an issue on the dataset's automated repository: [https\://github.com/OpenNeuroDatasets/ds008701/issues](https://github.com/OpenNeuroDatasets/ds008701/issues)  
+* **ORCID:** Weng-Lam Cheang's ORCID profile (0009-0007-9415-4308) via [https\://orcid.org/0009-0007-9415-4308](https://orcid.org/0009-0007-9415-4308)
