@@ -1,0 +1,2 @@
+SKIP unreadable data/ds008701/sub-12/ses-t05/eeg/sub-12_ses-t05_task-music_eeg.set OSError('could not read bytes')
+saved data/met_win4s.npz (10799, 67, 512) recordings used 397
