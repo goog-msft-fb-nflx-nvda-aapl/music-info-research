@@ -63,3 +63,23 @@ Fallback that avoids 1-2: generator trained on audio with valence/arousal labels
 
 ## 2026-11-03. Drafts
 `drafts/email_deap_access.txt` (DEAP access request, placeholders for names/affiliation/supervisor email) and `drafts/message_to_teammates.txt`. Not sent. Team asked first whether anyone already has DEAP.
+
+## 2026-11-03. Verification pass 2 (papers, weights, datasets)
+
+| Item | Result | Source |
+|---|---|---|
+| Postolache et al. 2025 (arXiv 2405.09062v6) | NMED-T, 124 of 128 ch (face channels dropped), EEG 1 kHz, 3.5 s chunks, minimal preprocessing. ControlNet on `audioldm2-music`, text fixed to "Pop music". Split: 9 songs split by time within each song (train 0-80%, val 80-90%, test 90-100%); 1 song ("Trigger 21") held out as out-of-distribution. "All"-subject models evaluated on subject 2 only. Test FAD (CLAP) ControlNet-2 0.38 vs pretrained no-EEG 0.80; CLAP score 0.60 vs 0.38; EnCodec metrics near no-EEG baseline (authors call EnCodec unsuitable); OOD-track results mostly not significant. No code repository stated; audio examples at emilianpostolache.com/brainwave. Stimulus audio source not described. | arxiv.org/html/2405.09062v6 |
+| Shen et al. 2026 TMM | Still abstract-level only (not re-checked). | pure.bit.edu.cn |
+| CBraMod | Code MIT (GitHub wjq-learning/CBraMod); weights on HF `weighting666/CBraMod`, license apache-2.0 on the HF card; input (batch, channels, segments, 200-sample patches); parameter count and pretraining data not stated on the pages read. | GitHub, HF |
+| LaBraM | Code MIT (GitHub 935963004/LaBraM); input resampled to 200 Hz, 0.1-75 Hz bandpass, channel order list required; checkpoint `labram-base.pth` referenced, download location not given on the page; pretraining ~2,500 h from ~20 datasets (not named on page). | GitHub |
+| MERT-v1-95M | 95M params, 24 kHz, 75 Hz features, 12 layers x 768, license **cc-by-nc-4.0** (Gemini's Apache 2.0 wrong; non-commercial). | HF |
+| DEAM | 1,802 songs/excerpts, per-second valence/arousal, CC-licensed audio (FMA, Jamendo, MedleyDB), PLOS ONE 2017, doi 10.1371/journal.pone.0173392; one manual copy says BY-NC; official page (cvml.unige.ch) unreachable, so license and download not confirmed. | PMC5345802, search |
+| PMEmo | 794 songs, static labels plus dynamic labels per 0.5 s (first 15 s removed), chorus MP3 excerpts only (no full songs), ~1.3 GB on Google Drive (2018, 2019 versions), repo MIT (dataset license not stated). | github.com/HuiZhangDB/PMEmo |
+| DREAMER | Zenodo record 546113 is restricted: access by request form. | zenodo.org/records/546113 |
+| AMIGOS | Username/password via request on QMUL page. | eecs.qmul.ac.uk/mmv/datasets/amigos/download.html |
+| MAHNOB-HCI | Via mahnob-db.eu; terms not confirmed. | search |
+
+### Interpretation
+- Postolache's test is a within-song time split, so its good scores do not show generalisation to new songs; our leave-song-out protocol would be stricter. Their approach is a strong baseline to reproduce or compare (ControlNet on audioldm2-music, but that checkpoint is non-commercial CC BY-NC-SA).
+- No dataset found yet that gives open (no-EULA) EEG plus music emotion ratings; DEAP, DREAMER, AMIGOS, MAHNOB all need requests. If DEAP stays down, DREAMER (Zenodo request) or AMIGOS is the substitute; both use film clips, not music.
+- Still open: Shen 2026 full text, LaBraM weight download, DEAM official page, JASCO, fadtk.
