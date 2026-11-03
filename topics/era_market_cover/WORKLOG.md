@@ -1008,3 +1008,15 @@ Held-out MuQ unerased Delta (95% song-bootstrap CI), 1980s / 1990s / 2010s:
 - MERT unerased: 1980s .516 / .595 / .720 / .743 / .785; 1990s .381 / .475 / .564 / .627 / .680; 2010s .521 / .565 / .626 / .680 / .702.
 - Content of the kept clips (N=1 .. 16): song-identity top-1 .859 / .847 / .812 / .847 / .875; chord agreement .348 / .347 / .346 / .346 / .344.
 Observation: the held-out effect rises with N in every decade on both encoders; on MuQ 1980s it is +.569 at N=16 (SMC beta 4, 8 particles: +.407); the 1990s MuQ value is flat between N=8 and N=16 (.389 vs .391). Melody metrics are unchanged. Not tested: N > 16 (queued, N=32), gain per unit of compute against SMC.
+
+## 2026-11-03 — FD-VGG of the era-axis and SMC sets (`results/fd_boot_{ax_ctrl_ge10,ax_ctrlc_ge10,ax_freec_ge10,ax_onehot_ge10,smc_ctrlc_N8_b2,smc_ctrlc_N8_b4,smc_ctrlc_N8_b2_f500,smc_ctrlc_N8_b4_f500}.json`)
+Same metric and protocol as the earlier FD entries (`run_avb.sh`, then `83_fd_bootstrap.py`): Delta FD-VGG = FD(clips of the decade-d prompt, real PA1 train clips of decade d) - FD(neutral clips, same real clips), negative = the prompt moves the generated set toward the real decade; 95% song-bootstrap CI. Commands: `bash run_avb.sh 2 ax_ctrl_ge10,ax_ctrlc_ge10,ax_freec_ge10,ax_onehot_ge10,smc_ctrlc_N8_b2,smc_ctrlc_N8_b4,smc_ctrlc_N8_b4_f500,smc_ctrlc_N8_b2_f500`; `python src/83_fd_bootstrap.py <sets>`. The av-benchmark checkout (commit f351b9a6) was re-cloned to `ext/av-benchmark` for this run (path set in the scripts).
+Delta FD-VGG 1960s / 1980s / 2010s:
+- ctrl (z of the continuous head): +.45 [-.44,+1.34] / -.07 [-.69,+.62] / -.43 [-1.03,+.09]
+- ctrlc: +.60 [+.01,+1.09] / -.72 [-1.43,-.15] / -.81 [-1.34,-.12]
+- freec: +.64 [-.01,+1.14] / -1.58 [-2.80,-.80] / -1.68 [-3.05,-.63]
+- one-hot z: +.89 [+.19,+1.49] / -1.48 [-2.53,-.62] / -1.71 [-2.64,-.76]
+- SMC beta 2 / beta 4 (full stages): +.78 [.08,1.27] / -.33 [-1.23,.29] / -.57 [-1.34,.11]; +.67 [.04,1.13] / -.26 [-1.24,.39] / -.61 [-1.31,.09]
+- SMC beta 2 / beta 4 (later stages only): +.81 [.16,1.35] / -.39 / -.65 [-1.41,-.05]; +.71 [.07,1.18] / -.44 / -.70 [-1.50,-.05]
+- references: standard CFG base (`gen`): -.10 [-.87,.32] / -.78 [-1.91,-.05] / +2.16 [1.08,2.95]; text LoRA three-branch (`tri_lora_m3e10`): -.14 / -.52 / -1.13 [-2.85,-.14]
+Observation: for the era-axis sets the 1980s and 2010s prompts lower the FD-VGG to the real clips of the decade (intervals exclude 0 for ctrlc, freec, one-hot), whereas the 1960s prompt raises it (+.45 to +.89; ctrlc, one-hot and the SMC sets have intervals above 0) even though the probe Delta for the 1960s is the largest (+.74 MERT). The text-LoRA reference shows no 1960s increase (-.14, interval contains 0). Not tested: why; FD-VGG uses 171 real clips per decade and 10 s frames, so it measures the global distribution distance, not the era probe.
