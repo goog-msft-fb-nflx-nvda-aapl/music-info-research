@@ -4,7 +4,7 @@
 - [x] NMED-T and NMED-E Stanford pages checked (WORKLOG 2026-11-03). NMED-H / NMED-M and the ISMIR paper still to check.
 - [x] Both EEG-to-music papers exist (Postolache ICASSP 2025; Shen TMM 2026). Still to do: read both in full (data, metrics, code); find the DEAP subject-identity paper or drop the claim.
 - [x] Stable Audio Open 1.0, AudioLDM2-music checked. Still to do: MERT-v1-95M, official CBraMod/LaBraM weights and licenses, DEAM/PMEmo, fadtk.
-- [ ] DEAP access: EULA / download route; confirm preprocessed 128 Hz version.
+- [ ] DEAP: needs a permanent-staff signer (supervisor); service reported down. On hold; revise `drafts/email_deap_access.txt` if resumed.
 - [ ] Decide with team: NMED-T audio sourcing and public-demo rights (no redistribution of copyrighted audio).
 
 ## Experiments (in order, each commits scripts + launch commands + results)
@@ -25,3 +25,9 @@
 - [ ] E3 audio-side VA evaluator on the server: MERT features + regressor on DEAM/PMEmo, cross-corpus check.
 - [ ] Download NMED-T cleaned EEG only (~7 GB for 10 files) to `~/music_therapy/data`, check shapes and metadata alignment (disk is ~99% full: check free space first).
 - [ ] Generator smoke test: Stable Audio Open 1.0 loads, audio-to-audio from a DEAM clip, LoRA/adapter dry run with a VA token.
+
+## From access check (2026-11-03)
+- [ ] Inspect MET (OpenNeuro ds008701): license, stimulus list (same songs across participants?), audio availability, preprocessed channel list/rate, rating distributions. Download to `~/music_therapy/data` (13 GB; check disk first).
+- [ ] Inspect ds002721 (3.35 GB, CC BY 4.0): ratings file, epoch length, stimulus set source (Eerola & Vuoskoski 2010).
+- [ ] Open ds002722, ds002724, ds003774, DAAMEE (Zenodo 16738766) pages ourselves.
+- [ ] Decide dataset for Phase 1/2 (MET vs DEAP vs DREAMER) after the inspections.

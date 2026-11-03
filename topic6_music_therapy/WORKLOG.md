@@ -86,3 +86,24 @@ Fallback that avoids 1-2: generator trained on audio with valence/arousal labels
 
 ## 2026-11-03. Access check
 DEAP (maintenance), DREAMER Zenodo URL and AMIGOS QMUL page unavailable when tried by the user. Prompt for a second deep-research round: `survey2/access_check_prompt.txt`. Not sent yet.
+
+## 2026-11-03. Access check results (survey2: response_perplexity.txt, response_chatgpt_v2.md)
+Both responses are third-party; items marked (ours) were opened by us.
+
+Agreement: DEAP/AMIGOS/MAHNOB-HCI need a signed EULA by a person with a permanent academic/research position (up to five same-institution researchers can be named, institutional email and webpage required); students cannot be the signer. DEAP page down/timeout, AMIGOS 502, MAHNOB HCI-Tagging path 404. SEED family: application form works, supervisor name/email requested for students, academic use only, no redistribution. DREAMER: Zenodo restricted record, request form (name, email, institution, position, reason); ChatGPT could not open the page today, Perplexity could. No owner-authorized mirrors found for DEAP/AMIGOS/MAHNOB/SEED/DREAMER; Hugging Face/Kaggle copies not authorized.
+
+Open datasets (no agreement), music listening + affect ratings:
+| Dataset | Content | License | Size | Check |
+|---|---|---|---|---|
+| MET, OpenNeuro ds008701 | 20 participants x 20 songs (one per session), 120 s music, SAM valence 1-9, arousal 1-9, likeability, familiarity, HVHA/HVLA/LVHA/LVLA/N labels; 128 ch at 1 kHz recorded, 66 ch released after preprocessing | not shown on GitHub README; Perplexity/ChatGPT say CC0 | 13.06 GB (ChatGPT) | (ours) GitHub README: content and ratings confirmed; audio inclusion not stated; license not confirmed |
+| ds002721 | 31 adults, 40 film-score clips ~12 s (Eerola & Vuoskoski 2010 stimulus set), 1 kHz, reported emotional responses, resting runs | CC BY 4.0 (ours, GitHub README Terms of Use; ChatGPT's CC0 wrong) | 3.35 GB (ChatGPT) | (ours); rating scale not described; audio not included; page says 20 s vs 12 s epoch, check |
+| ds002724 | 16 participants, EEG/GSR/ECG, 40 s clips, valence/arousal | CC BY 4.0 (Perplexity) | n/a | not opened by us |
+| ds002722 | EEG/GSR/ECG, valence/arousal-targeted clips | CC0 (ChatGPT) | n/a | not opened by us |
+| MUSIN-G, ds003774 | 20 participants, 12 songs, familiarity/enjoyment 1-5 | CC0 (Perplexity) | n/a | not opened by us |
+| DAAMEE, Zenodo 16738766 | scalp EEG + cEEGrid, music, behavioural emotion responses | LICENSE file present, text not read | 32.8 GB (ChatGPT) | not opened by us |
+| Mendeley 9fm94df3x2, xjtxnn7bx7 | spectral EEG features only (no raw EEG), valence/arousal | CC BY 4.0 | small | not opened by us |
+
+### Interpretation
+- DEAP cannot be requested by students alone; an email from us as drafted would not meet its terms. A permanent staff member (supervisor) has to submit/sign. With the service reported down, DEAP is no longer the fastest start.
+- MET (ds008701) has EEG, music listening and per-song valence/arousal ratings in one open dataset; it could replace DEAP for emotion modelling and also serve as the paired EEG-music set. Whether audio is obtainable (needed for the generator), the license, and whether 20 songs per participant are the same songs across participants are unchecked.
+- ds002721 stimuli are a published research stimulus set (audio not in dataset).
