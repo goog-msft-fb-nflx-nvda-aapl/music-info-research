@@ -1,0 +1,6 @@
+vocal market probe (MERT layer 16, C 0.01) validation accuracy 0.608; 77 clips (lyrics_scale_text.json)
+es -> Spain (n=63): P(target) 0.226 (control 0.046, original vocal 0.071); delta vs control +0.181 [+0.123,+0.242]; target top-1 0.29 (control 0.02)
+pt -> Brazil (n=64): P(target) 0.567 (control 0.079, original vocal 0.020); delta vs control +0.489 [+0.396,+0.580]; target top-1 0.64 (control 0.02)
+de -> Germany (n=76): P(target) 0.488 (control 0.144, original vocal 0.156); delta vs control +0.344 [+0.271,+0.419]; target top-1 0.63 (control 0.11)
+it -> Italy (n=72): P(target) 0.556 (control 0.191, original vocal 0.114); delta vs control +0.365 [+0.286,+0.442]; target top-1 0.69 (control 0.25)
+en -> US+UK (n=34): P(target) 0.508 (control 0.138, original vocal 0.078); delta vs control +0.370 [+0.300,+0.438]; target top-1 0.76 (control 0.09)

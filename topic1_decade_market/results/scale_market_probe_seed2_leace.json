@@ -1,0 +1,77 @@
+{
+ "val_acc_vocal_probe": 0.4019607843137255,
+ "layer": 16,
+ "C": 0.01,
+ "cells": {
+  "es": {
+   "target": "Spain",
+   "n": 63,
+   "P_target": 0.08832196146249771,
+   "P_target_source_language_control": 0.07535789906978607,
+   "P_target_original_vocal": 0.1370384395122528,
+   "delta_vs_control": 0.012964057736098766,
+   "ci": [
+    -0.008047816343605518,
+    0.03435767814517021
+   ],
+   "top1_hit": 0.047619047619047616,
+   "top1_hit_control": 0.031746031746031744
+  },
+  "pt": {
+   "target": "Brazil",
+   "n": 64,
+   "P_target": 0.20207735896110535,
+   "P_target_source_language_control": 0.19709287583827972,
+   "P_target_original_vocal": 0.1674603521823883,
+   "delta_vs_control": 0.0049844710156321526,
+   "ci": [
+    -0.04228843003511429,
+    0.05213315784931183
+   ],
+   "top1_hit": 0.265625,
+   "top1_hit_control": 0.203125
+  },
+  "de": {
+   "target": "Germany",
+   "n": 76,
+   "P_target": 0.14511056244373322,
+   "P_target_source_language_control": 0.19307754933834076,
+   "P_target_original_vocal": 0.1819106489419937,
+   "delta_vs_control": -0.047966986894607544,
+   "ci": [
+    -0.07744460552930832,
+    -0.01797744445502758
+   ],
+   "top1_hit": 0.09210526315789473,
+   "top1_hit_control": 0.21052631578947367
+  },
+  "it": {
+   "target": "Italy",
+   "n": 72,
+   "P_target": 0.1569022238254547,
+   "P_target_source_language_control": 0.13390028476715088,
+   "P_target_original_vocal": 0.1644076555967331,
+   "delta_vs_control": 0.023001933470368385,
+   "ci": [
+    -0.006031809374690056,
+    0.05227801203727722
+   ],
+   "top1_hit": 0.125,
+   "top1_hit_control": 0.05555555555555555
+  },
+  "en": {
+   "target": "US+UK",
+   "n": 34,
+   "P_target": 0.3802866041660309,
+   "P_target_source_language_control": 0.3599007725715637,
+   "P_target_original_vocal": 0.28594517707824707,
+   "delta_vs_control": 0.020385853946208954,
+   "ci": [
+    -0.04992774873971939,
+    0.08746062964200974
+   ],
+   "top1_hit": 0.47058823529411764,
+   "top1_hit_control": 0.47058823529411764
+  }
+ }
+}

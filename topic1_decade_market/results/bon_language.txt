@@ -1,0 +1,5 @@
+es -> Spain (n=63): plain probe Delta selected +0.234 [+0.173,+0.296], average over seeds +0.193, oracle +0.351; erased probe selected +0.024, average +0.017; share of clips with P(intended language) > .5: selected 0.84, average 0.56
+pt -> Brazil (n=64): plain probe Delta selected +0.563 [+0.478,+0.645], average over seeds +0.486, oracle +0.680; erased probe selected -0.005, average +0.007; share of clips with P(intended language) > .5: selected 0.81, average 0.58
+de -> Germany (n=76): plain probe Delta selected +0.371 [+0.303,+0.438], average over seeds +0.312, oracle +0.479; erased probe selected -0.038, average -0.029; share of clips with P(intended language) > .5: selected 0.86, average 0.65
+it -> Italy (n=72): plain probe Delta selected +0.464 [+0.393,+0.536], average over seeds +0.389, oracle +0.557; erased probe selected +0.005, average +0.004; share of clips with P(intended language) > .5: selected 0.71, average 0.46
+en -> US+UK (n=34): plain probe Delta selected +0.323 [+0.257,+0.391], average over seeds +0.308, oracle +0.489; erased probe selected +0.050, average +0.027; share of clips with P(intended language) > .5: selected 0.97, average 0.79
