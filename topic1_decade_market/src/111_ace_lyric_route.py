@@ -8,12 +8,12 @@ from acestep.inference import GenerationParams, GenerationConfig, generate_music
 H = os.path.expanduser("~/era_market"); SR = 24000
 LANG = {"orig": ("en", "English"), "en": ("en", "English"), "es": ("es", "Spanish"), "pt": ("pt", "Portuguese"), "de": ("de", "German"), "it": ("it", "Italian")}
 ap = argparse.ArgumentParser(); ap.add_argument("--strength", type=float, default=0.5); ap.add_argument("--outdir", default="ace_lyric"); ap.add_argument("--seeds", type=int, nargs="+", default=[0]); ap.add_argument("--limit", type=int, default=0); ap.add_argument("--shard", default="0/1", help="i/n: process clips i, i+n, ... (parallel workers)"); a = ap.parse_args()
-TEXT = os.environ.get("TEXT", "lyrics_route_text.json"); T = json.load(open(f"{H}/results/{TEXT}")); import csv; man = {r["sample_id"]: r for r in csv.DictReader(open(f"{H}/data/ex/dataset_B/manifest.csv"))}
+TEXT = os.environ.get("TEXT", "lyrics_route_text.json"); T = json.load(open(f"{H}/results/{TEXT}")); import csv; DS = os.environ.get("DS", "B"); man = {r["sample_id"]: r for r in csv.DictReader(open(f"{H}/data/ex/dataset_{DS}/manifest.csv"))}
 out = os.path.join(H, a.outdir); os.makedirs(out, exist_ok=True); tmp = os.path.join(H, "ace_work"); os.makedirs(tmp, exist_ok=True)
 dit = AceStepHandler(); llm = LLMHandler(); print(dit.initialize_service(project_root=os.getcwd(), config_path="acestep-v15-turbo", device="cuda"), flush=True); n = 0
 SI, SN = map(int, a.shard.split("/"))
 for sid, d in list(T.items())[SI::SN]:
-    mix = sf.read(os.path.join(H, "data/ex/dataset_B", man[sid]["audio_path"]), dtype="float32")[0]; src = os.path.join(tmp, sid + "_mix.wav"); sf.write(src, mix, SR)
+    mix = sf.read(os.path.join(H, f"data/ex/dataset_{DS}", man[sid]["audio_path"]), dtype="float32")[0]; src = os.path.join(tmp, sid + "_mix.wav"); sf.write(src, mix, SR)
     SRCL = d.get("src_lang", "en"); NAMES = {"en": "English", "es": "Spanish", "pt": "Portuguese", "de": "German", "it": "Italian", "fr": "French"}
     for cond, (code, name) in LANG.items():
         if cond not in ("orig",) and cond not in d: continue

@@ -1,0 +1,17 @@
+== mert: Delta P(market X | prompt X) - P(X | neutral), mean over 24 songs [songs>0], wilcoxon p; and P(X|prompt X)
+  US       -0.006 [10/24] p=0.7898  P=0.096 (neutral 0.103, chance 0.167)
+  UK       -0.019 [12/24] p=0.9664  P=0.044 (neutral 0.063, chance 0.167)
+  Brazil   +0.105 [18/24] p=0.0096  P=0.229 (neutral 0.124, chance 0.167)
+  Spain    +0.021 [12/24] p=0.6431  P=0.329 (neutral 0.307, chance 0.167)
+  Germany  -0.056 [11/24] p=0.1434  P=0.124 (neutral 0.180, chance 0.167)
+  Italy    -0.001 [13/24] p=0.7683  P=0.221 (neutral 0.223, chance 0.167)
+  identity_codec probe acc vs true market: 0.25
+--
+== muq: Delta P(market X | prompt X) - P(X | neutral), mean over 24 songs [songs>0], wilcoxon p; and P(X|prompt X)
+  US       +0.000 [12/24] p=0.9664  P=0.186 (neutral 0.186, chance 0.167)
+  UK       -0.079 [11/24] p=0.3449  P=0.131 (neutral 0.210, chance 0.167)
+  Brazil   +0.075 [18/24] p=0.0059  P=0.205 (neutral 0.130, chance 0.167)
+  Spain    +0.192 [16/24] p=0.0079  P=0.421 (neutral 0.228, chance 0.167)
+  Germany  -0.040 [8/24] p=0.0105  P=0.040 (neutral 0.079, chance 0.167)
+  Italy    -0.021 [10/24] p=0.5271  P=0.146 (neutral 0.167, chance 0.167)
+  identity_codec probe acc vs true market: 0.20833333333333334
