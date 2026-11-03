@@ -14,13 +14,13 @@ def tagp(y): return head(emb_m(librosa.resample(np.asarray(y, dtype=np.float32),
 GD = os.environ.get("GENDIR", "gen_mstyle"); G = os.path.join(ROOT, GD); ids = [l.split(",") for l in open(os.path.join(G, "picked.txt")).read().split("\n")]; seeds = [0, 1]; rng = np.random.default_rng(0)
 T = {}
 for sid, lab in ids:
-    for cond in ["neutral"] + [f"{f}_{m}" for f in ("hw", "ds", "dk", "dt") for m in MK]:
+    for cond in ["neutral"] + [f"{f}_{m}" for f in ("hw", "ds", "dk", "dt", "dp") for m in MK]:
         for sd in seeds:
             fp = os.path.join(G, f"{sid}_{cond}_s{sd}_acc.wav")
             if os.path.exists(fp): T[(sid, cond, sd)] = tagp(sf.read(fp, dtype="float32")[0])
     T[(sid, "real", 0)] = tagp(np.load(os.path.join(ROOT, "stems", "B", sid + ".npz"))["accomp"]); print(sid, flush=True)
 out = {"coverage": cov, "cells": {}}; txt = []
-for fam in ("hw", "ds", "dk", "dt"):
+for fam in ("hw", "ds", "dk", "dt", "dp"):
     for m in MK:
         d = []
         for sid, lab in ids:

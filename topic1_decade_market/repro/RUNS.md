@@ -36,8 +36,26 @@ Environment: see `environment.txt`. Server layout: `~/era_market` with `src/` (t
 | `116_ace_lego_vocal.py` | T-4g: vocal-only regeneration. ACE-Step 1.5 BASE model (acestep-v15-base, MIT; ACE-Step/acestep-v15-base) in 'lego' mode: given the ORIGINAL ACCOMPANIMENT STEM of a pilot clip as audio context, generate the 'vocals' track with new | python ~/era_market/src/116_ace_lego_vocal.py --outdir ace_lego --seeds 0 |
 | `117_lego_remix.py` | T-4g: remix of the vocal-only regeneration: generated vocals track (ace_lego/<id>_<cond>_s0.wav, 24 kHz) RMS-matched to the ORIGINAL vocal stem of the clip + the original accompaniment stem -> ace_lego_mix/<id>_<cond>_s0.wav, read |  |
 | `118_vocal_era_dsp.py` | T-9: era-specific vocal processing. The ORIGINAL vocal stem (HTDemucs) of the 24 evaluation songs (gen/picked.txt, dataset A validation) is processed with a parametrized DSP chain per target decade (numpy/scipy only; synthetic rev |  |
+| `119_stem_swap_route.py` | T-4i: combine the routes. The cover-route output of T-4b (ACE-Step cover mode, `ace_lyric_s095/<id>_<cond>_s{SEED}.wav`, strength 0.95: the model carries the target language) is separated with HT Demucs; its VOCAL stem (RMS-matche |  |
 | `11_gen_analysis.py` | Summaries and paired tests for results/gen_eval.json. clips (12 songs) are the unit: seeds are averaged within song, then Wilcoxon signed-rank across songs. |  |
+| `120_swap_market_probe.py` | T-4j market read-out of the lyric route: the vocal market probe (dataset-B vocal probe, MERT layer and C from probe_B.json 'voc_norm', StandardScaler + logistic regression fit on dataset-B TRAIN vocal embeddings; validation accura |  |
+| `121_lyric_scale.sh` | T-4k: scale-up of the lyric route to all 102 dataset-B validation clips (targets en, es, pt, de, it except the source language): text (Whisper + M2M-100), ACE-Step cover mode strength 0.95 on two GPUs, stem swap, vocal market prob |  |
+| `121_lyric_scale_seed.sh` | T-4k replication with a second generation seed: ACE-Step cover mode seed 1 (same text file), stem swap, vocal market probe (plain and language-erased), read-outs. usage: bash 121_lyric_scale_seed.sh <gpu> <seed>   (from ~/era_mark |  |
+| `121_lyric_scale_text.py` | T-4k stage 1 (scale-up of 110_lyrics_translate.py): transcribe the vocal stems of ALL 102 dataset-B validation clips with Whisper large-v3 (language forced to the clip's Whisper language group when it is one of the five target lan |  |
+| `122_ace_reference_market.py` | T-4m: reference-audio style transfer for the market axis. ACE-Step 1.5 turbo (cover mode, instrumental) regenerates the ACCOMPANIMENT of the 24 dataset-B evaluation clips (4 per source market, first by manifest order, as 114_marke | GENDIR=ace_mref python ~/era_market/src/122_ace_reference_market.py --strength 0.5 ; read-out: GENDIR=ace_mref python src/37_eval_market.py --out results/ace_mr |
+| `122_mref.sh` | T-4m: reference-audio market transfer, strengths 0.5 and 0.8, then 37_eval_market.py read-out. usage: bash 122_mref.sh <gpu>   (from ~/era_market) |  |
+| `123_two_axis.py` | T-10 two-axis composition on the 24 evaluation songs of dataset A: language axis from the lyric route (translated lyrics, ACE-Step cover mode strength 0.95 on the original mix, vocal separated with HT Demucs, RMS-matched to the or |  |
+| `123_two_axis.sh` | T-10: two-axis composition (era-axis accompaniment x lyric-route language) on the 24 evaluation songs of dataset A. usage: bash 123_two_axis.sh <gpu> (from ~/era_market) |  |
+| `124_vocal_chain_tune.py` | T-9c: tune the era-specific vocal chains of 118_vocal_era_dsp.py on dataset-A TRAIN vocals only, then evaluate the selected chains once on the 24 evaluation songs. Tuning: 60 TRAIN clips (10 per decade, first by sample id) are spl |  |
+| `125_mstyle_dk.sh` | T-4o: after 113 recomputed the style tables with top_kl: generate the dk_ prompts (3 workers) and read out with 115. usage: bash 125_mstyle_dk.sh <gpuA> <gpuB> <gpuC>   (from ~/era_market) |  |
+| `126_vocal_chain_tune2.py` | T-9e: extended vocal chains and a proper random control (same protocol as 124_vocal_chain_tune.py: parameters tuned on 60 TRAIN clips against a probe fit on the remaining TRAIN clips, one evaluation on the 24 evaluation songs). Ne |  |
+| `127_vocal_acc_additivity.py` | T-9d additivity of the vocal chain and the era-axis accompaniment: for decade e in {1980s, 2010s} on the 24 evaluation songs (seeds 0-2 of the accompaniment): mix-level era probe (MERT layer 12, probe_A.json 'mix_norm'; refit on T |  |
+| `128_dsel_gen.py` | T-4p stage 1: candidate style words per market, generated on dataset-B TRAIN clips. For each market m the candidate words are the style names of top_lift and top_kl of results/market_styles.json for (m, 1980s) (deduplicated, at mo |  |
+| `129_dsel_pick.py` | T-4p stage 2: select the style words per market. Discogs-EffNet tags (venv_ess, CPU) of every candidate clip of 128_dsel_gen.py; target score of market m = mean activation over the five highest-lift styles of (m, 1980s) present am |  |
 | `12_codec_resynth.py` | Pass real accompaniment stems through the EnCodec 32 kHz codec used inside MusicGen (4 codebooks = 2.2 kbps at 50 Hz) so real and generated audio share codec artifacts. | python 12_codec_resynth.py --ds A |
+| `130_dsel.sh` | T-4p: descriptor selection on TRAIN clips, then dt_ generation on the 24 evaluation clips and the tag read-out. usage: bash 130_dsel.sh <gpuA> <gpuB> <gpuC>   (from ~/era_market) |  |
+| `131_dsel_probe.sh` | T-4q: word selection with the market probes on TRAIN clips, dp_ generation on the 24 evaluation clips, read-out with the tagger (115) and the probes (37). usage: bash 131_dsel_probe.sh <gpuA> <gpuB> <gpuC>   (from ~/era_market; ne |  |
+| `131_dsel_probe_pick.py` | T-4q stage 2 (instruments swapped relative to 129_dsel_pick.py): select the style words per market with the codec-matched MARKET PROBES instead of the Discogs tagger. For every candidate clip of 128_dsel_gen.py (6 TRAIN clips, one |  |
 | `13_content_metrics.py` | Content-preservation metrics for the generated remixes (CPU), following SURVEY_metrics.md. | python 13_content_metrics.py --out results/content_metrics.json |
 | `14_content_analysis.py` |  |  |
 | `16_controls.py` | Validation controls for the era metric (SURVEY_metrics.md section 4), codec-matched probes. | python 16_controls.py --out results/controls.json |
@@ -437,3 +455,30 @@ Environment: see `environment.txt`. Server layout: `~/era_market` with `src/` (t
   scripts: 118_vocal_era_dsp.py
 - 2026-11-04 — T-4g vocal-only regeneration with ACE-Step 1.5 base model, lego mode (`src/116_ace_lego_vocal.py`, `src/117_lego_remix.py`, `results/lyric_route_eval_ace_lego_mix.{json,txt}`)  
   scripts: 116_ace_lego_vocal.py, 117_lego_remix.py
+- 2026-11-04 — T-4g follow-up: guidance 10 and the isolated generated vocal track (`results/lyric_route_eval_ace_lego_cfg10_mix.*`, `results/lyric_route_eval_ace_lego.*`)
+- 2026-11-04 — T-4i/T-4j stem swap: cover-route vocal over the original accompaniment, and the market read-out (`src/119_stem_swap_route.py`, `src/120_swap_market_probe.py`, `results/lyric_route_eval_ace_swap.*`, `results/swap_market_probe.{json,txt}`)  
+  scripts: 119_stem_swap_route.py, 120_swap_market_probe.py
+- 2026-11-04 — T-4k scale-up of the lyric route to all dataset-B validation clips (`src/121_lyric_scale_text.py`, `src/121_lyric_scale.sh`, `results/scale_market_probe.{json,txt}`, `results/lyric_route_eval_ace_scale_swap.{json,txt}`)  
+  scripts: 121_lyric_scale.sh, 121_lyric_scale_text.py
+- 2026-11-04 — T-4l the lyric-route market move after language erasure (`src/120_swap_market_probe.py` with `LEACE=1`, `results/scale_market_probe_leace.{json,txt}`)  
+  scripts: 120_swap_market_probe.py
+- 2026-11-04 — T-4m reference-audio style transfer for the market axis (`src/122_ace_reference_market.py`, `src/122_mref.sh`, `results/ace_mref_eval.{json,txt}`, `results/ace_mref08_eval.{json,txt}`)  
+  scripts: 122_ace_reference_market.py, 122_mref.sh
+- 2026-11-04 — T-10 two-axis composition: era-axis accompaniment x lyric-route language (`src/123_two_axis.py`, `src/123_two_axis.sh`, `results/two_axis.{json,txt}`)  
+  scripts: 123_two_axis.py, 123_two_axis.sh
+- 2026-11-04 — T-4e metadata-derived style descriptors for the accompaniment (`src/113_market_styles.py`, `src/114_market_style_gen.py`, `src/115_market_style_eval.py`, `results/market_styles.{json,txt}`, `results/market_style_eval.{json,txt}`)  
+  scripts: 113_market_styles.py, 114_market_style_gen.py, 115_market_style_eval.py
+- 2026-11-04 — T-9c vocal chain parameters tuned on TRAIN vocals (`src/124_vocal_chain_tune.py`, `results/vocal_chain_tune.{json,txt}`)  
+  scripts: 124_vocal_chain_tune.py
+- 2026-11-04 — T-4o descriptor selection by P x log(lift) (`src/113_market_styles.py` `top_kl`, `src/114_market_style_gen.py` `dk_` conditions, `src/125_mstyle_dk.sh`, `results/market_style_eval.{json,txt}` now with hw, ds and dk families)  
+  scripts: 113_market_styles.py, 114_market_style_gen.py, 125_mstyle_dk.sh
+- 2026-11-04 — T-9e extended vocal chains and random-chain control (`src/126_vocal_chain_tune2.py`, `results/vocal_chain_tune2.{json,txt}`)  
+  scripts: 126_vocal_chain_tune2.py
+- 2026-11-04 — T-4k replication with generation seed 1 (`src/121_lyric_scale_seed.sh`, `results/scale_market_probe_seed1{,_leace}.*`, `results/lyric_route_eval_ace_scale_swap_seed1.*`)  
+  scripts: 121_lyric_scale_seed.sh
+- 2026-11-04 — T-4n voice conversion with a voice-matched reference (`src/108_svc_market.py --nearest`, `results/svc_market_eval_nn.{json,txt}`)  
+  scripts: 108_svc_market.py
+- 2026-11-04 — T-9d vocal chain x era-axis accompaniment: additivity (`src/127_vocal_acc_additivity.py`, `results/vocal_acc_additivity.{json,txt}`)  
+  scripts: 127_vocal_acc_additivity.py
+- 2026-11-04 — T-4p descriptors selected on TRAIN clips by their tag score, and an independent probe read-out of all descriptor families (`src/128_dsel_gen.py`, `src/129_dsel_pick.py`, `src/130_dsel.sh`, `results/dsel_selected.json`, `results/market_style_eval.{json,txt}` with the `dt_` family, `resul  
+  scripts: 128_dsel_gen.py, 129_dsel_pick.py, 130_dsel.sh
