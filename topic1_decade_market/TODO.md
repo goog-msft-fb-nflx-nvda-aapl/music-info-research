@@ -118,7 +118,7 @@ Gate before the submission (target: all experiments complete by 20 Dec 2026, pap
 ## Next (2026-11-02, after N-5a/N-5b beta 4)
 - [ ] N-5b beta 1 and beta 2: copy results, run six-decade / ordinal / nuisance scripts, log in WORKLOG, push (generation finishing ~17:45 JST)
 - [x] N-5b variant: score only the later stages (>= 500 frames) (`--first 500`), done 2026-11-03, WORKLOG entry of that date
-- [ ] N-5 paired comparison: best-of-8 on seeds 0-2 pools vs SMC on the same seeds; same-song selection set vs evaluation set (split the 24 songs 12/12)
+- [x] N-5 paired comparison best-of-8 vs SMC (done 2026-11-03, `src/107_paired_bon_smc.py`; no song split needed, nothing tuned on the songs)
 - [ ] N-5a extension (running since 2026-11-03 06:45 JST: seeds 8-15 pool via `run_bon16_gen.sh`, then `run_bon16_eval.sh` -> `results/best_of_n_ax_ctrlc_bon16.*`): copy results, WORKLOG entry, push; N-1..16 scaling curve vs SMC
 - [ ] FD and paired metrics running (tmux avbA, avbP; sets ax_ctrl/ctrlc/freec/onehot_ge10, smc b2/b4, smc b2/b4 f500): copy `avb/out`, `avbp/out` results, `83_fd_bootstrap.py`, `85_pair_metrics.py`, WORKLOG, push
 - [ ] N-7 ACE-Step LoRA with the era axis (feasibility check first)
