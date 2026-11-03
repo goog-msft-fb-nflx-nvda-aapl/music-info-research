@@ -83,3 +83,6 @@ Fallback that avoids 1-2: generator trained on audio with valence/arousal labels
 - Postolache's test is a within-song time split, so its good scores do not show generalisation to new songs; our leave-song-out protocol would be stricter. Their approach is a strong baseline to reproduce or compare (ControlNet on audioldm2-music, but that checkpoint is non-commercial CC BY-NC-SA).
 - No dataset found yet that gives open (no-EULA) EEG plus music emotion ratings; DEAP, DREAMER, AMIGOS, MAHNOB all need requests. If DEAP stays down, DREAMER (Zenodo request) or AMIGOS is the substitute; both use film clips, not music.
 - Still open: Shen 2026 full text, LaBraM weight download, DEAM official page, JASCO, fadtk.
+
+## 2026-11-03. Access check
+DEAP (maintenance), DREAMER Zenodo URL and AMIGOS QMUL page unavailable when tried by the user. Prompt for a second deep-research round: `survey2/access_check_prompt.txt`. Not sent yet.

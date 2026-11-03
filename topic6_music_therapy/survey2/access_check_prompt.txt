@@ -1,0 +1,22 @@
+TASK
+Find out how a university research team can obtain each EEG emotion dataset listed below, today (date: 2026-11-03). Several official pages are currently down (DEAP: maintenance; DREAMER Zenodo URL: unavailable; AMIGOS QMUL page: "Service Unavailable"). For each dataset, open the primary source and report what works now. Do not guess. If a page cannot be opened, write UNVERIFIED and say what you tried (URL, error, archive.org snapshot, cache). Give full URLs. Quote the access/license wording exactly.
+
+DATASETS
+1. DEAP (QMUL): https://www.eecs.qmul.ac.uk/mmv/datasets/deap/ (32 ch EEG, 40 music videos, valence/arousal)
+2. DREAMER (Katsigiannis & Ramzan, 2017): Zenodo record 546113 and any other host (14 ch EEG, 18 film clips)
+3. AMIGOS (Miranda-Correa et al.): https://www.eecs.qmul.ac.uk/mmv/datasets/amigos/ (EEG/ECG/GSR)
+4. MAHNOB-HCI (Soleymani et al.): mahnob-db.eu (32 ch EEG)
+5. SEED, SEED-IV, SEED-V: https://bcmi.sjtu.edu.cn/home/seed
+6. Any other public EEG dataset recorded during MUSIC listening with valence/arousal (or similar) ratings, 2012-2026, that can be downloaded without a signed agreement (check OpenNeuro, Zenodo, Figshare, PhysioNet, OSF, Mendeley Data, IEEE DataPort, Kaggle, Hugging Face Hub).
+
+FOR EACH DATASET REPORT
+- Is it downloadable right now? Direct link, or "page down".
+- Mirrors and legal copies: Internet Archive snapshots of the official page, Zenodo/Figshare/OSF/Kaggle/Hugging Face copies, and whether each copy is authorized by the dataset owners (state the evidence, e.g. same uploader as the authors). Do not recommend unauthorized redistributions.
+- Access procedure: request form, EULA, email address, who may apply (students allowed? supervisor signature needed? institutional email required?), typical response time reported by users, any fee.
+- License and terms: what is allowed (publishing derived models, figures, results), what is forbidden (redistribution), citation requirement.
+- File format and size of the preprocessed and raw versions.
+- Whether the owners' contact email is currently valid and which address to use.
+- Reports from users in 2025-2026 (GitHub issues, forum posts, papers' data statements) about access problems or alternative download sources.
+
+OUTPUT
+A table: dataset | status today | official URL | authorized mirror URL | access steps | who can apply | license | size | verified (yes/no). Then a short ranked recommendation: which dataset can be obtained fastest by a student team in Taiwan, and the exact first step for each. Mark every unverified statement as UNVERIFIED.
