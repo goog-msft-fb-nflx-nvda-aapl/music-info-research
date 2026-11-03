@@ -1,0 +1,12 @@
+tuning 1960s: best {'lo': 300, 'hi': 3400, 'hiss': -45.0, 'wow': 3.0} objective +0.126; median setting {'lo': 120, 'hi': 7000, 'hiss': -35.0, 'wow': 1.0} +0.016; default {'lo': 120, 'hi': 7000, 'hiss': -90.0, 'wow': 0.0} not in grid
+tuning 1980s: best {'shelf': 2.0, 'wet': 0.55} objective +0.331; median setting {'shelf': 1.0, 'wet': 0.55} +0.319; default {'shelf': 0.6, 'wet': 0.25} not in grid
+tuning 2010s: best {'ratio': 10.0, 'bright': 0.8} objective +0.173; median setting {'ratio': 10.0, 'bright': 0.8} +0.173; default {'ratio': 6.0, 'bright': 0.4} not in grid
+eval 1960s default {'lo': 120, 'hi': 7000, 'hiss': -90.0, 'wow': 0.0}: vocal probe +0.002 [-0.017,+0.023]; mix-level with era-axis accompaniment -0.037 [-0.050,-0.024]
+eval 1960s tuned {'lo': 300, 'hi': 3400, 'hiss': -45.0, 'wow': 3.0}: vocal probe +0.097 [+0.056,+0.145]; mix-level with era-axis accompaniment -0.008 [-0.024,+0.009]
+eval 1980s default {'shelf': 0.6, 'wet': 0.25}: vocal probe +0.186 [+0.130,+0.249]; mix-level with era-axis accompaniment +0.068 [+0.050,+0.089]
+eval 1980s tuned {'shelf': 2.0, 'wet': 0.55}: vocal probe +0.322 [+0.253,+0.395]; mix-level with era-axis accompaniment +0.132 [+0.103,+0.163]
+eval 2010s default {'ratio': 6.0, 'bright': 0.4}: vocal probe +0.169 [+0.092,+0.246]; mix-level with era-axis accompaniment +0.043 [+0.027,+0.060]
+eval 2010s tuned {'ratio': 10.0, 'bright': 0.8}: vocal probe +0.178 [+0.100,+0.265]; mix-level with era-axis accompaniment +0.043 [+0.026,+0.061]
+random chains 1960s (20 draws): vocal-probe delta mean +0.043, min +0.023, max +0.091
+random chains 1980s (20 draws): vocal-probe delta mean +0.266, min +0.159, max +0.338
+random chains 2010s (20 draws): vocal-probe delta mean +0.170, min +0.158, max +0.177
