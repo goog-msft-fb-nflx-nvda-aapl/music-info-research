@@ -24,7 +24,7 @@ def emb_muq(w, L):
     with torch.inference_mode(): o = muq(torch.from_numpy(w)[None].cuda(), output_hidden_states=True)
     return o["hidden_states"][L].float().mean(1).squeeze(0).cpu().numpy()
 cfg = {"mert": (json.load(open(f"{ROOT}/results/probe_B.json"))["conds"]["voc_norm"], np.load(f"{ROOT}/emb/B_voc_norm.npy"), emb_mert), "muq": (json.load(open(f"{ROOT}/results/probe_muq_B.json"))["conds"]["voc_norm"], np.load(f"{ROOT}/emb/B_muq_voc_norm.npy"), emb_muq)}
-out = {}; txt = []; cache = {}; SELF = os.environ.get("SELF") == "1"; DIR = "svc_B_self" if SELF else "svc_B"; TAG = "_self" if SELF else ""
+out = {}; txt = []; cache = {}; SELF = os.environ.get("SELF") == "1"; DIR = "svc_B_self" if SELF else os.environ.get("SVCDIR", "svc_B"); TAG = "_self" if SELF else ("" if DIR == "svc_B" else "_" + DIR.replace("svc_B_", ""))
 for enc, (pj, E, fn) in cfg.items():
     L, C = pj["layer"], pj["C"]; clf = make_pipeline(StandardScaler(), LogisticRegression(C=C, max_iter=2000)).fit(E[tr, L].astype(np.float32), y[tr])
     acc0 = float((clf.predict(E[va, L].astype(np.float32)) == y[va]).mean()); assert abs(acc0 - pj["val_acc"]) < 1e-6, (enc, acc0, pj["val_acc"])

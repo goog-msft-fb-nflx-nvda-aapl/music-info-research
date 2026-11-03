@@ -1,0 +1,2 @@
+1980s (tuned chain {'shelf': 2.0, 'wet': 0.55}): P(1980s) dry/neutral 0.098, chain/neutral 0.129, dry/era 0.355, chain/era 0.487; chain main effect +0.082 [+0.055,+0.110]; accompaniment main effect +0.307 [+0.256,+0.359]; interaction +0.101 [+0.063,+0.141]
+2010s (tuned chain {'ratio': 10.0, 'bright': 0.8}): P(2010s) dry/neutral 0.370, chain/neutral 0.421, dry/era 0.594, chain/era 0.637; chain main effect +0.047 [+0.028,+0.070]; accompaniment main effect +0.220 [+0.156,+0.285]; interaction -0.007 [-0.022,+0.011]

@@ -10,6 +10,7 @@ Last updated 2026-11-04. Every row has its configuration and numbers in `WORKLOG
 | N-5b | probe-guided SMC (8 particles) | held-out MuQ 1980s .407 (beta 4); scoring only later stages does not help (.372) | `results/smc_ctrlc_N8_*` |
 | N-5 paired | best-of-8 vs SMC beta 4 | MuQ: best-of-8 higher in 11 of 12 cells, one cell with CI above 0 (erased 1980s +.109 [+.011,+.201]) | `results/paired_bon_smc.*` |
 | T-9 / T-9c / T-9e | decade-specific vocal processing chains | vocal probe 1980s +.32, 2010s +.18 (tuned), 1960s +.10 (tape cues); mix-level 1980s +.13, 2010s +.04, 1960s -.008 | `results/vocal_era_dsp.*`, `vocal_chain_tune{,2}.*` |
+| T-9d | vocal chain x era accompaniment additivity | 2010s additive (interaction -.007); 1980s super-additive (+.101 [+.063,+.141]) | `results/vocal_acc_additivity.*` |
 | FD / paired metrics | FD-VGG, KL-PaSST, CLAP of the new sets | ctrlc FD 1980s -.72, 2010s -.81, 1960s +.60; CLAP 1980s +.145 | `results/fd_boot_*`, `pair_*` |
 
 ## Axis 2, market
@@ -19,8 +20,10 @@ Last updated 2026-11-04. Every row has its configuration and numbers in `WORKLOG
 | T-4a | FreeSVC timbre conversion to a market voice | no move toward the target market; accuracy loss equals the self-voice control | `results/svc_market_eval*.json` |
 | T-4b / T-4g / T-4i | lyric route: translated lyrics sung in the target language | cover mode: language hit .42-.75, song identity lost (VINet cosine .5); lego: identity kept (.81-.83) but language hit .17-.33; stem swap: language hit .25-.88 with identity .80-.84 | `results/lyric_route_eval*.*` |
 | T-4k | scale-up of the stem swap, 77 clips, 5 targets | vocal market probe Delta P(target) Spain +.188, Brazil +.421, Germany +.314, Italy +.408, US+UK +.325 (all CIs above 0) | `results/scale_market_probe.*` |
+| T-4k seed 1 | replication | Spain +.212, Brazil +.488, Germany +.308, Italy +.381, US+UK +.239; erased probe within +-.03 | `results/scale_market_probe_seed1*` |
 | T-4l | same, language erased from the probe | all five targets within +-.03 of 0 (Spain +.023): the move is language | `results/scale_market_probe_leace.*` |
 | T-4e / T-4o | style descriptors from Discogs-VI metadata | target-style activation: Brazil +.055 / +.049, other markets at most a few thousandths | `results/market_styles.*`, `market_style_eval.*` |
+| T-4n | FreeSVC with a voice-matched reference | no move (target accuracy .178 / .193, effects within +-.01) | `results/svc_market_eval_nn.*` |
 | T-4m | reference-audio style transfer | no consistent move across encoders (Brazil +.105 / +.075 only at strength 0.5) | `results/ace_mref*_eval.*` |
 
 ## Both axes
