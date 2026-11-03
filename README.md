@@ -1,11 +1,17 @@
 # CommE5070 final project (music generation track)
 
-Course project for CommE5070 (Deep Learning for Music Analysis and Generation, NTU). The repository holds two independent topics, each in its own folder with its own README, code, results, work log and plan. People interested in either topic are welcome to join.
+Course project for CommE5070 (Deep Learning for Music Analysis and Generation, NTU). The repository has one folder per topic of the course project guide (eight topics, numbered as in the guide); two contain work so far, each in its own folder with its own README, code, results, work log and plan. People interested in either topic are welcome to join.
 
-| Topic | Folder | One line |
+| Guide topic | Folder | Status |
 |---|---|---|
-| 1. Steering evaluation | [`topics/musicgen_steering/`](topics/musicgen_steering/) | Independent, significance-tested evaluation of concept-direction steering in MusicGen (four direction methods, independent evaluators, layer selection). |
-| 2. Era and market cues, era-targeted covers | [`topics/era_market_cover/`](topics/era_market_cover/) | Stem-wise analysis of release-decade and release-market cues on Discogs-VI clips, and cover generation that keeps the original vocal and regenerates the accompaniment in a target decade. |
+| 1. Released decade and market classification, era-targeted covers | [`topics/topic1_decade_market/`](topics/topic1_decade_market/) | Stem-wise analysis of release-decade and release-market cues on Discogs-VI clips, and cover generation that keeps the melody and vocals while steering the era. Main work of this repository. |
+| 2. Streaming music accompaniment generation | [`topics/topic2_streaming_accompaniment/`](topics/topic2_streaming_accompaniment/) | not started |
+| 3. Inference-time optimization and evaluation for text-to-music | [`topics/topic3_inference_time_ttm/`](topics/topic3_inference_time_ttm/) | Independent, significance-tested evaluation of concept-direction steering in MusicGen. |
+| 4. MIDI-REPA and ATTM | [`topics/topic4_midi_repa_attm/`](topics/topic4_midi_repa_attm/) | not started |
+| 5. Hit song analysis and generation | [`topics/topic5_hit_song/`](topics/topic5_hit_song/) | not started |
+| 6. Music therapy | [`topics/topic6_music_therapy/`](topics/topic6_music_therapy/) | not started |
+| 7. AI DJ | [`topics/topic7_ai_dj/`](topics/topic7_ai_dj/) | not started |
+| 8. Copyright concerns in music generation | [`topics/topic8_copyright/`](topics/topic8_copyright/) | not started |
 
 ## Team
 - James Christian: MS in Artificial Intelligence, University of Texas at Austin (jameschristian@utexas.edu)
@@ -13,8 +19,8 @@ Course project for CommE5070 (Deep Learning for Music Analysis and Generation, N
 - Jefferson Sy Dionisio: Ph.D. in Communication Engineering, NTU (jsydionisio@gmail.com)
 
 ## Shared
-- `docs/` GitHub Pages source (kept at the repository root because Pages serves from `/docs`): `index.html` for topic 1, `era_market/` for topic 2. Pages URL: https://goog-msft-fb-nflx-nvda-aapl.github.io/music-info-research/
-- Topic 1 mid-progress video: https://youtu.be/aaZ89FoZe_U
+- `docs/` GitHub Pages source (kept at the repository root because Pages serves from `/docs`): `index.html` for topic 3, `era_market/` for topic 1. Pages URL: https://goog-msft-fb-nflx-nvda-aapl.github.io/music-info-research/
+- Topic 3 mid-progress video: https://youtu.be/aaZ89FoZe_U
 - `LICENSE` Apache License 2.0.
 
 Each topic folder is self-contained: run its scripts from inside that folder.

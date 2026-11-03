@@ -1,6 +1,6 @@
 # Era and release-market cues, and era-targeted cover generation
 
-Topic 2 of the repository (topic 1 is in `../musicgen_steering/`). Topic offered by the course TA as a team-finding example (extension of HW1). People interested are welcome to join.
+Topic 1 of the course project guide (2026): released decade/market classification, an extension of HW1. Research question of the guide: does a cover sound like the era of the original song, or the era in which the cover was released? (The steering evaluation of MusicGen is in `../topic3_inference_time_ttm/`.)
 
 ## Questions
 1. Which parts of a song (full mix, vocals, accompaniment) let a frozen audio encoder recognize the release decade (dataset A) and the release market (dataset B) on the PA1 Discogs-VI clips?
