@@ -1,4 +1,4 @@
-"""T-4e read-out: Discogs-EffNet style tags (400 Discogs styles; essentia models in ~/era_market/ess_models; venv_ess, CPU) of the generated accompaniment (GENDIR/<id>_<cond>_s<seed>_acc.wav). Target score of market m = mean tag activation over the five styles with the highest lift in (m, 1980s) (results/market_styles.json top_lift, styles present among the 400 tags) ; Delta = score(clip with prompt of m) - score(neutral clip of the same song and seed); per condition family hw_ (hand-written prompts) and ds_ (metadata-derived prompts), paired over songs and seeds, mean with song-bootstrap 95% CI (2000 resamples) and Wilcoxon p; all 24 songs (4 per source market) are used for every target market. Also reports the mean target score of the real accompaniment of the clips of market m (reference).
+"""T-4e read-out: Discogs-EffNet style tags (400 Discogs styles; essentia models in ~/era_market/ess_models; venv_ess, CPU) of the generated accompaniment (GENDIR/<id>_<cond>_s<seed>_acc.wav). Target score of market m = mean tag activation over the five styles with the highest lift in (m, 1980s) (results/market_styles.json top_lift, styles present among the 400 tags) ; Delta = score(clip with prompt of m) - score(neutral clip of the same song and seed); per condition family hw_ (hand-written prompts), ds_ (metadata-derived, highest lift) and dk_ (metadata-derived, largest P x log lift), paired over songs and seeds, mean with song-bootstrap 95% CI (2000 resamples) and Wilcoxon p; all 24 songs (4 per source market) are used for every target market. Also reports the mean target score of the real accompaniment of the clips of market m (reference).
 usage (from ~/era_market with venv_ess): GENDIR=gen_mstyle python src/115_market_style_eval.py -> results/market_style_eval.{json,txt}"""
 import os, sys, json, numpy as np, soundfile as sf, librosa
 from scipy.stats import wilcoxon
@@ -14,13 +14,13 @@ def tagp(y): return head(emb_m(librosa.resample(np.asarray(y, dtype=np.float32),
 GD = os.environ.get("GENDIR", "gen_mstyle"); G = os.path.join(ROOT, GD); ids = [l.split(",") for l in open(os.path.join(G, "picked.txt")).read().split("\n")]; seeds = [0, 1]; rng = np.random.default_rng(0)
 T = {}
 for sid, lab in ids:
-    for cond in ["neutral"] + [f"{f}_{m}" for f in ("hw", "ds") for m in MK]:
+    for cond in ["neutral"] + [f"{f}_{m}" for f in ("hw", "ds", "dk") for m in MK]:
         for sd in seeds:
             fp = os.path.join(G, f"{sid}_{cond}_s{sd}_acc.wav")
             if os.path.exists(fp): T[(sid, cond, sd)] = tagp(sf.read(fp, dtype="float32")[0])
     T[(sid, "real", 0)] = tagp(np.load(os.path.join(ROOT, "stems", "B", sid + ".npz"))["accomp"]); print(sid, flush=True)
 out = {"coverage": cov, "cells": {}}; txt = []
-for fam in ("hw", "ds"):
+for fam in ("hw", "ds", "dk"):
     for m in MK:
         d = []
         for sid, lab in ids:

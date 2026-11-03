@@ -1,0 +1,240 @@
+{
+ "coverage": {
+  "US": {
+   "wanted": [
+    "Folk, World, & Country---Bluegrass",
+    "Folk, World, & Country---Gospel",
+    "Folk, World, & Country---Hawaiian",
+    "Funk / Soul---Gospel",
+    "Folk, World, & Country---Honky Tonk",
+    "Folk, World, & Country---Cajun"
+   ],
+   "in_tagger": [
+    "Folk, World, & Country---Bluegrass",
+    "Folk, World, & Country---Gospel",
+    "Funk / Soul---Gospel",
+    "Folk, World, & Country---Honky Tonk",
+    "Folk, World, & Country---Cajun"
+   ]
+  },
+  "UK": {
+   "wanted": [
+    "Reggae---Lovers Rock",
+    "Rock---Psychobilly",
+    "Rock---Mod",
+    "Reggae---Roots Reggae",
+    "Pop---Novelty",
+    "Rock---Indie Rock"
+   ],
+   "in_tagger": [
+    "Reggae---Lovers Rock",
+    "Rock---Psychobilly",
+    "Rock---Mod",
+    "Reggae---Roots Reggae",
+    "Pop---Novelty"
+   ]
+  },
+  "Brazil": {
+   "wanted": [
+    "Latin---Choro",
+    "Latin---Forr\u00f3",
+    "Latin---MPB",
+    "Latin---Samba",
+    "Latin---Bossanova",
+    "Jazz---Bossa Nova"
+   ],
+   "in_tagger": [
+    "Latin---Forr\u00f3",
+    "Latin---MPB",
+    "Latin---Samba",
+    "Latin---Bossanova",
+    "Jazz---Bossa Nova"
+   ]
+  },
+  "Spain": {
+   "wanted": [
+    "Jazz---Cool Jazz",
+    "Pop---Ballad",
+    "Latin---Bolero",
+    "Electronic---Disco",
+    "Pop---Vocal",
+    "Rock---Rock & Roll"
+   ],
+   "in_tagger": [
+    "Jazz---Cool Jazz",
+    "Pop---Ballad",
+    "Latin---Bolero",
+    "Electronic---Disco",
+    "Pop---Vocal"
+   ]
+  },
+  "Germany": {
+   "wanted": [
+    "Pop---Schlager",
+    "Classical---Romantic",
+    "Pop---Europop",
+    "Jazz---Contemporary Jazz",
+    "Jazz---Easy Listening",
+    "Jazz---Dixieland"
+   ],
+   "in_tagger": [
+    "Pop---Schlager",
+    "Classical---Romantic",
+    "Pop---Europop",
+    "Jazz---Contemporary Jazz",
+    "Jazz---Easy Listening"
+   ]
+  },
+  "Italy": {
+   "wanted": [
+    "Folk, World, & Country---Canzone Napoletana",
+    "Electronic---Italo-Disco",
+    "Pop---Chanson",
+    "Pop---Europop",
+    "Jazz---Easy Listening",
+    "Pop---Vocal"
+   ],
+   "in_tagger": [
+    "Folk, World, & Country---Canzone Napoletana",
+    "Electronic---Italo-Disco",
+    "Pop---Chanson",
+    "Pop---Europop",
+    "Jazz---Easy Listening"
+   ]
+  }
+ },
+ "cells": {
+  "hw_US": {
+   "delta": 0.00033462149440310895,
+   "ci": [
+    1.3351392453841981e-06,
+    0.0006627224502153695
+   ],
+   "wilcoxon_p": 0.09791293740272522,
+   "n": 48,
+   "neutral_score": 0.0011359316995367408,
+   "real_clips_of_market_score": 0.0024584399070590734
+  },
+  "hw_UK": {
+   "delta": 0.001243655919097364,
+   "ci": [
+    0.0007982256938703358,
+    0.0017662105383351445
+   ],
+   "wilcoxon_p": 2.8849171940237284e-09,
+   "n": 48,
+   "neutral_score": 0.0007057880866341293,
+   "real_clips_of_market_score": 0.029737088829278946
+  },
+  "hw_Brazil": {
+   "delta": 0.01740156300365925,
+   "ci": [
+    0.013430560939013958,
+    0.022229742258787155
+   ],
+   "wilcoxon_p": 1.2008172234345693e-12,
+   "n": 48,
+   "neutral_score": 0.0036217395681887865,
+   "real_clips_of_market_score": 0.028328867629170418
+  },
+  "hw_Spain": {
+   "delta": 0.0009461941663175821,
+   "ci": [
+    -0.0016091063152998686,
+    0.003166124690324068
+   ],
+   "wilcoxon_p": 0.12342480570077896,
+   "n": 48,
+   "neutral_score": 0.009091195650398731,
+   "real_clips_of_market_score": 0.007412296254187822
+  },
+  "hw_Germany": {
+   "delta": -0.005242922808974981,
+   "ci": [
+    -0.008130855858325958,
+    -0.0020232400856912136
+   ],
+   "wilcoxon_p": 1.0485556231287774e-05,
+   "n": 48,
+   "neutral_score": 0.013876818120479584,
+   "real_clips_of_market_score": 0.00491677550598979
+  },
+  "hw_Italy": {
+   "delta": 0.032706789672374725,
+   "ci": [
+    0.02315685525536537,
+    0.04246052727103233
+   ],
+   "wilcoxon_p": 1.91209892363986e-09,
+   "n": 48,
+   "neutral_score": 0.00785659160465002,
+   "real_clips_of_market_score": 0.034316129982471466
+  },
+  "ds_US": {
+   "delta": 0.0037268351297825575,
+   "ci": [
+    0.0024331086315214634,
+    0.005301854573190212
+   ],
+   "wilcoxon_p": 1.964650664376677e-11,
+   "n": 48,
+   "neutral_score": 0.0011359316995367408,
+   "real_clips_of_market_score": 0.0024584399070590734
+  },
+  "ds_UK": {
+   "delta": 0.002304792171344161,
+   "ci": [
+    0.0018216671887785196,
+    0.0028799029532819986
+   ],
+   "wilcoxon_p": 7.105427357601002e-15,
+   "n": 48,
+   "neutral_score": 0.0007057880866341293,
+   "real_clips_of_market_score": 0.029737088829278946
+  },
+  "ds_Brazil": {
+   "delta": 0.05449320748448372,
+   "ci": [
+    0.04208866506814957,
+    0.06829570233821869
+   ],
+   "wilcoxon_p": 3.552713678800501e-14,
+   "n": 48,
+   "neutral_score": 0.0036217395681887865,
+   "real_clips_of_market_score": 0.028328867629170418
+  },
+  "ds_Spain": {
+   "delta": 0.0028057408053427935,
+   "ci": [
+    0.00034233700716868043,
+    0.005221908912062645
+   ],
+   "wilcoxon_p": 0.018660806119441986,
+   "n": 48,
+   "neutral_score": 0.009091195650398731,
+   "real_clips_of_market_score": 0.007412296254187822
+  },
+  "ds_Germany": {
+   "delta": 0.0031812582165002823,
+   "ci": [
+    -0.0002152030065190047,
+    0.006603290792554617
+   ],
+   "wilcoxon_p": 0.017105765640735626,
+   "n": 48,
+   "neutral_score": 0.013876818120479584,
+   "real_clips_of_market_score": 0.00491677550598979
+  },
+  "ds_Italy": {
+   "delta": 0.0048573631793260574,
+   "ci": [
+    0.0020706946961581707,
+    0.007524401880800724
+   ],
+   "wilcoxon_p": 0.00012686883565038443,
+   "n": 48,
+   "neutral_score": 0.00785659160465002,
+   "real_clips_of_market_score": 0.034316129982471466
+  }
+ }
+}
