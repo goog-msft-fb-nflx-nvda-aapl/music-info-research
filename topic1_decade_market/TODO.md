@@ -153,3 +153,11 @@ Professor: the TA can provide more data, for example Discogs-VI itself. Goal "Ti
 ## Survey round 4 (instruction 2026-11-03; plan)
 - [ ] Re-survey after the TA's Discogs-VI answer: available datasets with release year, country and audio or embeddings (Discogs-VI and Discogs-VI-YT, Discogs-VINet features, MusicBrainz/AcousticBrainz, Million Song / Last.fm style sets, SecondHandSongs cover lists, DALI, WhoSampled, Da-TACOS, SHS100K), license and access of each, what covers pair construction and two-axis (year x country) labels
 - [ ] Related work for era and market control and time-conditioned music generation; verified citations only; results to `SURVEY4.md`
+
+## From survey round 4 (2026-11-03)
+- [ ] Discogs-VI metadata-only pair statistics (CPU, no audio): `main.zip` from Zenodo 13983028 on the server (check disk, about 21 GB uncompressed: stream the jsonl, keep only version id, clique id, year, country, format descriptors); count cliques with distinct versions in different decades and/or release countries after dropping Reissue/Remastered/Repress descriptors; output `results/discogs_vi_pairs.{json,txt}` with the 2x2 (era gap x market gap) cell counts
+- [ ] Request Discogs-VI-YT audio features (CQT; chroma and HPCP if offered) from MTG for non-commercial research (contact on the dataset page and in the Discogs-VINet repository); record the answer and license in `SURVEY4.md`
+- [ ] Validate pairs with a second graph (MusicBrainz Work / Recording, SecondHandSongs ids) on a gold subset
+- [ ] 2x2 counterfactual evaluation design: target-era-only, target-market-only and joint moves per source, leakage of the non-target probe, three encoder families (control with A, evaluate with B and C), song identity with an unrelated VI model
+- [ ] Legal: written determination from the university on publishing generated clips of commercial compositions; keep only accompaniment-only demos until then
+- [ ] Open the cited papers (He et al. 2024; Kostrzewa and Grabczynski 2024; JASCO; Demerle et al.; MuLaCover; FreeSVC) before citing them

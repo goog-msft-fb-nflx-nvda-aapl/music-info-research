@@ -3,7 +3,7 @@
 Every number in the report, page and paper comes from a file in `results/` written by a script in `src/`; the worklog (`WORKLOG.md`) records, per run, the configuration, the data and the measured result. This guide gives the order of the steps and the exact commands. Scripts are run from the working directory `era_market/` (a copy of this folder's `src/` plus the data, embeddings, stems and generated audio, which are not in the repository because the source clips are not redistributable and the generated audio is large).
 
 ## 0. Environment
-- Python environments and package versions: `repro/environment.txt` (main env Python 3.11; separate envs for Audiobox Aesthetics, the Essentia tagger, ACE-Step, MuseControlLite / Stable Audio Open adapters, av-benchmark (commit `f351b9a6fc6abde746d5f8e1d4c47c883319cb41`), Discogs-VINet (third-party AGPL code, kept outside the repository), Whisper, LEACE (`concept-erasure` 0.2.4)).
+- Python environments and package versions: `repro/environment.txt` (main env Python 3.11; separate envs for Audiobox Aesthetics, the Essentia tagger, ACE-Step, MuseControlLite / Stable Audio Open adapters, av-benchmark (commit `f351b9a6fc6abde746d5f8e1d4c47c883319cb41`), Discogs-VINet (third-party code under the MIT license, kept outside the repository), Whisper, LEACE (`concept-erasure` 0.2.4)).
 - One CUDA device for stems, embeddings and generation (up to about 35 GB memory per generation process; one model load per process); the analysis tables need CPU only.
 - Hugging Face access for gated weights (token in a mode-600 file, never in the repository).
 - Determinism: MusicGen generation with `torch.manual_seed(seed)` is bit-identical across runs and devices in our environment (WORKLOG, R03).
