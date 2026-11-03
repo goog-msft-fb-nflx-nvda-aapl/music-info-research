@@ -21,3 +21,12 @@ Source of the questions: the TA's topic description (original Chinese text in `C
 3. (done) Discogs-VINet identity metric.
 4. Second era-conditioned generator or conditioning route (e.g. example-conditioned, ACE-Step 1.5 cover mode): only after checking licenses and weights.
 5. Artist-grouped or clique-grouped evaluation: impossible with PA1 (no ids); state as limitation.
+
+
+## Added 2026-11-03: professor's two-axis requirement and the guide's topic 1 wording
+| Requirement | Status | Where |
+|---|---|---|
+| Era-and-market-controlled cover generation, one song along time (20 years earlier, 30 years later) and market (US release rendered as Spain release) | era axis done; market axis and two-axis move open | `TODO.md` block "Two-axis plan", `MASTER_PLAN.md` section 6 |
+| The TA can provide more data such as Discogs-VI | requested through `draft.txt` (waiting for the TA's reply); metadata already analysed | `SURVEY4.md` |
+| Guide: pairs of different recordings, reissues excluded, era shift vs release-year gap | open | `TODO.md` "Guide Topic 1 gaps" |
+| Cover generation from the course materials (lecture 11b) | formulation adopted (content-preserving style transfer); SongEcho baseline done; others symbolic or piano-only | `TODO.md` "Course slides on cover generation" |

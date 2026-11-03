@@ -161,3 +161,38 @@ Professor: the TA can provide more data, for example Discogs-VI itself. Goal "Ti
 - [ ] 2x2 counterfactual evaluation design: target-era-only, target-market-only and joint moves per source, leakage of the non-target probe, three encoder families (control with A, evaluate with B and C), song identity with an unrelated VI model
 - [ ] Legal: written determination from the university on publishing generated clips of commercial compositions; keep only accompaniment-only demos until then
 - [ ] Open the cited papers (He et al. 2024; Kostrzewa and Grabczynski 2024; JASCO; Demerle et al.; MuLaCover; FreeSVC) before citing them
+
+## Requirements checklist (TA, professor, guide, course slides; updated 2026-11-03)
+Project name: Time Traveler. Goal (professor): era-and-market-controlled cover song generation; one song moves along axis 1 (time: from now 20 years earlier or 30 years later) and axis 2 (market: a US release rendered as a Spain release). The TA can provide more data such as Discogs-VI (request pending, waiting for the TA's reply; draft in `draft.txt`).
+| Requirement | Source | Status | Where |
+|---|---|---|---|
+| Which parts (mix, vocals, accompaniment) carry era and market | TA, guide | done on PA1 | WORKLOG 2026-10-25 to 2026-10-27, `TA_COVERAGE.md` |
+| Confusion by decade / market and by song; language vs arrangement vs dataset bias | TA | done on PA1 | `TA_COVERAGE.md` |
+| Larger Discogs-VI than the course subset | TA, professor | open: waiting for the TA's reply; metadata downloaded (`~/era_market/data/dvi/main.zip`), pair counts running | `SURVEY4.md`, `results/discogs_vi_pairs.*` |
+| Pairs of different recordings of one song, different decades, reissues excluded | guide | open (needs ids or Discogs-VI audio features) | next block below |
+| Era shift of a pair vs the release-year gap; cover era or original era | guide | open (needs pairs) | Guide Topic 1 gaps block |
+| Era axis of cover generation (decade) | professor, TA, guide | done (era-axis adapter, best-of-N, SMC) | WORKLOG 2026-11-02, 2026-11-03 |
+| **Market axis of cover generation** (US to Spain) | professor | open: accompaniment route weak (M-3, val acc .22-.33); vocal route not started | two-axis block |
+| **Two-axis move** (era x market jointly, leakage between axes) | professor | open | two-axis block |
+| Cover generation methods from the course | professor, lecture 11b | surveyed below; SongEcho baselines done (weak on era), others not run | block below |
+| Melody preserved, target era present | TA | done for era | `TA_COVERAGE.md` |
+| Audio demos on GitHub | guide section 5 | accompaniment-only demos published; two-axis demos after the two-axis experiments | `docs/era_market/` |
+| ISMIR-format report | guide section 5 | open: convert `report.tex` (also see author block conventions) | |
+
+### Course slides on cover generation (lecture 11b, Chih-Pin Tan, "Music Adaptation: Arrangement & Cover Generation"; `course materials/lecture11b_covergen_chihpin.pdf`)
+- Formulation on the slides: cover generation = content-preserving style transfer (content: melody, chords, structure; style: everything else: genre, instrument, arrangement). Our setup (keep vocal and melody, re-render the accompaniment) is this formulation; state it in the report.
+- Methods named on the slides (titles as printed there; open each paper before citing): AccoMontage (ISMIR 2021), Structured Multi-Track Accompaniment Arrangement via Style Prior Modelling (NeurIPS 2024), Pop2Piano (ICASSP 2023), PiCoGen (ICMR 2024), BOSSA (NeurIPS 2025 AI4Music workshop), SongEcho (arXiv). Symbolic or piano-only methods are not direct audio baselines; SongEcho is (done).
+- Evaluation remark on the slides: style is not well defined, similarity metrics and overall quality do not imply a good cover, metrics borrowed from general generation are unsuited. Consequence for us: report content (melody, chord, identity) and target-axis metrics separately, never one aggregate.
+- Resources and datasets on the slides: SecondHandSongs, HookTheory; POP909, Live Orchestral Piano, LargeSHS, Discogs-VI, Pop2Piano data. The lecturer invites contact for cover-song-generation work (email on the first slide; ask through the TA or professor first).
+- [ ] Read the SongEcho and BOSSA papers for a conditioning route that takes a style/example embedding (relevant to the z-axis conditioner); record in `SURVEY4.md`
+- [ ] Add SecondHandSongs and LargeSHS to the dataset survey (survey round 4 covers SHS-100K and Da-TACOS; LargeSHS not yet)
+
+### Two-axis plan, ordered (dependencies in brackets)
+1. [ ] T-1 pair statistics from Discogs-VI metadata (running; `src/106_discogs_vi_pairs.py`)
+2. [ ] T-2 data access: TA's answer; then features or audio; licence recorded
+3. [ ] T-3 pair set with reissue exclusion and a gold subset checked against MusicBrainz / SHS [T-1, T-2]
+4. [ ] T-4 market axis: vocal-side route (singing-voice conversion or language/accent conditioning) plus an accompaniment-side z from M-3 (language-erased); decide the route after reading the lecture 7/9 singing-generation slides
+5. [ ] T-5 two-axis conditioner z = [z_era, z_market] with axis dropout [T-3, T-4]
+6. [ ] T-6 2x2 counterfactual evaluation per source: (orig era, orig market), (target era, orig market), (orig era, target market), (target era, target market); leakage of the non-target probe; main effects and interaction; three encoder families (control with A, evaluate with B and C); song identity with an unrelated version-identification model
+7. [ ] T-7 original-vs-cover-era test on real pairs [T-3]
+8. [ ] T-8 report, page and demos with the two-axis results; accompaniment-only demos; legal check before publishing generated clips of commercial compositions

@@ -1,6 +1,8 @@
-# Era and release-market cues, and era-targeted cover generation
+# Time Traveler: era and release-market cues, and era-and-market-controlled cover generation
 
 Topic 1 of the course project guide (2026): released decade/market classification, an extension of HW1. Research question of the guide: does a cover sound like the era of the original song, or the era in which the cover was released? (The steering evaluation of MusicGen is in `../topic3_inference_time_ttm/`.)
+
+Goal (professor's framing): move one song along two axes, time (for example 20 years earlier or 30 years later) and market (for example a US release rendered as a Spain release). Status: era axis done and evaluated; market axis and the two-axis move are the open work (`TODO.md`, `MASTER_PLAN.md` section 6).
 
 ## Questions
 1. Which parts of a song (full mix, vocals, accompaniment) let a frozen audio encoder recognize the release decade (dataset A) and the release market (dataset B) on the PA1 Discogs-VI clips?
