@@ -20,7 +20,15 @@ def fit(lam=1.0):
     A = (X[~ist] - mu) / sd; ym = Y[~ist].mean(0); W = np.linalg.solve(A.T @ A + lam * len(A) * np.eye(A.shape[1]), A.T @ (Y[~ist] - ym)); return lambda Z: ((Z - mu) / sd) @ W + ym
 pred = fit()
 def ccc(a, b): return float(2 * np.mean((a - a.mean()) * (b - b.mean())) / (a.var() + b.var() + (a.mean() - b.mean()) ** 2))
-def stats(t, p): return {k: dict(r=float(pearsonr(t[:, j], p[:, j])[0]), rho=float(spearmanr(t[:, j], p[:, j])[0]), ccc=ccc(t[:, j], p[:, j]), slope=float(np.polyfit(t[:, j], p[:, j], 1)[0])) for j, k in enumerate(("valence", "arousal"))}
+def stats(t, p):
+    out_ = {}
+    rg = np.random.default_rng(0)
+    for j, k in enumerate(("valence", "arousal")):
+        bs = [rg.integers(0, len(t), len(t)) for _ in range(1000)]
+        rs = [pearsonr(t[b, j], p[b, j])[0] for b in bs if p[b, j].std() > 0 and t[b, j].std() > 0]; sl = [np.polyfit(t[b, j], p[b, j], 1)[0] for b in bs if t[b, j].std() > 0]
+        out_[k] = dict(r=float(pearsonr(t[:, j], p[:, j])[0]), rho=float(spearmanr(t[:, j], p[:, j])[0]), ccc=ccc(t[:, j], p[:, j]), slope=float(np.polyfit(t[:, j], p[:, j], 1)[0]),
+                       r_ci=[float(np.percentile(rs, 2.5)), float(np.percentile(rs, 97.5))], slope_ci=[float(np.percentile(sl, 2.5)), float(np.percentile(sl, 97.5))])
+    return out_
 res = {"reference_real_test": stats(Y[ist], pred(X[ist])), "n_real_test": int(ist.sum())}
 proc = Wav2Vec2FeatureExtractor.from_pretrained("m-a-p/MERT-v1-95M", trust_remote_code=True); m = AutoModel.from_pretrained("m-a-p/MERT-v1-95M", trust_remote_code=True).to(dev).eval()
 def feats(audio, sr):
