@@ -1,0 +1,86 @@
+{
+ "T0.8": {
+  "n": 28,
+  "mix_norm": {
+   "frac_order_agrees": 0.75,
+   "mean_shift": 0.6859185268487116,
+   "mean_label_gap": 2.4285714285714284,
+   "spearman": 0.34872353869923123
+  },
+  "voc_norm": {
+   "frac_order_agrees": 0.7142857142857143,
+   "mean_shift": 0.5849826974860791,
+   "mean_label_gap": 2.4285714285714284,
+   "spearman": 0.3693196700301728
+  },
+  "acc_norm": {
+   "frac_order_agrees": 0.6071428571428571,
+   "mean_shift": 0.4536660186422523,
+   "mean_label_gap": 2.4285714285714284,
+   "spearman": 0.2832673404967865
+  }
+ },
+ "T0.75": {
+  "n": 219,
+  "mix_norm": {
+   "frac_order_agrees": 0.7899543378995434,
+   "mean_shift": 1.145786399567807,
+   "mean_label_gap": 2.3881278538812785,
+   "spearman": 0.437720806036449
+  },
+  "voc_norm": {
+   "frac_order_agrees": 0.7214611872146118,
+   "mean_shift": 0.7124202089529319,
+   "mean_label_gap": 2.3881278538812785,
+   "spearman": 0.2333450699392702
+  },
+  "acc_norm": {
+   "frac_order_agrees": 0.7625570776255708,
+   "mean_shift": 1.0314624678971724,
+   "mean_label_gap": 2.3881278538812785,
+   "spearman": 0.40477311454527665
+  }
+ },
+ "T0.7": {
+  "n": 1307,
+  "mix_norm": {
+   "frac_order_agrees": 0.8117827084927315,
+   "mean_shift": 1.2998744722273992,
+   "mean_label_gap": 2.35424636572303,
+   "spearman": 0.4856459933579535
+  },
+  "voc_norm": {
+   "frac_order_agrees": 0.7314460596786534,
+   "mean_shift": 0.7224796465447295,
+   "mean_label_gap": 2.35424636572303,
+   "spearman": 0.3452794288951932
+  },
+  "acc_norm": {
+   "frac_order_agrees": 0.7934200459066565,
+   "mean_shift": 1.1811958259060775,
+   "mean_label_gap": 2.35424636572303,
+   "spearman": 0.43787748192967046
+  }
+ },
+ "random": {
+  "n": 1000,
+  "mix_norm": {
+   "frac_order_agrees": 0.829,
+   "mean_shift": 1.3617404494630063,
+   "mean_label_gap": 2.262,
+   "spearman": 0.537578623114651
+  },
+  "voc_norm": {
+   "frac_order_agrees": 0.759,
+   "mean_shift": 0.8709134462332877,
+   "mean_label_gap": 2.262,
+   "spearman": 0.3518400553996381
+  },
+  "acc_norm": {
+   "frac_order_agrees": 0.8,
+   "mean_shift": 1.2038709180817386,
+   "mean_label_gap": 2.262,
+   "spearman": 0.4920616698156423
+  }
+ }
+}
