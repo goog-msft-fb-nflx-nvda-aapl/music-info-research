@@ -1,0 +1,21 @@
+two-axis composition, 16 songs of dataset A; mix-level era probe MERT layer 12 (val acc 0.477)
+era 1960s, language es (n=13): P(1960s) gain from the era-axis accompaniment with the source-language vocal +0.068, with the es vocal +0.064; interaction (target minus source) -0.004 [-0.031,+0.029]
+era 1960s, language pt (n=16): P(1960s) gain from the era-axis accompaniment with the source-language vocal +0.057, with the pt vocal +0.078; interaction (target minus source) +0.020 [-0.028,+0.072]
+era 1960s, language de (n=16): P(1960s) gain from the era-axis accompaniment with the source-language vocal +0.057, with the de vocal +0.059; interaction (target minus source) +0.002 [-0.034,+0.041]
+era 1960s, language it (n=16): P(1960s) gain from the era-axis accompaniment with the source-language vocal +0.057, with the it vocal +0.110; interaction (target minus source) +0.053 [-0.006,+0.121]
+era 1980s, language es (n=13): P(1980s) gain from the era-axis accompaniment with the source-language vocal +0.170, with the es vocal +0.166; interaction (target minus source) -0.004 [-0.046,+0.043]
+era 1980s, language pt (n=16): P(1980s) gain from the era-axis accompaniment with the source-language vocal +0.166, with the pt vocal +0.153; interaction (target minus source) -0.013 [-0.064,+0.041]
+era 1980s, language de (n=16): P(1980s) gain from the era-axis accompaniment with the source-language vocal +0.166, with the de vocal +0.128; interaction (target minus source) -0.037 [-0.079,-0.001]
+era 1980s, language it (n=16): P(1980s) gain from the era-axis accompaniment with the source-language vocal +0.166, with the it vocal +0.162; interaction (target minus source) -0.003 [-0.057,+0.059]
+era 2010s, language es (n=13): P(2010s) gain from the era-axis accompaniment with the source-language vocal +0.169, with the es vocal +0.155; interaction (target minus source) -0.013 [-0.073,+0.047]
+era 2010s, language pt (n=16): P(2010s) gain from the era-axis accompaniment with the source-language vocal +0.187, with the pt vocal +0.173; interaction (target minus source) -0.014 [-0.104,+0.063]
+era 2010s, language de (n=16): P(2010s) gain from the era-axis accompaniment with the source-language vocal +0.187, with the de vocal +0.167; interaction (target minus source) -0.020 [-0.101,+0.050]
+era 2010s, language it (n=16): P(2010s) gain from the era-axis accompaniment with the source-language vocal +0.187, with the it vocal +0.169; interaction (target minus source) -0.018 [-0.083,+0.039]
+language es with neutral accompaniment (n=13): P(intended language) 0.803 (source-language control 0.715)
+language es with 1980s accompaniment (n=13): P(intended language) 0.768 (source-language control 0.678)
+language pt with neutral accompaniment (n=16): P(intended language) 0.611 (source-language control 0.743)
+language pt with 1980s accompaniment (n=16): P(intended language) 0.594 (source-language control 0.709)
+language de with neutral accompaniment (n=16): P(intended language) 0.819 (source-language control 0.743)
+language de with 1980s accompaniment (n=16): P(intended language) 0.822 (source-language control 0.709)
+language it with neutral accompaniment (n=16): P(intended language) 0.770 (source-language control 0.743)
+language it with 1980s accompaniment (n=16): P(intended language) 0.752 (source-language control 0.709)
