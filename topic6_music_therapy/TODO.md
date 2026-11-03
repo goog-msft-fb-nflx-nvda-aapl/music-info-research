@@ -17,3 +17,11 @@
 ## Open decisions (team)
 - Primary design: original three-phase pipeline vs fallback (DEAM/PMEmo generator, DEAP EEG-to-VA bridge).
 - Whether NMED-T stays in the generation phase.
+
+## Doable without DEAP (DEAP in maintenance as of 2026-11-03; email on hold)
+- [ ] Read Postolache 2025 (arXiv 2405.09062) and Shen 2026 (TMM) in full: data, metrics, code, what they leave open.
+- [ ] Check official weights/licenses: CBraMod, LaBraM (EEG); MERT-v1-95M; DEAM, PMEmo (sizes, licenses, audio access); fadtk.
+- [ ] Check other EEG + emotion datasets reachable now without a DEAP EULA (DREAMER on Zenodo, AMIGOS, SEED-family, MAHNOB-HCI, NMED-H/NMED-M) for access terms and whether they can substitute for DEAP in Phase 1.
+- [ ] E3 audio-side VA evaluator on the server: MERT features + regressor on DEAM/PMEmo, cross-corpus check.
+- [ ] Download NMED-T cleaned EEG only (~7 GB for 10 files) to `~/music_therapy/data`, check shapes and metadata alignment (disk is ~99% full: check free space first).
+- [ ] Generator smoke test: Stable Audio Open 1.0 loads, audio-to-audio from a DEAM clip, LoRA/adapter dry run with a VA token.
