@@ -44,3 +44,14 @@ Audio is not needed for the EEG-to-valence/arousal step, so the bridge design do
 - B1 gave chance-level subject-independent prediction on MET, so B3 (EEG-predicted valence/arousal as generator input) has no usable signal yet. Options, in order: (1) B1 follow-ups above; (2) B4: DREAMER/SEED/DEAP via supervisor signature; (3) report B1 as a negative result and use valence/arousal ratings (not EEG) as conditioning, with EEG used only as an ablation.
 - [ ] B2/E3 do not depend on B1: DEAM official page unreachable (cvml.unige.ch); find the download route (Zenodo/Mendeley/other) and verify license.
 - [ ] Add per-fold progress logging to `met_eval.py` cnn mode (no progress output during the 32 min run).
+
+## State after 2026-11-04 experiments (details in WORKLOG.md)
+Done: B1 (MET EEG to valence/arousal: ridge, handcrafted, frozen and fine-tuned CBraMod/LaBraM, CNN; all at chance for unseen subjects/songs), B5/B6 (BCMI ds002722, ds002724: chance across participants; weak within-participant association that shrinks across sessions), E3 (MERT-ridge audio evaluator on PMEmo), Phase 3 prototype (VA-conditioned Stable Audio Open LoRA: arousal r about 0.8, valence r 0.2 to 0.33 by the evaluator; controls at 0), memorisation check, 9 demo clips.
+Open, in order of expected value:
+- [ ] Obtain a labelled EEG-emotion dataset with unseen-subject signal known from the literature (DEAP, DREAMER, SEED family; all need a signature from a permanent staff member = supervisor) and run the same protocols; MET/BCMI results suggest the bottleneck is the EEG data/labels, not only the model.
+- [ ] Resolve the BCMI (ds002722) music-code to clip mapping from Daly et al., Scientific Data 2020 (doi 10.1038/s41597-020-0507-6); only then use its audio or the clip-level analyses.
+- [ ] Generator: improve valence control (more training audio with valence labels: DEAM host unreachable on 2026-11-04, try again or find authorised mirror; EMOPIA / other open sets; longer training; text prompts), a second independent evaluator (e.g. CLAP-based or a model trained on a different corpus), FAD with fadtk on enough clips, statistics over more seeds.
+- [ ] Connect EEG: replace labels by EEG-predicted valence/arousal (currently uninformative; report as negative end-to-end result) or use per-participant calibrated predictors with a fresh session.
+- [ ] Pending runs: LaBraM fine-tuning on BCMI (results/b5ft), summarise.
+- [ ] Contact MET authors only if the team decides to; the mail draft stays in drafts/ (not sent).
+- [ ] Repository hygiene before going public: confirm licenses (PMEmo data use, demo audio, BCMI CC BY vs CC0).
