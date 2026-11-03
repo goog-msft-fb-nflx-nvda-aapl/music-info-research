@@ -13,5 +13,9 @@ python3 src/78b_prompt_variants_decade.py 3 ge10=results/trp90_lora_m3e10_eval.j
 OUT=results/prompt_variants_2000s.txt python3 src/78b_prompt_variants_decade.py 4 ge10=results/trp00_lora_m3e10_eval.json:results/trp00_lora_m3e10_content.json ge15=results/trp00_lora_m3e15_eval.json:results/trp00_lora_m3e15_content.json > /dev/null   # results/prompt_variants_2000s.txt
 python3 src/78c_bandwidth_prompts.py bw_ge10=results/trpbw_lora_m3e10_eval.json bw_ge20=results/trpbw_lora_m3e20_eval.json > /dev/null   # results/bandwidth_prompts.txt
 OUT_PREFIX=results/six_decades_baselines python3 src/78_six_decades.py songecho_base=results/sao_songecho_base_eval.json songecho_large=results/sao_songecho_large_eval.json > /dev/null   # results/six_decades_baselines.txt
+L="smc_ctrlc_N8_b4_f500=results/smc_ctrlc_N8_b4_f500_eval.json smc_ctrlc_N8_b2_f500=results/smc_ctrlc_N8_b2_f500_eval.json smc_ctrlc_N8_b4=results/smc_ctrlc_N8_b4_eval.json smc_ctrlc_N8_b2=results/smc_ctrlc_N8_b2_eval.json"
+OUT_PREFIX=results/six_decades_smc_f500 python3 src/78_six_decades.py $L > /dev/null   # results/six_decades_smc_f500.txt
+OUT_PREFIX=results/ordinal_control_smc_f500 python3 src/102_ordinal_control.py $L > /dev/null   # results/ordinal_control_smc_f500.txt
+# server-side (need the stored embeddings and the venv of 94_nuisance_steering.py): 103_best_of_n.py <set> <N_MAX>, 107_paired_bon_smc.py, 94_nuisance_steering.py; GPU read-outs: 112_lyric_route_eval.py, 109_svc_market_eval.py, 115_market_style_eval.py, 118_vocal_era_dsp.py
 python3 src/73_probe_augment.py --help > /dev/null 2>&1 || true
 echo "tables regenerated"

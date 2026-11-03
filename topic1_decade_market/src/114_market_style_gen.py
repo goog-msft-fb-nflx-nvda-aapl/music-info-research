@@ -11,13 +11,14 @@ HW = {"US": "an American 1980s pop and rock recording, gated reverb drums, elect
 MS = json.load(open(f"{ROOT}/results/market_styles.json")); P = {"neutral": "a song recording"}
 for m in HW:
     P["hw_" + m] = HW[m]; names = [x["style"].split("---")[1] for x in MS[f"{m}|1980s"]["top_lift"][:3]]; P["ds_" + m] = f"a {ADJ[m]} recording in the styles {names[0]}, {names[1]} and {names[2]}"
-ap = argparse.ArgumentParser(); ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1]); ap.add_argument("--reverse", action="store_true"); ap.add_argument("--guidance", type=float, default=3.0); a = ap.parse_args()
+ap = argparse.ArgumentParser(); ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1]); ap.add_argument("--reverse", action="store_true"); ap.add_argument("--rot", type=int, default=0, help="rotate the clip order by this many clips (parallel workers on other GPUs)"); ap.add_argument("--guidance", type=float, default=3.0); a = ap.parse_args()
 G = os.path.join(ROOT, os.environ.get("GENDIR", "gen_mstyle")); os.makedirs(G, exist_ok=True)
 rows = [r for r in manifest("B") if r["split"] == "validation"]; pick = []
 for lab in LABELS["B"]: pick += [r for r in rows if r["label"] == lab][:4]
 open(os.path.join(G, "picked.txt"), "w").write("\n".join(r["sample_id"] + "," + r["label"] for r in pick)); json.dump(P, open(os.path.join(G, "prompts.json"), "w"), indent=1)
 proc = AutoProcessor.from_pretrained("facebook/musicgen-melody"); model = MusicgenMelodyForConditionalGeneration.from_pretrained("facebook/musicgen-melody", torch_dtype=torch.float16).to("cuda").eval(); n = 0
-for r in (pick[::-1] if a.reverse else pick):
+order = pick[::-1] if a.reverse else pick; order = order[a.rot:] + order[:a.rot]
+for r in order:
     mix = sf.read(r["path"], dtype="float32")[0]; z = np.load(os.path.join(ROOT, "stems", "B", r["sample_id"] + ".npz")); voc, acc0 = z["vocals"].astype(np.float32), z["accomp"].astype(np.float32); m32 = AF.resample(torch.from_numpy(mix), SR, 32000).numpy()
     for cond, prompt in P.items():
         for seed in a.seeds:
