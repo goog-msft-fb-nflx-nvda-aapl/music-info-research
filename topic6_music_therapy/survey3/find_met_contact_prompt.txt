@@ -1,0 +1,20 @@
+TASK
+Find the correct, current contact (email address) for the author of the dataset "MET - Music-Induced Emotion EEG Dataset" (OpenNeuro accession ds008701, versions 1.0.x, DOI 10.18112/openneuro.ds008701.v1.0.5, author listed as "Weng Lam, Cheang"; CC0). Also find any paper, preprint, thesis or data descriptor associated with this dataset.
+
+Open the primary sources and report what you actually see. Do not guess or construct email addresses from name patterns. If something cannot be opened, write UNVERIFIED and say what you tried.
+
+WHERE TO LOOK
+- https://openneuro.org/datasets/ds008701 (dataset page, README, CHANGES, datacite.yml, dataset_description.json, "Contact"/uploader info)
+- https://github.com/OpenNeuroDatasets/ds008701 (README, datacite.yml, dataset_description.json)
+- NEMAR copy: https://www.nemar.org/dataset/on008701
+- DOI resolver: https://doi.org/10.18112/openneuro.ds008701.v1.0.5
+- Google Scholar, Semantic Scholar, arXiv, ResearchGate, ORCID, university faculty/student pages for "Weng Lam Cheang" (also try spellings: Cheang Weng Lam, Weng Lam Cheang, Cheang W. L.), likely affiliations (e.g. University of Macau, Macao Polytechnic University, or other), supervisors/co-authors, lab pages.
+- Any publication that describes the MET dataset (title, venue, year, DOI, corresponding author's email as printed in the paper).
+
+REPORT
+1. Dataset metadata: exact author list, affiliation, any contact field, funding, associated paper(s) as stated in the dataset files (quote exactly).
+2. Contact candidates: for each, the email address exactly as printed, the page URL where it appears, the date or paper year, and whether it is the corresponding author. Mark which one is most likely current and why.
+3. Associated paper(s): full citation + link.
+4. Song information: whether any source (paper, README, supplementary material, repository) lists the 20 songs used (title/artist/source) or the song-id mapping (t01 to t30), and whether the audio or excerpt timing is available. Give links.
+5. If no email is findable: say so, and list the best alternative channels (OpenNeuro dataset issue tracker/GitHub issues, corresponding author of the paper, institutional department contact, ORCID message), each with URL.
+Keep the answer short, with full URLs and exact quotes. Mark every unverified item UNVERIFIED.

@@ -128,3 +128,5 @@ Open: license/redistribution terms of the Jyvaskyla stimulus audio; source of ME
 
 ## 2026-11-03. Draft to MET author
 `drafts/email_met_author.txt`: asks for song ids -> titles/excerpt times and audio availability. Not sent; author's contact email not verified (placeholder).
+
+Prompt to locate the MET author contact and song list: `survey3/find_met_contact_prompt.txt` (for ChatGPT / Perplexity / Gemini).
