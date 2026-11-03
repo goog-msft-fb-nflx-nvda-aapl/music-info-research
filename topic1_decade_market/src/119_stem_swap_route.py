@@ -3,11 +3,11 @@ usage (from ~/era_market, main venv): [SRC=ace_lyric_s095] python src/119_stem_s
 import os, json, numpy as np, torch, soundfile as sf, torchaudio.functional as AF
 from demucs.pretrained import get_model
 from demucs.apply import apply_model
-H = os.path.expanduser("~/era_market"); SRC = os.environ.get("SRC", "ace_lyric_s095"); DST = "ace_swap" if SRC == "ace_lyric_s095" else "ace_swap_" + SRC.replace("ace_lyric_", ""); T = json.load(open(f"{H}/results/lyrics_route_text.json")); os.makedirs(f"{H}/{DST}", exist_ok=True); os.makedirs(f"{H}/{DST}_voc", exist_ok=True)
+H = os.path.expanduser("~/era_market"); SRC = os.environ.get("SRC", "ace_lyric_s095"); DST = os.environ.get("DST") or ("ace_swap" if SRC == "ace_lyric_s095" else "ace_swap_" + SRC.replace("ace_lyric_", "")); TEXT = os.environ.get("TEXT", "lyrics_route_text.json"); T = json.load(open(f"{H}/results/{TEXT}")); os.makedirs(f"{H}/{DST}", exist_ok=True); os.makedirs(f"{H}/{DST}_voc", exist_ok=True)
 model = get_model("htdemucs").cuda().eval(); n = 0
 for sid in T:
     z = np.load(f"{H}/stems/B/{sid}.npz"); voc0, acc = z["vocals"].astype(np.float32), z["accomp"].astype(np.float32)
-    for c in ("orig", "es", "pt", "de", "it"):
+    for c in ("orig", "en", "es", "pt", "de", "it"):
         fp = f"{H}/{SRC}/{sid}_{c}_s0.wav"
         if not os.path.exists(fp): continue
         y = sf.read(fp, dtype="float32")[0]; x = AF.resample(torch.from_numpy(y)[None], 24000, 44100).repeat(2, 1)[None].cuda()

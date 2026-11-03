@@ -7,7 +7,7 @@ from sklearn.preprocessing import StandardScaler
 sys.path.insert(0, "src")
 from common import ROOT, SR, LABELS, manifest
 from mert_util import load_mert
-MK = LABELS["B"]; TG = {"es": "Spain", "pt": "Brazil", "de": "Germany", "it": "Italy"}; rng = np.random.default_rng(0)
+MK = LABELS["B"]; TG = {"es": "Spain", "pt": "Brazil", "de": "Germany", "it": "Italy", "en": "US+UK"}; VOC = os.environ.get("VOCDIR", "ace_swap_voc"); OUTN = os.environ.get("OUTNAME", "swap_market_probe"); rng = np.random.default_rng(0)
 pj = json.load(open(f"{ROOT}/results/probe_B.json"))["conds"]["voc_norm"]; L, C = pj["layer"], pj["C"]; rows = manifest("B"); y = np.array([MK.index(r["label"]) if r["label"] else -1 for r in rows]); split = np.array([r["split"] for r in rows]); tr = np.where((split == "train") & (y >= 0))[0]; va = np.where((split == "validation") & (y >= 0))[0]
 E_ = np.load(f"{ROOT}/emb/B_voc_norm.npy"); clf = make_pipeline(StandardScaler(), LogisticRegression(C=C, max_iter=2000)).fit(E_[tr, L].astype(np.float32), y[tr]); acc0 = float((clf.predict(E_[va, L].astype(np.float32)) == y[va]).mean()); assert abs(acc0 - pj["val_acc"]) < 1e-6
 proc, mert = load_mert(); meter = pyln.Meter(SR)
@@ -17,14 +17,20 @@ def emb(w):
     with torch.inference_mode(): o = mert(**inp, output_hidden_states=True)
     m = o.feature_attention_mask[..., None].float() if getattr(o, "feature_attention_mask", None) is not None else None
     return ((o.hidden_states[L] * m).sum(1) / m.sum(1).clamp_min(1) if m is not None else o.hidden_states[L].mean(1)).squeeze(0).float().cpu().numpy()
-T = json.load(open(f"{ROOT}/results/lyrics_route_text.json")); ids = list(T); P = {}
+TEXT = os.environ.get("TEXT", "lyrics_route_text.json"); TEXT = os.environ.get("TEXT", "lyrics_route_text.json"); T = json.load(open(f"{ROOT}/results/{TEXT}")); ids = list(T); P = {}
 for s in ids:
     P[(s, "original")] = clf.predict_proba(emb(norm(np.load(f"{ROOT}/stems/B/{s}.npz")["vocals"].astype(np.float32)))[None].astype(np.float32))[0]
-    for c in ("orig", "es", "pt", "de", "it"): P[(s, c)] = clf.predict_proba(emb(norm(sf.read(f"{ROOT}/ace_swap_voc/{s}_{c}_s0.wav", dtype="float32")[0]))[None].astype(np.float32))[0]
-out = {"val_acc_vocal_probe": acc0, "layer": L, "C": C, "cells": {}}; txt = [f"vocal market probe (MERT layer {L}, C {C}) validation accuracy {acc0:.3f}; 12 pilot clips (US/UK source)"]
+    for c in ("orig", "en", "es", "pt", "de", "it"):
+        fp = f"{ROOT}/{VOC}/{s}_{c}_s0.wav"
+        if os.path.exists(fp): P[(s, c)] = clf.predict_proba(emb(norm(sf.read(fp, dtype="float32")[0]))[None].astype(np.float32))[0]
+    print(s, flush=True)
+def tp(p, m): return p[MK.index("US")] + p[MK.index("UK")] if m == "US+UK" else p[MK.index(m)]
+out = {"val_acc_vocal_probe": acc0, "layer": L, "C": C, "cells": {}}; txt = [f"vocal market probe (MERT layer {L}, C {C}) validation accuracy {acc0:.3f}; {len(ids)} clips ({TEXT})"]
 for c, m in TG.items():
-    k = MK.index(m); pc = np.array([P[(s, c)][k] for s in ids]); p0 = np.array([P[(s, "orig")][k] for s in ids]); po = np.array([P[(s, "original")][k] for s in ids]); d = pc - p0; bs = [d[rng.integers(0, len(d), len(d))].mean() for _ in range(2000)]
-    hit = float(np.mean([np.argmax(P[(s, c)]) == k for s in ids])); hit0 = float(np.mean([np.argmax(P[(s, "orig")]) == k for s in ids]))
-    out["cells"][c] = {"target": m, "P_target": float(pc.mean()), "P_target_english_control": float(p0.mean()), "P_target_original_vocal": float(po.mean()), "delta_vs_control": float(d.mean()), "ci": [float(np.percentile(bs, 2.5)), float(np.percentile(bs, 97.5))], "top1_hit": hit, "top1_hit_control": hit0}
-    txt.append(f"{c} -> {m}: P(target) {pc.mean():.3f} (English control {p0.mean():.3f}, original vocal {po.mean():.3f}); delta vs control {d.mean():+.3f} [{np.percentile(bs, 2.5):+.3f},{np.percentile(bs, 97.5):+.3f}]; target top-1 {hit:.2f} (control {hit0:.2f})")
-json.dump(out, open(f"{ROOT}/results/swap_market_probe.json", "w"), indent=1); open(f"{ROOT}/results/swap_market_probe.txt", "w").write("\n".join(txt) + "\n"); print("\n".join(txt))
+    S = [s for s in ids if (s, c) in P and (s, "orig") in P and T[s].get("src_lang", "en") != c]
+    if len(S) < 3: continue
+    pc = np.array([tp(P[(s, c)], m) for s in S]); p0 = np.array([tp(P[(s, "orig")], m) for s in S]); po = np.array([tp(P[(s, "original")], m) for s in S]); d = pc - p0; bs = [d[rng.integers(0, len(d), len(d))].mean() for _ in range(2000)]
+    top = lambda p: (MK[int(np.argmax(p))] in ("US", "UK")) if m == "US+UK" else (MK[int(np.argmax(p))] == m); hit = float(np.mean([top(P[(s, c)]) for s in S])); hit0 = float(np.mean([top(P[(s, "orig")]) for s in S]))
+    out["cells"][c] = {"target": m, "n": len(S), "P_target": float(pc.mean()), "P_target_source_language_control": float(p0.mean()), "P_target_original_vocal": float(po.mean()), "delta_vs_control": float(d.mean()), "ci": [float(np.percentile(bs, 2.5)), float(np.percentile(bs, 97.5))], "top1_hit": hit, "top1_hit_control": hit0}
+    txt.append(f"{c} -> {m} (n={len(S)}): P(target) {pc.mean():.3f} (control {p0.mean():.3f}, original vocal {po.mean():.3f}); delta vs control {d.mean():+.3f} [{np.percentile(bs, 2.5):+.3f},{np.percentile(bs, 97.5):+.3f}]; target top-1 {hit:.2f} (control {hit0:.2f})")
+json.dump(out, open(f"{ROOT}/results/{OUTN}.json", "w"), indent=1); open(f"{ROOT}/results/{OUTN}.txt", "w").write("\n".join(txt) + "\n"); print("\n".join(txt))
