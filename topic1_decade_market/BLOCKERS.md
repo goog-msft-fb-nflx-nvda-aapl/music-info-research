@@ -20,8 +20,8 @@ Ideas and experiments
 Evidence: control (English lyrics, same pipeline) already has VINet cosine .496 to the original mix and top-1 0 of 12; translated .435-.483; the accompaniment-only ACE cover of 2026-10-28 also kept less of the source than chroma-conditioned MusicGen-Melody (WORKLOG 2026-10-28).
 Reading (interpretation): ACE-Step cover mode at strength 0.5 regenerates melody and arrangement.
 Ideas and experiments
-- Higher cover strength (0.8, 0.95): running, read-outs as above.
-- Vocal-only regeneration: keep the original accompaniment stem and the era-axis accompaniment, regenerate only the vocal with new lyrics (ACE-Step task types repaint/lego/extract, or a singing voice synthesis system driven by the extracted melody); T-4g.
+- Higher cover strength (0.8, 0.95): done (WORKLOG 2026-11-04): cosine to the original rises by .03-.07 (.49-.52), identity top-1 stays <= .33, language hit up to .75; the control has cosine .50 at every strength.
+- Vocal-only regeneration (T-4g, ACE-Step base model lego mode, original accompaniment kept): done (WORKLOG 2026-11-04): identity restored (cosine .81-.83, top-1 .83-.92) but the language is realized less often (hit .17-.33 vs .50-.75 for the cover route): the routes trade language against identity. Open: louder or longer vocal track, guidance sweep (running), language read-out on the isolated track, melody-driven synthesis with the original F0 so that identity and language are decoupled (T-4h).
 - Melody-conditioned synthesis: extract the vocal F0/MIDI (RMVPE, already inside FreeSVC) and drive a lyric-conditioned synthesizer; check the licences of candidates first.
 
 ## B3. Same-song pairs with year and country need audio we do not have
