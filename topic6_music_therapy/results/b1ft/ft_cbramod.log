@@ -1,0 +1,7 @@
+folds done in 822s
+loso/cbramod/valence {'r': -0.07, 'ccc': -0.037, 'rmse': 2.27} [-0.086, 0.002]
+loso/cbramod/arousal {'r': -0.064, 'ccc': -0.023, 'rmse': 2.638} [-0.049, 0.004]
+loso_song/cbramod/valence {'r': -0.038, 'ccc': -0.013, 'rmse': 2.192} [-0.047, 0.021]
+loso_song/cbramod/arousal {'r': -0.308, 'ccc': -0.062, 'rmse': 2.651} [-0.078, -0.05]
+strict/cbramod/valence {'r': -0.226, 'ccc': -0.079, 'rmse': 2.258} [-0.119, -0.04]
+strict/cbramod/arousal {'r': -0.065, 'ccc': -0.026, 'rmse': 2.655} [-0.056, 0.004]

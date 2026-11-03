@@ -1,0 +1,23 @@
+/home/jtan/music_therapy/env/lib/python3.10/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/jtan/music_therapy/env/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+/home/jtan/music_therapy/env/lib/python3.10/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/jtan/music_therapy/env/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+/home/jtan/music_therapy/env/lib/python3.10/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/jtan/music_therapy/env/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+/home/jtan/music_therapy/env/lib/python3.10/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/jtan/music_therapy/env/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+folds done in 2361s
+loso/labram/valence {'r': -0.054, 'ccc': -0.029, 'rmse': 2.264} [-0.09, 0.019]
+loso/labram/arousal {'r': -0.106, 'ccc': -0.061, 'rmse': 2.765} [-0.113, -0.008]
+loso_song/labram/valence {'r': 0.02, 'ccc': 0.014, 'rmse': 2.288} [-0.084, 0.113]
+loso_song/labram/arousal {'r': -0.073, 'ccc': -0.042, 'rmse': 2.738} [-0.104, 0.007]
+strict/labram/valence {'r': -0.227, 'ccc': -0.14, 'rmse': 2.416} [-0.197, -0.084]
+strict/labram/arousal {'r': -0.041, 'ccc': -0.025, 'rmse': 2.737} [-0.088, 0.03]
