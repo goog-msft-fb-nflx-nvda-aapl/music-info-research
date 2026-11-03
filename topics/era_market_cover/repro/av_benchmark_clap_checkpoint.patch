@@ -1,0 +1,26 @@
+diff --git a/av_bench/extraction_models.py b/av_bench/extraction_models.py
+index 377996a..6951202 100644
+--- a/av_bench/extraction_models.py
++++ b/av_bench/extraction_models.py
+@@ -13,7 +13,7 @@ from av_bench.synchformer.synchformer import Synchformer
+ from av_bench.vggish.vggish import VGGish
+ 
+ _clap_ckpt_path = Path(
+-    __file__).parent.parent / 'weights' / 'music_speech_audioset_epoch_15_esc_89.98.pt'
++    __file__).parent.parent / 'weights' / 'music_audioset_epoch_15_esc_90.14.pt'
+ _syncformer_ckpt_path = Path(__file__).parent.parent / 'weights' / 'synchformer_state_dict.pth'
+ 
+ 
+diff --git a/extract_text.py b/extract_text.py
+index 3e418aa..5b9aecb 100644
+--- a/extract_text.py
++++ b/extract_text.py
+@@ -10,7 +10,7 @@ from msclap import CLAP
+ from tqdm import tqdm
+ 
+ _clap_ckpt_path = Path(
+-    __file__).parent.parent / 'weights' / 'music_speech_audioset_epoch_15_esc_89.98.pt'
++    __file__).parent.parent / 'weights' / 'music_audioset_epoch_15_esc_90.14.pt'
+ log = logging.getLogger()
+ device = 'cuda'
+ 
