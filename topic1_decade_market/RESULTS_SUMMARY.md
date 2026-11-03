@@ -10,6 +10,7 @@ Last updated 2026-11-04. Every row has its configuration and numbers in `WORKLOG
 | N-5b | probe-guided SMC (8 particles) | held-out MuQ 1980s .407 (beta 4); scoring only later stages does not help (.372) | `results/smc_ctrlc_N8_*` |
 | N-5 paired | best-of-8 vs SMC beta 4 | MuQ: best-of-8 higher in 11 of 12 cells, one cell with CI above 0 (erased 1980s +.109 [+.011,+.201]) | `results/paired_bon_smc.*` |
 | T-9 / T-9c / T-9e | decade-specific vocal processing chains | vocal probe 1980s +.32, 2010s +.18 (tuned), 1960s +.10 (tape cues); mix-level 1980s +.13, 2010s +.04, 1960s -.008 | `results/vocal_era_dsp.*`, `vocal_chain_tune{,2}.*` |
+| T-9f | era chains on the whole mix (mix-bus) | mix-level gain on the era-axis remix: 1960s +.062, 1980s +.084, 2010s +.092 | `results/mixbus_chain.*` |
 | T-9d | vocal chain x era accompaniment additivity | 2010s additive (interaction -.007); 1980s super-additive (+.101 [+.063,+.141]) | `results/vocal_acc_additivity.*` |
 | FD / paired metrics | FD-VGG, KL-PaSST, CLAP of the new sets | ctrlc FD 1980s -.72, 2010s -.81, 1960s +.60; CLAP 1980s +.145 | `results/fd_boot_*`, `pair_*` |
 

@@ -1,0 +1,6 @@
+tuning 1960s: best {'lo': 120, 'hi': 7000, 'hiss': -45.0, 'wow': 3.0} objective +0.025 (range -0.077 to +0.025)
+tuning 1980s: best {'shelf': 2.0, 'wet': 0.4} objective +0.049 (range +0.000 to +0.049)
+tuning 2010s: best {'ratio': 10.0, 'bright': 0.4} objective +0.123 (range +0.106 to +0.123)
+eval 1960s mix-bus chain {'lo': 120, 'hi': 7000, 'hiss': -45.0, 'wow': 3.0}: P(1960s) gain on the era-axis remix +0.062 [+0.025,+0.105]; on the neutral-accompaniment remix +0.091 [+0.059,+0.127]
+eval 1980s mix-bus chain {'shelf': 2.0, 'wet': 0.4}: P(1980s) gain on the era-axis remix +0.084 [+0.031,+0.141]; on the neutral-accompaniment remix +0.049 [+0.010,+0.097]
+eval 2010s mix-bus chain {'ratio': 10.0, 'bright': 0.4}: P(2010s) gain on the era-axis remix +0.092 [+0.067,+0.119]; on the neutral-accompaniment remix +0.177 [+0.148,+0.209]
