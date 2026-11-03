@@ -50,3 +50,12 @@ Ideas and experiments
 - I6 reference-audio style transfer: ACE-Step takes a reference audio for style; use real clips of the target market (dataset-B TRAIN clips of the market and decade) as the reference with the original melody kept (T-4m); read-outs: Discogs-EffNet style tags, accompaniment market probe (M-3), language-erased vocal probe.
 - I7 vocal delivery: accent and singing style are not isolated by a language swap; test a conversion that keeps the language but changes the singer to a native singer of the target market (FreeSVC was not effective with a mean-embedding voice, T-4a; a per-reference nearest-voice choice is untested): T-4n.
 - I8 market-conditioned arrangement from the Discogs-VI metadata: condition the accompaniment adapter on the style distribution of (market, decade) instead of a label; needs audio of Discogs-VI-YT (B3).
+
+## B8. The 1990s and 2000s effects are near zero for several adapters
+Evidence: ACE-Step era LoRA 1990s -.045 to +.094 and 2000s -.067 to +.007 at every checkpoint, strength and scale (WORKLOG 2026-11-04, N-7); MusicGen ctrlc +.389 / +.225 (smaller than the other decades); the probes' own per-class validation recall is lowest for these decades: dataset A mix probe 1990s .41, 2000s .27 (2010s .59, 1960s .68), accompaniment probe .45 / .23, vocal probe .23 / .18 (`results/confusion_summary.txt`); the main confusions are 2000s with 1990s and 2010s.
+Reading (interpretation): the read-out itself separates these decades poorly (the 2000s are the hardest class), so a near-zero Delta mixes a weak generator effect with a weak read-out; the two cannot be separated with one probe family.
+Ideas and experiments
+- I9 independent read-outs for the decade (Discogs-EffNet decade probe, CLAP text score for the decade prompt, production-feature baseline after Tardieu et al.) on the existing generated sets, to see whether 1990s and 2000s move on another instrument (T-11).
+- I10 merge or coarsen the decade scale for the probes (1990s-2000s as one class) and report ordinal expected-decade shifts instead of class probabilities (already available as E in the six-decade tables).
+
+B8 update (T-11, 2026-11-04): independent Discogs-EffNet read-out gives MusicGen-adapter target hits of .53 (1990s) and .60 (2000s) versus 1/6 chance; the near-zero 1990s/2000s result is read-out dependent. ACE-Step LoRA remains at 0 for 2000s. See WORKLOG T-11.

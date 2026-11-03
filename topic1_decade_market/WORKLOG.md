@@ -1239,3 +1239,17 @@ Observation: the ACE-Step era route keeps much less of the song than the MusicGe
 Same 24 songs, prompts and read-out as the N-7 entries, 3-epoch LoRA of training seed 0; strength 0.3 and 0.8 (scale 1.0), LoRA scale 0.5 and 1.5 (strength 0.5; the scale was applied: "LoRA scale (final): 0.50" in the log).
 MERT Delta P(target decade), 1960s / 1970s / 1980s / 1990s / 2000s / 2010s: strength 0.3: +.179 / +.199 / +.426 / +.076 / -.036 / +.125; strength 0.5 (N-7): +.241 / +.109 / +.453 / -.045 / -.018 / +.133; strength 0.8: +.155 / +.115 / +.427 / +.003 / -.035 / +.150; scale 0.5: +.190 / +.136 / +.324 / +.059 / -.006 / +.054; scale 1.5: +.190 / +.194 / +.413 / -.003 / -.028 / +.145.
 Observation: the 1960s, 1980s and 2010s effects are stable over cover strengths 0.3 to 0.8 and LoRA scales 1.0 to 1.5 (1980s +.41 to +.45, 1960s +.16 to +.24, 2010s +.13 to +.15); halving the LoRA scale lowers the 1980s and 2010s effects (+.324, +.054); the 1970s effect is larger at strength 0.3 (+.199) and at scale 1.5 (+.194) than at 0.5 (+.109); 1990s and 2000s stay near zero at every setting.
+
+## T-11: independent per-decade read-out (Discogs-EffNet embedding + logistic probe), 1990s/2000s check
+
+Read-out: `src/36_discogs_tagger.py --gen <dir> --seeds ... --eras neutral,1960s,...,2010s` (probe CV acc .475, held-out val acc .523, six classes, 24 source clips, CPU). Outputs `results/discogs_decade_{ax_ctrlc,ace_e3,ace_none}.json`. Sources: `gen_ax_ctrlc_ge10` (seeds 0-2), `ace_lora_gen_e3`, `ace_lora_gen_none` (seeds 0-1). Values below: mean P(target decade) / share of clips whose argmax is the target.
+
+| generator | 1960s | 1970s | 1980s | 1990s | 2000s | 2010s |
+|---|---|---|---|---|---|---|
+| MusicGen + z adapter (ge 10) | .80/1.00 | .39/.58 | .45/.88 | .37/.53 | .34/.60 | .39/.64 |
+| ACE-Step + era LoRA (3 ep) | .25/.46 | .17/.15 | .45/.73 | .28/.40 | .12/.00 | .24/.46 |
+| ACE-Step, no LoRA (prompt only) | .06/.00 | .10/.00 | .27/.35 | .36/.77 | .15/.00 | .27/.46 |
+
+Reference (unconditioned original clips, identity codec): argmax shares .29 .17 .04 .12 .17 .21 (probe is weak on real audio, val acc .52).
+Measured: with this independent read-out the MusicGen adapter reaches the target for 1990s (.53) and 2000s (.60), well above the 1/6 chance level; the ACE LoRA never has the 2000s as argmax (0 of its clips) and 1970s only .15; the no-LoRA ACE output is dominated by 1990s/2010s regardless of the requested era.
+Interpretation: the MERT/MuQ probe's low 2000s recall (B8) is a property of that read-out, not necessarily of the generator; the Discogs-EffNet probe is also weak (.52), so both read-outs are reported. Confusions are mostly adjacent decades (1990s to 1980s .33, 2000s to 1990s .29, 2010s to 2000s .24).
