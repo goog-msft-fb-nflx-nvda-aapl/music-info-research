@@ -138,3 +138,38 @@ Prompt to locate the MET author contact and song list: `survey3/find_met_contact
 - Ours: IEEE DataPort author page lists only "MET: Music-Induced EEG Dataset" (a separate version with 8 channels, ~400 CSV files, per ChatGPT-independent page text); private messaging requires login. Different file format from OpenNeuro (66 ch .set).
 - No MET data paper found; song titles/audio source not found by any response. GitHub issue tracker (OpenNeuroDatasets/ds008701/issues) named as alternative channel (not checked by us).
 - Draft `drafts/email_met_author.txt` redirected to Prof. Ip with a forward request. Not sent.
+
+## 2026-11-03. B1: EEG -> valence/arousal on MET (ds008701), grouped cross-validation
+Scripts (all in `scripts/`): `download_met.sh` (public S3, 256 parallel connections), `prep_met.py`, `met_eval.py`, `met_probes.py`. Server: `~/music_therapy` (env `~/music_therapy/env`, torch 2.6.0+cu124, mne 1.12.1). Results: `results/b1/` (summary_ridge.json, summary_cnn.json, probes.json, logs).
+
+Commands (server, in `~/music_therapy`):
+```
+bash scripts/download_met.sh data/ds008701
+env/bin/python -I scripts/prep_met.py data/ds008701 data/met_win4s.npz 4 128
+env/bin/python -I scripts/met_eval.py data/met_win4s.npz results/b1 ridge 4
+env/bin/python -I scripts/met_eval.py data/met_win4s.npz results/b1 cnn 4      # 80 folds over 4 H200, 1922 s
+env/bin/python -I scripts/met_probes.py data/met_win4s.npz results/b1/probes.json
+```
+
+Data used: 399 EEG files downloaded; 1 unreadable (sub-12 ses-t05, file size equals the S3 object size, so the source file is corrupt), 1 trial flagged missing in ratings.tsv; 397 recordings, 396 trials with usable EEG and ratings (20 subjects, 20 songs), 10,799 non-overlapping 4 s windows (6-124 s of each recording, windows overlapping annotated bad segments dropped), 66 EEG channels (EOG removed), 1-45 Hz band-pass, resampled to 128 Hz, per-recording per-channel z-score.
+
+Models: ridge regression on log band power (delta, theta, alpha, beta, gamma x 66 channels; alpha 0.1/1/10, table shows alpha 1); EEGNet-style CNN (30 epochs, fixed hyperparameters, no tuning on test folds). Window predictions averaged per trial. Metrics at trial level (n=396): Pearson r / CCC / RMSE (1-9 scale). Protocols: loso = leave one subject out (20 folds); loso_song = leave one song out (20); strict = unseen subjects and unseen songs (5 x 4 = 20 folds); random = random window 5-fold (leaky reference, not a valid protocol). Shuffled-label control: ridge trained on trial labels permuted across training trials.
+
+| protocol | target | ridge r / CCC / RMSE | ridge shuffled-label r / CCC | CNN r / CCC / RMSE |
+|---|---|---|---|---|
+| loso | valence | 0.00 / 0.00 / 2.23 | -0.08 / -0.05 | -0.08 / -0.07 / 2.81 |
+| loso | arousal | -0.01 / -0.00 / 2.68 | -0.06 / -0.03 | -0.01 / -0.01 / 3.30 |
+| loso_song | valence | -0.07 / -0.04 / 2.27 | -0.13 / -0.07 | -0.10 / -0.10 / 2.81 |
+| loso_song | arousal | -0.09 / -0.05 / 2.73 | -0.21 / -0.12 | 0.05 / 0.04 / 3.10 |
+| strict | valence | -0.10 / -0.07 / 2.37 | -0.16 / -0.11 | -0.08 / -0.08 / 2.80 |
+| strict | arousal | -0.02 / -0.02 / 2.75 | -0.08 / -0.05 | -0.02 / -0.02 / 3.34 |
+| random | valence | 0.42 / 0.21 / 1.97 | 0.00 / 0.00 | 0.92 / 0.89 / 0.90 |
+| random | arousal | 0.38 / 0.20 / 2.38 | -0.03 / -0.01 | 0.94 / 0.91 / 0.96 |
+
+Reference predictors without EEG (trial level, r / CCC / RMSE): song mean from the other subjects (knows the song id): valence 0.67 / 0.63 / 1.59, arousal 0.79 / 0.78 / 1.55. Subject mean from other songs: valence 0.04 / 0.02, arousal 0.01 / 0.01. Global mean of other subjects: r is negative by construction (leave-one-out mean), CCC 0.
+
+Probes (ridge/logistic regression on the same band-power features, leave-one-subject-out): song identity from EEG: window accuracy 0.042, trial accuracy 0.043 (chance 0.05). Residual rating (rating minus training-subject song mean): valence r 0.01, CCC 0.003; arousal r 0.07, CCC 0.017.
+
+Findings (measured): with band-power ridge and an EEGNet-style CNN, valence and arousal were not predicted above chance when the test subject (loso), the test song (loso_song) or both (strict) were unseen; CCC between -0.12 and 0.05, shuffled-label control similar. Random window splits give r 0.38-0.42 (ridge) and r 0.92-0.94, CCC 0.89-0.91 (CNN), i.e. the leakage gap is large; those numbers come from windows of the same trial appearing in training and test. Band-power features did not recover song identity or the subject-specific residual of the ratings across subjects.
+Interpretation (not tested): the random-split scores reflect trial/subject-specific signal that does not carry over to unseen subjects; 20 subjects and 20 songs with song-driven labels (see inspection above) give little room; other features (e.g. pretrained EEG encoders, connectivity, per-subject calibration) were not tried. These results do not show that MET EEG contains no emotion information.
+Caveats: one hyperparameter setting per model; the 4 s window and 1-45 Hz preprocessing were fixed a priori; bootstrap CIs resample subjects (files in summary json).
