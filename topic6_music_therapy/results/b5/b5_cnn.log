@@ -1,0 +1,15 @@
+folds done in 3152s
+loso/cnn/valence {'r': 0.054, 'ccc': 0.017, 'rmse': 1.472, 'n_trials': 1645} [-0.005750885886681054, 0.04124658076958937]
+loso/cnn/arousal {'r': -0.014, 'ccc': -0.006, 'rmse': 1.335, 'n_trials': 1645} [-0.0312900721888951, 0.0210230183570526]
+loso_song/cnn/valence {'r': 0.169, 'ccc': 0.067, 'rmse': 1.442, 'n_trials': 1645} [0.014078385520812451, 0.10730664824846874]
+loso_song/cnn/arousal {'r': 0.139, 'ccc': 0.047, 'rmse': 1.289, 'n_trials': 1645} [0.006151436046792197, 0.09510165213153206]
+strict/cnn/valence {'r': -0.032, 'ccc': -0.011, 'rmse': 1.492, 'n_trials': 1645} [-0.02999631272459566, 0.015008870370170423]
+strict/cnn/arousal {'r': -0.059, 'ccc': -0.016, 'rmse': 1.321, 'n_trials': 1645} [-0.030581054732322952, -0.0008932043939145934]
+random/cnn/valence {'r': 0.222, 'ccc': 0.08, 'rmse': 1.426, 'n_trials': 1645} [0.028069404390812736, 0.11747139822364029]
+random/cnn/arousal {'r': 0.197, 'ccc': 0.064, 'rmse': 1.275, 'n_trials': 1645} [0.027897075086989877, 0.11166673400766827]
+ref/global_mean_loso/valence {'r': -0.222, 'ccc': -0.006, 'rmse': 1.463, 'n_trials': 1645} None
+ref/song_mean_loso/valence {'r': 0.685, 'ccc': 0.65, 'rmse': 1.065, 'n_trials': 1645} [0.5414564102888108, 0.7318749129772186]
+ref/subject_mean_loso_song/valence {'r': 0.173, 'ccc': 0.074, 'rmse': 1.438, 'n_trials': 1645} None
+ref/global_mean_loso/arousal {'r': -0.222, 'ccc': -0.006, 'rmse': 1.302, 'n_trials': 1645} None
+ref/song_mean_loso/arousal {'r': 0.635, 'ccc': 0.591, 'rmse': 1.005, 'n_trials': 1645} [0.5048657789826393, 0.6554458707571029]
+ref/subject_mean_loso_song/arousal {'r': 0.173, 'ccc': 0.073, 'rmse': 1.28, 'n_trials': 1645} None
