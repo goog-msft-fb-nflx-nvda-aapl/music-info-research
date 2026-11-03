@@ -12,6 +12,7 @@ mne.set_log_level("ERROR")
 root, out = sys.argv[1], sys.argv[2]
 win_s = float(sys.argv[3]) if len(sys.argv) > 3 else 4.0
 fs = int(sys.argv[4]) if len(sys.argv) > 4 else 128
+norm = sys.argv[5] if len(sys.argv) > 5 else "z"   # "z": 1-45 Hz + per-channel z-score; "uv100": 0.5-75 Hz, 50/60 Hz notch, microvolt/100 (foundation-model input)
 T0, T1 = 6.0, 124.0
 ratings = {}
 for r in csv.DictReader(open(os.path.join(root, "ratings.tsv"), encoding="utf-8-sig"), delimiter="\t"):
@@ -34,10 +35,16 @@ def proc(f):
         for e in csv.DictReader(open(ev, encoding="utf-8-sig"), delimiter="\t"):
             if e["trial_type"] == "bad":
                 bad.append((float(e["onset"]), float(e["onset"]) + float(e["duration"])))
-    raw.filter(1.0, 45.0, verbose=False)
-    raw.resample(fs)
-    x = raw.get_data().astype(np.float32) * 1e6
-    x = (x - x.mean(1, keepdims=True)) / (x.std(1, keepdims=True) + 1e-6)
+    if norm == "uv100":
+        raw.filter(0.5, 75.0, verbose=False)
+        raw.notch_filter([50.0, 60.0], verbose=False)
+        raw.resample(fs)
+        x = raw.get_data().astype(np.float32) * 1e6 / 100.0
+    else:
+        raw.filter(1.0, 45.0, verbose=False)
+        raw.resample(fs)
+        x = raw.get_data().astype(np.float32) * 1e6
+        x = (x - x.mean(1, keepdims=True)) / (x.std(1, keepdims=True) + 1e-6)
     n = int(win_s * fs)
     Xw, mw = [], []
     k = 0
