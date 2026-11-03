@@ -1,4 +1,5 @@
 """T-4j market read-out of the lyric route: the vocal market probe (dataset-B vocal probe, MERT layer and C from probe_B.json 'voc_norm', StandardScaler + logistic regression fit on dataset-B TRAIN vocal embeddings; validation accuracy reproduced) applied to the separated generated vocal of the stem-swap route (ace_swap_voc/<id>_<cond>_s0.wav, 12 pilot clips: US/UK source, English; conditions orig = English control, es -> Spain, pt -> Brazil, de -> Germany, it -> Italy). Reported: P(target market | vocal of condition c) for c in es, pt, de, it; its difference to the same market's probability under the English control (orig) of the same clip (paired over 12 clips, song-bootstrap 95% CI, 2000 resamples) ; top-1 hit of the target market; and the same quantities for the ORIGINAL vocal stems (reference).
+LEACE=1: the probe is refit after LEACE erasure of the Whisper large-v3 language group from the TRAIN vocal embeddings (file name suffix _leace; the validation accuracy of the erased probe is printed and stored). Env: TEXT, VOCDIR, OUTNAME select the text file, vocal directory and output name.
 usage (from ~/era_market, main venv, one GPU): python src/120_swap_market_probe.py -> results/swap_market_probe.{json,txt}"""
 import os, sys, json, numpy as np, soundfile as sf, torch, pyloudnorm as pyln
 from sklearn.linear_model import LogisticRegression
@@ -9,7 +10,16 @@ from common import ROOT, SR, LABELS, manifest
 from mert_util import load_mert
 MK = LABELS["B"]; TG = {"es": "Spain", "pt": "Brazil", "de": "Germany", "it": "Italy", "en": "US+UK"}; VOC = os.environ.get("VOCDIR", "ace_swap_voc"); OUTN = os.environ.get("OUTNAME", "swap_market_probe"); rng = np.random.default_rng(0)
 pj = json.load(open(f"{ROOT}/results/probe_B.json"))["conds"]["voc_norm"]; L, C = pj["layer"], pj["C"]; rows = manifest("B"); y = np.array([MK.index(r["label"]) if r["label"] else -1 for r in rows]); split = np.array([r["split"] for r in rows]); tr = np.where((split == "train") & (y >= 0))[0]; va = np.where((split == "validation") & (y >= 0))[0]
-E_ = np.load(f"{ROOT}/emb/B_voc_norm.npy"); clf = make_pipeline(StandardScaler(), LogisticRegression(C=C, max_iter=2000)).fit(E_[tr, L].astype(np.float32), y[tr]); acc0 = float((clf.predict(E_[va, L].astype(np.float32)) == y[va]).mean()); assert abs(acc0 - pj["val_acc"]) < 1e-6
+E_ = np.load(f"{ROOT}/emb/B_voc_norm.npy"); clf = make_pipeline(StandardScaler(), LogisticRegression(C=C, max_iter=2000)).fit(E_[tr, L].astype(np.float32), y[tr]); acc0 = float((clf.predict(E_[va, L].astype(np.float32)) == y[va]).mean()); assert abs(acc0 - pj["val_acc"]) < 1e-6; ACC_PLAIN = acc0
+if os.environ.get("LEACE") == "1":   # language erased from the probe: LEACE (concept-erasure) fit on TRAIN vocal embeddings with the Whisper large-v3 language group (en, pt, es, it, de, other) as concept, then the same logistic regression
+    from concept_erasure import LeaceEraser
+    lid3 = np.load(f"{ROOT}/emb/B_lid3_voc.npy"); langs = json.load(open(f"{ROOT}/emb/lid_langs.json")); G = ["en", "pt", "es", "it", "de"]; gl = np.array([G.index(langs[int(np.argmax(lid3[i]))]) if langs[int(np.argmax(lid3[i]))] in G else 5 for i in range(len(rows))]); Z = np.eye(6)[gl]
+    sc = StandardScaler().fit(E_[tr, L].astype(np.float32)); Xtr = sc.transform(E_[tr, L].astype(np.float32)); er = LeaceEraser.fit(torch.tensor(Xtr, dtype=torch.float64), torch.tensor(Z[tr], dtype=torch.float64))
+    def fe(X): return er(torch.tensor(sc.transform(X.astype(np.float32)), dtype=torch.float64)).numpy().astype(np.float32)
+    lr = LogisticRegression(C=C, max_iter=2000).fit(fe(E_[tr, L]), y[tr]); acc0 = float((lr.predict(fe(E_[va, L])) == y[va]).mean()); print("language-erased vocal probe validation accuracy", acc0, flush=True)
+    class _C:
+        def predict_proba(self, X): return lr.predict_proba(fe(X))
+    clf = _C(); OUTN = os.environ.get("OUTNAME", "swap_market_probe") + "_leace"
 proc, mert = load_mert(); meter = pyln.Meter(SR)
 def norm(w): l = meter.integrated_loudness(w.astype(np.float64)); return w if not np.isfinite(l) or np.abs(w).max() < 1e-4 else np.clip(pyln.normalize.loudness(w.astype(np.float64), l, -23.0), -1, 1).astype(np.float32)
 def emb(w):

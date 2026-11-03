@@ -1,0 +1,77 @@
+{
+ "val_acc_vocal_probe": 0.4019607843137255,
+ "layer": 16,
+ "C": 0.01,
+ "cells": {
+  "es": {
+   "target": "Spain",
+   "n": 63,
+   "P_target": 0.0925489217042923,
+   "P_target_source_language_control": 0.06992203742265701,
+   "P_target_original_vocal": 0.1370384395122528,
+   "delta_vs_control": 0.022626884281635284,
+   "ci": [
+    0.0011049709282815456,
+    0.043509338051080704
+   ],
+   "top1_hit": 0.015873015873015872,
+   "top1_hit_control": 0.015873015873015872
+  },
+  "pt": {
+   "target": "Brazil",
+   "n": 64,
+   "P_target": 0.19717346131801605,
+   "P_target_source_language_control": 0.20456787943840027,
+   "P_target_original_vocal": 0.1674603521823883,
+   "delta_vs_control": -0.007394399493932724,
+   "ci": [
+    -0.049117423593997955,
+    0.03093848191201687
+   ],
+   "top1_hit": 0.25,
+   "top1_hit_control": 0.234375
+  },
+  "de": {
+   "target": "Germany",
+   "n": 76,
+   "P_target": 0.164388045668602,
+   "P_target_source_language_control": 0.17588919401168823,
+   "P_target_original_vocal": 0.1819106489419937,
+   "delta_vs_control": -0.011501157656311989,
+   "ci": [
+    -0.046068109571933746,
+    0.023610489442944527
+   ],
+   "top1_hit": 0.10526315789473684,
+   "top1_hit_control": 0.13157894736842105
+  },
+  "it": {
+   "target": "Italy",
+   "n": 72,
+   "P_target": 0.13383692502975464,
+   "P_target_source_language_control": 0.12738043069839478,
+   "P_target_original_vocal": 0.1644076555967331,
+   "delta_vs_control": 0.00645652087405324,
+   "ci": [
+    -0.014249785803258419,
+    0.027616024017333984
+   ],
+   "top1_hit": 0.041666666666666664,
+   "top1_hit_control": 0.08333333333333333
+  },
+  "en": {
+   "target": "US+UK",
+   "n": 34,
+   "P_target": 0.41549140214920044,
+   "P_target_source_language_control": 0.3833850920200348,
+   "P_target_original_vocal": 0.28594517707824707,
+   "delta_vs_control": 0.03210632503032684,
+   "ci": [
+    -0.04007435217499733,
+    0.10729570686817169
+   ],
+   "top1_hit": 0.5588235294117647,
+   "top1_hit_control": 0.4411764705882353
+  }
+ }
+}

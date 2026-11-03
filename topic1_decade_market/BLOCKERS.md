@@ -40,3 +40,12 @@ Ideas: independent families (production-feature baseline after Tardieu et al., D
 ## B6. The era axis changes the accompaniment only
 Evidence: the vocal is kept from the original in all era-axis runs; vocal stems carry decade information (dataset A vocals .39 accuracy, WORKLOG 2026-10-25).
 Ideas: era-specific vocal processing chain (bandwidth, saturation, compression, reverb as parametrized DSP) applied to the original vocal, scored with the era probes on the remix (T-9).
+
+## B7. The lyric-route market move is language only
+Evidence: after LEACE erasure of the language group from the vocal market probe the move disappears (Delta P(target) within +-.03 for all five targets; WORKLOG 2026-11-04, T-4l), while the plain probe moves by +.19 to +.42 (T-4k).
+Reading (interpretation): language is one cue of the market; the cover route changes the language and keeps the arrangement of the original accompaniment, so the remaining market cues are not moved.
+Ideas and experiments
+- I5 metadata-derived style descriptors for the accompaniment (T-4e, running).
+- I6 reference-audio style transfer: ACE-Step takes a reference audio for style; use real clips of the target market (dataset-B TRAIN clips of the market and decade) as the reference with the original melody kept (T-4m); read-outs: Discogs-EffNet style tags, accompaniment market probe (M-3), language-erased vocal probe.
+- I7 vocal delivery: accent and singing style are not isolated by a language swap; test a conversion that keeps the language but changes the singer to a native singer of the target market (FreeSVC was not effective with a mean-embedding voice, T-4a; a per-reference nearest-voice choice is untested): T-4n.
+- I8 market-conditioned arrangement from the Discogs-VI metadata: condition the accompaniment adapter on the style distribution of (market, decade) instead of a label; needs audio of Discogs-VI-YT (B3).
