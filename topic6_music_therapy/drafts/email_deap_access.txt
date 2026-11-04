@@ -17,6 +17,13 @@ How DEAP will be used
 Team members
 [NAME 1], [NAME 2], [NAME 3] (all at NTU). Supervisor: Professor Yi-Hsuan Yang, NTU, [professor's NTU email].
 
+[Internal note, delete before sending. Datasets whose license must be signed by a person with a permanent academic/research position (so Prof. Yang would sign), per survey2 (2026-11-03):
+ - DEAP: EULA wording "signed by a person with a permanent position at an academic/research institute"; up to 5 same-institution researchers; institutional email + webpage.
+ - AMIGOS: same wording and rules (QMUL page was down; wording from ChatGPT survey, not re-checked).
+ - MAHNOB-HCI: "permanent position at an academic institute"; registration page returned 404 on 2026-11-03.
+ - SEED / SEED-IV / SEED-V: signed license PDF from a faculty PI (Perplexity); ChatGPT reports the form accepts a student with supervisor name/email; one signed form covers all three.
+ Not signature-gated: DREAMER (Zenodo request with name, email, institution, position, reason), MET ds008701, BCMI ds002721/2/4 (open).]
+
 I have attached the signed End User License Agreement [attach after signing; the EULA is on the download page]. Please tell us if you need anything else, such as confirmation from our supervisor.
 
 Thank you for your time and for making the dataset available.
