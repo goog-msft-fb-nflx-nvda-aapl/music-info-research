@@ -1,0 +1,12 @@
+{
+ "F1_lag_tolerant_corrca": {
+  "song_id_acc": 0.05808080808080808,
+  "matched_minus_mismatched": 0.0001065968186780215,
+  "chance": 0.05
+ },
+ "F2_band_power_envelope": {
+  "song_id_acc": 0.05555555555555555,
+  "matched_minus_mismatched": 0.004650185091719146,
+  "chance": 0.05
+ }
+}

@@ -55,3 +55,12 @@ Open, in order of expected value:
 - [x] LaBraM and CBraMod fine-tuning on BCMI done (chance).
 - [ ] Contact MET authors only if the team decides to; the mail draft stays in drafts/ (not sent).
 - [ ] Repository hygiene before going public: confirm licenses (PMEmo data use, demo audio, BCMI CC BY vs CC0).
+
+
+## Status for teammates (2026-11-04, end of day)
+Where we are: EEG -> valence/arousal does not work subject-independently on MET (66 ch) or BCMI ds002722 with ridge, EEGNet, frozen/fine-tuned CBraMod and LaBraM, covariance/alignment features (WORKLOG entries B1, B5, "Failure investigation"). The audio side works (VA-conditioned Stable Audio Open LoRA, arousal r about 0.8, valence 0.2-0.33 on a MERT evaluator). Open facts: MET ds008701 has 66 channels and no audio (the "8 channels" figure likely comes from the IEEE DataPort copy); BCMI has audio but its music-code-to-clip mapping is unresolved; DREAMER needs a Zenodo access request (no signature stated), DEAP/AMIGOS/MAHNOB/SEED need a permanent-staff signature (see drafts/email_deap_access.txt).
+- [ ] Positive control is the key gap: the song cannot be identified from MET EEG across subjects even with lag tolerance. First check whether MET EEG is time-locked to the music (needs song audio or identity; the MET authors or the IEEE DataPort page may have it).
+- [ ] Ask DREAMER access on Zenodo (https://zenodo.org/records/546113; name, email, institution, position, reason); run the same protocols (loso, strict, shuffled control) there.
+- [ ] Per-subject few-shot calibration (train on 19 subjects + a few trials of the test subject) on MET and BCMI.
+- [ ] Decide as a team: either (a) keep the pipeline with EEG as an input that is reported as a negative result, plus the working audio side, or (b) reframe the contribution on the audio side (valence control, second evaluator, FAD).
+- [ ] Resolve BCMI clip mapping from Daly et al., Sci Data 2020 (doi 10.1038/s41597-020-0507-6).

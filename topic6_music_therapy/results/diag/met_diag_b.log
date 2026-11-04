@@ -1,0 +1,55 @@
+/home/jtan/music_therapy/scripts/met_diag_b.py:76: RuntimeWarning: Mean of empty slice
+  match = np.array([[scores[s, g, g] - np.nanmean(np.delete(scores[s, g], g)) for g in range(nG)] for s in range(nS)])
+D {
+ "ncomp": 3,
+ "song_id_acc_mean": 0.0375,
+ "song_id_acc_by_subject": [
+  0.0,
+  0.05,
+  0.15,
+  0.0,
+  0.1,
+  0.0,
+  0.05,
+  0.05,
+  0.05,
+  0.0,
+  0.0,
+  0.0,
+  0.05,
+  0.05,
+  0.05,
+  0.05,
+  0.0,
+  0.0,
+  0.0,
+  0.1
+ ],
+ "matched_minus_mismatched_corr_mean": 3.368767058876694e-05,
+ "matched_minus_mismatched_by_subject_min_max": [
+  -0.016456740827546282,
+  0.00934645391590541
+ ],
+ "category_acc_from_predicted_song": 0.14898989898989898,
+ "matched_score_vs_subject_centred_rating": {
+  "valence": {
+   "r": 0.0006130914360464485,
+   "p_two_sided": 0.986
+  },
+  "arousal": {
+   "r": 0.10712494713880033,
+   "p_two_sided": 0.0315
+  },
+  "like": {
+   "r": -0.03061225394473372,
+   "p_two_sided": 0.5405
+  },
+  "fam": {
+   "r": 0.029104922589018367,
+   "p_two_sided": 0.5615
+  }
+ }
+}
+aligned {'aligned/category_acc': 0.19710526315789473, 'aligned/category_chance': 0.2, 'aligned/song_id_acc': 0.035263157894736843, 'aligned/song_id_chance': 0.05}
+trace_norm_only {'trace_norm_only/category_acc': 0.1513157894736842, 'trace_norm_only/category_chance': 0.2, 'trace_norm_only/song_id_acc': 0.05039473684210527, 'trace_norm_only/song_id_chance': 0.05}
+top by ccc [(0.05149762501367588, 'aligned/lam0.01/valence/raw'), (0.038305669494389225, 'aligned/lam0.1/valence/raw'), (0.03650731309763821, 'aligned/lam0.01/valence/subject_centred_target'), (0.03242075203781074, 'trace_norm_only/lam0.01/arousal/raw'), (0.030230246328150204, 'aligned/lam0.1/arousal/subject_centred_target'), (0.03020091670310223, 'trace_norm_only/lam0.1/arousal/raw')]
