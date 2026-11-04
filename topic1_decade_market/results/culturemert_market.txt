@@ -1,0 +1,2 @@
+culturemert mix: best layer by CV 8 (cv 0.305, C 0.1), validation acc 0.255; best validation over layers 0.363 (chance 0.167)
+culturemert acc: best layer by CV 2 (cv 0.295, C 0.01), validation acc 0.304; best validation over layers 0.363 (chance 0.167)

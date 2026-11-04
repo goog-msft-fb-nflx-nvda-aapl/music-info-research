@@ -1309,3 +1309,9 @@ Measured: all three seeds exceed the baseline mean (.79-.81 vs .70) on a read-ou
 ### N-2 baseline spread (ctrlc adapter, training seeds 0-2, same 432-clip protocol)
 Files `results/ax_ctrlc_{,s1_,s2_}ge10_eval.json`. Target hit MERT / MuQ: seed 0 .819 / .764, seed 1 .792 / .794, seed 2 .840 / .769 (means .817 / .776).
 Versus one-hot + 16 prefix (seeds 0-2: MERT .847-.889, mean .869; MuQ .787-.829, mean .809): MERT +.05 with ranges almost touching (.840 vs .847), MuQ +.03 within overlapping ranges. Interpretation: the N-2 gain is small; clearly separated only on the independent Discogs-EffNet read-out (mean .79-.81 vs one baseline seed .70; baseline seeds 1-2 read-out running, `src/run_t11_base.sh`).
+
+## M-5: CultureMERT-95M as a market read-out (B1)
+
+`src/140_culturemert_market.py` (layer outputs captured by forward hooks, 12 transformer layers; logistic probe, C by 5-fold CV on TRAIN; 798 train / 102 validation; chance .167). Files `results/culturemert_market.{json,txt}`.
+Mix: best layer by CV 8, validation .255 (best validation over layers .363). Accompaniment stem: best layer by CV 2, validation .304 (best over layers .363). Reference: MERT-v2-30s probe on the mix, validation .559 (layer 14, `results/probe_B.json`); accompaniment-only M-3 encoder .22-.33.
+Measured: the culture-aware encoder does not read the 1980s release market better than MERT-v2 on the same clips (mix .26 vs .56) and sits in the same .30 band as M-3 on the accompaniment. Interpretation: the accompaniment carries little market information for these encoders; the MERT-v2 mix result is largely language (B7, language-erased probe near chance). MERT-v1-95M could not be loaded (.bin weights, torch < 2.6 refuses torch.load), so the same-architecture control is missing.
