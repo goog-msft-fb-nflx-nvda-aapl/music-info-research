@@ -64,3 +64,4 @@ Where we are: EEG -> valence/arousal does not work subject-independently on MET 
 - [ ] Per-subject few-shot calibration (train on 19 subjects + a few trials of the test subject) on MET and BCMI.
 - [ ] Decide as a team: either (a) keep the pipeline with EEG as an input that is reported as a negative result, plus the working audio side, or (b) reframe the contribution on the audio side (valence control, second evaluator, FAD).
 - [ ] Resolve BCMI clip mapping from Daly et al., Sci Data 2020 (doi 10.1038/s41597-020-0507-6).
+- [ ] Survey round 4: send `survey4/survey_prompt.txt` to ChatGPT/Perplexity/Gemini, save as `survey4/response_*`, verify sources, then pick experiments (new-bottleneck framing in WORKLOG "Proposed new bottleneck").
