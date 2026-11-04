@@ -65,3 +65,8 @@ Literature/model search 2026-11-04 (standard web search; candidates, not yet tri
 - B2/B7: Poly-SVC (arXiv 2605.12310) zero-shot cross-lingual singing voice conversion; code availability unchecked.
 - B6/N-4: SongEcho (ICLR 2026, arXiv 2602.19976) and Qwen-Music (HF papers 2607.11699) are melody-preserving cover generators; no era or market conditioning found; HF checkpoints unchecked.
 - B7 (market cues beyond language): no 2026 paper found on regional-style or decade-conditioned audio generation in this search; the gap supports the novelty claim, to be verified with an extended search before use in the paper.
+
+Extended search 2026-11-04 (two queries: era/decade-conditioned generation; market/country-conditioned generation)
+- Found no text-to-music or cover-generation paper that conditions on release decade or release market. Closest: music era recognition (arXiv 2407.05368, supervised contrastive learning with artist information), JASCO (arXiv 2406.10970) and Noise2Music (arXiv 2302.03917) as conditioning architectures; SecondHandSongs / SHS as cover-pair source. Interpretation: supports the novelty of the two-axis framing; absence in two searches is not proof, so the paper's related-work claim needs a final check.
+- Synthesis for next experiments: (1) SoulX-Singer melody-driven synthesis for B2 (install pending approval); (2) held-out read-out of N-2 (running, tmux t11n2); (3) the remaining blockers B1/B7 have no new external method, so they stay with in-house routes (lyric route, style descriptors).
+Install attempt of SoulX-Singer environment (`venv_sx`, conda py3.10 plus its requirements.txt; repo cloned to `~/era_market/ext/SoulX-Singer` at commit 81aeb3a) was refused by the auto-mode classifier as external code; waiting for the user.
