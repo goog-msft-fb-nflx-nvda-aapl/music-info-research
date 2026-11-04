@@ -91,7 +91,7 @@ Open (GPU access ends 2026-10-31):
 
 ## Next-round method candidates (after the M-2 round; GPU; each is one run family, logged with its own ID)
 - [ ] N-1 **bandwidth-randomized training**: adapter trained on accompaniment with random low-pass / EQ / hiss augmentation (and a spectrum-matched variant) so the decade cannot be carried by bandwidth; test with the era-free bandwidth prompts and the nuisance-erased probes (expect: bandwidth-prompt effect falls, decade effect survives or not)
-- [ ] N-2 **era tokens (soft prompts)**: learn K continuous text tokens per decade (prompt tuning) on the same data, compare with the decade word, with z-conditioning and with LoRA alone
+- [~] N-2 (run done, WORKLOG N-2: one-hot+16 prefix best; seed repeat and held-out read-out open) **era tokens (soft prompts)**: learn K continuous text tokens per decade (prompt tuning) on the same data, compare with the decade word, with z-conditioning and with LoRA alone
 - [ ] N-3 **richer era code**: z with a six-way decade head plus a nuisance-orthogonal subspace (supervised contrastive loss, prototype per decade, mixture of prototypes) so middle decades (1980s, 1990s) are encoded; z via prefix tokens in cross-attention (IP-Adapter style, zero-gated) instead of a bias
 - [ ] N-4 **era-axis conditioning on the strongest melody controller**: apply the z-conditioning (and LoRA) to the Stable Audio Open adapters (SongEcho_base/large: top-1 .986 at weak era control) so that melody preservation and decade control come together
 - [ ] N-5 **probe-guided sequential Monte Carlo**: N particles per 2 s segment, weight by the nuisance-controlled era score of the partially decoded audio and the melody similarity to the source, resample (inference-time, no training); compares with best-of-N (G09) and with guidance
@@ -107,7 +107,7 @@ Order by cost/benefit: N-1, N-2, N-3 (training only, ~15 min each), N-4, N-5, th
 Gate before the submission (target: all experiments complete by 20 Dec 2026, paper draft by 10 Jan 2027, submit by 20 Jan 2027): M-1..M-3 finished and written up; N-1..N-7 each run or explicitly dropped with the reason; B-1 baselines done; every number in the paper re-checked against `results/`; reproduction guide in the repo; report and page updated.
 
 ## Schedule to the ACL submission (details and criteria: MASTER_PLAN section 5)
-- [ ] by 15 Nov: M-2 replicates (`ax_ctrl_s1/s2`), dose-response, `c` variants analysed; N-1, N-2 run
+- [~] by 15 Nov: M-2 replicates (`ax_ctrl_s1/s2`), dose-response, `c` variants analysed; N-1, N-2 (run done, WORKLOG N-2: one-hot+16 prefix best; seed repeat and held-out read-out open) run
 - [ ] by 30 Nov: N-3, N-4 results; decide N-5
 - [ ] by 10 Dec: freeze numbers; regenerate all tables; reproduction guide
 - [ ] 21-31 Dec: page and video update; start paper (ICML format)
@@ -230,4 +230,4 @@ Project name: Time Traveler. Goal (professor): era-and-market-controlled cover s
 - [ ] Ask (through the TA or the professor) about LargeSHS (lecturer's dataset, SecondHandSongs adaptation clusters with audio links): access, fields for release year and country, licence; alternative or complement to the Discogs-VI audio
 - [~] open remaining cited papers: opened 2026-11-04 GagaST (Findings of ACL 2022), JASCO (preprint), Pop2Piano (preprint), AccoMontage (ISMIR 2021), SongEcho (ICLR 2026), LargeSHS (arXiv version withdrawn); still unopened: Kostrzewa and Grabczynski (ICCS 2024), Tardieu et al. (DAFx 2011), Demerle et al., PiCoGen
 - [~] T-11 (Discogs-EffNet part done, WORKLOG T-11; CLAP text score and production-feature baseline still open) independent read-outs for 1990s and 2000s: Discogs-EffNet decade probe (`src/36_discogs_tagger.py` on the existing `gen_ax_ctrlc_ge10` and ACE LoRA sets), CLAP text score for the decade prompt, a production-feature baseline; per-class comparison with the MERT/MuQ probes
-- [ ] N-2 era tokens (running 2026-11-04): `ax_onehot_pfx4`, `ax_onehot_pfx16` = one-hot z through P learned prefix tokens (free per-decade token embeddings), via `run_ax_prefix.sh`
+- [~] N-2 (run done, WORKLOG N-2: one-hot+16 prefix best; seed repeat and held-out read-out open) era tokens (running 2026-11-04): `ax_onehot_pfx4`, `ax_onehot_pfx16` = one-hot z through P learned prefix tokens (free per-decade token embeddings), via `run_ax_prefix.sh`

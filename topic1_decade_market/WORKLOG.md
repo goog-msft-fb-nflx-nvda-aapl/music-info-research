@@ -1253,3 +1253,22 @@ Read-out: `src/36_discogs_tagger.py --gen <dir> --seeds ... --eras neutral,1960s
 Reference (unconditioned original clips, identity codec): argmax shares .29 .17 .04 .12 .17 .21 (probe is weak on real audio, val acc .52).
 Measured: with this independent read-out the MusicGen adapter reaches the target for 1990s (.53) and 2000s (.60), well above the 1/6 chance level; the ACE LoRA never has the 2000s as argmax (0 of its clips) and 1970s only .15; the no-LoRA ACE output is dominated by 1990s/2010s regardless of the requested era.
 Interpretation: the MERT/MuQ probe's low 2000s recall (B8) is a property of that read-out, not necessarily of the generator; the Discogs-EffNet probe is also weak (.52), so both read-outs are reported. Confusions are mostly adjacent decades (1990s to 1980s .33, 2000s to 1990s .29, 2010s to 2000s .24).
+
+## N-2: era tokens (one-hot z through learned prefix tokens)
+
+Launch: `bash run_ax_prefix.sh 0 ax_onehot_pfx4 A_eraz_onehot_s0 4` and `bash run_ax_prefix.sh 1 ax_onehot_pfx16 A_eraz_onehot_s0 16` (3000 steps each, then generation and evaluation at ge 10; 24 clips x 6 eras x 3 seeds = 432 clips per row). Single training seed. Files: `results/ax_onehot_pfx{4,16}_ge10_{eval,content}.json`, `results/ax_ctrlc_pfx{4,16}_ge10_*.json`.
+
+Target-decade hit (argmax equals requested decade) / mean P(target), codec-matched probes:
+
+| variant | MERT hit / P | MuQ hit / P |
+|---|---|---|
+| ctrlc adapter (baseline) | .819 / .658 | .764 / .611 |
+| ctrlc + 4 prefix tokens | .701 / .605 | .743 / .604 |
+| ctrlc + 16 prefix tokens | .801 / .660 | .713 / .582 |
+| one-hot z adapter | .736 / .599 | .757 / .611 |
+| one-hot z + 4 prefix tokens | .780 / .628 | .738 / .596 |
+| one-hot z + 16 prefix tokens | .889 / .728 | .812 / .661 |
+
+Content (mean over era conditions, top-1 / own-clip similarity / chord agreement): baseline .854 / .879 / .347; one-hot+4 .868 / .878 / .355; one-hot+16 .840 / .881 / .354.
+Measured: one-hot z with 16 prefix tokens is highest on both probes (MERT .889, MuQ .812) with content metrics within .02 of the baseline. Other variants are at or below the baseline.
+Interpretation: one training seed and 24 source clips; the gain over baseline (+.07 MERT, +.05 MuQ) is not yet tested against seed variance. Both probes are the ones used for training-time checks elsewhere in this log, so a held-out read-out (Discogs-EffNet, T-11 style) is still needed before the claim is used.
