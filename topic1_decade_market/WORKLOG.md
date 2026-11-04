@@ -1282,3 +1282,16 @@ Target hit / mean P(target), MERT | MuQ; content top-1 / own-clip similarity:
 | 1 | .847 / .723 | .829 / .667 | .866 | .884 |
 | 2 | .870 / .724 | .787 / .652 | .880 | .884 |
 Measured: MERT hit .847-.889 (mean .869), MuQ .787-.829 (mean .809), against the ctrlc baseline .819 / .764 (one seed). Interpretation: the MERT gain survives three seeds (all above the baseline seed); the MuQ gain is small relative to seed spread; the baseline itself has one seed only, so its spread is unknown.
+
+## T-4h-b: SoulX-Singer melody-driven resynthesis (identity control, English)
+
+Setup: SoulX-Singer (Apache 2.0, commit 81aeb3a, weights `Soul-AILab/SoulX-Singer` and `-Preprocess`), conda py3.10 env `venv_sx` from its requirements.txt (+ `lightning`, NLTK taggers). English ASR step replaced by Whisper large-v3 word timestamps because the shipped NeMo/Parakeet path needs a newer torch than the pinned 2.2; vocal detection, F0, ROSVOT notes and phonemes are the repository's own. 12 clips (the lyric-route set). Target = the clip's own annotation (original melody and ASR lyrics), prompt = the clip's own vocal (self timbre), vocal RMS-matched and added to the original accompaniment, read out with `112_lyric_route_eval.py`.
+Commands (from `~/era_market`): `N=12 ./venv/bin/python src/138_sx_prep.py`; `bash src/138_sx_run.sh 2` (annotation); `bash src/138_sx_synth.sh 2` and `CONTROL=score bash src/138_sx_synth.sh 2`; `./venv/bin/python src/139_sx_swap.py` (CONTROL=score for the MIDI variant); `GEN=sx_swap[_score] ./venv/bin/python src/112_lyric_route_eval.py`. Files `results/lyric_route_eval_sx_swap{,_score}.{json,txt}` (transcripts stripped).
+
+| control | VINet cos to original | VINet top-1 of 12 | language top-1 (en) | lyric similarity to intended text |
+|---|---|---|---|---|
+| F0 melody | .958 | 1.00 | 1.00 | .353 |
+| MIDI score | .863 | 1.00 | .917 | .449 |
+Reference (same 12 clips): ACE lego route cos .81-.83, top-1 .83-.92 (language hit .17-.33 for non-English targets); ACE cover route cos .49-.52, top-1 <= .33.
+Measured: melody-driven synthesis keeps song identity at least as well as the lego route (cos .96, top-1 1.00); resynthesized English words match the intended text only partly (.35 F0, .45 MIDI).
+Limits: control of the identity path only; the model has no Spanish, Portuguese, German or Italian, so the market (language) move is untested here; the vocal market probe was not run on these clips. Interpretation: the identity versus language trade-off of B2 can be decoupled for English, not yet for the target languages.

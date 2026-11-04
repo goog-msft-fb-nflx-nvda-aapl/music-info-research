@@ -1,0 +1,2 @@
+orig: n=12 P(intended language) 0.752, language top-1 hit 0.917, lyric similarity to intended text 0.449, intended text is the closest of the five versions in 0.83, VINet cos to the original 0.863, VINet top-1 among 12 1.00
+original mix: P(en) 0.761
