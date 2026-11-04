@@ -59,3 +59,9 @@ Ideas and experiments
 - I10 merge or coarsen the decade scale for the probes (1990s-2000s as one class) and report ordinal expected-decade shifts instead of class probabilities (already available as E in the six-decade tables).
 
 B8 update (T-11, 2026-11-04): independent Discogs-EffNet read-out gives MusicGen-adapter target hits of .53 (1990s) and .60 (2000s) versus 1/6 chance; the near-zero 1990s/2000s result is read-out dependent. ACE-Step LoRA remains at 0 for 2000s. See WORKLOG T-11.
+
+Literature/model search 2026-11-04 (standard web search; candidates, not yet tried)
+- B2 (identity vs language): SoulX-Singer (arXiv 2602.07803, Apache 2.0, weights `Soul-AILab/SoulX-Singer`): zero-shot singing synthesis with F0 or MIDI melody control, lyric editing, prompt-voice timbre. Fits T-4h (melody-driven lyric synthesis, original F0 kept). Limit: trained on Mandarin, English, Cantonese only, so Spanish/Portuguese/German/Italian lyrics are likely out of domain; usable for a language-kept variant and an English/Mandarin/Cantonese-market test. Install needs user approval (third-party code and weights).
+- B2/B7: Poly-SVC (arXiv 2605.12310) zero-shot cross-lingual singing voice conversion; code availability unchecked.
+- B6/N-4: SongEcho (ICLR 2026, arXiv 2602.19976) and Qwen-Music (HF papers 2607.11699) are melody-preserving cover generators; no era or market conditioning found; HF checkpoints unchecked.
+- B7 (market cues beyond language): no 2026 paper found on regional-style or decade-conditioned audio generation in this search; the gap supports the novelty claim, to be verified with an extended search before use in the paper.

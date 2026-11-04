@@ -1272,3 +1272,13 @@ Target-decade hit (argmax equals requested decade) / mean P(target), codec-match
 Content (mean over era conditions, top-1 / own-clip similarity / chord agreement): baseline .854 / .879 / .347; one-hot+4 .868 / .878 / .355; one-hot+16 .840 / .881 / .354.
 Measured: one-hot z with 16 prefix tokens is highest on both probes (MERT .889, MuQ .812) with content metrics within .02 of the baseline. Other variants are at or below the baseline.
 Interpretation: one training seed and 24 source clips; the gain over baseline (+.07 MERT, +.05 MuQ) is not yet tested against seed variance. Both probes are the ones used for training-time checks elsewhere in this log, so a held-out read-out (Discogs-EffNet, T-11 style) is still needed before the claim is used.
+
+### N-2 seed repeat (one-hot z + 16 prefix tokens)
+Launch: `bash src/run_ax_prefix_seed.sh <gpu> ax_onehot_pfx16_s{1,2} A_eraz_onehot_s0 16 <seed>` (seeds 1, 2). Files `results/ax_onehot_pfx16_s{1,2}_ge10_*.json`.
+Target hit / mean P(target), MERT | MuQ; content top-1 / own-clip similarity:
+| training seed | MERT | MuQ | top-1 | sim |
+|---|---|---|---|---|
+| 0 | .889 / .728 | .812 / .661 | .840 | .881 |
+| 1 | .847 / .723 | .829 / .667 | .866 | .884 |
+| 2 | .870 / .724 | .787 / .652 | .880 | .884 |
+Measured: MERT hit .847-.889 (mean .869), MuQ .787-.829 (mean .809), against the ctrlc baseline .819 / .764 (one seed). Interpretation: the MERT gain survives three seeds (all above the baseline seed); the MuQ gain is small relative to seed spread; the baseline itself has one seed only, so its spread is unknown.
