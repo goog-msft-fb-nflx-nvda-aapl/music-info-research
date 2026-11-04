@@ -1,0 +1,54 @@
+{
+ "benchmark": {
+  "works": 3000,
+  "performances": 15000,
+  "performances_with_mbid": 10027,
+  "works_with_year_gap_info": 1000,
+  "pairs": 76741,
+  "gap_years_median": 5.0,
+  "gap_ge_10": 26802,
+  "gap_ge_20": 14222,
+  "works_with_span_ge_20": 626,
+  "performances_by_decade": {
+   "1890": 3,
+   "1900": 15,
+   "1910": 42,
+   "1920": 292,
+   "1930": 712,
+   "1940": 850,
+   "1950": 2784,
+   "1960": 3992,
+   "1970": 1643,
+   "1980": 762,
+   "1990": 1287,
+   "2000": 1418,
+   "2010": 1088
+  }
+ },
+ "coveranalysis": {
+  "works": 5000,
+  "performances": 10000,
+  "performances_with_mbid": 6821,
+  "works_with_year_gap_info": 4968,
+  "pairs": 4968,
+  "gap_years_median": 10.0,
+  "gap_ge_10": 2485,
+  "gap_ge_20": 1548,
+  "works_with_span_ge_20": 1548,
+  "performances_by_decade": {
+   "1890": 1,
+   "1900": 3,
+   "1910": 17,
+   "1920": 59,
+   "1930": 147,
+   "1940": 159,
+   "1950": 521,
+   "1960": 1328,
+   "1970": 1520,
+   "1980": 1128,
+   "1990": 1225,
+   "2000": 1788,
+   "2010": 2072
+  }
+ }
+}
