@@ -1295,3 +1295,13 @@ Commands (from `~/era_market`): `N=12 ./venv/bin/python src/138_sx_prep.py`; `ba
 Reference (same 12 clips): ACE lego route cos .81-.83, top-1 .83-.92 (language hit .17-.33 for non-English targets); ACE cover route cos .49-.52, top-1 <= .33.
 Measured: melody-driven synthesis keeps song identity at least as well as the lego route (cos .96, top-1 1.00); resynthesized English words match the intended text only partly (.35 F0, .45 MIDI).
 Limits: control of the identity path only; the model has no Spanish, Portuguese, German or Italian, so the market (language) move is untested here; the vocal market probe was not run on these clips. Interpretation: the identity versus language trade-off of B2 can be decoupled for English, not yet for the target languages.
+
+### N-2 held-out read-out (Discogs-EffNet probe, T-11 method)
+Launch: `bash src/run_t11_n2.sh` (CPU). Files `results/discogs_decade_ax_onehot_pfx16{,_s1,_s2}_ge10.json`. Target-decade argmax share per decade (1960s ... 2010s), then mean:
+| model | 60s | 70s | 80s | 90s | 00s | 10s | mean |
+|---|---|---|---|---|---|---|---|
+| ctrlc adapter (T-11, 1 seed) | 1.00 | .58 | .88 | .53 | .60 | .64 | .704 |
+| one-hot + 16 prefix, seed 0 | 1.00 | .79 | .93 | .78 | .65 | .58 | .789 |
+| seed 1 | 1.00 | .90 | .89 | .88 | .58 | .61 | .810 |
+| seed 2 | 1.00 | .94 | .96 | .78 | .56 | .62 | .810 |
+Measured: all three seeds exceed the baseline mean (.79-.81 vs .70) on a read-out not used for training or selection; gains sit in the 1970s and 1990s, the 2010s are not better. Interpretation: N-2 holds on an independent probe; the baseline has one seed only.
