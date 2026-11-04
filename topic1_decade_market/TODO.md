@@ -233,3 +233,4 @@ Project name: Time Traveler. Goal (professor): era-and-market-controlled cover s
 - [~] N-2 (run done, WORKLOG N-2: one-hot+16 prefix best; seed repeat and held-out read-out open) era tokens (running 2026-11-04): `ax_onehot_pfx4`, `ax_onehot_pfx16` = one-hot z through P learned prefix tokens (free per-decade token embeddings), via `run_ax_prefix.sh`
 - [~] T-4h-b SoulX-Singer (done for English identity control, WORKLOG T-4h-b); open: a synthesizer covering es/pt/de/it
 - [ ] extended literature search on regional-style and era-conditioned audio generation before the paper's novelty claim
+- [ ] regenerate ctrlc seeds 1-2 (`bash src/run_ax.sh <gpu> ax_ctrl_s1 ...`, audio deleted) for the Discogs-EffNet read-out of the N-2 baseline spread
