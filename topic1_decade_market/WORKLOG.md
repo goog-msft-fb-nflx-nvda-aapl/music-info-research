@@ -1305,3 +1305,7 @@ Launch: `bash src/run_t11_n2.sh` (CPU). Files `results/discogs_decade_ax_onehot_
 | seed 1 | 1.00 | .90 | .89 | .88 | .58 | .61 | .810 |
 | seed 2 | 1.00 | .94 | .96 | .78 | .56 | .62 | .810 |
 Measured: all three seeds exceed the baseline mean (.79-.81 vs .70) on a read-out not used for training or selection; gains sit in the 1970s and 1990s, the 2010s are not better. Interpretation: N-2 holds on an independent probe; the baseline has one seed only.
+
+### N-2 baseline spread (ctrlc adapter, training seeds 0-2, same 432-clip protocol)
+Files `results/ax_ctrlc_{,s1_,s2_}ge10_eval.json`. Target hit MERT / MuQ: seed 0 .819 / .764, seed 1 .792 / .794, seed 2 .840 / .769 (means .817 / .776).
+Versus one-hot + 16 prefix (seeds 0-2: MERT .847-.889, mean .869; MuQ .787-.829, mean .809): MERT +.05 with ranges almost touching (.840 vs .847), MuQ +.03 within overlapping ranges. Interpretation: the N-2 gain is small; clearly separated only on the independent Discogs-EffNet read-out (mean .79-.81 vs one baseline seed .70; baseline seeds 1-2 read-out running, `src/run_t11_base.sh`).
