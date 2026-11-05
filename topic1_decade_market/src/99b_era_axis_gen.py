@@ -67,6 +67,7 @@ for s in ids:
             fp = os.path.join(out, f"{s}_{era}_s{seed}")
             if os.path.exists(fp + "_remix.wav"): continue
             tok = proc(text=[prompt, NEUTRAL], padding=True, return_tensors="pt"); feat = proc(audio=m32, sampling_rate=32000, text=[prompt], padding=True, return_tensors="pt")["input_features"]
+            if os.environ.get("HPCP_CHROMA"): feat = torch.from_numpy(np.load(os.path.join(ROOT, "emb", "hpcp_chroma", s + ".npy")))[None].to(feat.dtype)   # P-3c: chroma from Da-TACOS-style HPCP instead of the processor chroma
             STATE["ze"] = torch.from_numpy(zof(era))[None].repeat(2, 1).cuda(); STATE["z0"] = torch.zeros_like(STATE["ze"]); STATE["neutral"] = {"input_ids": tok["input_ids"][1:2].repeat(2, 1).to("cuda"), "attention_mask": tok["attention_mask"][1:2].repeat(2, 1).to("cuda")}
             inp = {"input_ids": tok["input_ids"][0:1].repeat(2, 1).to("cuda"), "attention_mask": tok["attention_mask"][0:1].repeat(2, 1).to("cuda"), "input_features": feat.repeat(2, 1, 1).to("cuda").half()}
             torch.manual_seed(seed)
