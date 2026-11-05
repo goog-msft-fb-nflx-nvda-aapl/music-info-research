@@ -1330,3 +1330,8 @@ Interpretation: HPCP chroma is a usable substitute for the processor chroma in t
 
 ## 2026-11-05 — P-3b MusicBrainz release country lookup (`src/142_mb_country.py`, server `results/datacos_mb_country.json`, 6,821 MBIDs, 1.6 MB; not committed)
 Lookup finished; the table of pairs with year gap >= 20 and different countries is still to be built from it (TODO).
+
+## 2026-11-05 — N-7b (3) ACE-Step era LoRA with year-augmented captions (`src/144_ace_lora_year.sh`, `YEAR_CAPTION` in `src/137_ace_lora_gen.py`, `results/ace_lora_gen_yr_e3_eval.json`, `results/six_decades_ace_lora_gen_yr_e3.{json,txt}`)
+Question: do captions with a year ("..., recorded in 1994", year drawn uniformly inside the clip's decade, seed 0) make the 1990s and 2000s appear? Setting as the N-7 pilot (rank 64, alpha 128, lr 1e-4, 3 epochs, cover strength 0.5); generation appends "recorded in <decade>4" to the decade prompt. Command: `bash src/144_ace_lora_year.sh 1 3`.
+Measured (MERT effect [95% CI], top-1): 1960s +.182 (.42), 1970s +.133 (.67), 1980s +.400 (.81), 1990s +.016 [-.029,+.071] (.08), 2000s +.006 [-.018,+.037] (.04), 2010s +.163 (.42). MuQ 1990s +.059 (.17), 2000s +.014 (.12). Caption-only LoRA (WORKLOG N-7): 1990s -.045, 2000s -.018.
+Interpretation: year captions do not make the 1990s or 2000s move; the other decades are within the earlier range (single training seed). A 10-epoch run of the same recipe is running.
