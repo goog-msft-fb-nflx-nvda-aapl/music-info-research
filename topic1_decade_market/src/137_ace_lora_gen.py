@@ -20,6 +20,7 @@ n = 0
 for s in ids:
     z = np.load(f"{H}/stems/A/{s}.npz"); voc, acc0 = z["vocals"].astype(np.float32), z["accomp"].astype(np.float32); src = os.path.join(tmp, s + "_acc_lora_src.wav"); sf.write(src, acc0, SR)
     for era, prompt in ERAS.items():
+        if os.environ.get("YEAR_CAPTION") and era != "neutral": prompt = prompt + ", recorded in " + era[:3] + "4"   # year-augmented caption variant (144_ace_lora_year.sh)
         for sd in a.seeds:
             fp = os.path.join(out, f"{s}_{era}_s{sd}")
             if os.path.exists(fp + "_remix.wav"): continue
