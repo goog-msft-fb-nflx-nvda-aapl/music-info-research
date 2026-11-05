@@ -234,5 +234,5 @@ Project name: Time Traveler. Goal (professor): era-and-market-controlled cover s
 - [~] T-4h-b SoulX-Singer (done for English identity control, WORKLOG T-4h-b); open: a synthesizer covering es/pt/de/it
 - [ ] extended literature search on regional-style and era-conditioned audio generation before the paper's novelty claim
 - [ ] regenerate ctrlc seeds 1-2 (`bash src/run_ax.sh <gpu> ax_ctrl_s1 ...`, audio deleted) for the Discogs-EffNet read-out of the N-2 baseline spread
-- [ ] Da-TACOS cover subset x MusicBrainz (country, date) pair table: check the Da-TACOS metadata for MBIDs and feature availability; test HPCP as a MusicGen-Melody chroma substitute on PA1 clips (compare chroma from audio vs HPCP-derived chroma on melody retention); source: SURVEY4 round 5
+- [ ] Da-TACOS cover subset x MusicBrainz (country, date) pair table: check the Da-TACOS metadata for MBIDs and feature availability; test HPCP as a MusicGen-Melody chroma substitute on PA1 clips (compare chroma from audio vs HPCP-derived chroma on melody retention); source: SURVEY4 round 5  [HPCP substitute done 2026-11-05, WORKLOG P-3c; country table still open]
 - [ ] cite Lee et al. (arXiv 2608.10980, ISMIR 2026) in related work and report era shift per market
