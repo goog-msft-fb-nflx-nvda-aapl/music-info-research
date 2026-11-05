@@ -236,3 +236,9 @@ Project name: Time Traveler. Goal (professor): era-and-market-controlled cover s
 - [ ] regenerate ctrlc seeds 1-2 (`bash src/run_ax.sh <gpu> ax_ctrl_s1 ...`, audio deleted) for the Discogs-EffNet read-out of the N-2 baseline spread
 - [ ] Da-TACOS cover subset x MusicBrainz (country, date) pair table: check the Da-TACOS metadata for MBIDs and feature availability; test HPCP as a MusicGen-Melody chroma substitute on PA1 clips (compare chroma from audio vs HPCP-derived chroma on melody retention); source: SURVEY4 round 5  [HPCP substitute done 2026-11-05, WORKLOG P-3c; country table still open]
 - [ ] cite Lee et al. (arXiv 2608.10980, ISMIR 2026) in related work and report era shift per market
+
+## Plan after the 2026-11-05 round (user direction: survey and consolidate before any full experiment)
+- [ ] finish the running round (h16 HPCP + one-hot+16, base3 baseline regeneration + Discogs-EffNet read-out, acey10 year-caption LoRA 10 epochs); document each in WORKLOG
+- [ ] survey: open and verify the unopened items in SURVEY5.md (MuseControlLite guidance terms, Composer Vector, Audio Conditioning double CFG, Music ControlNet, ACE-Step 1.5, Stylus, TADA activation steering); search composable/multi-axis CFG for audio, concept sliders for audio, steering vectors per axis
+- [ ] measurement design for the 2D plane (CONSOLIDATION.md): per-axis monotonicity, cross-axis leakage, two independent read-outs, content and quality metrics (FAD, CLAP) on the grid; implement as one script over a grid directory
+- [ ] decide the 2D-plane method after the survey (two-term CFG on the adapter vs activation steering vs sliders); no new full experiment before that
