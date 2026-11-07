@@ -1,4 +1,6 @@
-# Evaluation plan for the era × market grid (draft, 2026-11-07)
+# Evaluation plan for the era × market grid (draft, 2026-11-07, revised)
+
+Scope decision (user, 2026-11-07): no new-metric contribution. The paper evaluates with existing generation metrics (FAD as the audio counterpart of text-to-motion FID, R-Precision, MM-Dist, Diversity, MultiModality, content preservation); the focus stays on the two-axis generation. Section B items are descriptive diagnostics already computed in the experiments (hit rate, monotonicity, leakage), reported as analysis and not claimed as new metrics. Whether motion-field metric critiques apply to music is not argued here.
 
 Principle (user): reuse generic generation metrics from text-to-motion and text-to-music as the base, add new metrics only for what they do not cover (controllability along two axes).
 
@@ -15,7 +17,7 @@ Principle (user): reuse generic generation metrics from text-to-motion and text-
 
 Citation status: R-Precision, MM-Dist, Diversity, MultiModality definitions originate in the text-to-motion literature (Guo et al., CVPR 2022 and later); exact reference not yet verified, to be opened before citing.
 
-## B. New metrics (controllability, no direct precedent)
+## B. Diagnostics (descriptive, not claimed as new metrics)
 1. Hit rate and gain vs. neutral with bootstrap CI (existing `145_grid_metrics.py`).
 2. Adjacent vs. far-decade mass and Spearman monotonicity along the era axis (existing).
 3. Dose-response smoothness: monotone, smooth change of classifier probability as the control moves continuously (FreeSliders-style range/smoothness/preservation, arXiv 2511.00103, verified).
