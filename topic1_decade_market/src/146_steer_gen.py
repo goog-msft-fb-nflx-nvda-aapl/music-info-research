@@ -21,11 +21,11 @@ for f in glob.glob(os.path.join(NS, "*_neutral_s*_*.wav")):
 mid = "facebook/musicgen-melody"; proc = AutoProcessor.from_pretrained(mid); model = MusicgenMelodyForConditionalGeneration.from_pretrained(mid, torch_dtype=torch.float16).to("cuda").eval()
 from common import LABELS
 SV = np.load(os.path.join(ROOT, "steer", a.name + ".npy")); SVt = torch.from_numpy(SV).cuda().half(); DEC = list(LABELS["A"]); LAY = [int(x) for x in os.environ.get("LAYERS", "8-23").split("-")]; LAY = list(range(LAY[0], LAY[1] + 1)); BETA = float(os.environ.get("BETA", "1.0")); CAL = os.environ.get("CALIB"); HN = torch.from_numpy(np.load(os.path.join(ROOT, "steer", a.name + "_hnorm.npy"))).cuda().float() if CAL else None; VN = SVt.float().norm(dim=-1).clamp_min(1e-6) if CAL else None; P_ = 0
-CURS = {"v": None, "k": 0}
+CURS = {"v": None, "k": 0}; KK = int(os.environ.get("KROWS", "1"))
 def mk(l):
     def h(mod, inp, out):
         if CURS["v"] is None or l not in LAY: return out
-        x = out[0] if isinstance(out, tuple) else out; x = x.clone(); x[0] += (BETA * (HN[l] / VN[CURS["k"], l]) if CAL else BETA) * CURS["v"][l].to(x.dtype)
+        x = out[0] if isinstance(out, tuple) else out; x = x.clone(); x[:KK] += (BETA * (HN[l] / VN[CURS["k"], l]) if CAL else BETA) * CURS["v"][l].to(x.dtype)
         return (x,) + tuple(out[1:]) if isinstance(out, tuple) else x
     return h
 for l, ly in enumerate(model.decoder.model.decoder.layers): ly.register_forward_hook(mk(l))
