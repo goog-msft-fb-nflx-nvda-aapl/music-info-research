@@ -34,5 +34,5 @@ for s in ids:
     print(s, flush=True)
 top = {}
 for c in ERAS:
-    m = np.mean([r["tags"] for r in out if r["cond"] == c], 0); n = np.mean([r["tags"] for r in out if r["cond"] == "neutral"], 0); top[c] = [(tags[i], round(float(m[i] - n[i]), 3)) for i in np.argsort(-(m - n))[:8]]
+    m = np.mean([r["tags"] for r in out if r["cond"] == c], 0); n = np.mean([r["tags"] for r in out if r["cond"] == ("neutral" if any(q["cond"] == "neutral" for q in out) else a.eras.split(",")[0])], 0); top[c] = [(tags[i], round(float(m[i] - n[i]), 3)) for i in np.argsort(-(m - n))[:8]]
 json.dump({"probe_cv": best, "probe_val_acc": acc, "rows": out, "top_tags_vs_neutral": top}, open(a.out, "w"))
