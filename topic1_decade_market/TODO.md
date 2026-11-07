@@ -253,3 +253,7 @@ Round 2026-11-07 = N-8 steering (b4, b16, b64; flags `steer_b*.done`) + dose swe
 - dose: monotone expected-decade over a0..a1 -> era x language grid (TODO item above); not monotone -> interpolate the prefix tokens instead of z and repeat
 - if all new rows are within the baseline's range, record a null result and move to the quality/loudness/bandwidth condition (SURVEY5 item 1)
 - if a free GPU exists and the survey list has unopened items, open and verify them (QA-MDT arXiv 2405.15863, Gui et al. arXiv 2311.01616) and add them to SURVEY5.md
+
+## Final-presentation demo concept (user, 2026-11-07)
+- Interactive 2D plane (release era × release market); the user hovers or drags a point and the cover of one fixed song (example: a recent Adele song, original market US) changes continuously along both axes (example point: Brazil, 2010). Future eras are out of scope (extrapolation); era and market feature prototypes (per-era steering vectors, per-market language/accompaniment prototypes) define how the continuum evolves.
+- Open: final solution not consolidated; era axis has adapter and steering candidates, market axis is language-carried. Evaluation protocol for the grid (metrics, cross-axis leakage, quality, content preservation) is the next discussion item after the current round.
