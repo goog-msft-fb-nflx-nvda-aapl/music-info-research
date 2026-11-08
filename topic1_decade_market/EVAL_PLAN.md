@@ -15,7 +15,7 @@ Principle (user): reuse generic generation metrics from text-to-motion and text-
 | CLAP score / KL (text-to-music) | optional text-condition agreement; not the main axis |
 | Content preservation (cover task) | chroma/melody similarity to the source song (existing `13_content_metrics.py`: top-1 / cosine) |
 
-Citation status: R-Precision, MM-Dist, Diversity, MultiModality definitions originate in the text-to-motion literature (Guo et al., CVPR 2022 and later); exact reference not yet verified, to be opened before citing.
+Citation status (verified 2026-11-08 by reading the paper text, Guo et al., CVPR 2022, 'Generating Diverse and Natural 3D Human Motions from Text', pp. 5152-5161): R-precision (ground-truth description plus 31 mismatched descriptions ranked by Euclidean distance between motion and text features of a contrastively trained extractor; top-1/2/3) and MultiModal distance (mean Euclidean distance between the motion feature and the text feature of its description) are proposed in that paper; FID, Diversity and MultiModality are adopted from its reference [12] (the Action2Motion paper, to be opened before citing). Adaptation here: no text encoder; the retrieval pool is the 6 real-decade centroids in embedding space (chance 1/6 top-1), MM-Dist is the distance to the target-decade centroid.
 
 ## B. Diagnostics (descriptive, not claimed as new metrics)
 1. Hit rate and gain vs. neutral with bootstrap CI (existing `145_grid_metrics.py`).
