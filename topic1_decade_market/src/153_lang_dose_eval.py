@@ -25,6 +25,7 @@ def emb(w, Lx):
 def lid(y24):
     f = wproc(librosa.resample(y24, orig_sr=SR, target_sr=16000), sampling_rate=16000, return_tensors="pt").input_features.cuda().half()
     with torch.inference_mode(): lg = wm(input_features=f, decoder_input_ids=torch.tensor([[sot]]).cuda()).logits[0, -1]
+    return torch.softmax(lg[lang_ids].float(), -1).cpu().numpy()
 doc = """Language dose: P(intended language) of the mix (Whisper large-v3 language token) and P(target market) of the isolated generated vocal (dataset-B vocal probe) as the fraction f of the lyrics in the target language rises 0, .25, .5, .75, 1 (target es -> Spain, de -> Germany), accompaniment = original. results/lang_dose.{json,txt}. usage (from ~/era_market, main venv): python src/153_lang_dose_eval.py"""
 from scipy.stats import spearmanr
 SEEDS = [0, 1, 2]; FR = [0, 25, 50, 75, 100]; MK = {"es": "Spain", "de": "Germany"}

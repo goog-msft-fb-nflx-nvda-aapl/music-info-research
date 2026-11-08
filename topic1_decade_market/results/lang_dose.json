@@ -1,0 +1,152 @@
+{
+ "cells": {
+  "es|0": {
+   "n_songs": 16,
+   "P_target_language": 0.16030987271127137,
+   "P_target_language_ci": [
+    0.010606138961884426,
+    0.32318205395501215
+   ],
+   "P_source_language": 0.7096229314726468,
+   "P_target_market_vocal": 0.0830325829325981,
+   "P_target_market_ci": [
+    0.038449202273053144,
+    0.13991489075985244
+   ]
+  },
+  "es|25": {
+   "n_songs": 13,
+   "P_target_language": 0.08542243399633428,
+   "P_target_language_ci": [
+    0.04272039254339269,
+    0.1400512916891154
+   ],
+   "P_source_language": 0.47311896964525574,
+   "P_target_market_vocal": 0.06425023157722676,
+   "P_target_market_ci": [
+    0.03849195744006489,
+    0.0967708576028832
+   ]
+  },
+  "es|50": {
+   "n_songs": 13,
+   "P_target_language": 0.1996918183584244,
+   "P_target_language_ci": [
+    0.13366993717425385,
+    0.26822094207611646
+   ],
+   "P_source_language": 0.3519130295667892,
+   "P_target_market_vocal": 0.10545511097193529,
+   "P_target_market_ci": [
+    0.06741958229133907,
+    0.1490257385879373
+   ]
+  },
+  "es|75": {
+   "n_songs": 13,
+   "P_target_language": 0.3973338160042962,
+   "P_target_language_ci": [
+    0.3189498002927464,
+    0.4764014880357979
+   ],
+   "P_source_language": 0.2053138381467225,
+   "P_target_market_vocal": 0.23056905513677076,
+   "P_target_market_ci": [
+    0.17409514381598012,
+    0.2874916126085923
+   ]
+  },
+  "es|100": {
+   "n_songs": 13,
+   "P_target_language": 0.6102387352058521,
+   "P_target_language_ci": [
+    0.44793121419751486,
+    0.7508439253418683
+   ],
+   "P_source_language": 0.03306607155200954,
+   "P_target_market_vocal": 0.3219236029932896,
+   "P_target_market_ci": [
+    0.23347579960663542,
+    0.4180838025425775
+   ]
+  },
+  "de|0": {
+   "n_songs": 16,
+   "P_target_language": 0.0037273489948953893,
+   "P_target_language_ci": [
+    0.002730305946761291,
+    0.0046702752604687705
+   ],
+   "P_source_language": 0.7096229314726468,
+   "P_target_market_vocal": 0.20145904192274125,
+   "P_target_market_ci": [
+    0.14238926763888837,
+    0.2644790392941407
+   ]
+  },
+  "de|25": {
+   "n_songs": 16,
+   "P_target_language": 0.03850827982872336,
+   "P_target_language_ci": [
+    0.006517088689906814,
+    0.08202981391574816
+   ],
+   "P_source_language": 0.5679737312408785,
+   "P_target_market_vocal": 0.22940772379903746,
+   "P_target_market_ci": [
+    0.18899819753520813,
+    0.26768443480832504
+   ]
+  },
+  "de|50": {
+   "n_songs": 16,
+   "P_target_language": 0.27698000264596584,
+   "P_target_language_ci": [
+    0.1677204578124171,
+    0.39630598276968765
+   ],
+   "P_source_language": 0.3720505882623305,
+   "P_target_market_vocal": 0.29360317469884956,
+   "P_target_market_ci": [
+    0.2324182144055764,
+    0.35590810522747535
+   ]
+  },
+  "de|75": {
+   "n_songs": 16,
+   "P_target_language": 0.4563273154393148,
+   "P_target_language_ci": [
+    0.3257044462773289,
+    0.5910477415010973
+   ],
+   "P_source_language": 0.21506952611525776,
+   "P_target_market_vocal": 0.43382605568816257,
+   "P_target_market_ci": [
+    0.3404082585242577,
+    0.5273030857710789
+   ]
+  },
+  "de|100": {
+   "n_songs": 16,
+   "P_target_language": 0.664949377591256,
+   "P_target_language_ci": [
+    0.5327686835531495,
+    0.7896696989701011
+   ],
+   "P_source_language": 0.0544871867356657,
+   "P_target_market_vocal": 0.5166441399681692,
+   "P_target_market_ci": [
+    0.3974025418254314,
+    0.637072713303496
+   ]
+  }
+ },
+ "spearman_es": {
+  "language": 0.8999999999999998,
+  "market": 0.8999999999999998
+ },
+ "spearman_de": {
+  "language": 0.9999999999999999,
+  "market": 0.9999999999999999
+ }
+}

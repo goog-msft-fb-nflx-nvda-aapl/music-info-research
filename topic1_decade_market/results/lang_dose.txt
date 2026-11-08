@@ -1,0 +1,13 @@
+language dose, 16 songs, seeds [0, 1, 2]; fraction f of the lyrics in the target language
+es f=0% (n=16): P(es) 0.160 [0.011,0.323], P(source language) 0.710, P(Spain) of the vocal 0.083 [0.038,0.140]
+es f=25% (n=13): P(es) 0.085 [0.043,0.140], P(source language) 0.473, P(Spain) of the vocal 0.064 [0.038,0.097]
+es f=50% (n=13): P(es) 0.200 [0.134,0.268], P(source language) 0.352, P(Spain) of the vocal 0.105 [0.067,0.149]
+es f=75% (n=13): P(es) 0.397 [0.319,0.476], P(source language) 0.205, P(Spain) of the vocal 0.231 [0.174,0.287]
+es f=100% (n=13): P(es) 0.610 [0.448,0.751], P(source language) 0.033, P(Spain) of the vocal 0.322 [0.233,0.418]
+es: Spearman(f, mean P(language)) +0.90, Spearman(f, mean P(market)) +0.90
+de f=0% (n=16): P(de) 0.004 [0.003,0.005], P(source language) 0.710, P(Germany) of the vocal 0.201 [0.142,0.264]
+de f=25% (n=16): P(de) 0.039 [0.007,0.082], P(source language) 0.568, P(Germany) of the vocal 0.229 [0.189,0.268]
+de f=50% (n=16): P(de) 0.277 [0.168,0.396], P(source language) 0.372, P(Germany) of the vocal 0.294 [0.232,0.356]
+de f=75% (n=16): P(de) 0.456 [0.326,0.591], P(source language) 0.215, P(Germany) of the vocal 0.434 [0.340,0.527]
+de f=100% (n=16): P(de) 0.665 [0.533,0.790], P(source language) 0.054, P(Germany) of the vocal 0.517 [0.397,0.637]
+de: Spearman(f, mean P(language)) +1.00, Spearman(f, mean P(market)) +1.00
