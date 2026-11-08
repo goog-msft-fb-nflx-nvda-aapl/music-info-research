@@ -28,18 +28,21 @@ def lid(y24):
     f = wproc(librosa.resample(y24, orig_sr=SR, target_sr=16000), sampling_rate=16000, return_tensors="pt").input_features.cuda().half()
     with torch.inference_mode(): lg = wm(input_features=f, decoder_input_ids=torch.tensor([[sot]]).cuda()).logits[0, -1]
     return torch.softmax(lg[lang_ids].float(), -1).cpu().numpy()
-R = {}; DECS = ["neutral"] + list(DEC); ACCDIR = os.environ.get("ACCDIR", "gen_ax_onehot_pfx16_ge10_hpcp")
+R = {}; RS = {}; SEEDS = [int(x) for x in os.environ.get("SEEDS", "0").split(",")]; OUTN = os.environ.get("OUTN", "two_axis_grid"); DECS = ["neutral"] + list(DEC); ACCDIR = os.environ.get("ACCDIR", "gen_ax_onehot_pfx16_ge10_hpcp")
 for s in ids:
     z = np.load(f"{ROOT}/stems/A/{s}.npz"); voc0 = z["vocals"].astype(np.float32); sl = T[s].get("src_lang", "en")
-    for lg in LG:
-        fp = f"{ROOT}/ace_a_swap_voc/{s}_{lg}_s0.wav"
-        if not os.path.exists(fp): continue
-        v = sf.read(fp, dtype="float32")[0][:len(voc0)]; v = np.pad(v, (0, len(voc0) - len(v))); R[(s, lg, "vocmarket")] = clfB.predict_proba(emb(norm(v), LB)[None].astype(np.float32))[0]
-        for d in DECS:
-            acc = sf.read(f"{ROOT}/{ACCDIR}/{s}_{d}_s0_acc.wav", dtype="float32")[0][:len(voc0)]; mix = np.clip(v + acc, -1, 1); nm = norm(mix)
-            R[(s, lg, d, "era")] = clfA.predict_proba(emb(nm, L)[None].astype(np.float32))[0]; code = sl if lg == "orig" else lg
-            R[(s, lg, d, "lang")] = float(lid(mix)[lang_list.index(code)])
+    for sd in SEEDS:
+        vd = "ace_a_swap_voc" if sd == 0 else f"ace_a_swap_sd{sd}_voc"
+        for lg in LG:
+            fp = f"{ROOT}/{vd}/{s}_{lg}_s{sd}.wav"
+            if not os.path.exists(fp): continue
+            v = sf.read(fp, dtype="float32")[0][:len(voc0)]; v = np.pad(v, (0, len(voc0) - len(v))); RS.setdefault((s, lg, "vocmarket"), []).append(clfB.predict_proba(emb(norm(v), LB)[None].astype(np.float32))[0])
+            for d in DECS:
+                acc = sf.read(f"{ROOT}/{ACCDIR}/{s}_{d}_s{sd}_acc.wav", dtype="float32")[0][:len(voc0)]; mix = np.clip(v + acc, -1, 1); nm = norm(mix)
+                RS.setdefault((s, lg, d, "era"), []).append(clfA.predict_proba(emb(nm, L)[None].astype(np.float32))[0]); code = sl if lg == "orig" else lg
+                RS.setdefault((s, lg, d, "lang"), []).append(float(lid(mix)[lang_list.index(code)]))
     print(s, flush=True)
+R = {k: np.mean(v, 0) if k[-1] != "lang" else float(np.mean(v)) for k, v in RS.items()}   # per-song mean over the generation seeds present
 def boot(d): bs = [d[rng.integers(0, len(d), len(d))].mean() for _ in range(2000)]; return [float(np.percentile(bs, 2.5)), float(np.percentile(bs, 97.5))]
 out = {"cells": {}, "effects": {}}; txt = [f"two-axis composition, {len(ids)} songs of dataset A; mix-level era probe MERT layer {L} (val acc {pj['val_acc']:.3f})"]
 for lg in LG:
@@ -60,4 +63,4 @@ for lg in LG[1:]:
         if len(S) < 5: continue
         a = np.array([R[(s, lg, d, "lang")] for s in S]); b = np.array([R[(s, "orig", d, "lang")] for s in S]); out["effects"][f"lang_{lg}|accomp_{d}"] = {"n": len(S), "P_intended_language": float(a.mean()), "P_source_language_control": float(b.mean())}
         txt.append(f"language {lg} with {d} accompaniment (n={len(S)}): P(intended language) {a.mean():.3f} (source-language control {b.mean():.3f})")
-json.dump(out, open(f"{ROOT}/results/two_axis_grid.json", "w"), indent=1); open(f"{ROOT}/results/two_axis_grid.txt", "w").write("\n".join(txt) + "\n"); print("\n".join(txt))
+json.dump(out, open(f"{ROOT}/results/{OUTN}.json", "w"), indent=1); open(f"{ROOT}/results/{OUTN}.txt", "w").write("\n".join(txt) + "\n"); print("\n".join(txt))
