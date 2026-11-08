@@ -7,6 +7,8 @@ from acestep.llm_inference import LLMHandler
 from acestep.inference import GenerationParams, GenerationConfig, generate_music
 H = os.path.expanduser("~/era_market"); SR = 24000
 LANG = {"orig": ("en", "English"), "en": ("en", "English"), "es": ("es", "Spanish"), "pt": ("pt", "Portuguese"), "de": ("de", "German"), "it": ("it", "Italian")}
+for _c in ("es", "de"):
+    for _f in (25, 50, 75): LANG[f"{_c}{_f}"] = LANG[_c]   # language-dose conditions (153_lang_dose_text.py)
 ap = argparse.ArgumentParser(); ap.add_argument("--strength", type=float, default=0.5); ap.add_argument("--outdir", default="ace_lyric"); ap.add_argument("--seeds", type=int, nargs="+", default=[0]); ap.add_argument("--limit", type=int, default=0); ap.add_argument("--shard", default="0/1", help="i/n: process clips i, i+n, ... (parallel workers)"); a = ap.parse_args()
 TEXT = os.environ.get("TEXT", "lyrics_route_text.json"); T = json.load(open(f"{H}/results/{TEXT}")); import csv; DS = os.environ.get("DS", "B"); man = {r["sample_id"]: r for r in csv.DictReader(open(f"{H}/data/ex/dataset_{DS}/manifest.csv"))}
 out = os.path.join(H, a.outdir); os.makedirs(out, exist_ok=True); tmp = os.path.join(H, "ace_work"); os.makedirs(tmp, exist_ok=True)

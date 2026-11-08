@@ -8,7 +8,7 @@ H = os.path.expanduser("~/era_market"); SRC = os.environ.get("SRC", "ace_lyric_s
 model = get_model("htdemucs").cuda().eval(); n = 0
 for sid in T:
     z = np.load(f"{H}/stems/{os.environ.get('DS', 'B')}/{sid}.npz"); voc0, acc = z["vocals"].astype(np.float32), z["accomp"].astype(np.float32)
-    for c in ("orig", "en", "es", "pt", "de", "it"):
+    for c in os.environ.get("CONDS", "orig,en,es,pt,de,it").split(","):
         fp = f"{H}/{SRC}/{sid}_{c}_s{SEED}.wav"
         if not os.path.exists(fp): continue
         y = sf.read(fp, dtype="float32")[0]; x = AF.resample(torch.from_numpy(y)[None], 24000, 44100).repeat(2, 1)[None].cuda()
