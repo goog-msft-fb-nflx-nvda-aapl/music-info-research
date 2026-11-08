@@ -1,0 +1,18 @@
+per-cell FAD, MuQ, PCA 32; real-half floor 1960s 13.83 1970s 13.51 1980s 29.37 1990s 20.50 2000s 15.84 2010s 14.55
+ax_onehot_pfx16_ge10_hpcp target 1960s (n=72): FAD to real 1960s 32.51, neutral generation to real 1960s 44.16, difference -11.65
+ax_onehot_pfx16_ge10_hpcp target 1970s (n=72): FAD to real 1970s 43.70, neutral generation to real 1970s 43.93, difference -0.23
+ax_onehot_pfx16_ge10_hpcp target 1980s (n=72): FAD to real 1980s 56.05, neutral generation to real 1980s 56.90, difference -0.85
+ax_onehot_pfx16_ge10_hpcp target 1990s (n=72): FAD to real 1990s 50.33, neutral generation to real 1990s 46.66, difference +3.67
+ax_onehot_pfx16_ge10_hpcp target 2000s (n=72): FAD to real 2000s 41.57, neutral generation to real 2000s 45.69, difference -4.11
+ax_onehot_pfx16_ge10_hpcp target 2010s (n=72): FAD to real 2010s 45.99, neutral generation to real 2010s 44.30, difference +1.68
+ax_onehot_pfx16_ge10_hpcp_dose dose a0 (n=72): FAD to real 1960s 32.51, to real 2010s 60.11
+ax_onehot_pfx16_ge10_hpcp_dose dose a0.2 (n=72): FAD to real 1960s 35.33, to real 2010s 61.03
+ax_onehot_pfx16_ge10_hpcp_dose dose a0.4 (n=72): FAD to real 1960s 40.85, to real 2010s 60.83
+ax_onehot_pfx16_ge10_hpcp_dose dose a0.6 (n=72): FAD to real 1960s 51.68, to real 2010s 54.67
+ax_onehot_pfx16_ge10_hpcp_dose dose a0.8 (n=72): FAD to real 1960s 47.15, to real 2010s 41.12
+ax_onehot_pfx16_ge10_hpcp_dose dose a1 (n=72): FAD to real 1960s 50.30, to real 2010s 45.99
+ax_onehot_pfx16_ge10_hpcp_dose2 dose a0.3 (n=72): FAD to real 1960s 38.02, to real 2010s 62.00
+ax_onehot_pfx16_ge10_hpcp_dose2 dose a0.35 (n=72): FAD to real 1960s 39.23, to real 2010s 63.72
+ax_onehot_pfx16_ge10_hpcp_dose2 dose a0.45 (n=72): FAD to real 1960s 44.07, to real 2010s 56.36
+ax_onehot_pfx16_ge10_hpcp_dose2 dose a0.5 (n=72): FAD to real 1960s 41.36, to real 2010s 45.84
+ax_onehot_pfx16_ge10_hpcp_dose2 dose a0.55 (n=72): FAD to real 1960s 47.32, to real 2010s 52.04
