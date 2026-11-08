@@ -20,6 +20,7 @@ Era axis (adapter, one-hot+16 prefix, HPCP chroma):
 - R-Precision top-1 (MERT, chance .167): 1960s .958, 1970s .847, 1980s .889, 1990s .722, 2000s .278, 2010s .389; MuQ 2010s .236.
 - Diversity and MultiModality lower than neutral under conditioning (MERT diversity 6.4-7.6 vs 8.6).
 - Control adapter dose (same protocol): MERT .21 -> 4.59, EffNet .70 -> 3.72; adapter higher at a0.4 / a0.6 on MERT, MuQ and EffNet. Doses beyond [0,1] saturate (a1.5: MERT 4.69). Piecewise path 1960s -> 1980s -> 2010s covers the range gradually (MERT .10, .39, 1.67, 2.21, 2.18, 2.47, 3.68, 4.30, 4.54).
+- Training-seed replicates (seeds 0, 1, 2 for adapter and control; `results/dseed_summary`, `dseed3_summary`, `dfine_summary`): adapter above control at a0.3-a0.7 on MERT and EffNet in every seed (a0.5 MERT adapter 3.35/3.39/3.00 vs control 2.41/1.88/2.14; EffNet 3.10/3.08/2.64 vs 2.39/2.10/2.08); equal at a0.2 and a0.8-a1. FAD_inf does not reproduce the ordering (MuQ a0.5 to real 2010s: adapter 36/68/51, control 47/39/44), so FAD is not used to rank the two.
 Market axis (language is the carrier): language-erased probe removes the move (T-4l); language dose de P(Germany) .201 -> .517, es P(Spain) .083 -> .322; mix-level P(language) +.71 to +.78.
 Both axes: era effect +.62 to +1.00 expected-decade index at every language share, language effect +.71 to +.78 at every era dose (CIs exclude 0, `two_dose_grid`); 3-seed grid: 20 of 24 interactions contain 0. Training-free steering (difference in means) is a null baseline for this model (content top-1 .06-.16 vs .958).
 
