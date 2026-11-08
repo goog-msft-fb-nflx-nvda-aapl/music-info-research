@@ -28,6 +28,8 @@ PROTO = {"neutral": np.zeros(Zall.shape[1], np.float32)}
 for k, d in enumerate(LABELS["A"]): PROTO[d] = Zn[[i for i, r in enumerate(allrows) if r["split"] == "train" and r["label"] == d]].mean(0)
 def zof(e):
     if e.startswith("a"): al = float(e[1:]); return (1 - al) * PROTO["1960s"] + al * PROTO["2010s"]
+    if e.startswith("b"): al = float(e[1:]); return (1 - al) * PROTO["1980s"] + al * PROTO["2010s"]   # 1980s -> 2010s path
+    if e.startswith("c"): al = float(e[1:]); return (1 - al) * PROTO["1960s"] + al * PROTO["1980s"]   # 1960s -> 1980s path
     return PROTO[e]
 NEUTRAL = "a song recording" + "".join(f"<extra_id_{i}>" for i in range(P_)); PIDS = {proc.tokenizer.convert_tokens_to_ids(f"<extra_id_{i}>") for i in range(P_)}
 CUR = {"z": None, "idx": torch.tensor([j for j, t in enumerate(proc.tokenizer(NEUTRAL)["input_ids"]) if t in PIDS], device="cuda")}
