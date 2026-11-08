@@ -1,6 +1,6 @@
 """FAD with sample-size extrapolation (Gui et al., arXiv 2311.01616: FAD is biased by the number of generated samples; extrapolate to infinite sample size). For each cell: FAD(subsample of N generated clips, real decade) for N in --sizes (20 random subsets each), linear fit FAD = a + b/N, report a = FAD_inf. Embeddings and references as 154_cell_fad_mert.py (--enc mert) or 156_cell_fad_muq.py (--enc muq); PCA 32 on real references.
 usage (from ~/era_market, venv_mcl): python src/158_fad_inf.py --tags ax_onehot_pfx16_ge10_hpcp ax_onehot_pfx16_ge10_hpcp_dose ax_onehot_pfx16_ge10_hpcp_dose2 --enc mert --out results/cell_fad_inf_mert"""
-import argparse, json, os, sys, numpy as np
+import argparse, json, os, re, sys, numpy as np
 from scipy import linalg
 sys.path.insert(0, "src")
 from common import ROOT, LABELS, manifest
@@ -23,8 +23,8 @@ for g in a.tags:
     z = np.load(os.path.join(ROOT, "results", g + "_eval_emb.npz"), allow_pickle=True); names = [str(n) for n in z["names"]]; Z = proj(z[a.enc].astype(np.float64)); cond = np.array([n.split("|")[1] for n in names]); res = {}
     for c in sorted(set(cond), key=lambda c: (c != "neutral", c)):
         Zc = Z[cond == c]
-        if len(Zc) < 60 or not (c in DEC or c == "neutral" or c.startswith("a")): continue
-        refs = [c] if c in DEC else (["1960s", "2010s"] if c.startswith("a") else DEC)
+        if len(Zc) < 60 or not (c in DEC or c == "neutral" or re.match(r"^[abc]-?[0-9.]+$", c)): continue
+        refs = [c] if c in DEC else (["1960s", "1980s", "2010s"] if re.match(r"^[abc]-?[0-9.]+$", c) else DEC)
         res[c] = {d: dict(zip(("fad_inf", "fad_full"), fad_inf(Zc, Rd[d]))) for d in refs}
         txt.append(f"{g} {c} (n={len(Zc)}): " + ", ".join(f"to real {d} {v['fad_inf']:.1f} ({v['fad_full']:.1f})" for d, v in res[c].items()))
     out["dirs"][g] = res
