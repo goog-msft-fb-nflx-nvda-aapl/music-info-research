@@ -1,0 +1,10 @@
+ax_ctrlc_ge10_hpcp_pathb: Spearman dose vs MERT +1.00, MuQ +1.00
+  b0: MERT 2.38 MuQ 2.41 chroma_cos 0.860 (n=72)
+  b0.25: MERT 2.81 MuQ 2.68 chroma_cos 0.856 (n=72)
+  b0.5: MERT 3.72 MuQ 3.49 chroma_cos 0.838 (n=72)
+  b0.75: MERT 4.33 MuQ 4.11 chroma_cos 0.837 (n=72)
+  b1: MERT 4.59 MuQ 4.36 chroma_cos 0.836 (n=72)
+ax_ctrlc_ge10_hpcp_pathc: Spearman dose vs MERT +1.00, MuQ +1.00
+  c0.25: MERT 0.40 MuQ 0.70 chroma_cos 0.828 (n=72)
+  c0.5: MERT 0.79 MuQ 1.03 chroma_cos 0.838 (n=72)
+  c0.75: MERT 1.83 MuQ 1.97 chroma_cos 0.848 (n=72)

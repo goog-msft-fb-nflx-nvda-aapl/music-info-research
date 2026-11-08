@@ -1,0 +1,2 @@
+ctrlpathb: Spearman +1.00; b0 2.51, b0.25 2.73, b0.5 3.16, b0.75 3.47, b1 3.72
+ctrlpathc: Spearman +1.00; c0.25 0.76, c0.5 1.12, c0.75 2.12
