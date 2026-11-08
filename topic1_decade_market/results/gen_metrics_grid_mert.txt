@@ -1,0 +1,20 @@
+gen metrics (mert, PCA 32), per target decade: R-Prec top1/top2 | MM-Dist | Diversity | MultiModality
+real 1960s n=193: 0.642/0.808 | 6.13 | 8.65 | -
+real 1970s n=193: 0.409/0.741 | 6.37 | 9.25 | -
+real 1980s n=193: 0.326/0.549 | 6.74 | 9.66 | -
+real 1990s n=193: 0.326/0.482 | 6.81 | 9.31 | -
+real 2000s n=193: 0.176/0.580 | 6.73 | 9.54 | -
+real 2010s n=193: 0.466/0.637 | 6.68 | 9.39 | -
+ax_onehot_pfx16_ge10_hpcp_gridA a0 n=72: - | - | 6.41 | 4.42
+ax_onehot_pfx16_ge10_hpcp_gridA a0.3 n=72: - | - | 7.40 | 4.83
+ax_onehot_pfx16_ge10_hpcp_gridA a0.5 n=72: - | - | 8.19 | 5.52
+ax_onehot_pfx16_ge10_hpcp_gridA dsp_new n=24: - | - | 9.86 | nan
+ax_onehot_pfx16_ge10_hpcp_gridA dsp_old n=24: - | - | 9.58 | nan
+ax_onehot_pfx16_ge10_hpcp_gridA identity n=24: - | - | 9.86 | nan
+ax_onehot_pfx16_ge10_hpcp_gridA identity_codec n=24: - | - | 9.59 | nan
+ax_onehot_pfx16_ge10_hpcp_gridB a0.7 n=72: - | - | 7.92 | 5.30
+ax_onehot_pfx16_ge10_hpcp_gridB a1 n=72: - | - | 7.29 | 4.99
+ax_onehot_pfx16_ge10_hpcp_gridB dsp_new n=24: - | - | 9.75 | nan
+ax_onehot_pfx16_ge10_hpcp_gridB dsp_old n=24: - | - | 9.42 | nan
+ax_onehot_pfx16_ge10_hpcp_gridB identity n=24: - | - | 10.08 | nan
+ax_onehot_pfx16_ge10_hpcp_gridB identity_codec n=24: - | - | 9.46 | nan

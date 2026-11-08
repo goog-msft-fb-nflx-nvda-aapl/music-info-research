@@ -1,0 +1,6 @@
+FAD_inf (Gui et al. extrapolation), mert, PCA 32: cell: FAD_inf (FAD at full n)
+ax_onehot_pfx16_ge10_hpcp_gridA a0 (n=72): to real 1960s 14.0 (17.2), to real 2010s 35.3 (39.0)
+ax_onehot_pfx16_ge10_hpcp_gridA a0.3 (n=72): to real 1960s 14.1 (17.7), to real 2010s 33.3 (36.3)
+ax_onehot_pfx16_ge10_hpcp_gridA a0.5 (n=72): to real 1960s 17.3 (21.0), to real 2010s 17.8 (22.3)
+ax_onehot_pfx16_ge10_hpcp_gridB a0.7 (n=72): to real 1960s 25.3 (29.3), to real 2010s 17.3 (21.6)
+ax_onehot_pfx16_ge10_hpcp_gridB a1 (n=72): to real 1960s 29.1 (33.0), to real 2010s 18.4 (22.1)
