@@ -1,0 +1,16 @@
+ax_onehot_pfx16_s1_ge10_hpcp_dseed3: Spearman dose vs MERT +1.00, MuQ +1.00
+  a0.3: MERT 0.79 MuQ 1.09 chroma_cos 0.823 (n=72)
+  a0.5: MERT 3.39 MuQ 3.20 chroma_cos 0.809 (n=72)
+  a0.7: MERT 4.25 MuQ 4.01 chroma_cos 0.829 (n=72)
+ax_onehot_pfx16_s2_ge10_hpcp_dseed3: Spearman dose vs MERT +1.00, MuQ +1.00
+  a0.3: MERT 0.86 MuQ 1.35 chroma_cos 0.823 (n=72)
+  a0.5: MERT 3.00 MuQ 3.33 chroma_cos 0.822 (n=72)
+  a0.7: MERT 4.14 MuQ 4.04 chroma_cos 0.841 (n=72)
+ax_ctrlc_s1_ge10_hpcp_dseed3: Spearman dose vs MERT +1.00, MuQ +1.00
+  a0.3: MERT 0.44 MuQ 0.85 chroma_cos 0.811 (n=72)
+  a0.5: MERT 1.88 MuQ 2.14 chroma_cos 0.806 (n=72)
+  a0.7: MERT 3.84 MuQ 3.75 chroma_cos 0.817 (n=72)
+ax_ctrlc_s2_ge10_hpcp_dseed3: Spearman dose vs MERT +1.00, MuQ +1.00
+  a0.3: MERT 0.66 MuQ 0.95 chroma_cos 0.821 (n=72)
+  a0.5: MERT 2.14 MuQ 2.33 chroma_cos 0.813 (n=72)
+  a0.7: MERT 3.92 MuQ 3.77 chroma_cos 0.828 (n=72)
