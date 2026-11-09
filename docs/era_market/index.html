@@ -23,7 +23,7 @@ button.k[aria-pressed="true"]{background:var(--acc);color:var(--bg);border-color
 label{display:flex;flex-direction:column;font-size:.85rem;color:var(--mut);gap:4px}select{font:inherit;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--fg)}
 svg{width:100%;height:auto;display:block}svg text{fill:var(--mut);font:11px system-ui,sans-serif}
 .btns{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
-</style>
+.dc{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}.ap{display:flex;align-items:center;gap:10px;margin:4px 0}.ap span{min-width:64px;font-size:.9em}.ap audio{height:34px;max-width:100%}</style>
 </head>
 <body>
 <main>
@@ -65,6 +65,30 @@ svg{width:100%;height:auto;display:block}svg text{fill:var(--mut);font:11px syst
 <li>The song stays the song: song identification from the cover alone gives top-1 .875 at guidance 7 and 10 (neutral generations of the same adapter .944; chance .042).</li>
 <li>An independent third encoder (Discogs-EffNet) orders the six prompts the same way. Against real clips of the prompted decade, FD-VGG is lower than for neutral generations for the 1980s and 2010s prompts (not for the 1960s), and Audiobox production quality does not drop at moderate guidance.</li>
 </ul>
+
+<h2>Weekly update, 9 November 2026: era and market as two controls</h2>
+<p>The goal is one control plane: a fixed song is regenerated as the point (release era, release market) moves. This week's results: the <b>era axis is a continuous dose</b> a (a = 0 is the 1960s prototype, a = 1 the 2010s prototype); the <b>market axis is carried by the sung language</b> (translated lyrics, vocal replaced by the target-language voice); both axes combine in one grid. All read-outs below are existing metrics; no new metric is proposed.</p>
+<h3>Era dose response, adapter versus a control conditioner</h3>
+<p>Expected decade index of the generated accompaniment (0 = 1960s, 5 = 2010s) per dose. MERT: mean ± sd over three training seeds (72 clips per dose and seed). Discogs-EffNet (independent of the probe encoders): one training seed. The control uses the same conditioning route without the adapter's bias injection.</p>
+<div class="t"><table><tr><th>dose a</th><th>MERT adapter</th><th>MERT control</th><th>EffNet adapter</th><th>EffNet control</th></tr><tr><td>0</td><td>0.17 ± 0.06</td><td>0.22 ± 0.01</td><td>0.64</td><td>0.70</td></tr><tr><td>0.2</td><td>0.40 ± 0.01</td><td>0.38 ± 0.05</td><td>1.00</td><td>1.04</td></tr><tr><td>0.3</td><td>0.84 ± 0.04</td><td>0.60 ± 0.11</td><td>1.45</td><td>1.21</td></tr><tr><td>0.4</td><td>1.77 ± 0.07</td><td>1.14 ± 0.07</td><td>1.99</td><td>1.75</td></tr><tr><td>0.5</td><td>3.25 ± 0.18</td><td>2.15 ± 0.22</td><td>3.10</td><td>2.39</td></tr><tr><td>0.6</td><td>4.01 ± 0.13</td><td>3.17 ± 0.30</td><td>3.37</td><td>3.09</td></tr><tr><td>0.7</td><td>4.23 ± 0.07</td><td>3.93 ± 0.07</td><td>3.42</td><td>3.40</td></tr><tr><td>0.8</td><td>4.36 ± 0.06</td><td>4.25 ± 0.09</td><td>3.53</td><td>3.57</td></tr><tr><td>1</td><td>4.56 ± 0.02</td><td>4.53 ± 0.08</td><td>3.62</td><td>3.72</td></tr></table></div>
+<ul>
+<li>Both curves are monotone (Spearman +1.00 for every run) and meet at the end points; chroma cosine to the source stays .81 to .84.</li>
+<li>Between doses .3 and .7 the adapter is ahead of the control on MERT and EffNet in all three training seeds (dose .5: 3.25 vs 2.15 on MERT, three-seed means).</li>
+<li>The distribution-level metric disagrees: FAD with sample-size extrapolation to the real 2010s does not rank the two models consistently across seeds, so we do not claim that the adapter generates more realistic audio of the decade; we claim it reaches the decade at a lower dose.</li>
+<li>Beyond the end points the response saturates; a path 1960s → 1980s → 2010s increases gradually, with the 1990s and 2000s region reached by intermediate doses.</li>
+</ul>
+<h3>Market axis and the combined grid</h3>
+<ul>
+<li>The market move is carried by the sung language: erasing the language direction from the vocal probe removes it. Language share (0 to 100 % of code-switched lyrics) moves the Whisper language probability by +.71 to +.78 and the vocal market probe by +.28 (Spanish) and +.32 (German).</li>
+<li>In the 5 × 5 grid (five era doses × five language shares, Spanish and German, 16 songs, three seeds) the era effect is +.62 to +1.00 expected decades at every language share and the language effect +.71 to +.78 at every era dose; the confidence intervals exclude zero.</li>
+<li>Vocal-containing mixes are derived from commercial recordings and are not published here; the clips below are accompaniment only.</li>
+</ul>
+<h3>Evaluation protocol</h3>
+<p>Controllability: probe index and gain, R-Precision and multimodal distance in embedding space (adapted from Guo et al., CVPR 2022), dose monotonicity. Distribution: FAD per cell against real clips of the decade (MERT, MuQ), extrapolated to infinite sample size (Gui et al., arXiv 2311.01616). Variety: Diversity and MultiModality. Content: song identification, chroma similarity. Baselines are re-run on the same 24 songs; numbers from other papers are not mixed in. No listening test has been run.</p>
+<h3>Listen: era dose, same song and seed</h3>
+<p>Generated accompaniment only, seed 0, same chroma input. Doses from 1960s-like (0) to 2010s-like (1), adapter versus control.</p>
+<div class="dc"><div><b>Adapter</b><div class='ap'><span>dose 0</span><audio controls preload='none' src='audio_dose/adapter/A_007e1d02fd77_a0_s0.ogg'></audio></div><div class='ap'><span>dose 0.2</span><audio controls preload='none' src='audio_dose/adapter/A_007e1d02fd77_a0.2_s0.ogg'></audio></div><div class='ap'><span>dose 0.4</span><audio controls preload='none' src='audio_dose/adapter/A_007e1d02fd77_a0.4_s0.ogg'></audio></div><div class='ap'><span>dose 0.6</span><audio controls preload='none' src='audio_dose/adapter/A_007e1d02fd77_a0.6_s0.ogg'></audio></div><div class='ap'><span>dose 0.8</span><audio controls preload='none' src='audio_dose/adapter/A_007e1d02fd77_a0.8_s0.ogg'></audio></div><div class='ap'><span>dose 1</span><audio controls preload='none' src='audio_dose/adapter/A_007e1d02fd77_a1_s0.ogg'></audio></div></div><div><b>Control</b><div class='ap'><span>dose 0</span><audio controls preload='none' src='audio_dose/control/A_007e1d02fd77_a0_s0.ogg'></audio></div><div class='ap'><span>dose 0.2</span><audio controls preload='none' src='audio_dose/control/A_007e1d02fd77_a0.2_s0.ogg'></audio></div><div class='ap'><span>dose 0.4</span><audio controls preload='none' src='audio_dose/control/A_007e1d02fd77_a0.4_s0.ogg'></audio></div><div class='ap'><span>dose 0.6</span><audio controls preload='none' src='audio_dose/control/A_007e1d02fd77_a0.6_s0.ogg'></audio></div><div class='ap'><span>dose 0.8</span><audio controls preload='none' src='audio_dose/control/A_007e1d02fd77_a0.8_s0.ogg'></audio></div><div class='ap'><span>dose 1</span><audio controls preload='none' src='audio_dose/control/A_007e1d02fd77_a1_s0.ogg'></audio></div></div></div>
+<p>Another song, era prompts instead of doses:</p><div class="dc"><div><div class='ap'><span>neutral</span><audio controls preload='none' src='audio_dose/hero/A_01321d0221ab_neutral_s0.ogg'></audio></div><div class='ap'><span>1960s</span><audio controls preload='none' src='audio_dose/hero/A_01321d0221ab_1960s_s0.ogg'></audio></div><div class='ap'><span>1980s</span><audio controls preload='none' src='audio_dose/hero/A_01321d0221ab_1980s_s0.ogg'></audio></div><div class='ap'><span>2010s</span><audio controls preload='none' src='audio_dose/hero/A_01321d0221ab_2010s_s0.ogg'></audio></div></div></div>
 
 <h2>Controls and limits</h2>
 <ul>

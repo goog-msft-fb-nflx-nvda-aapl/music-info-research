@@ -7,4 +7,5 @@ keep = ["base_ge7", "lora_ge7", "lora_ge10", "lora_ge15", "lora_ge20"]
 six = {enc: {k: {"E": [sd[k][f"{enc}_{d}"]["expected_decade"] for d in D], "dP": [sd[k][f"{enc}_{d}"]["delta"] for d in D]} for k in keep} for enc in ("mert", "muq")}
 data = {"six": six, "songs": songs, "lora": json.load(open("../docs/era_market/audio_lora_index.json"))}
 html = open("src/page_template.html").read().replace("/*DATA*/", "const D=" + json.dumps(data) + ";")
+import sys; sys.path.insert(0, "src"); from importlib import import_module; html = html.replace("<!--WEEKLY-->", import_module("163_weekly_section").weekly_html())
 open(P, "w").write(html); print("wrote", P, len(html))

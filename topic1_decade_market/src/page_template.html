@@ -23,7 +23,7 @@ button.k[aria-pressed="true"]{background:var(--acc);color:var(--bg);border-color
 label{display:flex;flex-direction:column;font-size:.85rem;color:var(--mut);gap:4px}select{font:inherit;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--fg)}
 svg{width:100%;height:auto;display:block}svg text{fill:var(--mut);font:11px system-ui,sans-serif}
 .btns{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
-</style>
+.dc{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}.ap{display:flex;align-items:center;gap:10px;margin:4px 0}.ap span{min-width:64px;font-size:.9em}.ap audio{height:34px;max-width:100%}</style>
 </head>
 <body>
 <main>
@@ -66,6 +66,7 @@ svg{width:100%;height:auto;display:block}svg text{fill:var(--mut);font:11px syst
 <li>An independent third encoder (Discogs-EffNet) orders the six prompts the same way. Against real clips of the prompted decade, FD-VGG is lower than for neutral generations for the 1980s and 2010s prompts (not for the 1960s), and Audiobox production quality does not drop at moderate guidance.</li>
 </ul>
 
+<!--WEEKLY-->
 <h2>Controls and limits</h2>
 <ul>
 <li>Prompts that name no decade but only bandwidth ("dull, band-limited, tape hiss") shift the probes by about half the effect of the 1960s prompt, so part of the era effect rides on bandwidth cues. Matching each clip's long-term spectrum to its neutral clip keeps the MERT 1980s and 2010s effects positive and halves the MuQ 2010s effect.</li>
