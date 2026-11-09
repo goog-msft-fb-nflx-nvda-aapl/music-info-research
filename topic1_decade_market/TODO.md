@@ -287,3 +287,9 @@ Possible small adoption (open): an `EXPERIMENTS.md` ledger (id, parent, hypothes
 - [x] (done 2026-11-09) a0.3/0.5/0.7 on both training seeds (1, 2), adapter and control (tags ax_{onehot_pfx16,ctrlc}_s{1,2}_ge10_hpcp_dseed3; tmux oa1 oa2 ca1 ca2): same command pattern as the dseed runs with `SUF=_hpcp_dseed3`; tests the a0.5 gap (.9 MERT at seed 0) on seeds 1, 2. Score EffNet before deleting wavs.
 - [ ] (running 2026-11-09) seed-2 models at a0.2/a0.8 (tags ax_{onehot_pfx16,ctrlc}_s2_ge10_hpcp_dseed4; tmux oe1, ce1)
 - [ ] page update from MILESTONE.md checklist (2026-11-09)
+
+## HALT (2026-11-09): task paused for some days; state at halt
+- GitHub holds all code and result json/txt (checked server src and results against the repo on 2026-11-09). Server-only and backed up to the restricted Drive folder (`CommE5070_FP_topic2/`: demo_keep, emb_clap, results, logs, src, demo_internal; earlier: emb, adapters, gen dirs): embeddings, demo OGGs, checkpoints.
+- No experiment running at halt. Last scored: seed-2 a0.2/a0.8 (dseed4).
+- Resume: (1) page update from MILESTONE.md section 5 (copy accompaniment-only demo OGGs from server `demo_keep/`, rebuild with `src/92_make_page.py`); (2) remaining TODO items above; (3) final credential revocation (rclone token, Kaggle) before leaving the server.
+- Kept on the server for resume: `data/`, `stems*`, `emb/`, `ace_lora/`, `lora/`, `svc_B_nn/`, `ext/` (ACE-Step 1.5 32 GB, av-benchmark, free-svc, MuseControlLite), venvs, `gen_ax_onehot_pfx16_ge10_hpcp` (vocal compositions), `demo_internal/`. Shared HF cache untouched.
