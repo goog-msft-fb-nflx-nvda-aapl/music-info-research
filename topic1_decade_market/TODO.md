@@ -294,3 +294,8 @@ Possible small adoption (open): an `EXPERIMENTS.md` ledger (id, parent, hypothes
 - Resume: (1) page update from MILESTONE.md section 5 (copy accompaniment-only demo OGGs from server `demo_keep/`, rebuild with `src/92_make_page.py`); (2) remaining TODO items above; (3) final credential revocation (rclone token, Kaggle) before leaving the server.
 - Kept on the server for resume: `data/`, `stems*`, `emb/`, `ace_lora/`, `lora/`, `svc_B_nn/`, `ext/` (ACE-Step 1.5 32 GB, av-benchmark, free-svc, MuseControlLite), venvs, `gen_ax_onehot_pfx16_ge10_hpcp` (vocal compositions), `demo_internal/`. Shared HF cache untouched.
 - (2026-11-09 cleanup) deleted from the server: all `ace_*` generation directories except `ace_lora` (checkpoints) and `ace_work`, `mcl_gen`, `gen_smc_ctrlc_N8_b1` (17 GB; numbers are in `results/`, regenerable with the commands in WORKLOG.md). Resume of the lyric route needs re-running the ACE-Step cover scripts (`src/153_lang_dose.sh`, `ace_*` runs in WORKLOG.md).
+
+## From lecture 10 (LECTURE10_NOTE.md, 2026-11-09)
+- [ ] open and verify Piano2Pop, MIDI-SAG, MIDI-REPA, MIDI-DDSP (cited on the slides) before citing
+- [ ] T-12: AMT-transcribed MIDI as melody condition vs chroma (same 24 songs, era dose, same read-outs); check Piano2Pop code/weights
+- [ ] MIDI-SAG as accompaniment-generation baseline candidate (code/weights availability)
