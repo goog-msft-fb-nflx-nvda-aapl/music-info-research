@@ -1,5 +1,25 @@
 """Builds the 'weekly update' html block of the project page from results/weekly_tables.json and the demo clips in docs/era_market/audio_dose. Imported by 92_make_page.py (function weekly_html)."""
 import json, os
+
+def _grid(G, m, key, lo, hi, rgb):
+    rows = "".join("<tr><td>" + (a[1:] or "0") + "</td>" + "".join("<td style='text-align:center;background:rgba(%s,%.2f)'>%.2f</td>" % (rgb, 0.08 + 0.55 * (G[f"{m}|{a}|{f}"][key] - lo) / (hi - lo), G[f"{m}|{a}|{f}"][key]) for f in (0, 25, 50, 75, 100)) + "</tr>" for a in ("a0", "a0.3", "a0.5", "a0.7", "a1"))
+    return "<div class='t'><table><tr><th>era dose \\ language share %</th>" + "".join(f"<th style='text-align:center'>{f}</th>" for f in (0, 25, 50, 75, 100)) + "</tr>" + rows + "</table></div>"
+def plane_html():
+    G = json.load(open("results/two_dose_grid.json"))["cells"]
+    out = "<h3>The 2D control plane, discrete stage</h3><p>Vertical axis: era dose (0 = 1960s prototype, 1 = 2010s prototype). Horizontal axis: market, set by the share of lyrics sung in the target language (0 % = original language, 100 % = fully translated). Entries: mean over songs and three seeds; the era index is read from the full mix, P(language) from Whisper language-token probability. The era index changes down the rows and stays flat along the columns; the language probability does the reverse, so the two axes act separately. The market is still carried only by the sung language, not by a change of the music. Vocal-containing mixes stay internal.</p>"
+    for m, name in (("es", "Spanish"), ("de", "German")):
+        out += f"<p class='s'><b>{name}</b>: era index of the mix, then P(language)</p><div class='dg'>" + _grid(G, m, "era_index", 3.3, 4.5, "242,166,90") + _grid(G, m, "P_language", 0, 0.8, "127,183,190") + "</div>"
+    return out
+def decomposition_html():
+    return """<h3>Task decomposition</h3><p>Cover generation is content-preserving style transfer (content: melody, chords, lyric meaning; style: the rest). Our control variables are metadata coordinates, and the market change involves the lyrics. Six parts:</p>
+<div class='t'><table><tr><th>part</th><th>status</th></tr>
+<tr><td>S1 content: melody, chords, lyrics with timing</td><td>chroma and ASR; symbolic melody next</td></tr>
+<tr><td>S2 singable lyric translation (syllables, rhythm)</td><td>no rhythm constraint yet; to be measured</td></tr>
+<tr><td>S3 render the sung translation, keep the singer</td><td>cover generator with swapped vocal</td></tr>
+<tr><td>S4 accompaniment by era</td><td>done (dose response above)</td></tr>
+<tr><td>S5 music by market beyond language</td><td>open: needs a language-free market descriptor</td></tr>
+<tr><td>S6 evaluation</td><td>existing metrics; no agreed cover-generation metric</td></tr></table></div>
+<p>We found no published system that combines translated lyrics, a metadata-controlled accompaniment and a preserved melody and singer; the closest are singing-voice translation, cover generation with phoneme control and singable lyric translation (survey notes in the repository, <code>topic1_decade_market/SURVEY6.md</code>). This is a search result, to be repeated after the next experiments.</p>"""
 def weekly_html():
     T = json.load(open("results/weekly_tables.json")); D = T["doses"]; ms = T["mert_seeds"]; s0 = T["seed0"]
     rows = "".join(f"<tr><td>{c[1:]}</td><td>{ms['adapter'][c]['mean']:.2f} ± {ms['adapter'][c]['sd']:.2f}</td><td>{ms['control'][c]['mean']:.2f} ± {ms['control'][c]['sd']:.2f}</td><td>{s0['adapter'][c]['effnet']:.2f}</td><td>{s0['control'][c]['effnet']:.2f}</td></tr>" for c in D)
@@ -24,6 +44,8 @@ def weekly_html():
 <li>In the 5 × 5 grid (five era doses × five language shares, Spanish and German, 16 songs, three seeds) the era effect is +.62 to +1.00 expected decades at every language share and the language effect +.71 to +.78 at every era dose; the confidence intervals exclude zero.</li>
 <li>Vocal-containing mixes are derived from commercial recordings and are not published here; the clips below are accompaniment only.</li>
 </ul>
+{plane_html()}
+{decomposition_html()}
 <h3>Evaluation protocol</h3>
 <p>Controllability: probe index and gain, R-Precision and multimodal distance in embedding space (adapted from Guo et al., CVPR 2022), dose monotonicity. Distribution: FAD per cell against real clips of the decade (MERT, MuQ), extrapolated to infinite sample size (Gui et al., arXiv 2311.01616). Variety: Diversity and MultiModality. Content: song identification, chroma similarity. Baselines are re-run on the same 24 songs; numbers from other papers are not mixed in. No listening test has been run.</p>
 <h3>Listen: era dose, same song and seed</h3>
