@@ -299,3 +299,4 @@ Possible small adoption (open): an `EXPERIMENTS.md` ledger (id, parent, hypothes
 - [ ] open and verify Piano2Pop, MIDI-SAG, MIDI-REPA, MIDI-DDSP (cited on the slides) before citing
 - [ ] T-12: AMT-transcribed MIDI as melody condition vs chroma (same 24 songs, era dose, same read-outs); check Piano2Pop code/weights
 - [ ] MIDI-SAG as accompaniment-generation baseline candidate (code/weights availability)
+- [ ] (running 2026-11-11) dose x era-guidance interaction: adapter at ge 5 and ge 15, doses a0.3/0.5/0.7 (tags ax_onehot_pfx16_ge{5,15}_hpcp_dge; tmux ge1, GPU 3): `HPCP_CHROMA=1 SUF=_hpcp_dge bash src/run_ax.sh 3 ax_onehot_pfx16 A_eraz_onehot_s0 <ge> a0.3 a0.5 a0.7`; score with 159/160/158, archive, delete wavs
