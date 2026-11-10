@@ -1487,3 +1487,18 @@ Measured a0.2 / a0.8. MERT: adapter .39 / 4.26, control .35 / 4.15. MuQ: adapter
 
 ## 2026-11-09 Weekly progress report (page, slides, video)
 Page: `src/92_make_page.py` now inserts a weekly-update block (`src/163_weekly_section.py`, numbers from `results/weekly_tables.json` written by `src/162_weekly_tables.py`; no new computation); demo clips (accompaniment only, seed 0): `docs/era_market/audio_dose/{adapter,control}` doses 0, .2, .4, .6, .8, 1 of one song and `hero/` neutral/1960s/1980s/2010s of one song, copied from server `demo_keep/`. Slides/video sources in `video/weekly1/` (`make_slides.py`, `render.sh` headless Chrome, `tts_kokoro.py` Kokoro-82M, `build.sh`); outputs `weekly1.mp4` (295.6 s) and `weekly1_slides.pdf` are git-ignored (mp4, pdf) and kept locally. Lecture 10 assessment: `LECTURE10_NOTE.md`.
+
+## 2026-11-11 Baselines on the generation-metric protocol (same embeddings, same real references)
+Commands (server, `venv_mcl`, from `~/era_market`): `python src/157_gen_metrics.py --tags textonly tri_base_m3e7 mcl ace_lora_gen_e3 sao_songecho_base steer_b16 steer_rc0.1 smc_ctrlc_N8_b2 ax_ctrlc_bon32 tri_lora_m3e10 ax_onehot_pfx16_ge10 ax_ctrlc_ge10 --enc {mert,muq} --out results/gen_metrics_baselines_{mert,muq}` and `python src/158_fad_inf.py --tags <same> --enc mert --out results/cell_fad_inf_baselines_mert` (no generation; existing `results/<tag>_eval_emb.npz`). Files: `gen_metrics_baselines_{mert,muq}.*`, `cell_fad_inf_baselines_mert.*`. The ACE-Step LoRA tag (n=48 per cell) produced R-Precision rows but no FAD_inf rows (not computed).
+MERT R-Precision top-1 (chance .167) for target 1960s / 1980s / 2010s; MM-Dist; per-cell FAD_inf to the real target decade (neutral generation of the same system in brackets):
+- text-only MusicGen (no melody): .333 / .986 / .667; MM-Dist 8.19 / 6.91 / 9.31; FAD_inf 92.2 / 87.0 / 123.9 (neutral 94.0 / 99.3 / 92.5)
+- MusicGen-Melody, text decade prompts: .597 / .986 / .681; FAD_inf 37.0 / 44.8 / 55.8 (neutral 29.7 / 38.4 / 36.5)
+- MuseControlLite: .889 / .111 / .083; FAD_inf 24.4 / 38.6 / 38.9 (neutral 28.7 / 40.7 / 40.4)
+- SongEcho (Stable Audio Open): .847 / .153 / .167 (1960s-1980s-2010s)
+- ACE-Step era LoRA: .688 / .896 / .292
+- training-free steering (b16, rc0.1): R-Precision 0 to 1.0 with MM-Dist 8.8 to 10.3 and Diversity about 1.2 (collapsed output)
+- adapter, text-less z conditioning (ax_onehot_pfx16_ge10): .972 / .792 / .389; FAD_inf 19.3 / 29.7 / 25.9 (neutral 25.5 / 28.6 / 27.8)
+- control (ax_ctrlc_ge10): .986 / .597 / .236; FAD_inf 19.7 / 29.6 / 25.8
+- text-prompt adapter (tri_lora_m3e10): .972 / .764 / .361; FAD_inf 20.3 / 28.3 / 23.8
+- best-of-32 (n=768 per cell): .997 / .678 / .262; SMC N8 b2: 1.000 / .792 / .306.
+Reading (interpretation): R-Precision alone favours the unconstrained text-only generator at 1980s and 2010s, which keeps no melody (no content preservation) and has the largest FAD to every real decade; the era-controlled systems are the only ones with both high R-Precision at 1960s and a lower FAD than the unconditioned generation at 1960s. The 2010s target remains the hardest end for every melody-preserving system (R-Precision .08 to .39), consistent with the base model's own 2010s bias. R-Precision is therefore reported next to content preservation and FAD, never alone.
