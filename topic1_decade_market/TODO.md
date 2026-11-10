@@ -300,3 +300,10 @@ Possible small adoption (open): an `EXPERIMENTS.md` ledger (id, parent, hypothes
 - [ ] T-12: AMT-transcribed MIDI as melody condition vs chroma (same 24 songs, era dose, same read-outs); check Piano2Pop code/weights
 - [ ] MIDI-SAG as accompaniment-generation baseline candidate (code/weights availability)
 - [ ] (running 2026-11-11) dose x era-guidance interaction: adapter at ge 5 and ge 15, doses a0.3/0.5/0.7 (tags ax_onehot_pfx16_ge{5,15}_hpcp_dge; tmux ge1, GPU 3): `HPCP_CHROMA=1 SUF=_hpcp_dge bash src/run_ax.sh 3 ax_onehot_pfx16 A_eraz_onehot_s0 <ge> a0.3 a0.5 a0.7`; score with 159/160/158, archive, delete wavs
+
+## From survey 6 (SURVEY6.md, 2026-11-11)
+- [ ] S2 measurement: rhythm fit of the current translated vocals vs the original (syllables per second, onset alignment from ASR word timestamps on the existing `ace_*` stems, phoneme/word error rate of the generated vocal); controlled variant with syllable-constrained translation (GagaST/Lyra/MAVL-style constraints)
+- [ ] open and verify: Lyra (ACL 2023), CrossSinger, FreeSVC, SingStyle111, SheetSage-Pro, PiCoGen, Piano2Pop, AccoMontage, BOSSA, Liew et al. 2021; MPEcho (languages used)
+- [ ] S5: language-free market descriptor (rhythm, instrumentation, production) before a market control beyond language
+- [ ] repeat the survey after the next experiment round (user, 2026-11-11)
+- [ ] add the discrete 2D plane (era dose × market original/es/de) to the weekly page, slides and video (done 2026-11-11 below)
