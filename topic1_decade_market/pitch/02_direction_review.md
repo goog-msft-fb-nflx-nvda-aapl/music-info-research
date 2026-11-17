@@ -42,7 +42,7 @@ No listening test (decision recorded in `CLAUDE.md`); say so on the slide as a s
 ## 5. Feasibility facts for the pitch's "Feasibility" slide
 - Reference papers read in full: SongEcho, MPEcho, MuseControlLite. Codebases: ACE-Step / ACE-Step 1.5, SongEcho and MPEcho (links on their pages), MuseControlLite, av-benchmark, our own repo (`goog-msft-fb-nflx-nvda-aapl/music-info-research`, scripts, exact commands, result JSONs).
 - Data we hold: PA1 subset (A: 1,290 recordings, six decades; B: 1,002 recordings, six markets; licensed for the course, not redistributed), Discogs-VI metadata (33,578 cliques with a different-artist pair with era and market move; 3,172 US–Spain), TA request pending for Discogs-VI audio/LargeSHS/MTG.
-- Compute: a shared multi-GPU server (4× H200 class; at the last check one GPU free); adapter training at SongEcho scale fits one GPU. (Course sheet asks for GPU need; the project's public-page rule is not to mention GPUs, so decide whether this line goes on the slide.)
+- Compute (slide wording, decided by the owner 2026-11-17): the nvidia-smi spec only, "4 x NVIDIA H200 NVL, 143,771 MiB each", no server name or other host details; adapter training at SongEcho scale fits one GPU.
 - Milestones with tangible intermediates: M1 baseline reproduction on the common protocol (done for MusicGen side: `gen_metrics_baselines_*`); M2 H1 adapter on ACE-Step (adapter + dose–response); M3 H3 guidance plane (continuous plane demo page, which already exists in discrete form); M4 H4/H5; M5 paper (target ICML 2027; experiments frozen by 20 Dec 2026).
 - Pilot already running/ran: dose–response replicated on 3 seeds; discrete 2D plane page; baselines table; S2 rhythm measurement is next.
 
