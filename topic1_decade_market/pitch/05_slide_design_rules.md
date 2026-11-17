@@ -18,5 +18,5 @@ Diagrams to draw (specs in `06_diagram_specs.md`): D1 positioning map vs existin
 ## Workflow for the assistant
 1. Build `claim_ledger` check: read `claim_ledger.csv`; every slide claim maps to a row.
 2. Draw D1–D5 with the draw.io connector/plugin; show them to the owner as inline previews if the connector supports it.
-3. Assemble the deck (PPTX skill or slides artifact), images from step 2, notes per slide.
+3. Assemble the deck in Canva (connector), images from step 2, notes per slide.
 4. Self-audit (numbers, status chips, word cap per slide), then report the word count per slide.

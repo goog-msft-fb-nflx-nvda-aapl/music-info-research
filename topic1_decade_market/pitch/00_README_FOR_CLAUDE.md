@@ -4,7 +4,7 @@ You receive a folder with everything needed to produce the **5-minute project pi
 
 1. Read `01_pitch_requirements.md` (pitch format from the course) and `final_proj_pitch.pdf`.
 2. Read `03_progress_snapshot.md` (measured results, limits), `02_direction_review.md` (proposed technical core H1–H5, evaluation, feasibility, risks) and `01_course_deep_dive.md` (paper-by-paper technique notes, with verification status).
-3. Follow `04_pitch_storyboard.md` for the slide list and timing. Build 9 slides (title, innovation, course fit, pilot evidence, objectives/challenges, approach, evaluation, feasibility/milestones, team). Output: a PPTX or PDF deck + speaker notes for 5 minutes.
+3. Follow `04_pitch_storyboard.md` for the slide list and timing. Build 9 slides (title, innovation, course fit, pilot evidence, objectives/challenges, approach, evaluation, feasibility/milestones, team). Build the deck in **Canva** (Canva connector; no PowerPoint tool is available). Diagrams D1-D5: draw them with the draw.io connector, export as PNG/SVG, and upload/place them in the Canva slides. Put speaker notes in each slide's notes. If the Canva connector cannot import images, give the owner the draw.io exports and the slide-by-slide text instead.
 
 **Read `05_slide_design_rules.md`, `06_diagram_specs.md` and `claim_ledger.csv` before building. The previous decks were criticised for too many words and unsupported claims: respect the 40-word body cap and the evidence tags. Draw all diagrams (D1-D5) with the draw.io connector; if it is not enabled, tell the owner which connector to enable and stop before drawing.**
 
