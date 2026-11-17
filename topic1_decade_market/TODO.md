@@ -307,3 +307,7 @@ Possible small adoption (open): an `EXPERIMENTS.md` ledger (id, parent, hypothes
 - [ ] S5: language-free market descriptor (rhythm, instrumentation, production) before a market control beyond language
 - [ ] repeat the survey after the next experiment round (user, 2026-11-11)
 - [ ] add the discrete 2D plane (era dose × market original/es/de) to the weekly page, slides and video (done 2026-11-11 below)
+- [ ] pitch direction (2026-11-17, `pitch/02_direction_review.md`): H1 coordinate-conditioned EiLM adapter on ACE-Step; H2 layer-8 REPA-style era alignment; H3 decomposed multi-condition guidance plane; H4 DPO with nuisance-controlled probe rewards; H5 duration-aware translated lyrics (S2 measurement first)
+- [ ] verify before citing: ACE-Step paper (layer-8 MERT/HuBERT alignment claim), LeVo, JAM, YuE, DiffRhythm, BOSSA, PiCoGen2, Etude, FlexCover (no arXiv), REPA, APG, MIDI-REPA full text
+- [ ] score the dose x era-guidance run (tags ax_onehot_pfx16_ge{5,15}_hpcp_dge, generation finished 2026-11-17): EffNet via `36_discogs_tagger.py --gen <dir> --eras a0.3,a0.5,a0.7` before deleting wavs, then `159_dose_summary.py`, `158_fad_inf.py`, archive, WORKLOG
+- [ ] pitch slides: send to TAs one day before W12; team fills ML/music background and lab
