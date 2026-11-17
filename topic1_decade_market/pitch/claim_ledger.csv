@@ -1,0 +1,23 @@
+id,claim,evidence_file,status
+E1,MERT expected decade index at dose 0.5: adapter 3.25 vs control 2.15 (mean of 3 seeds),results/weekly_tables.json; results/dseed_summary.txt,Measured
+E2,Adapter above control at doses 0.3-0.7 on MERT and EffNet in all three seeds; equal at 0.2 and >=0.8,repo_notes/RESULTS_SUMMARY.md; 03_progress_snapshot.md,Measured
+E3,FAD_inf/MuQ-FAD does not rank adapter vs control consistently across seeds,03_progress_snapshot.md,Measured
+E4,"Translated lyrics sung in target language move the vocal market probe (Spain +.188, Germany +.314); with language erased all within +-.03","repo_notes/RESULTS_SUMMARY.md (T-4k, T-4l)",Measured
+E5,"Market control beyond sung language not achieved (voice conversion, reference audio, syllable-matched translation: no move)",repo_notes/RESULTS_SUMMARY.md,Measured
+E6,"Discrete 2D grid: era effect +0.69 [+0.40,+1.08] on full-mix era index; language effect on P(language) about +0.72 to +0.78; effect of language share identical at every era dose",results/two_dose_grid.txt,Measured
+E7,Best-of-N raises held-out MuQ 1980s .348 -> .565 (N=16); SMC .407,repo_notes/RESULTS_SUMMARY.md,Measured
+E8,R-Precision alone favours melody-less text-only generation (1980s .986 vs ours .792),results/gen_metrics_baselines_mert.txt,Measured
+E9,"SongEcho: EiLM before FFN; 49.1M trainable; RPA .7080, PER .2951; no era/market control evaluated",papers/songecho_2602.19976.pdf,Reported
+E10,MPEcho: phoneme encoder + length regulator; PER .4562 -> .1865; Mandarin-only data; multilingual listed as future work,papers/mpecho_2607.26698.pdf,Reported
+E11,MuseControlLite: decoupled cross-attention with RoPE; 85M trainable; sequential multi-condition guidance,papers/musecontrollite_2506.18729.pdf,Reported
+E12,ACE-Step aligns its 8th DiT layer to MERT/HuBERT (REPA),lectures/lecture09b_song_generation.pdf (slide),Slide-only
+E13,LeVo/JAM use DPO with ASR/MuQ/SongEval preference signals,lectures/lecture09b_song_generation.pdf (slides),Slide-only
+E14,Cover generation = content-preserving style transfer; evaluation is an open problem,lectures/lecture11b_covergen_chihpin.pdf,Slide-only
+E15,MIDI-REPA aligns a DiT layer to a transcribed piano roll; trains in ~31 h on one RTX 3090,papers/midi_repa_2610.20967.pdf (abstract read),Reported
+H1,Coordinate-conditioned EiLM adapter improves middle-decade control on ACE-Step,02_direction_review.md,Hypothesis
+H2,Layer-8 era alignment improves era control at equal melody metrics,02_direction_review.md,Hypothesis
+H3,"Decomposed guidance gives a continuous, interaction-free plane",02_direction_review.md,Hypothesis
+H4,DPO with probe rewards reaches >=70% of best-of-16 gain at N=1,02_direction_review.md,Hypothesis
+H5,Duration-aware translated lyrics lower PER and improve onset alignment,02_direction_review.md,Hypothesis
+S1,No listening test was run (scope decision),CLAUDE.md,Scope
+S2,"Compute: 4 x NVIDIA H200 NVL, 143,771 MiB each (nvidia-smi)",nvidia-smi output,Measured

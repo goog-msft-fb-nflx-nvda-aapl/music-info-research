@@ -12,6 +12,9 @@ Speaker time ≈ 35 s per slide. Slides are sent to the TAs one day before; the 
 | 6 | Approach (the new part) | Diagram: melody/F0 + phoneme stream (MPEcho) + coordinate (era, market) → ACE-Step with IA-EiLM adapter; REPA-style layer-8 alignment; decomposed guidance ω_era, ω_market, ω_melody → continuous plane; DPO with probe rewards (amortised search) | 50 s |
 | 7 | Evaluation protocol | 4-part panel: content (RPA/RCA/OA, chroma, song-ID), control (independent probes, dose Spearman, interaction), quality (FD, KL, CLAP, FAD_inf with caveat), language (Whisper LID, PER). Baselines table. No listening test (scope statement) | 35 s |
 | 8 | Feasibility & milestones | Papers read in full; code available (ACE-Step, SongEcho, MPEcho, MuseControlLite); data held (PA1 subset, Discogs-VI metadata) and pending (TA: audio); compute: 4 x NVIDIA H200 NVL (143,771 MiB each, nvidia-smi spec only; no server name); adapter training at SongEcho/MPEcho scale fits one GPU; milestones M1–M5 with intermediate artefacts; pilots done; risks + fallback | 45 s |
-| 9 | Team | Three members, department/major only: James Christian (NTU-EE); Liang-Yu Hsia and Jefferson Sy Dionisio (**department/major to be filled by the team**). No ML/music background, no lab | 15 s |
+| 9 | Team | Three members, department/major (and lab) only: James Christian, NTU-EE; Liang-Yu Hsia (master's, GICE) and Jefferson Dionisio (PhD, GICE), both iDSSP lab (https://www.idssp.ee.ntu.edu.tw/members). No ML/music background | 15 s |
 
 Rules for the slide-maker: no Claude/Anthropic mention; no claim beyond `03_progress_snapshot.md`; mark H1–H5 as hypotheses; cite papers by name + venue + arXiv id exactly as in `01_course_deep_dive.md` and say "abstract only" where applicable; do not show vocal-containing audio or lyric text; no bug history.
+
+
+Design rules, diagrams and the claim ledger: `05_slide_design_rules.md`, `06_diagram_specs.md`, `claim_ledger.csv`. Body text cap 40 words per slide.
